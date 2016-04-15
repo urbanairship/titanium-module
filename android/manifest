@@ -1,0 +1,19 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+architectures: armeabi armeabi-v7a x86
+description: UrbanAirship Titanium module
+author: Urban Airship
+license: Apache License, Version 2.0
+copyright: Copyright (c) 2016 by Urban Airship
+
+# these should not be edited
+name: UrbanAirship
+moduleid: com.urbanairship
+guid: 240dc468-ccad-479d-9510-14e9a7cae5c9
+platform: android
+minsdk: 5.2.2.GA
+respackage: com.urbanairship

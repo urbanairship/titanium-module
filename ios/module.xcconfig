@@ -1,0 +1,1 @@
+OTHER_LDFLAGS=$(inherited) -ObjC -lz -lsqlite3 -framework CFNetwork -framework CoreGraphics -framework Foundation -framework MobileCoreServices -framework Security -framework SystemConfiguration -framework UIKit -framework CoreTelephony -framework CoreLocation -framework PassKit -framework CoreData
