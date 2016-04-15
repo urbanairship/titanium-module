@@ -1,4 +1,4 @@
-<project name="com.urbanairship" default="dist">
+<project name="urbanairship" default="dist">
 	<description>
 		Ant build script for Titanium Android module what
 	</description>
