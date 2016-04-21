@@ -12,7 +12,7 @@ We accept pull requests! If you would like to submit a pull request, please fill
 
 ## Setup
 
-Modify the tiapp.xml file to include the Urban Airship Config:
+Modify the `tiapp.xml` file to include the Urban Airship Config:
 
 ```
   <!-- Production credentials -->
@@ -30,6 +30,24 @@ Modify the tiapp.xml file to include the Urban Airship Config:
   <property name="com.urbanairship.gcm_sender" type="String">GCM Sender ID or Project Number</property>
   <property name="com.urbanairship.notification_icon" type="string">Name of an icon in assets directory, e.g. ic_notification</property>
   <property name="com.urbanairship.notification_accent_color" type="string">Notification accent color, e.g. #ff0000</property>
+```
+
+For iOS, enable background remote notifications in the `tiapp.xml` file:
+
+```
+  ...
+  <ios>
+  <plist>
+  <dict>    
+      ...
+       <key>UIBackgroundModes</key>
+       <array>
+           <string>remote-notification</string>
+       </array>
+  </dict>
+  </plist>
+  </ios>
+  ...
 ```
 
 ## Accessing the urbanairship Module
