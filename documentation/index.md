@@ -99,7 +99,7 @@ the EVENT_CHANNEL_UPDATED event to be notified when it becomes available.
 #### userNotificationsEnabled
 
 Enables or disables user notifications. On iOS, user notifications can only be enabled and enabling
-notifications the first time will promopt the user to enable notifications.
+notifications the first time will prompt the user to enable notifications.
 
 ```
     UrbanAirship.userNotificationsEnabled = true
