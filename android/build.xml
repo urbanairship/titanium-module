@@ -1,6 +1,6 @@
 <project name="urbanairship" default="dist">
 	<description>
-		Ant build script for Titanium Android module what
+		Ant build script for Titanium Android module
 	</description>
 
 	<property name="ti.module.root" location="${basedir}"/>

@@ -51,7 +51,6 @@ NSString *const ProductionConfigKey = @"com.urbanairship.in_production";
 
     NSDictionary *appProperties = [TiApp tiAppProperties];
     UAConfig *config = [UAConfig defaultConfig];
-    config.developmentAppKey = appProperties[DevelopmentAppKeyConfigKey];
     config.productionAppKey = appProperties[ProductionAppKeyConfigKey];
     config.productionAppSecret = appProperties[ProductionAppSecretConfigKey];
     config.developmentAppKey = appProperties[DevelopmentAppKeyConfigKey];

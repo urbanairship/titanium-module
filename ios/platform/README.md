@@ -1,4 +1,4 @@
-Files in this folder are copied directory into the iOS build directory
+Files in this folder are copied into the iOS build directory
 when the iOS app is compiled:
 
     <project-dir>/build/iphone

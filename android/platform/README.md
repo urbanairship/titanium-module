@@ -1,4 +1,4 @@
-Files in this folder are copied directory into the Android build directory
+Files in this folder are copied into the Android build directory
 when the Android app is compiled:
 
     <project-dir>/build/android
