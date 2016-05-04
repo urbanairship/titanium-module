@@ -26,6 +26,7 @@
 		24DD6CFA1134B3F500162E58 /* ComUrbanairshipModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* ComUrbanairshipModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* ComUrbanairshipModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* ComUrbanairshipModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m */; };
+		7632D1941CDA9481007D7E33 /* libUAirship-7.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7632D1931CDA9481007D7E33 /* libUAirship-7.1.0.a */; };
 		AA747D9F0F9514B9006C5449 /* ComUrbanairship_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* ComUrbanairship_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		CCDD0C4B1CC01B4E00467979 /* AirshipLib.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0BEA1CC01B4E00467979 /* AirshipLib.h */; };
@@ -110,7 +111,6 @@
 		CCDD0C9A1CC01B4E00467979 /* UAInboxMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0C3E1CC01B4E00467979 /* UAInboxMessage.h */; };
 		CCDD0C9B1CC01B4E00467979 /* UAInboxMessageList.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0C3F1CC01B4E00467979 /* UAInboxMessageList.h */; };
 		CCDD0C9C1CC01B4E00467979 /* UAInboxUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0C401CC01B4E00467979 /* UAInboxUtils.h */; };
-		CCDD0C9D1CC01B4E00467979 /* libUAirship-7.0.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCDD0C411CC01B4E00467979 /* libUAirship-7.0.4.a */; };
 		CCDD0C9E1CC01B4E00467979 /* UAChannelRegistrar.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0C431CC01B4E00467979 /* UAChannelRegistrar.h */; };
 		CCDD0C9F1CC01B4E00467979 /* UAMutableUserNotificationAction.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0C441CC01B4E00467979 /* UAMutableUserNotificationAction.h */; };
 		CCDD0CA01CC01B4E00467979 /* UAMutableUserNotificationCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0C451CC01B4E00467979 /* UAMutableUserNotificationCategory.h */; };
@@ -139,6 +139,7 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* ComUrbanairshipModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComUrbanairshipModuleAssets.h; path = Classes/ComUrbanairshipModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComUrbanairshipModuleAssets.m; path = Classes/ComUrbanairshipModuleAssets.m; sourceTree = "<group>"; };
+		7632D1931CDA9481007D7E33 /* libUAirship-7.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-7.1.0.a"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* ComUrbanairship_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComUrbanairship_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CCDD0BEA1CC01B4E00467979 /* AirshipLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirshipLib.h; sourceTree = "<group>"; };
@@ -223,7 +224,6 @@
 		CCDD0C3E1CC01B4E00467979 /* UAInboxMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxMessage.h; sourceTree = "<group>"; };
 		CCDD0C3F1CC01B4E00467979 /* UAInboxMessageList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxMessageList.h; sourceTree = "<group>"; };
 		CCDD0C401CC01B4E00467979 /* UAInboxUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxUtils.h; sourceTree = "<group>"; };
-		CCDD0C411CC01B4E00467979 /* libUAirship-7.0.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-7.0.4.a"; sourceTree = "<group>"; };
 		CCDD0C431CC01B4E00467979 /* UAChannelRegistrar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAChannelRegistrar.h; sourceTree = "<group>"; };
 		CCDD0C441CC01B4E00467979 /* UAMutableUserNotificationAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAMutableUserNotificationAction.h; sourceTree = "<group>"; };
 		CCDD0C451CC01B4E00467979 /* UAMutableUserNotificationCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAMutableUserNotificationCategory.h; sourceTree = "<group>"; };
@@ -242,8 +242,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCDD0C9D1CC01B4E00467979 /* libUAirship-7.0.4.a in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				7632D1941CDA9481007D7E33 /* libUAirship-7.1.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,11 +303,11 @@
 		CCDD0BE91CC01B4E00467979 /* Airship */ = {
 			isa = PBXGroup;
 			children = (
+				7632D1931CDA9481007D7E33 /* libUAirship-7.1.0.a */,
 				CCDD0BEA1CC01B4E00467979 /* AirshipLib.h */,
 				CCDD0BEB1CC01B4E00467979 /* Common */,
 				CCDD0C3A1CC01B4E00467979 /* External */,
 				CCDD0C3C1CC01B4E00467979 /* Inbox */,
-				CCDD0C411CC01B4E00467979 /* libUAirship-7.0.4.a */,
 				CCDD0C421CC01B4E00467979 /* Push */,
 			);
 			path = Airship;

@@ -32,8 +32,8 @@
  	            <meta-data android:name="com.urbanairship.autopilot"
  	            	android:value="com.urbanairship.ti.TiAutopilot" />
 
-                <!-- AirshipReceiver -->
-                <receiver android:name="com.urbanairship.ti.AirshipReceiver"
+                <!-- TiAirshipReceiver -->
+                <receiver android:name="com.urbanairship.ti.TiAirshipReceiver"
                         android:exported="false">
                     <intent-filter>
                         <action android:name="com.urbanairship.push.CHANNEL_UPDATED" />

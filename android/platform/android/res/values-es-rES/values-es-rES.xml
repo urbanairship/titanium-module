@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="ua_selected_count">
+    <item quantity="one">
+      <ns1:g example="1" id="count">%1$d</ns1:g> seleccionado</item>
+    <item quantity="other">
+      <ns1:g example="3" id="count">%1$d</ns1:g> seleccionados</item>
+  </plurals>
+    <string name="ua_cancel">Cancelar</string>
+    <string name="ua_channel_copy_toast">¡Canal copiado al portapapeles!</string>
+    <string name="ua_channel_notification_ticker">Cana Urban Airship</string>
+    <string name="ua_connection_error">Error de conexión</string>
+    <string name="ua_delete">Eliminar</string>
+    <string name="ua_empty_message_list">No hay mensajes</string>
+    <string name="ua_mark_read">Marcar como leído</string>
+    <string name="ua_mc_failed_to_load">No se pudo cargar el mensaje. Por favor intenta más tarde.</string>
+    <string name="ua_message_center_title">Centro de mensajes</string>
+    <string name="ua_message_not_selected">No hay mensajes seleccionado</string>
+    <string name="ua_notification_button_accept">Aceptar</string>
+    <string name="ua_notification_button_add">Añadir</string>
+    <string name="ua_notification_button_add_to_calendar">Añadir al calendario</string>
+    <string name="ua_notification_button_book_now">Reservar ahora</string>
+    <string name="ua_notification_button_buy_now">Comprar ahora</string>
+    <string name="ua_notification_button_copy">Copiar</string>
+    <string name="ua_notification_button_decline">Rechazar</string>
+    <string name="ua_notification_button_dislike">No me gusta</string>
+    <string name="ua_notification_button_download">Descargar</string>
+    <string name="ua_notification_button_follow">Seguir</string>
+    <string name="ua_notification_button_less_like">Menos como éste</string>
+    <string name="ua_notification_button_like">Me gusta</string>
+    <string name="ua_notification_button_more_like">Más como éste</string>
+    <string name="ua_notification_button_no">No</string>
+    <string name="ua_notification_button_opt_in">Acepto</string>
+    <string name="ua_notification_button_opt_out">No acepto</string>
+    <string name="ua_notification_button_rate_now">Calificar ahora</string>
+    <string name="ua_notification_button_remind">Recordármelo más tarde</string>
+    <string name="ua_notification_button_save">Guardar</string>
+    <string name="ua_notification_button_search">Buscar</string>
+    <string name="ua_notification_button_send_info">Enviar información</string>
+    <string name="ua_notification_button_share">Compartir</string>
+    <string name="ua_notification_button_shop_now">Obtener ahora</string>
+    <string name="ua_notification_button_tell_me_more">Díme más</string>
+    <string name="ua_notification_button_unfollow">Dejar de seguir</string>
+    <string name="ua_notification_button_yes">Sí</string>
+    <string name="ua_ok">Aceptar</string>
+    <string name="ua_retry_button">Intentar de nuevo</string>
+    <string name="ua_select_all">Seleccionar todo</string>
+    <string name="ua_select_none">Deseleccionar todo</string>
+    <string name="ua_share_dialog_title">Compartir</string>
+</resources>
