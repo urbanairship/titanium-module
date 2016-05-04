@@ -33,18 +33,31 @@ public class TiAutopilot extends Autopilot {
     @Override
     public void onAirshipReady(UAirship airship) {
         Log.i(TAG, "Airship ready");
+    }
 
-        Context context = UAirship.getApplicationContext();
+    @Override
+    public boolean allowEarlyTakeOff(Context context) {
+        return TiApplication.getInstance().getAppProperties() != null;
+    }
+
+    @Override
+    public AirshipConfigOptions createAirshipConfigOptions(Context context) {
         TiProperties properties = TiApplication.getInstance().getAppProperties();
 
-        // Customize the notification factory
-        DefaultNotificationFactory factory = new DefaultNotificationFactory(context);
+        AirshipConfigOptions.Builder options = new AirshipConfigOptions.Builder()
+                .setDevelopmentAppKey(properties.getString(DEVELOPMENT_KEY, ""))
+                .setDevelopmentAppSecret(properties.getString(DEVELOPMENT_SECRET, ""))
+                .setProductionAppKey(properties.getString(PRODUCTION_KEY, ""))
+                .setProductionAppSecret(properties.getString(PRODUCTION_SECRET, ""))
+                .setInProduction(properties.getBool(IN_PRODUCTION, false))
+                .setGcmSender(properties.getString(GCM_SENDER, ""));
+
 
         // Accent color
         String accentColor = properties.getString(NOTIFICATION_ACCENT_COLOR, null);
         if (!UAStringUtil.isEmpty(accentColor)) {
             try {
-                factory.setColor(Color.parseColor(accentColor));
+                options.setNotificationAccentColor(Color.parseColor(accentColor));
             } catch (IllegalArgumentException e) {
                 Log.e(TAG, "Unable to parse notification accent color: " + accentColor, e);
             }
@@ -55,29 +68,12 @@ public class TiAutopilot extends Autopilot {
         if (!UAStringUtil.isEmpty(notificationIconName)) {
             int id  = context.getResources().getIdentifier(notificationIconName, "drawable", context.getPackageName());
             if (id > 0) {
-                factory.setSmallIconId(id);
+                options.setNotificationIcon(id);
             } else {
                 Log.e(TAG, "Unable to find notification icon with name: " + notificationIconName);
             }
         }
 
-        airship.getPushManager().setNotificationFactory(factory);
-    }
-
-    @Override
-    public AirshipConfigOptions createAirshipConfigOptions(Context context) {
-
-        TiProperties properties = TiApplication.getInstance().getAppProperties();
-
-        AirshipConfigOptions options = new AirshipConfigOptions.Builder()
-                .setDevelopmentAppKey(properties.getString(DEVELOPMENT_KEY, ""))
-                .setDevelopmentAppSecret(properties.getString(DEVELOPMENT_SECRET, ""))
-                .setProductionAppKey(properties.getString(PRODUCTION_KEY, ""))
-                .setProductionAppSecret(properties.getString(PRODUCTION_SECRET, ""))
-                .setInProduction(properties.getBool(IN_PRODUCTION, false))
-                .setGcmSender(properties.getString(GCM_SENDER, ""))
-                .build();
-
-        return options;
+        return options.build();
     }
 }
