@@ -23,13 +23,13 @@ window.add(Ti.UI.createLabel({
 
 // Enable push
 var view = Ti.UI.createView({
-	backgroundColor:'white',
-	top:20,
-	width:Ti.UI.FILL,
-	height:50,
-	left:10,
-	horizontalWrap:true,
-	layout:'horizontal'
+    backgroundColor:'white',
+    top:20,
+    width:Ti.UI.FILL,
+    height:50,
+    left:10,
+    horizontalWrap:true,
+    layout:'horizontal'
 });
 
 view.add(Ti.UI.createLabel({
@@ -135,29 +135,29 @@ window.add(labelMessage);
 
 // Display message center
 var mesgCtrButton = Ti.UI.createButton({
-	title : 'Display Message Center',
-	height:Ti.UI.FILL,
-	width:Ti.UI.FILL
+    title : 'Display Message Center',
+    height:Ti.UI.FILL,
+    width:Ti.UI.FILL
 });
 
 if(isAndroid) {
-	var view = Ti.UI.createView({
-		top:10,
-		width:Ti.UI.FILL,
-		height:50,
-		left:10,
-		right:10
-	});
+    var view = Ti.UI.createView({
+        top:10,
+        width:Ti.UI.FILL,
+        height:50,
+        left:10,
+        right:10
+    });
 } else {
-	var view = Ti.UI.createView({
-		top:10,
-		borderRadius:10,
-		borderColor:'gray',
-		width:Ti.UI.FILL,
-		height:50,
-		left:10,
-		right:10
-	});
+    var view = Ti.UI.createView({
+        top:10,
+        borderRadius:10,
+        borderColor:'gray',
+        width:Ti.UI.FILL,
+        height:50,
+        left:10,
+        right:10
+    });
 }
 
 view.add(mesgCtrButton);
@@ -166,7 +166,7 @@ window.add(view);
 
 // Listen for click events.
 mesgCtrButton.addEventListener('click', function() {
-	UrbanAirship.displayMessageCenter();
+    UrbanAirship.displayMessageCenter();
 });
 
 window.open();
@@ -185,9 +185,9 @@ var tags = '';
 data.forEach( function ( val, i ) {
     Ti.API.info("Tag: " + val);
     if(tags=='') {
-    	tags = val;
+        tags = val;
     } else {
-    	tags = tags + ', ' + val;
+        tags = tags + ', ' + val;
     }
     Ti.API.info("tags: " + tags);
 });
@@ -202,19 +202,19 @@ notificationsEnabledSwitch.addEventListener('change', function (e) {
 });
 
 if(isAndroid) {
-	window.addEventListener("open", function(e) {
-	    window.activity.addEventListener("resume", function() {
-	        Ti.App.fireEvent('resume');
-	    });
-	    //Notice the pause event
-	    window.activity.addEventListener("pause", function() {
-	        Ti.App.fireEvent('paused');
-	    });
-	});
+    window.addEventListener("open", function(e) {
+        window.activity.addEventListener("resume", function() {
+            Ti.App.fireEvent('resume');
+        });
+        //Notice the pause event
+        window.activity.addEventListener("pause", function() {
+            Ti.App.fireEvent('paused');
+        });
+    });
 
-	Ti.App.addEventListener('resume', function() {
-	    Ti.API.info("Launch: " + UrbanAirship.getLaunchNotification(true).message);
-	});
+    Ti.App.addEventListener('resume', function() {
+        Ti.API.info("Launch: " + UrbanAirship.getLaunchNotification(true).message);
+    });
 }
 
 UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
@@ -225,5 +225,5 @@ UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
 UrbanAirship.addEventListener(UrbanAirship.EVENT_PUSH_RECEIVED, function(e) {
         Ti.API.info('Push received: ' + e.message);
         Ti.API.info('Extras: ' + JSON.stringify(e.extras));
-        labelMessage.text = UrbanAirship.channelId;
+        labelMessage.text = e.message;
 });
