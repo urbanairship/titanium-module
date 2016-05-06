@@ -28,7 +28,7 @@ Modify the `tiapp.xml` file to include the Urban Airship Config:
 
   <!-- Android -->
   <property name="com.urbanairship.gcm_sender" type="String">GCM Sender ID or Project Number</property>
-  <property name="com.urbanairship.notification_icon" type="string">Name of an icon in assets directory, e.g. ic_notification</property>
+  <property name="com.urbanairship.notification_icon" type="string">Name of an icon in /project_name/platform/android/res/drawable folders, e.g. ic_notification.png</property>
   <property name="com.urbanairship.notification_accent_color" type="string">Notification accent color, e.g. #ff0000</property>
 ```
 
@@ -67,9 +67,9 @@ Listens for any channel updates. Event contains the following:
  - deviceToken: (iOS only) The device token.
 
 ```
-    UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, new function(e) {
-        Ti.API.info('Channel Updated' + e.channelId)
-    })
+    UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
+        Ti.API.info('Channel Updated: ' + UrbanAirship.channelId)
+    });
 ```
 
 #### EVENT_PUSH_RECEIVED
@@ -80,9 +80,9 @@ Listens for any push received events. Event contains the following:
  - notificationId: (Android only) The ID of the posted notification.
 
 ```
-    UrbanAirship.addEventListener(UrbanAirship.EVENT_PUSH_RECEIVED, new function(e) {
-        Ti.API.info('Push received' + e.message)
-    })
+    UrbanAirship.addEventListener(UrbanAirship.EVENT_PUSH_RECEIVED, function(e) {
+        Ti.API.info('Push received: ' + e.message);
+    });
 ```
 
 ## Properties
@@ -93,7 +93,7 @@ Returns the app's channel ID. The channel ID might not be immediately available 
 the EVENT_CHANNEL_UPDATED event to be notified when it becomes available.
 
 ```
-    Ti.API.info('Channel ID: ' + UrbanAirship.channelId)
+    Ti.API.info('Channel ID: ' + UrbanAirship.channelId);
 ```
 
 #### userNotificationsEnabled
@@ -102,7 +102,7 @@ Enables or disables user notifications. On iOS, user notifications can only be e
 notifications the first time will prompt the user to enable notifications.
 
 ```
-    UrbanAirship.userNotificationsEnabled = true
+    UrbanAirship.userNotificationsEnabled = true;
 ```
 
 
@@ -111,11 +111,11 @@ notifications the first time will prompt the user to enable notifications.
 Sets or gets the channel tags. Tags can be used to segment the audience.
 
 ```
-    UrbanAirship.tags = ["test", "titanium"]
+    UrbanAirship.tags = ["test", "titanium"];
 
     UrbanAirship.tags.forEach(function(tag) {
-        Ti.API.info("Tag: " + tag)
-    })
+        Ti.API.info("Tag: " + tag);
+    });
 ```
 
 #### namedUser
@@ -123,7 +123,7 @@ Sets or gets the channel tags. Tags can be used to segment the audience.
 Sets the namedUser for the device.
 
 ```
-    UrbanAirship.namedUser = "totes mcgoats"
+    UrbanAirship.namedUser = "totes mcgoats";
 ```
 
 ## Methods
@@ -139,7 +139,7 @@ Gets the notification that launched the app. The notification will have the foll
 
 
 ```
-    Ti.API.info("Launch notification: " + UrbanAirship.getLaunchNotification(false).message)
+    Ti.API.info("Launch notification: " + UrbanAirship.getLaunchNotification(false).message);
 ```
 
 
