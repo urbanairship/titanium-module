@@ -201,6 +201,8 @@ notificationsEnabledSwitch.addEventListener('change', function (e) {
     UrbanAirship.userNotificationsEnabled = e.value;
 });
 
+Ti.API.info("Launch: " + UrbanAirship.getLaunchNotification(true).message);
+
 if(isAndroid) {
     window.addEventListener("open", function(e) {
         window.activity.addEventListener("resume", function() {
@@ -215,7 +217,12 @@ if(isAndroid) {
     Ti.App.addEventListener('resume', function() {
         Ti.API.info("Launch: " + UrbanAirship.getLaunchNotification(true).message);
     });
+} else {
+    Ti.App.addEventListener('resumed', function() {
+        Ti.API.info("Launch iOS resumed: " + UrbanAirship.getLaunchNotification(true).message);
+    });
 }
+
 
 UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
         Ti.API.info('Channel Updated: ' + UrbanAirship.channelId);

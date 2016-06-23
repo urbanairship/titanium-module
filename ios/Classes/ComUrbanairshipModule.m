@@ -69,6 +69,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UAirship push].pushNotificationDelegate = self;
         [UAirship push].registrationDelegate = self;
+        self.launchPush = [UAirship push].launchNotification;
     });
 }
 
@@ -136,7 +137,7 @@
     [push setObject:incomingAlert forKey:@"message"];
     [push setObject:incomingExtras forKey:@"extras"];
 
-    if ([TiUtils boolValue:[args firstObject] def:NO]) {\
+    if ([TiUtils boolValue:[args firstObject] def:NO]) {
         self.launchPush = nil;
     }
     
