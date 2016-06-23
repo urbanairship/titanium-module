@@ -1,6 +1,11 @@
 Urban Airship Titanium Module
 =============================
 
+Version 1.3.0 - June 23, 2016
+=============================
+ - Updated Urban Airship Android library to 7.2.0
+ - For iOS set the launchNotification in the startup method.
+
 Version 1.2.0 - June 2, 2016
 ============================
  - Updated Urban Airship iOS Library to 7.2.0
