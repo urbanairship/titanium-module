@@ -6,4 +6,6 @@
 
 @interface ComUrbanairshipAutopilot : NSObject
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
+
 @end

@@ -11,7 +11,7 @@
 
 + (void)load {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:[ComUrbanairshipAutopilot class] selector:@selector(performTakeOff:) name:UIApplicationDidFinishLaunchingNotification object:nil];
+    [center addObserver:[ComUrbanairshipAutopilot class] selector:@selector(didFinishLaunching) name:UIApplicationDidFinishLaunchingNotification object:nil];
 }
 
 // Config keys
@@ -22,10 +22,10 @@ NSString *const DevelopmentAppSecretConfigKey = @"com.urbanairship.development_a
 NSString *const ProductionConfigKey = @"com.urbanairship.in_production";
 
 + (NSBundle *)resources {
-    static dispatch_once_t onceToken;
-    static dispatch_once_t resourcesBundle_;
+    static dispatch_once_t resourceDispatchOnceToken_;
+    static NSBundle *resourcesBundle_;
 
-    dispatch_once(&onceToken, ^{
+    dispatch_once(&resourceDispatchOnceToken_, ^{
         // Don't assume that we are within the main bundle
         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"modules/com.urbanairship/AirshipResources.bundle"];
 
@@ -34,10 +34,26 @@ NSString *const ProductionConfigKey = @"com.urbanairship.in_production";
             UA_LIMPERR(@"AirshipResources.bundle could not be found.");
         }
     });
+
     return resourcesBundle_;
 }
 
-+ (void)performTakeOff:(NSNotification *)notification {
+
+#pragma mark - Method Swizzling
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+    // Fixes crash in Titanium
+}
+
++ (void)didFinishLaunching {
+    static dispatch_once_t takeoOffOnceToken_;
+
+    dispatch_once(&takeoOffOnceToken_, ^{
+        [self performTakeOff];
+    });
+}
+
++ (void)performTakeOff {
     // Need to change where UAirship looks for the AirshipResources.bundle
     const char *airshipClassName = [NSStringFromClass([UAirship class]) UTF8String];
     const char *moduleClassName = [NSStringFromClass([ComUrbanairshipAutopilot class]) UTF8String];
@@ -49,6 +65,20 @@ NSString *const ProductionConfigKey = @"com.urbanairship.in_production";
                         method_getTypeEncoding(swizzleMethod));
 
 
+    // Titanium forwards application:didReceiveRemoteNotification:fetchCompletionHandler: to
+    // application:didReceiveRemoteNotification:, however that method is not defined. We will
+    // add the method if missing.
+    id delegate = [UIApplication sharedApplication].delegate;
+    if (delegate && ![delegate respondsToSelector:@selector(application:didReceiveRemoteNotification:)]) {
+
+        Method delegateMethod = class_getInstanceMethod([ComUrbanairshipAutopilot class], @selector(application:didReceiveRemoteNotification:));
+
+        BOOL swizzled = class_addMethod([delegate class],
+                        @selector(application:didReceiveRemoteNotification:),
+                        method_getImplementation(delegateMethod),
+                        method_getTypeEncoding(delegateMethod));
+    }
+
     NSDictionary *appProperties = [TiApp tiAppProperties];
     UAConfig *config = [UAConfig defaultConfig];
     config.productionAppKey = appProperties[ProductionAppKeyConfigKey];
@@ -56,7 +86,6 @@ NSString *const ProductionConfigKey = @"com.urbanairship.in_production";
     config.developmentAppKey = appProperties[DevelopmentAppKeyConfigKey];
     config.developmentAppSecret = appProperties[DevelopmentAppSecretConfigKey];
     config.inProduction = [appProperties[ProductionConfigKey] boolValue];
-
     [UAirship takeOff:config];
 }
 

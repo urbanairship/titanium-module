@@ -28,19 +28,19 @@
 
 #pragma mark UAPushNotificationDelegate
 
-- (void)launchedFromNotification:(NSDictionary *)notification {
-    UA_LDEBUG(@"The application was launched or resumed from a notification %@", notification);
-    self.launchPush = notification;
+- (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)())completionHandler {
+    UA_LDEBUG(@"The application was launched or resumed from a notification %@", notificationResponse);
+    self.launchPush = notificationResponse.notificationContent.notificationInfo;
 }
 
-- (void)receivedForegroundNotification:(NSDictionary *)notification {
-    UA_LDEBUG(@"Received a notification while the app was already in the foreground %@", [notification description]);
+- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void(^)())completionHandler {
+    UA_LDEBUG(@"Received a notification while the app was already in the foreground %@", notificationContent);
 
     [[UAirship push] setBadgeNumber:0]; // zero badge after push received
 
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
-    [data setValue:[ComUrbanairshipModule alertForUserInfo:notification] forKey:@"message"];
-    [data setValue:[ComUrbanairshipModule extrasForUserInfo:notification] forKey:@"extras"];
+    [data setValue:[ComUrbanairshipModule alertForUserInfo:notificationContent.notificationInfo] forKey:@"message"];
+    [data setValue:[ComUrbanairshipModule extrasForUserInfo:notificationContent.notificationInfo] forKey:@"extras"];
 
     [self fireEvent:self.EVENT_PUSH_RECEIVED withObject:data];
 }
@@ -69,7 +69,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UAirship push].pushNotificationDelegate = self;
         [UAirship push].registrationDelegate = self;
-        self.launchPush = [UAirship push].launchNotification;
+        self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
     });
 }
 
@@ -115,12 +115,12 @@
 }
 
 - (NSString *)namedUser {
-    return [UAirship push].namedUser.identifier;
+    return [UAirship namedUser].identifier;
 }
 
 - (void)setNamedUser:(id)value {
     ENSURE_STRING(value);
-    [UAirship push].namedUser.identifier = [value length] ? value : nil;
+    [UAirship namedUser].identifier = [value length] ? value : nil;
 }
 
 - (NSDictionary *)getLaunchNotification:(id)args {
