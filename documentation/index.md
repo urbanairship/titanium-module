@@ -30,6 +30,13 @@ Modify the `tiapp.xml` file to include the Urban Airship Config:
   <property name="com.urbanairship.gcm_sender" type="String">GCM Sender ID or Project Number</property>
   <property name="com.urbanairship.notification_icon" type="string">Name of an icon in /project_name/platform/android/res/drawable folders, e.g. ic_notification.png</property>
   <property name="com.urbanairship.notification_accent_color" type="string">Notification accent color, e.g. #ff0000</property>
+
+  <!-- iOS 10 alert foreground notification presentation option -->
+  <property name="com.urbanairship.ios_foreground_notification_presentation_alert" type="bool">true</property>
+  <!-- iOS 10 badge foreground notification presentation option -->
+  <property name="com.urbanairship.ios_foreground_notification_presentation_badge" type="bool">true</property>
+  <!-- iOS 10 sound foreground notification presentation option -->
+  <property name="com.urbanairship.ios_foreground_notification_presentation_sound" type="bool">true</property>
 ```
 
 For iOS, enable background remote notifications in the `tiapp.xml` file:

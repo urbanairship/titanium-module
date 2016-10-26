@@ -31,6 +31,7 @@
 - (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)())completionHandler {
     UA_LDEBUG(@"The application was launched or resumed from a notification %@", notificationResponse);
     self.launchPush = notificationResponse.notificationContent.notificationInfo;
+    completionHandler();
 }
 
 - (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void(^)())completionHandler {
@@ -43,6 +44,7 @@
     [data setValue:[ComUrbanairshipModule extrasForUserInfo:notificationContent.notificationInfo] forKey:@"extras"];
 
     [self fireEvent:self.EVENT_PUSH_RECEIVED withObject:data];
+    completionHandler();
 }
 
 #pragma mark UARegistrationDelegate
