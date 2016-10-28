@@ -20,6 +20,9 @@ NSString *const ProductionAppSecretConfigKey = @"com.urbanairship.production_app
 NSString *const DevelopmentAppKeyConfigKey = @"com.urbanairship.development_app_key";
 NSString *const DevelopmentAppSecretConfigKey = @"com.urbanairship.development_app_secret";
 NSString *const ProductionConfigKey = @"com.urbanairship.in_production";
+NSString *const NotificationPresentationAlertKey = @"com.urbanairship.ios_foreground_notification_presentation_alert";
+NSString *const NotificationPresentationBadgeKey = @"com.urbanairship.ios_foreground_notification_presentation_badge";
+NSString *const NotificationPresentationSoundKey = @"com.urbanairship.ios_foreground_notification_presentation_sound";
 
 + (NSBundle *)resources {
     static dispatch_once_t resourceDispatchOnceToken_;
@@ -87,6 +90,30 @@ NSString *const ProductionConfigKey = @"com.urbanairship.in_production";
     config.developmentAppSecret = appProperties[DevelopmentAppSecretConfigKey];
     config.inProduction = [appProperties[ProductionConfigKey] boolValue];
     [UAirship takeOff:config];
+
+    // Set the iOS default foreground presentation options if specified in the tiapp.xml else default to None
+    UNNotificationPresentationOptions options = UNNotificationPresentationOptionNone;
+
+    if (appProperties[NotificationPresentationAlertKey]) {
+        if ([appProperties[NotificationPresentationAlertKey] boolValue]) {
+            options = options | UNNotificationPresentationOptionAlert;
+        }
+    }
+
+    if (appProperties[NotificationPresentationBadgeKey] != nil) {
+        if ([appProperties[NotificationPresentationBadgeKey] boolValue]) {
+            options = options | UNNotificationPresentationOptionBadge;
+        }
+    }
+
+    if (appProperties[NotificationPresentationSoundKey] != nil) {
+        if ([appProperties[NotificationPresentationSoundKey] boolValue]) {
+            options = options | UNNotificationPresentationOptionSound;
+        }
+    }
+
+    UA_LDEBUG(@"Foreground presentation options: %lu", (unsigned long)options);
+    [UAirship push].defaultPresentationOptions = options;
 }
 
 
