@@ -178,6 +178,9 @@ UrbanAirship.namedUser = "namedUser";
 Ti.API.info("namedUser: " + UrbanAirship.namedUser);
 namedUserLabel.text = UrbanAirship.namedUser;
 
+// Add a custom identifier
+UrbanAirship.associateIdentifier("customKey", "customIdentifier");
+
 // Set Tags
 UrbanAirship.tags = [ osname, 'titanium-test' ];
 var data = UrbanAirship.tags;
