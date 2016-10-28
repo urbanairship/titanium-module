@@ -93,6 +93,22 @@ public class UrbanAirshipModule extends KrollModule {
         UAirship.shared().getPushManager().getNamedUser().setId(namedUser);
     }
 
+    @Kroll.method
+    public void associateIdentifier(String key, String identifier) {
+        if (key == null) {
+            Log.d(TAG, "AssociateIdentifier failed, key cannot be null.");
+            return;
+        }
+
+        if (identifier == null) {
+            Log.d(TAG, "AssociateIdentifier removed identifier for key: " + key);
+            UAirship.shared().getAnalytics().editAssociatedIdentifiers().removeIdentifier(key).apply();
+        } else {
+            Log.d(TAG, "AssociateIdentifier with identifier: " + identifier + " for key: " + key);
+            UAirship.shared().getAnalytics().editAssociatedIdentifiers().addIdentifier(key, identifier).apply();
+        }
+    }
+
     @Kroll.method 
     @Kroll.getProperty
     public Object[] getTags() {

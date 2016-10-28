@@ -7,6 +7,7 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 #import "AirshipLib.h"
+#import "UAAssociatedIdentifiers.h"
 
 @interface ComUrbanairshipModule()
 @property (nonatomic, copy) NSDictionary *launchPush;
@@ -123,6 +124,29 @@
 - (void)setNamedUser:(id)value {
     ENSURE_STRING(value);
     [UAirship namedUser].identifier = [value length] ? value : nil;
+}
+
+- (void)associateIdentifier:(id)args {
+    ENSURE_ARRAY(args);
+
+    NSString *keyString = [TiUtils stringValue:[args objectAtIndex:0]];
+
+    if (keyString.length == 0) {
+        UA_LDEBUG(@"AssociateIdentifier failed, key cannot be nil.");
+        return;
+    }
+
+    NSString *identifierString = [TiUtils stringValue:[args objectAtIndex:1]];
+
+    if (identifierString.length == 0) {
+        UA_LDEBUG(@"AssociateIdentifier removed identifier for key: %@", keyString);
+    } else {
+        UA_LDEBUG(@"AssociateIdentifier with identifier: %@ for key: %@", identifierString, keyString);
+    }
+
+    UAAssociatedIdentifiers *identifiers = [[UAirship shared].analytics currentAssociatedDeviceIdentifiers];
+    [identifiers setIdentifier:identifierString forKey:keyString];
+    [[UAirship shared].analytics associateDeviceIdentifiers:identifiers];
 }
 
 - (NSDictionary *)getLaunchNotification:(id)args {

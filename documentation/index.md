@@ -158,3 +158,14 @@ Displays the message center.
     UrbanAirship.displayMessageCenter();
 ```
 
+### associateIdentifier(key, identifier)
+
+Associate a custom identifier.
+Previous identifiers will be replaced by the new identifiers each time associateIdentifier is called.
+It is a set operation.
+ - key: The custom key for the identifier as a string.
+ - identifier: The value of the identifier as a string, or `null` to remove the identifier.
+
+```
+    UrbanAirship.associateIdentifier("customKey", "customIdentifier");
+```
