@@ -10,6 +10,17 @@ import com.urbanairship.Autopilot;
 import com.urbanairship.richpush.RichPushInbox;
 import com.urbanairship.UAirship;
 import com.urbanairship.push.PushMessage;
+import com.urbanairship.analytics.CustomEvent;
+import com.urbanairship.actions.ActionArguments;
+import com.urbanairship.actions.ActionCompletionCallback;
+import com.urbanairship.actions.ActionResult;
+import com.urbanairship.actions.ActionRunRequest;
+import com.urbanairship.actions.AddCustomEventAction;
+import com.urbanairship.analytics.CustomEvent;
+import com.urbanairship.json.JsonException;
+import com.urbanairship.json.JsonMap;
+import com.urbanairship.json.JsonValue;
+import com.urbanairship.util.UAStringUtil;
 
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
@@ -107,6 +118,39 @@ public class UrbanAirshipModule extends KrollModule {
             Log.d(TAG, "AssociateIdentifier with identifier: " + identifier + " for key: " + key);
             UAirship.shared().getAnalytics().editAssociatedIdentifiers().addIdentifier(key, identifier).apply();
         }
+    }
+
+    @Kroll.method
+    public void addCustomEvent(final String eventPayload) {
+        Log.d(TAG, "Add custom event: " + eventPayload);
+
+        if (UAStringUtil.isEmpty(eventPayload)) {
+            Log.e(TAG, "Missing event payload.");
+            return;
+        }
+
+        JsonMap eventArgs = null;
+        try {
+            eventArgs = JsonValue.parseString(eventPayload).getMap();
+        } catch (JsonException e) {
+            Log.e(TAG, "Failed to parse event payload", e);
+        }
+
+        if (eventArgs == null) {
+            Log.e(TAG, "Event payload must define a JSON object.");
+            return;
+        }
+
+        ActionRunRequest.createRequest(AddCustomEventAction.DEFAULT_REGISTRY_NAME)
+                        .setValue(eventArgs)
+                        .run(new ActionCompletionCallback() {
+                                 @Override
+                                 public void onFinish(ActionArguments arguments, ActionResult result) {
+                                     if (result.getException() != null) {
+                                         Log.e(TAG, "Failed to add custom event: " + eventPayload, result.getException());
+                                     }
+                                 }
+                             });
     }
 
     @Kroll.method 
