@@ -181,6 +181,26 @@ namedUserLabel.text = UrbanAirship.namedUser;
 // Add a custom identifier
 UrbanAirship.associateIdentifier("customKey", "customIdentifier");
 
+// Add a custom event
+var customEvent = {
+    event_name: 'customEventName',
+    event_value: 2016,
+    transaction_id: 'customTransactionId',
+    interaction_id: 'customInteractionId',
+    interaction_type: 'customInteractionType',
+    properties: {
+        someBoolean: true,
+        someDouble: 124.49,
+        someString: "customString",
+        someInt: 5,
+        someLong: 1234567890,
+        someArray: ["tangerine", "pineapple", "kiwi"]
+    }
+};
+
+var customEventPayload = JSON.stringify(customEvent);
+UrbanAirship.addCustomEvent(customEventPayload);
+
 // Set Tags
 UrbanAirship.tags = [ osname, 'titanium-test' ];
 var data = UrbanAirship.tags;

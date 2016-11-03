@@ -169,3 +169,29 @@ It is a set operation.
 ```
     UrbanAirship.associateIdentifier("customKey", "customIdentifier");
 ```
+
+### addCustomEvent(eventPayload)
+
+Adds a custom event.
+ - eventPayload: The custom event payload as a string.
+
+```
+    var customEvent = {
+      event_name: 'customEventName',
+      event_value: 2016,
+      transaction_id: 'customTransactionId',
+      interaction_id: 'customInteractionId',
+      interaction_type: 'customInteractionType',
+      properties: {
+        someBoolean: true,
+        someDouble: 124.49,
+        someString: "customString",
+        someInt: 5,
+        someLong: 1234567890,
+        someArray: ["tangerine", "pineapple", "kiwi"]
+      }
+    };
+
+    var customEventPayload = JSON.stringify(customEvent);
+    UrbanAirship.addCustomEvent(customEventPayload);
+```

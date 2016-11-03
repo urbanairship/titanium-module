@@ -149,6 +149,21 @@
     [[UAirship shared].analytics associateDeviceIdentifiers:identifiers];
 }
 
+- (void)addCustomEvent:(id)eventPayload {
+    NSString *customEventString = [TiUtils stringValue:[eventPayload objectAtIndex:0]];
+    UA_LDEBUG(@"Add custom event: %@", customEventString);
+
+    if (customEventString.length == 0) {
+        UA_LERR(@"Missing event payload.");
+        return;
+    }
+
+    NSError *jsonError;
+    NSData *data = [customEventString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *eventArgs = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+    [UAActionRunner runActionWithName:@"add_custom_event_action" value:eventArgs situation:UASituationManualInvocation];
+}
+
 - (NSDictionary *)getLaunchNotification:(id)args {
     NSString *incomingAlert = @"";
     NSMutableDictionary *incomingExtras = [NSMutableDictionary dictionary];
