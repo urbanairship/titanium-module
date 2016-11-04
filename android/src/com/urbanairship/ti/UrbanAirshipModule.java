@@ -84,13 +84,13 @@ public class UrbanAirshipModule extends KrollModule {
     @Kroll.method
     @Kroll.getProperty
     public String getNamedUser() {
-        return UAirship.shared().getPushManager().getNamedUser().getId();
+        return UAirship.shared().getNamedUser().getId();
     }
 
     @Kroll.method
     @Kroll.setProperty
     public void setNamedUser(String namedUser) {
-        UAirship.shared().getPushManager().getNamedUser().setId(namedUser);
+        UAirship.shared().getNamedUser().setId(namedUser);
     }
 
     @Kroll.method 
