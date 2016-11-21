@@ -1,6 +1,10 @@
 Urban Airship Titanium Module
 =============================
 
+Version 2.0.2 - November 21, 2016
+=================================
+ - Fixed getLaunchNotification on iOS not returning the notification when app is started from a push notification.
+
 Version 2.0.1 - October 4, 2016
 ===============================
  - Updated Urban Airship iOS Library to 8.0.2
