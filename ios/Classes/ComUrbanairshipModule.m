@@ -68,14 +68,10 @@
 
 -(void)startup {
     [super startup];
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [UAirship push].pushNotificationDelegate = self;
-        [UAirship push].registrationDelegate = self;
-        self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
-    });
+    [UAirship push].pushNotificationDelegate = self;
+    [UAirship push].registrationDelegate = self;
+    self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
 }
-
 
 #pragma Public APIs
 
@@ -181,7 +177,7 @@
     if ([TiUtils boolValue:[args firstObject] def:NO]) {
         self.launchPush = nil;
     }
-    
+
     return push;
 }
 
@@ -228,7 +224,7 @@
     if([[extras allKeys] containsObject:@"_"]) {
         [extras removeObjectForKey:@"_"];
     }
-    
+
     return extras;
 }
 
