@@ -1,7 +1,7 @@
 Urban Airship Titanium Module
 =============================
 
-Version 3.0.0 - November 21, 2016
+Version 3.0.0 - November 22, 2016
 =================================
  - Update to Titanium 6.0.0 GA.
  - Added iOS foreground presentation support.
