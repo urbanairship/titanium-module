@@ -1,6 +1,13 @@
 Urban Airship Titanium Module
 =============================
 
+Version 3.0.0 - November 21, 2016
+=================================
+ - Update to Titanium 6.0.0 GA.
+ - Added iOS foreground presentation support.
+ - Added support for associated identifiers.
+ - Added support for custom events.
+
 Version 2.0.2 - November 21, 2016
 =================================
  - Fixed getLaunchNotification on iOS not returning the notification when app is started from a push notification.
