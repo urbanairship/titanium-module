@@ -46,14 +46,14 @@
 
                 <!-- Google Play Services -->
                 <meta-data android:name="com.google.android.gms.version"
-                           android:value="7571000"/>
+                           android:value="9683000"/>
 
                 <!-- ADM -->
                 <amazon:enable-feature
                     android:name="com.amazon.device.messaging"
                     android:required="false"/>
 
-                <activity android:name="com.urbanairship.actions.ActionActivity"
+                <activity android:name="com.urbanairship.util.HelperActivity"
                           android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
                 <activity android:name="com.urbanairship.CoreActivity"/>
                 <activity android:name="com.urbanairship.google.PlayServicesErrorActivity"
@@ -89,19 +89,15 @@
 
                 </activity>
 
-                <service android:name="com.urbanairship.push.PushService"
-                         android:label="Push Notification Service"/>
-                <service android:name="com.urbanairship.analytics.EventService"
-                         android:label="Event Service"/>
+                <service android:name="com.urbanairship.AirshipService"/>
                 <service android:name="com.urbanairship.actions.ActionService"/>
-                <service android:name="com.urbanairship.richpush.RichPushUpdateService"/>
                 <service android:name="com.urbanairship.location.LocationService"
                          android:label="Segments Service"/>
 
                 <service
                     android:name="com.urbanairship.push.UAInstanceIDListenerService"
                     android:exported="false">
-                    <intent-filter>
+                    <intent-filter android:priority="-999">
                         <action android:name="com.google.android.gms.iid.InstanceID"/>
                     </intent-filter>
                 </service>
@@ -119,7 +115,7 @@
                     android:name="com.urbanairship.push.GcmPushReceiver"
                     android:permission="com.google.android.c2dm.permission.SEND">
 
-                    <intent-filter>
+                    <intent-filter android:priority="-999">
                         <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
                         <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
                         <category android:name="${tiapp.properties['id']}"/>
