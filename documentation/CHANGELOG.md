@@ -1,6 +1,11 @@
 Urban Airship Titanium Module
 =============================
 
+Version 3.1.0 - December 9, 2016
+================================
+ - Updated Urban Airship Android Library to 8.2.2
+ - Updated Urban Airship iOS library to 8.1.4
+
 Version 3.0.0 - November 22, 2016
 =================================
  - Update to Titanium 6.0.0 GA.
