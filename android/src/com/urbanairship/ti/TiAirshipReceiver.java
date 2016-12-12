@@ -18,8 +18,14 @@ public class TiAirshipReceiver extends AirshipReceiver {
     private static final String TAG = "TiAirshipReceiver";
 
     @Override
-    protected void onChannelRegistrationSucceeded(Context context, String channelId) {
-        Log.i(TAG, "Channel registration updated. Channel Id:" + channelId + ".");
+    protected void onChannelCreated(Context context, String channelId) {
+        Log.i(TAG, "Channel created. Channel ID:" + channelId + ".");
+        UrbanAirshipModule.onChannelUpdated(channelId);
+    }
+
+    @Override
+    protected void onChannelUpdated(Context context, String channelId) {
+        Log.i(TAG, "Channel updated. Channel ID:" + channelId + ".");
         UrbanAirshipModule.onChannelUpdated(channelId);
     }
 

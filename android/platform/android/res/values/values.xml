@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
     <color name="urban_airship_blue">#003f61</color>
-    <declare-styleable name="UAWebView"><attr format="enum" name="mixed_content_mode"><enum name="always_allow" value="0"/><enum name="never_allow" value="1"/><enum name="compatibility_mode" value="2"/></attr></declare-styleable>
+    <declare-styleable name="UAWebView"><attr format="enum" name="mixed_content_mode">
+            
+            <enum name="always_allow" value="0"/>
+
+            
+            <enum name="never_allow" value="1"/>
+
+            
+            <enum name="compatibility_mode" value="2"/>
+        </attr></declare-styleable>
     <declare-styleable name="UrbanAirshipActionButton"><attr name="android:icon"/><attr name="android:label"/></declare-styleable>
     <plurals name="ua_selected_count">
         <item quantity="one"><ns1:g example="1" id="count">%1$d</ns1:g> selected</item>
@@ -16,7 +25,7 @@
     <string name="ua_mark_read">Mark Read</string>
     <string name="ua_mc_failed_to_load">Unable to load message. Please try again later.</string>
     <string name="ua_message_center_title">Message Center</string>
-    <string name="ua_message_not_selected">No Message Selected</string>
+    <string name="ua_message_not_selected">No Messages Selected</string>
     <string name="ua_notification_button_accept">Accept</string>
     <string name="ua_notification_button_add">Add</string>
     <string name="ua_notification_button_add_to_calendar">Add To Calendar</string>
@@ -53,6 +62,5 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:padding">8dp</item>
     </style>
 </resources>

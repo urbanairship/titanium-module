@@ -3,7 +3,9 @@
 Titanium module for Urban Airship services.
 
  [ ![Download](https://api.bintray.com/packages/urbanairship/titanium/titanium-module/images/download.svg) ](https://bintray.com/urbanairship/titanium/titanium-module/_latestVersion)
- 
+
+Note: For Version 3.1.0 a special Urban Airship SDK build targeting version 23 was used to work around the issue where the v4 support library has not been updated for version 24+.
+
 ## Docs
  - [Plugin](documentation/index.md)
  - [Changelog](documentation/CHANGELOG.md)
