@@ -38,6 +38,9 @@ public class UrbanAirshipModule extends KrollModule {
     public static final String EVENT_CHANNEL_UPDATED = "EVENT_CHANNEL_UPDATED";
 
     @Kroll.constant
+    public static final String DEEP_LINK_RECEIVED = "DEEP_LINK_RECEIVED";
+    
+    @Kroll.constant
     public static final String EVENT_PUSH_RECEIVED = "PUSH_RECEIVED";
 
     private static final String TAG = "UrbanAirshipModule";
@@ -168,6 +171,12 @@ public class UrbanAirshipModule extends KrollModule {
         }
         UAirship.shared().getPushManager().setTags(tagSet);
     }
+    
+    @Kroll.method
+    public String getDeepLink(String args) {
+        String deepLink = args;
+        return deepLink;
+    }
 
     @Kroll.method
     public void displayMessageCenter() {
@@ -192,6 +201,15 @@ public class UrbanAirshipModule extends KrollModule {
             HashMap<String, String> event = new HashMap<String, String>();
             event.put("channelId", channelId);
             module.fireEvent(EVENT_CHANNEL_UPDATED, event);
+        }
+    }
+    
+    public static void deepLinkReceived(String deepLink) {
+    	UrbanairshipModule module = getModule();
+        if (module != null) {
+            HashMap<String, String> event = new HashMap<String, String>();
+            event.put("deepLink", deepLink);
+            module.fireEvent(DEEP_LINK_RECEIVED, event);
         }
     }
 

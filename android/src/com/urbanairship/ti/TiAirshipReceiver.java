@@ -38,6 +38,7 @@ public class TiAirshipReceiver extends AirshipReceiver {
         }
     }
 
+    @Override
     protected void onNotificationPosted(Context context, NotificationInfo notificationInfo) {
         Log.i(TAG, "Notification posted. Alert: " + notificationInfo.getMessage().getAlert());
         UrbanAirshipModule.onPushReceived(notificationInfo.getMessage(), notificationInfo.getNotificationId());
