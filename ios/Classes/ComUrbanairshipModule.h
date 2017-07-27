@@ -5,7 +5,7 @@
 #import "TiModule.h"
 #import "UAPush.h"
 
-@interface ComUrbanairshipModule : TiModule <UAPushNotificationDelegate, UARegistrationDelegate>
+@interface ComUrbanairshipModule : TiModule <UAPushNotificationDelegate, UARegistrationDelegate, UADeepLinkDelegate>
 
 
 @end
