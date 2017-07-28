@@ -13,6 +13,10 @@
  */
 @interface UADefaultMessageCenterStyle : NSObject
 
+///---------------------------------------------------------------------------------------
+/// @name Default Message Center Style Properties
+///---------------------------------------------------------------------------------------
+
 /**
  * The font to use for the message center title.
  */
@@ -112,6 +116,26 @@
  * The background color for the unread indicator.
  */
 @property(nonatomic, strong) UIColor *unreadIndicatorColor;
+
+/**
+ * The title color for the "Select All" button.
+ */
+@property(nonatomic, strong) UIColor *selectAllButtonTitleColor;
+
+/**
+ * The title color for the "Delete" button.
+ */
+@property(nonatomic, strong) UIColor *deleteButtonTitleColor;
+
+/**
+ * The title color for the "Mark Read" button.
+ */
+@property(nonatomic, strong) UIColor *markAsReadButtonTitleColor;
+
+
+///---------------------------------------------------------------------------------------
+/// @name Default Message Center Style Factories
+///---------------------------------------------------------------------------------------
 
 /**
  * Factory method to create a UADefaultMessageCenterStyle.

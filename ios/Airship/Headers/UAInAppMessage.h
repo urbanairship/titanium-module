@@ -1,27 +1,4 @@
-/*
- Copyright 2009-2017 Urban Airship Inc. All rights reserved.
-
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
-
- 1. Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
-
- 2. Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation
- and/or other materials provided with the distribution.
-
- THIS SOFTWARE IS PROVIDED BY THE URBAN AIRSHIP INC ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL URBAN AIRSHIP INC OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* Copyright 2017 Urban Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -64,31 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface UAInAppMessage : NSObject
 
-/**
- * Class factory method for constructing an unconfigured
- * in-app message model.
- *
- * @return An unconfigured instance of UAInAppMessage.
- */
-+ (instancetype)message;
-
-/**
- * Class factory method for constructing an in-app message
- * model from the in-app message section of a push payload.
- *
- * @param payload The in-app message section of a push payload,
- * in NSDictionary representation.
- * @return A fully configured instance of UAInAppMessage.
- */
-+ (instancetype)messageWithPayload:(NSDictionary *)payload;
-
-/**
- * Tests whether the message is equal by value to another message.
- *
- * @param message The message the receiver is being compared to.
- * @return `YES` if the two messages are equal by value, `NO` otherwise.
- */
-- (BOOL)isEqualToMessage:(nullable UAInAppMessage *)message;
+///---------------------------------------------------------------------------------------
+/// @name In App Message Properties
+///---------------------------------------------------------------------------------------
 
 /**
  * The in-app message payload in NSDictionary format
@@ -100,7 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSString *identifier;
 
-// Top level
+///---------------------------------------------------------------------------------------
+/// @name In App Message Top Level Properties
+///---------------------------------------------------------------------------------------
 
 /**
  * The expiration date for the message.
@@ -113,7 +70,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSDictionary *extra;
 
-// Display
+///---------------------------------------------------------------------------------------
+/// @name In App Message Display Properties
+///---------------------------------------------------------------------------------------
 
 /**
  * The display type. Defaults to `UAInAppMessageDisplayTypeBanner`
@@ -149,7 +108,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) UIColor *secondaryColor;
 
 
-// Actions
+///---------------------------------------------------------------------------------------
+/// @name In App Message Actions Properties
+///---------------------------------------------------------------------------------------
 
 /**
  * The button group (category) associated with the message.
@@ -173,12 +134,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSDictionary *onClick;
 
+#if !TARGET_OS_TV    // UIUserNotificationActinoContext is not available on tvOS
 /**
  * The chosen notification action context. If there are notification actions defined for
  * UIUserNotificationActionContextMinimal, this context will be preferred. Othwerise, the
  * context defaults to UIUserNotificationActionContextDefault.
+ *
+ * @deprecated Deprecated - to be removed in SDK version 9.0
  */
-@property(nonatomic, readonly) UIUserNotificationActionContext notificationActionContext;
+@property(nonatomic, readonly) UIUserNotificationActionContext notificationActionContext DEPRECATED_MSG_ATTRIBUTE("Deprecated - to be removed in SDK version 9.0");
+#endif
 
 /**
  * An array of UNNotificationAction instances corresponding to the left-to-right order
@@ -199,6 +164,41 @@ NS_ASSUME_NONNULL_BEGIN
  * buttons.
  */
 @property(nonatomic, readonly, nullable) NSArray *buttonActionBindings;
+
+
+///---------------------------------------------------------------------------------------
+/// @name In App Message Factories
+///---------------------------------------------------------------------------------------
+
+/**
+ * Class factory method for constructing an unconfigured
+ * in-app message model.
+ *
+ * @return An unconfigured instance of UAInAppMessage.
+ */
++ (instancetype)message;
+
+/**
+ * Class factory method for constructing an in-app message
+ * model from the in-app message section of a push payload.
+ *
+ * @param payload The in-app message section of a push payload,
+ * in NSDictionary representation.
+ * @return A fully configured instance of UAInAppMessage.
+ */
++ (instancetype)messageWithPayload:(NSDictionary *)payload;
+
+///---------------------------------------------------------------------------------------
+/// @name In App Message Utilities
+///---------------------------------------------------------------------------------------
+
+/**
+ * Tests whether the message is equal by value to another message.
+ *
+ * @param message The message the receiver is being compared to.
+ * @return `YES` if the two messages are equal by value, `NO` otherwise.
+ */
+- (BOOL)isEqualToMessage:(nullable UAInAppMessage *)message;
 
 @end
 

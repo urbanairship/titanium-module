@@ -1,27 +1,4 @@
-/*
- Copyright 2009-2017 Urban Airship Inc. All rights reserved.
-
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
-
- 1. Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
-
- 2. Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation
- and/or other materials provided with the distribution.
-
- THIS SOFTWARE IS PROVIDED BY THE URBAN AIRSHIP INC ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL URBAN AIRSHIP INC OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* Copyright 2017 Urban Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -70,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
             withResponse:(nullable NSHTTPURLResponse *)response;
 
 
+#if !TARGET_OS_TV   // Inbox not supported on tvOS
 /**
  * Returns a basic auth header string.
  *
@@ -78,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return An HTTP Basic Auth header string value for the user's credentials.
  */
 + (NSString *)userAuthHeaderString;
+#endif
 
 
 /**
@@ -122,6 +101,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A DateFormatter with the default attributes, matching the optional `T` delimiter.
  */
 + (NSDateFormatter *)ISODateFormatterUTCWithDelimiter;
+
+/**
+ * Parses ISO 8601 date strings. Supports timestamps with just year all
+ * the way up to seconds with and without the optional `T` delimeter.
+ * @param timestamp The ISO 8601 timestamp.
+ * @return A parsed NSDate object, or nil if the timestamp is not a valid format.
+ */
++ (nullable NSDate *)parseISO8601DateFromString:(NSString *)timestamp;
 
 
 ///---------------------------------------------------------------------------------------
@@ -169,6 +156,31 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if it is a silent push, `NO` otherwise
  */
 + (BOOL)isSilentPush:(NSDictionary *)notification;
+
+/**
+ * Determine if the notification payload is an alerting push.
+ * @param notification The notification payload
+ * @return `YES` if it is an alerting push, `NO` otherwise
+ */
++ (BOOL)isAlertingPush:(NSDictionary *)notification;
+
+///---------------------------------------------------------------------------------------
+/// @name Fetch Results
+///---------------------------------------------------------------------------------------
+
+/**
+ * A utility method that takes an array of fetch results as NSNumbers and returns the merged result
+ */
++ (UIBackgroundFetchResult)mergeFetchResults:(NSArray *)fetchResults;
+
+///---------------------------------------------------------------------------------------
+/// @name Device Tokens
+///---------------------------------------------------------------------------------------
+
+/**
+ * A utility method that takes an APNS-provided device token and returns the decoded UA device token
+ */
++ (NSString *)deviceTokenStringFromDeviceToken:(NSData *)deviceToken;
 
 @end
 

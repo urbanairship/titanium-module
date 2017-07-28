@@ -1,27 +1,4 @@
-/*
- Copyright 2009-2017 Urban Airship Inc. All rights reserved.
-
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
-
- 1. Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
-
- 2. Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation
- and/or other materials provided with the distribution.
-
- THIS SOFTWARE IS PROVIDED BY THE URBAN AIRSHIP INC ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL URBAN AIRSHIP INC OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* Copyright 2017 Urban Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 
@@ -32,44 +9,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The UAConfig object provides an interface for passing common configurable values to [UAirship takeOff].
  * The simplest way to use this class is to add an AirshipConfig.plist file in your app's bundle and set
- * the desired options. The plist keys use the same names as the properties on this class. Older, all-caps
- * keys are still supported, but you should migrate your properties file to make use of a number of new options.
+ * the desired options. The plist keys use the same names as this class's configuration options. Older,
+ * all-caps keys are still supported, but you should migrate your properties file to make use of a number 
+ * of new options.
  */
 @interface UAConfig : NSObject <NSCopying>
 
 ///---------------------------------------------------------------------------------------
-/// @name Resolved Values
-///---------------------------------------------------------------------------------------
-
-/**
- * The current app key (resolved using the inProduction flag).
- */
-@property (nonatomic, readonly, nullable) NSString *appKey;
-
-/**
- * The current app secret (resolved using the inProduction flag).
- */
-@property (nonatomic, readonly, nullable) NSString *appSecret;
-
-/**
- * The current log level for the library's UA_L<level> macros (resolved using the inProduction flag).
- */
-@property (nonatomic, readonly) UALogLevel logLevel;
-
-/**
- * The production status of this application. This may be set directly, or it may be determined
- * automatically if the detectProvisioningMode flag is set to `YES`.
- */
-@property (nonatomic, assign, getter=isInProduction) BOOL inProduction;
-
-/**
- * Toggles Urban Airship analytics. Defaults to `YES`. If set to `NO`, many UA features will not be
- * available to this application.
- */
-@property (nonatomic, assign, getter=isAnalyticsEnabled) BOOL analyticsEnabled;
-
-///---------------------------------------------------------------------------------------
-/// @name Configuration Values
+/// @name Configuration Options
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -108,8 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) UALogLevel productionLogLevel;
 
-
-
 /**
  * The size in MB for the UA Disk Cache.  Defaults to 100.
  *
@@ -145,6 +90,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Advanced Configuration Options
 ///---------------------------------------------------------------------------------------
 
+/**
+ * Toggles Urban Airship analytics. Defaults to `YES`. If set to `NO`, many UA features will not be
+ * available to this application.
+ */
+@property (nonatomic, assign, getter=isAnalyticsEnabled) BOOL analyticsEnabled;
 
 /**
  * Apps may be set to self-configure based on the APS-environment set in the
@@ -164,12 +114,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) BOOL detectProvisioningMode;
 
-
 /**
  * The Urban Airship device API url. This option is reserved for internal debugging.
  */
 @property (nonatomic, copy) NSString *deviceAPIURL;
-
 
 /**
  * The Urban Airship analytics API url. This option is reserved for internal debugging.
@@ -185,6 +133,11 @@ NS_ASSUME_NONNULL_BEGIN
  * The Urban Airship default message center style configuration file.
  */
 @property (nonatomic, copy) NSString *messageCenterStyleConfig;
+
+/**
+ * The iTunes ID used for Rate App Actions.
+ */
+@property (nonatomic, copy) NSString *itunesID;
 
 /**
  * If set to `YES`, the Urban Airship user will be cleared if the application is
@@ -220,6 +173,40 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy) NSDictionary *customConfig;
 
+/**
+ * If set to `YES`, SDK will use WKWebView for UA default inbox message and overlay views.
+ * If set to `NO`,  SDK will use UIWebView for UA default inbox message and overlay views.
+ *
+ * Defaults to `NO`. 
+ * @note Will default to `YES` in SDK 9.0.
+ */
+@property (nonatomic, assign) BOOL useWKWebView;
+
+///---------------------------------------------------------------------------------------
+/// @name Resolved Options
+///---------------------------------------------------------------------------------------
+
+/**
+ * The current app key (resolved using the inProduction flag).
+ */
+@property (nonatomic, readonly, nullable) NSString *appKey;
+
+/**
+ * The current app secret (resolved using the inProduction flag).
+ */
+@property (nonatomic, readonly, nullable) NSString *appSecret;
+
+/**
+ * The current log level for the library's UA_L<level> macros (resolved using the inProduction flag).
+ */
+@property (nonatomic, readonly) UALogLevel logLevel;
+
+/**
+ * The production status of this application. This may be set directly, or it may be determined
+ * automatically if the detectProvisioningMode flag is set to `YES`.
+ */
+@property (nonatomic, assign, getter=isInProduction) BOOL inProduction;
+
 ///---------------------------------------------------------------------------------------
 /// @name Factory Methods
 ///---------------------------------------------------------------------------------------
@@ -246,7 +233,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///---------------------------------------------------------------------------------------
 /// @name Utilities, Helpers
 ///---------------------------------------------------------------------------------------
-
 
 /**
  * Validates the current configuration. In addition to performing a strict validation, this method

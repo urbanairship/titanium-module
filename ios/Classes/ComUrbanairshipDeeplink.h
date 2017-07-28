@@ -20,11 +20,11 @@
 /**
  * Custom deep link action that forwards incoming deep links to a delegate.
  */
-@interface UADeepLinkAction : UAAction
+@interface ComUrbanAirshipDeepLinkAction : UADeepLinkAction
 
 /**
     * Deep link delegate.
  */
-@property (nonatomic, weak, nullable) id<UADeepLinkDelegate> deepLinkDelegate;
+@property (nonatomic, strong, nullable) id<UADeepLinkDelegate> deepLinkDelegate;
 
 @end

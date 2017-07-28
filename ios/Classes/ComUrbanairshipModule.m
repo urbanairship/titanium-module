@@ -8,7 +8,7 @@
 #import "TiUtils.h"
 #import "AirshipLib.h"
 #import "UAAssociatedIdentifiers.h"
-#import "UADeepLinkAction.h"
+#import "ComUrbanAirshipDeeplink.h"
 
 @interface ComUrbanairshipModule()
 @property (nonatomic, copy) NSDictionary *launchPush;
@@ -84,7 +84,7 @@ NSString *const UADeepLinkEventName = @"com.urbanairship.deep_link";
     [super startup];
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].registrationDelegate = self;
-    UADeepLinkAction *dle = [[UADeepLinkAction alloc] init];
+    ComUrbanAirshipDeepLinkAction *dle = [[ComUrbanAirshipDeepLinkAction alloc] init];
     [[UAirship shared].actionRegistry updateAction:dle forEntryWithName:kUADeepLinkActionDefaultRegistryName];
     dle.deepLinkDelegate = self;
     self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;

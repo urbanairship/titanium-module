@@ -1,8 +1,8 @@
 /* Copyright 2017 Urban Airship and Contributors */
 
-#import "UADeepLinkAction.h"
+#import "ComUrbanairshipDeeplink.h"
 
-@implementation UADeepLinkAction
+@implementation ComUrbanAirshipDeepLinkAction
 
 - (BOOL)acceptsArguments:(UAActionArguments *)arguments {
     if (arguments.situation == UASituationBackgroundPush || arguments.situation == UASituationBackgroundInteractiveButton) {
