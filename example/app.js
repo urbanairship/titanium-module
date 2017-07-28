@@ -246,6 +246,10 @@ if(isAndroid) {
     });
 }
 
+UrbanAirship.addEventListener(UrbanAirship.DEEP_LINK_RECEIVED, function (e) {
+	Ti.API.info('Deep Link Received: ' + UrbanAirship.getDeepLink(e.deepLink));
+	alert("deepLink: " + UrbanAirship.getDeepLink(e.deepLink));
+});
 
 UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
         Ti.API.info('Channel Updated: ' + UrbanAirship.channelId);
