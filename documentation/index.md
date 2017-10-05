@@ -92,6 +92,17 @@ Listens for any push received events. Event contains the following:
     });
 ```
 
+#### EVENT_DEEP_LINK_RECEIVED
+
+Listens for any deep link events. Event contains the following:
+ - deepLink: The deep link.
+
+```
+    UrbanAirship.addEventListener(UrbanAirship.EVENT_DEEP_LINK_RECEIVED, function(e) {
+        Ti.API.info('DeepLink: ' + e.deepLink);
+    });
+```
+
 ## Properties
 
 #### channelId
@@ -149,6 +160,15 @@ Gets the notification that launched the app. The notification will have the foll
     Ti.API.info("Launch notification: " + UrbanAirship.getLaunchNotification(false).message);
 ```
 
+### getDeepLink([clear])
+
+Gets the deep link that launched the app.
+
+`clear` is used to prevent getDeepLink from returning the deepLink again.
+
+```
+    Ti.API.info("Deep link: " + UrbanAirship.getDeepLink(false));
+```
 
 ### displayMessageCenter()
 

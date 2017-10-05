@@ -46,7 +46,7 @@ public class TiAutopilot extends Autopilot {
                 return ActionResult.newResult(arguments.getValue());
             }
         });
-        
+
     }
 
     @Override
