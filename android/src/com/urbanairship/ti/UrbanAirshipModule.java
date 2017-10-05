@@ -38,7 +38,7 @@ public class UrbanAirshipModule extends KrollModule {
     public static final String EVENT_CHANNEL_UPDATED = "EVENT_CHANNEL_UPDATED";
 
     @Kroll.constant
-    public static final String DEEP_LINK_RECEIVED = "DEEP_LINK_RECEIVED";
+    public static final String EVENT_DEEP_LINK_RECEIVED = "EVENT_DEEP_LINK_RECEIVED";
 
     @Kroll.constant
     public static final String EVENT_PUSH_RECEIVED = "PUSH_RECEIVED";
@@ -216,7 +216,7 @@ public class UrbanAirshipModule extends KrollModule {
         if (module != null) {
             HashMap<String, String> event = new HashMap<String, String>();
             event.put("deepLink", dl);
-            module.fireEvent(DEEP_LINK_RECEIVED, event);
+            module.fireEvent(EVENT_DEEP_LINK_RECEIVED, event);
         }
     }
 
