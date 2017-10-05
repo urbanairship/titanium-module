@@ -33,13 +33,13 @@ import java.util.Map;
 
 @Kroll.module(name = "UrbanAirship", id = "com.urbanairship")
 public class UrbanAirshipModule extends KrollModule {
-    
+
     @Kroll.constant
     public static final String EVENT_CHANNEL_UPDATED = "EVENT_CHANNEL_UPDATED";
 
     @Kroll.constant
     public static final String DEEP_LINK_RECEIVED = "DEEP_LINK_RECEIVED";
-    
+
     @Kroll.constant
     public static final String EVENT_PUSH_RECEIVED = "PUSH_RECEIVED";
 
@@ -47,9 +47,10 @@ public class UrbanAirshipModule extends KrollModule {
 
     private static final String MODULE_NAME = "UrbanAirship";
 
-    // Stores the launch notification
+    // Store state
     private static PushMessage launchPushMessage = null;
     private static Integer launchNotificationId = null;
+    private static String deepLink = null;
 
     public UrbanAirshipModule() {
         super(MODULE_NAME);
@@ -156,12 +157,12 @@ public class UrbanAirshipModule extends KrollModule {
                              });
     }
 
-    @Kroll.method 
+    @Kroll.method
     @Kroll.getProperty
     public Object[] getTags() {
         return UAirship.shared().getPushManager().getTags().toArray();
     }
-    
+
     @Kroll.method
     @Kroll.setProperty
     public void setTags(Object[] tags) {
@@ -171,11 +172,16 @@ public class UrbanAirshipModule extends KrollModule {
         }
         UAirship.shared().getPushManager().setTags(tagSet);
     }
-    
+
     @Kroll.method
-    public String getDeepLink(String args) {
-        String deepLink = args;
-        return deepLink;
+    public String getDeepLink(@Kroll.argument(optional=true) boolean clear) {
+        String dl = deepLink;
+
+        if (clear) {
+          deepLink = null;
+        }
+
+        return dl;
     }
 
     @Kroll.method
@@ -203,12 +209,13 @@ public class UrbanAirshipModule extends KrollModule {
             module.fireEvent(EVENT_CHANNEL_UPDATED, event);
         }
     }
-    
-    public static void deepLinkReceived(String deepLink) {
+
+    public static void deepLinkReceived(String dl) {
+      deepLink = dl;
     	UrbanairshipModule module = getModule();
         if (module != null) {
             HashMap<String, String> event = new HashMap<String, String>();
-            event.put("deepLink", deepLink);
+            event.put("deepLink", dl);
             module.fireEvent(DEEP_LINK_RECEIVED, event);
         }
     }
