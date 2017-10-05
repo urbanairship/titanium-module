@@ -25,8 +25,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <CoreTelephony/CTCarrier.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -35,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
  * This base class encapsulates analytics events.
  */
 @interface UAEvent : NSObject
+
+///---------------------------------------------------------------------------------------
+/// @name Event Properties
+///---------------------------------------------------------------------------------------
 
 /**
  * The time the event was created.
@@ -56,6 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) NSString *eventType;
 
+///---------------------------------------------------------------------------------------
+/// @name Event Validation
+///---------------------------------------------------------------------------------------
 
 /**
  * Checks if the event is valid. Invalid events will be dropped.

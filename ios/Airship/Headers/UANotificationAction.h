@@ -1,27 +1,4 @@
-/*
- Copyright 2009-2017 Urban Airship Inc. All rights reserved.
-
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
-
- 1. Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
-
- 2. Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation
- and/or other materials provided with the distribution.
-
- THIS SOFTWARE IS PROVIDED BY THE URBAN AIRSHIP INC ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL URBAN AIRSHIP INC OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* Copyright 2017 Urban Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -50,13 +27,16 @@ typedef NS_OPTIONS(NSUInteger, UANotificationActionOptions) {
     UANotificationActionOptionForeground = (1 << 2),
 };
 
-static const UANotificationActionOptions UANotificationActionOptionNone NS_SWIFT_UNAVAILABLE("Use [] instead.");
+static const UANotificationActionOptions UANotificationActionOptionNone NS_SWIFT_UNAVAILABLE("Use [] instead.") = 0;
 
 /**
  * Clone of UNNotificationAction for iOS 8-10 support.
  */
 @interface UANotificationAction : NSObject
 
+///---------------------------------------------------------------------------------------
+/// @name Notification Action Properties
+///---------------------------------------------------------------------------------------
 
 /**
  * The string that you use internally to identify the action.
@@ -72,6 +52,10 @@ static const UANotificationActionOptions UANotificationActionOptionNone NS_SWIFT
  * The options with which to perform the action.
  */
 @property(assign, readonly, nonatomic) UANotificationActionOptions options;
+
+///---------------------------------------------------------------------------------------
+/// @name Notification Action Initialization
+///---------------------------------------------------------------------------------------
 
 /**
  * Init method.
@@ -100,12 +84,20 @@ static const UANotificationActionOptions UANotificationActionOptionNone NS_SWIFT
 + (instancetype)actionWithIdentifier:(NSString *)identifier
                                title:(NSString *)title
                              options:(UANotificationActionOptions)options;
+
+///---------------------------------------------------------------------------------------
+/// @name Notification Action Utilities
+///---------------------------------------------------------------------------------------
+
+#if TARGET_OS_IOS // UIUserNotificationAction and UNNotificationAction not available on tvOS
+
 /**
  * Converts a UANotificationAction into a UIUserNotificationAction.
  *
  * @return An instance of UIUserNotificationAction or nil if conversion fails.
+ * @deprecated Deprecated in iOS 10.
  */
-- (nullable UIUserNotificationAction *)asUIUserNotificationAction;
+- (nullable UIUserNotificationAction *)asUIUserNotificationAction NS_DEPRECATED_IOS(8_0, 10_0, "Deprecated in iOS 10");
 
 /**
  * Converts a UANotificationAction into a UNNotificationAction.
@@ -113,6 +105,28 @@ static const UANotificationActionOptions UANotificationActionOptionNone NS_SWIFT
  * @return An instance of UNUNotificationAction or nil if conversion fails.
  */
 - (nullable UNNotificationAction *)asUNNotificationAction __IOS_AVAILABLE(10.0);
+
+
+/**
+ * Tests for equivalence with a UIUserNotificationAction. As UANotificationAction is a
+ * drop-in replacement for UNNotificationAction, any features not applicable
+ * in UIUserNotificationAction will be ignored.
+ *
+ * @param notificationAction The UIUserNotificationAction to compare with.
+ * @return `YES` if the two actions are equivalent, `NO` otherwise.
+ * @deprecated Deprecated in iOS 10.
+ */
+- (BOOL)isEqualToUIUserNotificationAction:(UIUserNotificationAction *)notificationAction NS_DEPRECATED_IOS(8_0, 10_0, "Deprecated in iOS 10");
+
+/**
+ * Tests for equivalence with a UNNotificationAction.
+ *
+ * @param notificationAction The UNNNotificationAction to compare with.
+ * @return `YES` if the two actions are equivalent, `NO` otherwise.
+ */
+- (BOOL)isEqualToUNNotificationAction:(UNNotificationAction *)notificationAction;
+
+#endif
 
 @end
 

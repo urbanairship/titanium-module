@@ -8,12 +8,18 @@
 #import "TiUtils.h"
 #import "AirshipLib.h"
 #import "UAAssociatedIdentifiers.h"
+#import "ComUrbanAirshipDeeplink.h"
 
 @interface ComUrbanairshipModule()
 @property (nonatomic, copy) NSDictionary *launchPush;
+@property (nonatomic,copy) NSString * deepLink;
+@property(nonatomic, strong) NSMutableArray *pendingEvents;
 @end
 
 @implementation ComUrbanairshipModule
+    
+NSString *const UANotificationResponseEventName = @"com.urbanairship.notification_response";
+NSString *const UADeepLinkEventName = @"com.urbanairship.deep_link";
 
 #pragma mark Internal
 
@@ -62,7 +68,15 @@
 
     [self fireEvent:self.EVENT_CHANNEL_UPDATED withObject:data];
 }
-
+    
+#pragma mark UADeepLinkDelegate
+    
+-(void)deepLinkReceived:(NSString *)deepLink {
+    id body = @{ @"deepLink" : deepLink };
+    if ([self sendEventWithName:UADeepLinkEventName body:body]) {
+        [self.pendingEvents addObject:@{ @"name": UANotificationResponseEventName, @"body": body}];
+    }
+}
 
 #pragma mark Lifecycle
 
@@ -70,6 +84,9 @@
     [super startup];
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].registrationDelegate = self;
+    ComUrbanAirshipDeepLinkAction *dle = [[ComUrbanAirshipDeepLinkAction alloc] init];
+    [[UAirship shared].actionRegistry updateAction:dle forEntryWithName:kUADeepLinkActionDefaultRegistryName];
+    dle.deepLinkDelegate = self;
     self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
 }
 
@@ -81,6 +98,10 @@
 
 -(NSString *)EVENT_CHANNEL_UPDATED {
     return @"EVENT_CHANNEL_UPDATED";
+}
+    
+-(NSString *)DEEP_LINK_RECEIVED {
+    return @"DEEP_LINK_RECEIVED";
 }
 
 - (void)displayMessageCenter:(id)args {
@@ -183,6 +204,20 @@
 
 - (NSDictionary *)launchNotification {
     [self getLaunchNotification:@[NUMBOOL(NO)]];
+}
+    
+- (NSString *)getDeepLink:(id)args {
+    NSString *deepLink = args;
+    
+    if([args firstObject]) {
+        args = nil;
+    }
+    return deepLink;
+}
+    
+- (BOOL)sendEventWithName:(NSString *)eventName body:(id)body {
+    [self fireEvent:self.DEEP_LINK_RECEIVED withObject:body];
+    return YES;
 }
 
 #pragma mark Helpers

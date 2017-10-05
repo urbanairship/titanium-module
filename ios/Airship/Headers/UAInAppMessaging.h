@@ -1,27 +1,4 @@
-/*
- Copyright 2009-2017 Urban Airship Inc. All rights reserved.
-
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
-
- 1. Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
-
- 2. Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation
- and/or other materials provided with the distribution.
-
- THIS SOFTWARE IS PROVIDED BY THE URBAN AIRSHIP INC ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL URBAN AIRSHIP INC OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* Copyright 2017 Urban Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -39,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
+///---------------------------------------------------------------------------------------
+/// @name In App Messaging Delegate Methods
+///---------------------------------------------------------------------------------------
+
 /**
  * Indicates that an in-app message has been stored as pending.
  * @param message The associated in-app message.
@@ -51,6 +32,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)messageWillBeDisplayed:(UAInAppMessage *)message;
 
+/**
+ * Indicates that an in-app message body has been tapped.
+ */
+- (void)messageTapped:(UAInAppMessage *)message;
+
+/**
+ * Indicates that an in-app message button has been tapped.
+ */
+- (void)messageButtonTapped:(UAInAppMessage *)message buttonIdentifier:(NSString *)identifier;
+
+/**
+ * Indicates that an in-app message has been dismissed by the user or a timeout.
+ */
+- (void)messageDismissed:(UAInAppMessage *)message timeout:(BOOL)timedOut;
+
 @end
 
 
@@ -59,35 +55,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface UAInAppMessaging : NSObject
 
-/**
- * Deletes the pending message if it matches the
- * provided message argument.
- *
- * @param message The message to delete.
- */
-- (void)deletePendingMessage:(UAInAppMessage *)message;
+///---------------------------------------------------------------------------------------
+/// @name In App Messaging Properties
+///---------------------------------------------------------------------------------------
 
 /**
- * Displays the provided message. Expired messages will be
- * ignored.
- *
- * @param message The message to display.
- */
-- (void)displayMessage:(UAInAppMessage *)message;
-
-/*
- * Displays the pending message if it is available.
- */
-- (void)displayPendingMessage;
-
-/**
- * The pending in-app message.
- */
+* The pending in-app message.
+*/
 @property(nonatomic, copy, nullable) UAInAppMessage *pendingMessage;
 
 /**
- * Enables/disables auto-display of in-app messages.
- */
+* Enables/disables auto-display of in-app messages.
+*/
 @property(nonatomic, assign, getter=isAutoDisplayEnabled) BOOL autoDisplayEnabled;
 
 /**
@@ -116,8 +95,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Whether to display an incoming message as soon as possible, as opposed to on app foreground
- * transitions. If set to `YES`, and if automatic display is enabled, when a message arrives in 
- * the foreground it will be automatically displayed as soon as it has been received. Otherwise 
+ * transitions. If set to `YES`, and if automatic display is enabled, when a message arrives in
+ * the foreground it will be automatically displayed as soon as it has been received. Otherwise
  * the message will be stored as pending. Defaults to `NO`.
  */
 @property(nonatomic, assign, getter=isDisplayASAPEnabled) BOOL displayASAPEnabled;
@@ -131,6 +110,31 @@ NS_ASSUME_NONNULL_BEGIN
  * A optional delegate for configuring and providing custom UI during message display.
  */
 @property(nonatomic, weak, nullable) id<UAInAppMessageControllerDelegate> messageControllerDelegate;
+
+///---------------------------------------------------------------------------------------
+/// @name In App Messaging Display and Management
+///---------------------------------------------------------------------------------------
+
+/**
+ * Displays the provided message. Expired messages will be
+ * ignored.
+ *
+ * @param message The message to display.
+ */
+- (void)displayMessage:(UAInAppMessage *)message;
+
+/*
+ * Displays the pending message if it is available.
+ */
+- (void)displayPendingMessage;
+
+/**
+ * Deletes the pending message if it matches the
+ * provided message argument.
+ *
+ * @param message The message to delete.
+ */
+- (void)deletePendingMessage:(UAInAppMessage *)message;
 
 @end
 

@@ -46,7 +46,7 @@
 
                 <!-- Google Play Services -->
                 <meta-data android:name="com.google.android.gms.version"
-                           android:value="9683000"/>
+                           android:value="11011000"/>
 
                 <!-- ADM -->
                 <amazon:enable-feature
@@ -88,12 +88,26 @@
                     </intent-filter>
 
                 </activity>
-
+				<activity
+            		android:name="com.urbanairship.ChannelCaptureActivity"/>
+        		
+            		
                 <service android:name="com.urbanairship.AirshipService"/>
                 <service android:name="com.urbanairship.actions.ActionService"/>
-                <service android:name="com.urbanairship.location.LocationService"
-                         android:label="Segments Service"/>
-
+                <service android:name="com.urbanairship.location.LocationService" android:label="Segments Service"/>
+				<service android:name="com.urbanairship.push.PushService" />
+				
+				<service android:name="com.urbanairship.job.AirshipGcmTaskService"
+                 		 android:exported="true"
+                 		 android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
+            		<intent-filter>
+                		<action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
+            		</intent-filter>
+        		</service>
+        		
+        		<service android:name="com.urbanairship.job.AndroidJobService"
+                 		 android:permission="android.permission.BIND_JOB_SERVICE" />
+				
                 <service
                     android:name="com.urbanairship.push.UAInstanceIDListenerService"
                     android:exported="false">
@@ -137,9 +151,7 @@
                     android:name="com.urbanairship.UrbanAirshipProvider"
                     android:authorities="${tiapp.properties['id']}.urbanairship.provider"
                     android:exported="true"
-                    android:multiprocess="true"
                     android:permission="${tiapp.properties['id']}.permission.UA_DATA"/>
-
             </application>
         </manifest>
     </android>

@@ -1,27 +1,4 @@
-/*
- Copyright 2009-2017 Urban Airship Inc. All rights reserved.
-
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
-
- 1. Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
-
- 2. Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation
- and/or other materials provided with the distribution.
-
- THIS SOFTWARE IS PROVIDED BY THE URBAN AIRSHIP INC ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL URBAN AIRSHIP INC OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* Copyright 2017 Urban Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 
@@ -41,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
+///---------------------------------------------------------------------------------------
+/// @name Inbox Delegate Optional Methods
+///---------------------------------------------------------------------------------------
+
 /**
  * Called when the UADisplayInboxAction was triggered from a foreground notification.
  *
@@ -52,10 +33,23 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when the inbox is requested to be displayed by the UADisplayInboxAction.
  *
  * @param message The Rich Push message
+ *
+ * @deprecated Deprecated - to be removed in SDK version 10.0
  */
-- (void)showInboxMessage:(UAInboxMessage *)message;
+- (void)showInboxMessage:(UAInboxMessage *)message DEPRECATED_MSG_ATTRIBUTE("Deprecated - to be removed in SDK version 10.0");
+
+/**
+ * Called when the inbox is requested to be displayed by the UADisplayInboxAction.
+ *
+ * @param messageID The message ID of the Rich Push message
+ */
+- (void)showMessageForID:(NSString *)messageID;
 
 @required
+
+///---------------------------------------------------------------------------------------
+/// @name Inbox Delegate Required Methods
+///---------------------------------------------------------------------------------------
 
 /**
  * Called when the inbox is requested to be displayed by the UADisplayInboxAction.
@@ -72,6 +66,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface UAInbox : NSObject
 
+///---------------------------------------------------------------------------------------
+/// @name Inbox Properties
+///---------------------------------------------------------------------------------------
+
 /**
  * The list of Rich Push Inbox messages.
  */
@@ -81,7 +79,6 @@ NS_ASSUME_NONNULL_BEGIN
  * The Inbox API Client
  */
 @property (nonatomic, readonly, strong) UAInboxAPIClient *client;
-
 
 /**
  * The delegate that should be notified when an incoming push is handled,

@@ -1,27 +1,4 @@
-/*
- Copyright 2009-2017 Urban Airship Inc. All rights reserved.
-
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
-
- 1. Redistributions of source code must retain the above copyright notice, this
- list of conditions and the following disclaimer.
-
- 2. Redistributions in binary form must reproduce the above copyright notice,
- this list of conditions and the following disclaimer in the documentation
- and/or other materials provided with the distribution.
-
- THIS SOFTWARE IS PROVIDED BY THE URBAN AIRSHIP INC ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL URBAN AIRSHIP INC OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* Copyright 2017 Urban Airship and Contributors */
 
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
@@ -38,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 ///---------------------------------------------------------------------------------------
-/// @name UNUserNotificationDelegate hooks
+/// @name User Notification Delegate hooks
 ///---------------------------------------------------------------------------------------
 
+#if !TARGET_OS_TV   // UNNotificationResponse not available in tvOS
 /**
  * Must be called by the UNUserNotificationDelegate's
  * userNotificationCenter:willPresentNotification:withCompletionHandler.
@@ -53,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center
    didReceiveNotificationResponse:(UNNotificationResponse *)response
-            withCompletionHandler:(void(^)())completionHandler;
+         withCompletionHandler:(void(^)(void))completionHandler;
+#endif
 
 /**
  * Must be called by the UNUserNotificationDelegate's
@@ -71,8 +50,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 ///---------------------------------------------------------------------------------------
-/// @name UIApplicationDelegate hooks
+/// @name Application Delegate hooks
 ///---------------------------------------------------------------------------------------
+
+/**
+ * Must be called by the UIApplicationDelegate's
+ * application:performFetchWithCompletionHandler:.
+ *
+ * @param application The application instance.
+ * @param completionHandler completionHandler The completion handler.
+ */
++ (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
 /**
  * Must be called by the UIApplicationDelegate's
@@ -85,6 +73,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Must be called by the UIApplicationDelegate's
+ * application:didFailToRegisterForRemoteNotificationsWithError:.
+ *
+ * @param application The application instance.
+ * @param error An NSError object that encapsulates information why registration did not succeed.
+ */
++ (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
+
+/**
+ * Must be called by the UIApplicationDelegate's
  * application:didReceiveRemoteNotification:fetchCompletionHandler:.
  *
  * @param application The application instance.
@@ -93,6 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
+#if !TARGET_OS_TV   // UIUserNotificationSettings not available on tvOS
 /**
  * Must be called by the UIApplicationDelegate's
  * application:didRegisterUserNotificationSettings:.
@@ -101,9 +99,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param application The application instance.
  * @param notificationSettings The user notification settings.
+ * @deprecated Deprecated in iOS 10.
  */
-+ (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings;
++ (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings NS_DEPRECATED_IOS(8_0, 10_0, "Deprecated in iOS 10");
+#endif
 
+#if !TARGET_OS_TV   // Delegate methods unavailable in tvOS
 /**
  * Must be called by the UIApplicationDelegate's
  * application:handleActionWithIdentifier:forRemoteNotification:completionHandler
@@ -115,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param userInfo The remote notification.
  * @param handler The completion handler
  */
-+ (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())handler;
++ (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)(void))handler;
 
 /**
  * Must be called by the UIApplicationDelegate's
@@ -129,7 +130,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @param responseInfo The user response info.
  * @param handler The completion handler
  */
-+ (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo withResponseInfo:(nullable NSDictionary *)responseInfo completionHandler:(void (^)())handler;
++ (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo withResponseInfo:(nullable NSDictionary *)responseInfo completionHandler:(void (^)(void))handler;
+#endif
 
 @end
 

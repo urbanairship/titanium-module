@@ -26,6 +26,9 @@
 		24DD6CFA1134B3F500162E58 /* ComUrbanairshipModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* ComUrbanairshipModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* ComUrbanairshipModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* ComUrbanairshipModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m */; };
+		3DB548101F2A680D009E7EF4 /* libUAirship-8.5.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB5480F1F2A680D009E7EF4 /* libUAirship-8.5.0.a */; };
+		3DB548131F2A6829009E7EF4 /* ComUrbanairshipDeeplink.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DB548111F2A6829009E7EF4 /* ComUrbanairshipDeeplink.h */; };
+		3DB548141F2A6829009E7EF4 /* ComUrbanairshipDeeplink.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB548121F2A6829009E7EF4 /* ComUrbanairshipDeeplink.m */; };
 		765210381DF8DF67002B5868 /* AirshipLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 76520FD71DF8DF67002B5868 /* AirshipLib.h */; };
 		765210391DF8DF67002B5868 /* NSJSONSerialization+UAAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 76520FD81DF8DF67002B5868 /* NSJSONSerialization+UAAdditions.h */; };
 		7652103A1DF8DF67002B5868 /* NSManagedObjectContext+UAAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 76520FD91DF8DF67002B5868 /* NSManagedObjectContext+UAAdditions.h */; };
@@ -82,7 +85,6 @@
 		7652106D1DF8DF67002B5868 /* UAInboxMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7652100C1DF8DF67002B5868 /* UAInboxMessage.h */; };
 		7652106E1DF8DF67002B5868 /* UAInboxMessageList.h in Headers */ = {isa = PBXBuildFile; fileRef = 7652100D1DF8DF67002B5868 /* UAInboxMessageList.h */; };
 		7652106F1DF8DF67002B5868 /* UAInboxUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7652100E1DF8DF67002B5868 /* UAInboxUtils.h */; };
-		765210701DF8DF67002B5868 /* UAIncomingInAppMessageAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 7652100F1DF8DF67002B5868 /* UAIncomingInAppMessageAction.h */; };
 		765210711DF8DF67002B5868 /* UAInstallAttributionEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210101DF8DF67002B5868 /* UAInstallAttributionEvent.h */; };
 		765210721DF8DF67002B5868 /* UAirship.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210111DF8DF67002B5868 /* UAirship.h */; };
 		765210731DF8DF67002B5868 /* UAJavaScriptDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210121DF8DF67002B5868 /* UAJavaScriptDelegate.h */; };
@@ -106,7 +108,6 @@
 		765210851DF8DF67002B5868 /* UAOpenExternalURLAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210241DF8DF67002B5868 /* UAOpenExternalURLAction.h */; };
 		765210861DF8DF67002B5868 /* UAOverlayInboxMessageAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210251DF8DF67002B5868 /* UAOverlayInboxMessageAction.h */; };
 		765210871DF8DF67002B5868 /* UAPasteboardAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210261DF8DF67002B5868 /* UAPasteboardAction.h */; };
-		765210881DF8DF67002B5868 /* UAPreferenceDataStore+InternalTagGroupsMutation.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210271DF8DF67002B5868 /* UAPreferenceDataStore+InternalTagGroupsMutation.h */; };
 		765210891DF8DF67002B5868 /* UAProximityRegion.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210281DF8DF67002B5868 /* UAProximityRegion.h */; };
 		7652108A1DF8DF67002B5868 /* UAPush.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210291DF8DF67002B5868 /* UAPush.h */; };
 		7652108B1DF8DF67002B5868 /* UARegionEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 7652102A1DF8DF67002B5868 /* UARegionEvent.h */; };
@@ -123,7 +124,6 @@
 		765210961DF8DF67002B5868 /* UAWebViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210351DF8DF67002B5868 /* UAWebViewDelegate.h */; };
 		765210971DF8DF67002B5868 /* UAWhitelist.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210361DF8DF67002B5868 /* UAWhitelist.h */; };
 		765210981DF8DF67002B5868 /* UIWebView+UAAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 765210371DF8DF67002B5868 /* UIWebView+UAAdditions.h */; };
-		7672D72A1E3A9B4B00B47B09 /* libUAirship-8.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7672D7291E3A9B4B00B47B09 /* libUAirship-8.1.6.a */; };
 		AA747D9F0F9514B9006C5449 /* ComUrbanairship_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* ComUrbanairship_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		CCDD0CAD1CC0424400467979 /* ComUrbanairshipAutopilot.h in Headers */ = {isa = PBXBuildFile; fileRef = CCDD0CAB1CC0424400467979 /* ComUrbanairshipAutopilot.h */; };
@@ -146,6 +146,9 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* ComUrbanairshipModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComUrbanairshipModuleAssets.h; path = Classes/ComUrbanairshipModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComUrbanairshipModuleAssets.m; path = Classes/ComUrbanairshipModuleAssets.m; sourceTree = "<group>"; };
+		3DB5480F1F2A680D009E7EF4 /* libUAirship-8.5.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-8.5.0.a"; sourceTree = "<group>"; };
+		3DB548111F2A6829009E7EF4 /* ComUrbanairshipDeeplink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComUrbanairshipDeeplink.h; path = Classes/ComUrbanairshipDeeplink.h; sourceTree = "<group>"; };
+		3DB548121F2A6829009E7EF4 /* ComUrbanairshipDeeplink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComUrbanairshipDeeplink.m; path = Classes/ComUrbanairshipDeeplink.m; sourceTree = "<group>"; };
 		76520FD71DF8DF67002B5868 /* AirshipLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirshipLib.h; path = Headers/AirshipLib.h; sourceTree = "<group>"; };
 		76520FD81DF8DF67002B5868 /* NSJSONSerialization+UAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSJSONSerialization+UAAdditions.h"; path = "Headers/NSJSONSerialization+UAAdditions.h"; sourceTree = "<group>"; };
 		76520FD91DF8DF67002B5868 /* NSManagedObjectContext+UAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+UAAdditions.h"; path = "Headers/NSManagedObjectContext+UAAdditions.h"; sourceTree = "<group>"; };
@@ -202,7 +205,6 @@
 		7652100C1DF8DF67002B5868 /* UAInboxMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAInboxMessage.h; path = Headers/UAInboxMessage.h; sourceTree = "<group>"; };
 		7652100D1DF8DF67002B5868 /* UAInboxMessageList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAInboxMessageList.h; path = Headers/UAInboxMessageList.h; sourceTree = "<group>"; };
 		7652100E1DF8DF67002B5868 /* UAInboxUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAInboxUtils.h; path = Headers/UAInboxUtils.h; sourceTree = "<group>"; };
-		7652100F1DF8DF67002B5868 /* UAIncomingInAppMessageAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAIncomingInAppMessageAction.h; path = Headers/UAIncomingInAppMessageAction.h; sourceTree = "<group>"; };
 		765210101DF8DF67002B5868 /* UAInstallAttributionEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAInstallAttributionEvent.h; path = Headers/UAInstallAttributionEvent.h; sourceTree = "<group>"; };
 		765210111DF8DF67002B5868 /* UAirship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAirship.h; path = Headers/UAirship.h; sourceTree = "<group>"; };
 		765210121DF8DF67002B5868 /* UAJavaScriptDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAJavaScriptDelegate.h; path = Headers/UAJavaScriptDelegate.h; sourceTree = "<group>"; };
@@ -226,7 +228,6 @@
 		765210241DF8DF67002B5868 /* UAOpenExternalURLAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAOpenExternalURLAction.h; path = Headers/UAOpenExternalURLAction.h; sourceTree = "<group>"; };
 		765210251DF8DF67002B5868 /* UAOverlayInboxMessageAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAOverlayInboxMessageAction.h; path = Headers/UAOverlayInboxMessageAction.h; sourceTree = "<group>"; };
 		765210261DF8DF67002B5868 /* UAPasteboardAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAPasteboardAction.h; path = Headers/UAPasteboardAction.h; sourceTree = "<group>"; };
-		765210271DF8DF67002B5868 /* UAPreferenceDataStore+InternalTagGroupsMutation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UAPreferenceDataStore+InternalTagGroupsMutation.h"; path = "Headers/UAPreferenceDataStore+InternalTagGroupsMutation.h"; sourceTree = "<group>"; };
 		765210281DF8DF67002B5868 /* UAProximityRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAProximityRegion.h; path = Headers/UAProximityRegion.h; sourceTree = "<group>"; };
 		765210291DF8DF67002B5868 /* UAPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAPush.h; path = Headers/UAPush.h; sourceTree = "<group>"; };
 		7652102A1DF8DF67002B5868 /* UARegionEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UARegionEvent.h; path = Headers/UARegionEvent.h; sourceTree = "<group>"; };
@@ -243,7 +244,6 @@
 		765210351DF8DF67002B5868 /* UAWebViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAWebViewDelegate.h; path = Headers/UAWebViewDelegate.h; sourceTree = "<group>"; };
 		765210361DF8DF67002B5868 /* UAWhitelist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UAWhitelist.h; path = Headers/UAWhitelist.h; sourceTree = "<group>"; };
 		765210371DF8DF67002B5868 /* UIWebView+UAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+UAAdditions.h"; path = "Headers/UIWebView+UAAdditions.h"; sourceTree = "<group>"; };
-		7672D7291E3A9B4B00B47B09 /* libUAirship-8.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-8.1.6.a"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* ComUrbanairship_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComUrbanairship_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CCDD0CAB1CC0424400467979 /* ComUrbanairshipAutopilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComUrbanairshipAutopilot.h; path = Classes/ComUrbanairshipAutopilot.h; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7672D72A1E3A9B4B00B47B09 /* libUAirship-8.1.6.a in Frameworks */,
+				3DB548101F2A680D009E7EF4 /* libUAirship-8.5.0.a in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +295,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3DB548111F2A6829009E7EF4 /* ComUrbanairshipDeeplink.h */,
+				3DB548121F2A6829009E7EF4 /* ComUrbanairshipDeeplink.m */,
 				24DE9E0F11C5FE74003F90F6 /* ComUrbanairshipModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* ComUrbanairshipModule.h */,
@@ -373,7 +375,6 @@
 				7652100C1DF8DF67002B5868 /* UAInboxMessage.h */,
 				7652100D1DF8DF67002B5868 /* UAInboxMessageList.h */,
 				7652100E1DF8DF67002B5868 /* UAInboxUtils.h */,
-				7652100F1DF8DF67002B5868 /* UAIncomingInAppMessageAction.h */,
 				765210101DF8DF67002B5868 /* UAInstallAttributionEvent.h */,
 				765210111DF8DF67002B5868 /* UAirship.h */,
 				765210121DF8DF67002B5868 /* UAJavaScriptDelegate.h */,
@@ -397,7 +398,6 @@
 				765210241DF8DF67002B5868 /* UAOpenExternalURLAction.h */,
 				765210251DF8DF67002B5868 /* UAOverlayInboxMessageAction.h */,
 				765210261DF8DF67002B5868 /* UAPasteboardAction.h */,
-				765210271DF8DF67002B5868 /* UAPreferenceDataStore+InternalTagGroupsMutation.h */,
 				765210281DF8DF67002B5868 /* UAProximityRegion.h */,
 				765210291DF8DF67002B5868 /* UAPush.h */,
 				7652102A1DF8DF67002B5868 /* UARegionEvent.h */,
@@ -421,7 +421,7 @@
 		CCDD0BE91CC01B4E00467979 /* Airship */ = {
 			isa = PBXGroup;
 			children = (
-				7672D7291E3A9B4B00B47B09 /* libUAirship-8.1.6.a */,
+				3DB5480F1F2A680D009E7EF4 /* libUAirship-8.5.0.a */,
 				7652109A1DF8DF7C002B5868 /* Headers */,
 			);
 			path = Airship;
@@ -434,6 +434,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DB548131F2A6829009E7EF4 /* ComUrbanairshipDeeplink.h in Headers */,
 				765210591DF8DF67002B5868 /* UAConfig.h in Headers */,
 				765210811DF8DF67002B5868 /* UANotificationCategories.h in Headers */,
 				765210401DF8DF67002B5868 /* UAAction.h in Headers */,
@@ -482,7 +483,6 @@
 				7652104F1DF8DF67002B5868 /* UAAppIntegration.h in Headers */,
 				765210961DF8DF67002B5868 /* UAWebViewDelegate.h in Headers */,
 				7652104D1DF8DF67002B5868 /* UAAggregateActionResult.h in Headers */,
-				765210701DF8DF67002B5868 /* UAIncomingInAppMessageAction.h in Headers */,
 				765210781DF8DF67002B5868 /* UALandingPageOverlayController.h in Headers */,
 				765210661DF8DF67002B5868 /* UAInAppMessage.h in Headers */,
 				7652108F1DF8DF67002B5868 /* UAScheduleAction.h in Headers */,
@@ -530,7 +530,6 @@
 				7652104C1DF8DF67002B5868 /* UAAddTagsAction.h in Headers */,
 				7652107C1DF8DF67002B5868 /* UAMessageCenterDateUtils.h in Headers */,
 				7652106D1DF8DF67002B5868 /* UAInboxMessage.h in Headers */,
-				765210881DF8DF67002B5868 /* UAPreferenceDataStore+InternalTagGroupsMutation.h in Headers */,
 				765210951DF8DF67002B5868 /* UAWebViewCallData.h in Headers */,
 				765210771DF8DF67002B5868 /* UALandingPageAction.h in Headers */,
 				CCDD0CAD1CC0424400467979 /* ComUrbanairshipAutopilot.h in Headers */,
@@ -565,7 +564,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0810;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "UrbanAirship" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -620,6 +619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24DD6CFA1134B3F500162E58 /* ComUrbanairshipModule.m in Sources */,
+				3DB548141F2A6829009E7EF4 /* ComUrbanairshipDeeplink.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* ComUrbanairshipModuleAssets.m in Sources */,
 				CCDD0CAE1CC0424400467979 /* ComUrbanairshipAutopilot.m in Sources */,
 			);
@@ -659,7 +659,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Airship";
 				OTHER_CFLAGS = (
 					"-DDEBUG",
@@ -697,7 +697,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Airship";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
@@ -712,21 +712,37 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/ComUrbanairship.dst;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ComUrbanairship_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
@@ -753,19 +769,34 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DSTROOT = /tmp/ComUrbanairship.dst;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ComUrbanairship_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;

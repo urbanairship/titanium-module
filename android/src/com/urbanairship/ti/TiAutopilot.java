@@ -16,6 +16,9 @@ import com.urbanairship.Autopilot;
 import com.urbanairship.UAirship;
 import com.urbanairship.push.notifications.DefaultNotificationFactory;
 import com.urbanairship.util.UAStringUtil;
+import com.urbanairship.actions.DeepLinkAction;
+import com.urbanairship.actions.ActionResult;
+import com.urbanairship.actions.ActionArguments;
 
 public class TiAutopilot extends Autopilot {
 
@@ -33,6 +36,17 @@ public class TiAutopilot extends Autopilot {
     @Override
     public void onAirshipReady(UAirship airship) {
         Log.i(TAG, "Airship ready");
+        airship.getActionRegistry().getEntry(DeepLinkAction.DEFAULT_REGISTRY_NAME).setDefaultAction(new DeepLinkAction() {
+            @Override
+            public ActionResult perform(ActionArguments arguments) {
+                String deepLink = arguments.getValue().getString();
+                if (deepLink != null) {
+                	UrbanairshipModule.deepLinkReceived(deepLink);
+                }
+                return ActionResult.newResult(arguments.getValue());
+            }
+        });
+        
     }
 
     @Override
