@@ -17,13 +17,17 @@
 
 @end
 
++(ComUrbanAirshipDeepLinkAction *)shared;
+
 /**
  * Custom deep link action that forwards incoming deep links to a delegate.
  */
 @interface ComUrbanAirshipDeepLinkAction : UADeepLinkAction
 
+@property (nonatomic, copy) NSString *deepLink;
+
 /**
-    * Deep link delegate.
+  * Deep link delegate.
  */
 @property (nonatomic, strong, nullable) id<UADeepLinkDelegate> deepLinkDelegate;
 

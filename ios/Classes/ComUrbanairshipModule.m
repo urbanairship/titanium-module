@@ -85,9 +85,8 @@ NSString *const UADeepLinkEventName = @"com.urbanairship.deep_link";
     [super startup];
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].registrationDelegate = self;
-    ComUrbanAirshipDeepLinkAction *dle = [[ComUrbanAirshipDeepLinkAction alloc] init];
-    [[UAirship shared].actionRegistry updateAction:dle forEntryWithName:kUADeepLinkActionDefaultRegistryName];
-    dle.deepLinkDelegate = self;
+    [ComUrbanAirshipDeepLinkAction shared].delegate = self;
+    self.deepLink = [ComUrbanAirshipDeepLinkAction shared].deepLink;
     self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
 }
 

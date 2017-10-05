@@ -6,6 +6,7 @@
 #import "AirshipLib.h"
 #import "TiApp.h"
 #import <objc/runtime.h>
+#import "ComUrbanAirshipDeeplink.h"
 
 @implementation ComUrbanairshipAutopilot
 
@@ -114,6 +115,7 @@ NSString *const NotificationPresentationSoundKey = @"com.urbanairship.ios_foregr
 
     UA_LDEBUG(@"Foreground presentation options: %lu", (unsigned long)options);
     [UAirship push].defaultPresentationOptions = options;
+    [[UAirship shared].actionRegistry updateAction:[ComUrbanAirshipDeepLinkAction shared] forEntryWithName:kUADeepLinkActionDefaultRegistryName];
 }
 
 
