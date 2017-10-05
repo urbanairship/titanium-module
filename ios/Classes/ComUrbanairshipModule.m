@@ -12,12 +12,12 @@
 
 @interface ComUrbanairshipModule()
 @property (nonatomic, copy) NSDictionary *launchPush;
-@property (nonatomic,copy) NSString * deepLink;
+@property (nonatomic,copy) NSString *deepLink;
 @property(nonatomic, strong) NSMutableArray *pendingEvents;
 @end
 
 @implementation ComUrbanairshipModule
-    
+
 NSString *const UANotificationResponseEventName = @"com.urbanairship.notification_response";
 NSString *const UADeepLinkEventName = @"com.urbanairship.deep_link";
 
@@ -68,10 +68,11 @@ NSString *const UADeepLinkEventName = @"com.urbanairship.deep_link";
 
     [self fireEvent:self.EVENT_CHANNEL_UPDATED withObject:data];
 }
-    
+
 #pragma mark UADeepLinkDelegate
-    
+
 -(void)deepLinkReceived:(NSString *)deepLink {
+    self.deepLink = deepLink;
     id body = @{ @"deepLink" : deepLink };
     if ([self sendEventWithName:UADeepLinkEventName body:body]) {
         [self.pendingEvents addObject:@{ @"name": UANotificationResponseEventName, @"body": body}];
@@ -99,7 +100,7 @@ NSString *const UADeepLinkEventName = @"com.urbanairship.deep_link";
 -(NSString *)EVENT_CHANNEL_UPDATED {
     return @"EVENT_CHANNEL_UPDATED";
 }
-    
+
 -(NSString *)DEEP_LINK_RECEIVED {
     return @"DEEP_LINK_RECEIVED";
 }
@@ -205,16 +206,17 @@ NSString *const UADeepLinkEventName = @"com.urbanairship.deep_link";
 - (NSDictionary *)launchNotification {
     [self getLaunchNotification:@[NUMBOOL(NO)]];
 }
-    
+
 - (NSString *)getDeepLink:(id)args {
-    NSString *deepLink = args;
-    
-    if([args firstObject]) {
-        args = nil;
+    NSString *deepLink = self.deepLink;
+
+    if ([TiUtils boolValue:[args firstObject] def:NO]) {
+        self.deepLink = nil;
     }
+
     return deepLink;
 }
-    
+
 - (BOOL)sendEventWithName:(NSString *)eventName body:(id)body {
     [self fireEvent:self.DEEP_LINK_RECEIVED withObject:body];
     return YES;
