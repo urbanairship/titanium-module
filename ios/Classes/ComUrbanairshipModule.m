@@ -8,7 +8,7 @@
 #import "TiUtils.h"
 #import "AirshipLib.h"
 #import "UAAssociatedIdentifiers.h"
-#import "ComUrbanAirshipDeeplink.h"
+#import "ComUrbanairshipDeeplink.h"
 
 @interface ComUrbanairshipModule()
 @property (nonatomic, copy) NSDictionary *launchPush;
@@ -70,7 +70,7 @@
 -(void)deepLinkReceived:(NSString *)deepLink {
     self.deepLink = deepLink;
     id body = @{ @"deepLink" : deepLink };
-    [self fireEvent:self.EVENT_DEEP_LINK_RECEIVED withObject:data];
+    [self fireEvent:self.EVENT_DEEP_LINK_RECEIVED withObject:body];
 }
 
 #pragma mark Lifecycle
@@ -79,7 +79,7 @@
     [super startup];
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].registrationDelegate = self;
-    [ComUrbanAirshipDeepLinkAction shared].delegate = self;
+    [ComUrbanAirshipDeepLinkAction shared].deepLinkDelegate = self;
     self.deepLink = [ComUrbanAirshipDeepLinkAction shared].deepLink;
     self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
 }

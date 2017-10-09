@@ -6,7 +6,7 @@
 #import "AirshipLib.h"
 #import "TiApp.h"
 #import <objc/runtime.h>
-#import "ComUrbanAirshipDeeplink.h"
+#import "ComUrbanairshipDeeplink.h"
 
 @implementation ComUrbanairshipAutopilot
 
