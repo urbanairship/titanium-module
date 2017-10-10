@@ -4,12 +4,11 @@
 
 @implementation ComUrbanAirshipDeepLinkAction
 
-
-+(ComUrbanAirshipDeepLinkAction *)shared {
++ (ComUrbanAirshipDeepLinkAction *)shared {
   static dispatch_once_t pred_;
   static ComUrbanAirshipDeepLinkAction *sharedInstance_;
-  dispatch_once(&pred, ^{
-    sharedInstance_ = [ComUrbanAirshipDeepLinkAction alloc] init];
+  dispatch_once(&pred_, ^{
+      sharedInstance_ = [[ComUrbanAirshipDeepLinkAction alloc] init];
   });
 
   return sharedInstance_;
@@ -33,8 +32,8 @@
         }
 
         self.deepLink = deepLink;
-        if (self.delegate) {
-          [self.delegate deepLinkReceived:deepLink];
+        if (self.deepLinkDelegate) {
+          [self.deepLinkDelegate deepLinkReceived:deepLink];
         }
 
         completionHandler([UAActionResult resultWithValue:arguments.value]);
