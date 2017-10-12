@@ -212,7 +212,7 @@ public class UrbanAirshipModule extends KrollModule {
 
     public static void deepLinkReceived(String dl) {
       deepLink = dl;
-    	UrbanairshipModule module = getModule();
+    	UrbanAirshipModule module = getModule();
         if (module != null) {
             HashMap<String, String> event = new HashMap<String, String>();
             event.put("deepLink", dl);
