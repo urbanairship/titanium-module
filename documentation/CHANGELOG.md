@@ -1,6 +1,12 @@
 Urban Airship Titanium Module
 =============================
 
+Version 3.2.0 - October 26, 2017
+================================
+ - Added deep link support.
+ - Updated Android SDK to 8.7.0
+ - Updated iOS SDK to 8.6.0
+
 Version 3.1.1 - January 26, 2017
 ================================
  - Updated Urban Airship iOS library to 8.1.6
