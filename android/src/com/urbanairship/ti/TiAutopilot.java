@@ -41,12 +41,12 @@ public class TiAutopilot extends Autopilot {
             public ActionResult perform(ActionArguments arguments) {
                 String deepLink = arguments.getValue().getString();
                 if (deepLink != null) {
-                	UrbanairshipModule.deepLinkReceived(deepLink);
+                	UrbanAirshipModule.deepLinkReceived(deepLink);
                 }
                 return ActionResult.newResult(arguments.getValue());
             }
         });
-        
+
     }
 
     @Override

@@ -225,6 +225,7 @@ notificationsEnabledSwitch.addEventListener('change', function (e) {
 });
 
 Ti.API.info("Launch: " + UrbanAirship.getLaunchNotification(true).message);
+Ti.API.info("Launch Deep Link: " + UrbanAirship.getDeepLink(true));
 
 if(isAndroid) {
     window.addEventListener("open", function(e) {
@@ -246,9 +247,8 @@ if(isAndroid) {
     });
 }
 
-UrbanAirship.addEventListener(UrbanAirship.DEEP_LINK_RECEIVED, function (e) {
-	Ti.API.info('Deep Link Received: ' + UrbanAirship.getDeepLink(e.deepLink));
-	alert("deepLink: " + UrbanAirship.getDeepLink(e.deepLink));
+UrbanAirship.addEventListener(UrbanAirship.EVENT_DEEP_LINK_RECEIVED, function (e) {
+    alert("Received deepLink: " + e.deepLink);
 });
 
 UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
