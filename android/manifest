@@ -3,7 +3,7 @@
 # during compilation, packaging, distribution, etc.
 #
 version: 3.2.0
-apiversion: 4
+apiversion: 3
 architectures: armeabi-v7a x86
 description: Urban Airship Titanium module
 author: Urban Airship
