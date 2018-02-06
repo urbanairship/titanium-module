@@ -36,6 +36,12 @@
 		<fileset dir="${basedir}/../example"/>
 	</copy>
 
+	<!-- Copy assets subdirectories -->
+	<mkdir dir="${basedir}/assets"/>
+	<copy todir="${basedir}/assets">
+		<fileset dir="${basedir}/../assets"/>
+	</copy>
+
 	<!-- Copy license -->
 	<copy todir="${basedir}" file="${basedir}/../LICENSE"/>
 
