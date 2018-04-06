@@ -1,6 +1,10 @@
 Urban Airship Titanium Module
 =============================
 
+Version 4.0.1 - April 6, 2018
+=============================
+- Fixed bug causing iOS resource bundle verification errors.
+
 Version 4.0.0 - February 6, 2018
 ================================
  - Update to Titanium 7.0.1
