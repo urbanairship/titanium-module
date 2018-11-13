@@ -100,7 +100,7 @@
 
 - (void)displayMessageCenter:(id)args {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[UAirship defaultMessageCenter] display];
+        [[UAirship messageCenter] display];
     });
 }
 

@@ -28,3 +28,5 @@ android/java-sources.txt
 ios/documentation
 ios/example
 ios/*.zip
+ios/Airship
+ios/assets/AirshipResources.bundle
