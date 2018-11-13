@@ -1,6 +1,12 @@
 Urban Airship Titanium Module
 =============================
 
+Version 5.0.0 - November 12, 2018
+=================================
+- Updated Android SDK to 9.5.4
+- Updated iOS SDK to 10.0.3
+- Fixed parsing error when converting google.ttl to a String
+
 Version 4.0.1 - April 6, 2018
 =============================
 - Fixed bug causing iOS resource bundle verification errors.
