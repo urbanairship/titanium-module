@@ -11,10 +11,6 @@
             <uses-permission android:name="android.permission.WAKE_LOCK"/>
             <uses-permission android:name="android.permission.VIBRATE"/>
 
-            <permission android:name="${tiapp.properties['id']}.permission.UA_DATA"
-                        android:protectionLevel="signature"/>
-            <uses-permission android:name="${tiapp.properties['id']}.permission.UA_DATA"/>
-
             <!-- GCM -->
             <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
             <permission android:name="${tiapp.properties['id']}.permission.C2D_MESSAGE"
@@ -49,20 +45,45 @@
                     android:name="com.amazon.device.messaging"
                     android:required="false"/>
 
-                <activity android:name="com.urbanairship.util.HelperActivity"
-                          android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-                <activity android:name="com.urbanairship.CoreActivity"/>
-                <activity android:name="com.urbanairship.google.PlayServicesErrorActivity"
-                          android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+                <activity android:name="com.urbanairship.iam.html.HtmlActivity" android:theme="@style/UrbanAirship.InAppHtml.Activity"/>
+                <activity android:name="com.urbanairship.iam.fullscreen.FullScreenActivity" android:theme="@style/UrbanAirship.InAppFullscreen.Activity"/>
+                <activity android:name="com.urbanairship.iam.modal.ModalActivity" android:theme="@style/UrbanAirship.InAppModal.Activity"/>
 
-                <activity android:name="com.urbanairship.messagecenter.MessageActivity"/>
-                <activity android:name="com.urbanairship.messagecenter.MessageCenterActivity"
-                          android:label="@string/ua_message_center_title"/>
+                <activity android:name="com.urbanairship.CoreActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+                <activity android:name="com.urbanairship.messagecenter.MessageActivity" />
+                <activity android:name="com.urbanairship.messagecenter.MessageCenterActivity" android:label="@string/ua_message_center_title" />
+
+                <activity android:name="com.urbanairship.util.HelperActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+                    <meta-data
+                        android:name="com.urbanairship.push.iam.EXCLUDE_FROM_AUTO_SHOW"
+                        android:value="true" />
+                </activity>
+
+                <activity android:name="com.urbanairship.google.PlayServicesErrorActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+                    <meta-data
+                        android:name="com.urbanairship.push.iam.EXCLUDE_FROM_AUTO_SHOW"
+                        android:value="true" />
+                </activity>
+
+                <activity
+                    android:name="com.urbanairship.actions.RateAppActivity"
+                    android:theme="@style/UrbanAirship.RateAppActivity">
+
+                    <meta-data
+                        android:name="com.urbanairship.push.iam.EXCLUDE_FROM_AUTO_SHOW"
+                        android:value="true" />
+
+                    <intent-filter>
+                        <action android:name="com.urbanairship.actions.SHOW_RATE_APP_INTENT_ACTION"/>
+                        <category android:name="android.intent.category.DEFAULT"/>
+                    </intent-filter>
+                </activity>
 
                 <activity
                     android:name="com.urbanairship.actions.LandingPageActivity"
                     android:exported="false"
-                    android:theme="@style/LandingPageStyle">
+                    android:theme="@style/UrbanAirship.LandingPageActivity">
 
                     <meta-data
                         android:name="com.urbanairship.action.LANDING_PAGE_VIEW"
@@ -70,11 +91,10 @@
 
                     <meta-data
                         android:name="com.urbanairship.push.iam.EXCLUDE_FROM_AUTO_SHOW"
-                        android:value="true"/>
+                        android:value="true" />
 
                     <intent-filter>
-                        <action
-                            android:name="com.urbanairship.actions.SHOW_LANDING_PAGE_INTENT_ACTION"/>
+                        <action android:name="com.urbanairship.actions.SHOW_LANDING_PAGE_INTENT_ACTION"/>
 
                         <data android:scheme="http"/>
                         <data android:scheme="https"/>
@@ -84,45 +104,35 @@
                     </intent-filter>
 
                 </activity>
-				<activity
-            		android:name="com.urbanairship.ChannelCaptureActivity"/>
+
+                <activity android:name="com.urbanairship.ChannelCaptureActivity"/>
 
 
-                <service android:name="com.urbanairship.job.AirshipService"/>
-                <service android:name="com.urbanairship.actions.ActionService"/>
-                <service android:name="com.urbanairship.location.LocationService" android:label="Segments Service"/>
-				<service android:name="com.urbanairship.push.PushService" />
+                <service android:name="com.urbanairship.job.AirshipService" />
+                <service android:name="com.urbanairship.actions.ActionService" />
+                <service android:name="com.urbanairship.location.LocationService" android:label="Segments Service" />
+                <service android:name="com.urbanairship.push.PushService" />
 
-				<service android:name="com.urbanairship.job.AirshipGcmTaskService"
-                 		 android:exported="true"
-                 		 android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
-            		<intent-filter>
-                		<action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
-            		</intent-filter>
-        		</service>
 
-        		<service android:name="com.urbanairship.job.AndroidJobService"
-                 		 android:permission="android.permission.BIND_JOB_SERVICE" />
+                <service android:name="com.urbanairship.job.AndroidJobService"
+                        android:permission="android.permission.BIND_JOB_SERVICE" />
 
-                <service
-                    android:name="com.urbanairship.push.UAInstanceIDListenerService"
-                    android:exported="false">
-                    <intent-filter android:priority="-999">
-                        <action android:name="com.google.android.gms.iid.InstanceID"/>
-                    </intent-filter>
-                </service>
 
                 <receiver android:name="com.urbanairship.CoreReceiver"
-                          android:exported="false">
-
+                        android:exported="false">
                     <intent-filter android:priority="-999">
-                        <action android:name="com.urbanairship.push.OPENED"/>
+                        <action android:name="com.urbanairship.push.OPENED" />
                         <category android:name="${tiapp.properties['id']}"/>
                     </intent-filter>
                 </receiver>
 
+                <provider
+                    android:exported="false"
+                    android:name="com.urbanairship.UrbanAirshipProvider"
+                    android:authorities="${tiapp.properties['id']}.urbanairship.provider" />
+
                 <receiver
-                    android:name="com.urbanairship.push.GcmPushReceiver"
+                    android:name="com.urbanairship.push.gcm.GcmPushReceiver"
                     android:permission="com.google.android.c2dm.permission.SEND">
 
                     <intent-filter android:priority="-999">
@@ -133,7 +143,7 @@
                 </receiver>
 
                 <receiver
-                    android:name="com.urbanairship.push.AdmPushReceiver"
+                    android:name="com.urbanairship.push.adm.AdmPushReceiver"
                     android:permission="com.amazon.device.messaging.permission.SEND">
 
                     <intent-filter>
@@ -142,12 +152,6 @@
                         <category android:name="${tiapp.properties['id']}"/>
                     </intent-filter>
                 </receiver>
-
-                <provider
-                    android:name="com.urbanairship.UrbanAirshipProvider"
-                    android:authorities="${tiapp.properties['id']}.urbanairship.provider"
-                    android:exported="true"
-                    android:permission="${tiapp.properties['id']}.permission.UA_DATA"/>
             </application>
         </manifest>
     </android>
