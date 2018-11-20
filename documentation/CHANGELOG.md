@@ -1,6 +1,10 @@
 Urban Airship Titanium Module
 =============================
 
+Version 5.0.1 - November 20, 2018
+=================================
+- Updated Android SDK to 9.5.6
+
 Version 5.0.0 - November 12, 2018
 =================================
 - Updated Android SDK to 9.5.4
