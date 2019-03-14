@@ -1,6 +1,14 @@
 Urban Airship Titanium Module
 =============================
 
+Version 5.0.2 - March 14, 2018
+==============================
+Fixed a security issue within Android Urban Airship SDK, that could allow
+trusted URL redirects in certain edge cases. All applications that are using
+Urban Airship Titanium module for Android version 5.0.0 - 5.0.1 should update
+as soon as possible. For more details, please email security@urbanairship.com.
+
+
 Version 5.0.1 - November 20, 2018
 =================================
 - Updated Android SDK to 9.5.6
