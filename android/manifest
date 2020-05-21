@@ -11,7 +11,7 @@ license: Apache License, Version 2.0
 copyright: Copyright (c) 2020 by Airship
 
 # these should not be edited
-name: Airship
+name: AirshipTitanium
 moduleid: ti.airship
 guid: 240dc468-ccad-479d-9510-14e9a7cae5c9
 platform: android

@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-@Kroll.module(name = "Airship", id = "ti.airship")
+@Kroll.module(name = "AirshipTitanium", id = "ti.airship")
 public class UrbanAirshipModule extends KrollModule {
 
     @Kroll.constant
@@ -36,7 +36,7 @@ public class UrbanAirshipModule extends KrollModule {
 
     private static final String TAG = "UrbanAirshipModule";
 
-    private static final String MODULE_NAME = "Airship";
+    private static final String MODULE_NAME = "AirshipTitanium";
 
     // Store state
     private static PushMessage launchPushMessage = null;
