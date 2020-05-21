@@ -2,22 +2,15 @@
 
 package com.urbanairship.ti;
 
-import android.app.Activity;
-
 import com.urbanairship.Autopilot;
-import com.urbanairship.richpush.RichPushInbox;
 import com.urbanairship.UAirship;
-import com.urbanairship.push.PushMessage;
-import com.urbanairship.analytics.CustomEvent;
-import com.urbanairship.actions.ActionArguments;
-import com.urbanairship.actions.ActionCompletionCallback;
-import com.urbanairship.actions.ActionResult;
 import com.urbanairship.actions.ActionRunRequest;
 import com.urbanairship.actions.AddCustomEventAction;
-import com.urbanairship.analytics.CustomEvent;
 import com.urbanairship.json.JsonException;
 import com.urbanairship.json.JsonMap;
 import com.urbanairship.json.JsonValue;
+import com.urbanairship.messagecenter.MessageCenter;
+import com.urbanairship.push.PushMessage;
 import com.urbanairship.util.UAStringUtil;
 
 import org.appcelerator.kroll.KrollModule;
@@ -29,7 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-@Kroll.module(name = "UrbanAirship", id = "com.urbanairship")
+@Kroll.module(name = "Airship", id = "ti.airship")
 public class UrbanAirshipModule extends KrollModule {
 
     @Kroll.constant
@@ -43,7 +36,7 @@ public class UrbanAirshipModule extends KrollModule {
 
     private static final String TAG = "UrbanAirshipModule";
 
-    private static final String MODULE_NAME = "UrbanAirship";
+    private static final String MODULE_NAME = "Airship";
 
     // Store state
     private static PushMessage launchPushMessage = null;
@@ -62,7 +55,7 @@ public class UrbanAirshipModule extends KrollModule {
     @Kroll.method
     @Kroll.getProperty
     public String getChannelId() {
-        return UAirship.shared().getPushManager().getChannelId();
+        return UAirship.shared().getChannel().getId();
     }
 
     @Kroll.getProperty
@@ -145,20 +138,17 @@ public class UrbanAirshipModule extends KrollModule {
 
         ActionRunRequest.createRequest(AddCustomEventAction.DEFAULT_REGISTRY_NAME)
                         .setValue(eventArgs)
-                        .run(new ActionCompletionCallback() {
-                                 @Override
-                                 public void onFinish(ActionArguments arguments, ActionResult result) {
-                                     if (result.getException() != null) {
-                                         Log.e(TAG, "Failed to add custom event: " + eventPayload, result.getException());
-                                     }
-                                 }
-                             });
+                        .run((arguments, result) -> {
+                            if (result.getException() != null) {
+                                Log.e(TAG, "Failed to add custom event: " + eventPayload, result.getException());
+                            }
+                        });
     }
 
     @Kroll.method
     @Kroll.getProperty
     public Object[] getTags() {
-        return UAirship.shared().getPushManager().getTags().toArray();
+        return UAirship.shared().getChannel().getTags().toArray();
     }
 
     @Kroll.method
@@ -168,7 +158,7 @@ public class UrbanAirshipModule extends KrollModule {
         for (Object tag : tags) {
             tagSet.add(String.valueOf(tag));
         }
-        UAirship.shared().getPushManager().setTags(tagSet);
+        UAirship.shared().getChannel().setTags(tagSet);
     }
 
     @Kroll.method
@@ -184,7 +174,7 @@ public class UrbanAirshipModule extends KrollModule {
 
     @Kroll.method
     public void displayMessageCenter() {
-        UAirship.shared().getInbox().startInboxActivity();
+        MessageCenter.shared().showMessageCenter();
     }
 
     public static void onPushReceived(PushMessage message, Integer notificationId) {

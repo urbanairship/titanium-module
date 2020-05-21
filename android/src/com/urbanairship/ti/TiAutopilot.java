@@ -2,21 +2,23 @@
 
 package com.urbanairship.ti;
 
-import org.appcelerator.kroll.common.Log;
-import org.appcelerator.titanium.TiApplication;
-import org.appcelerator.titanium.TiProperties;
-
 import android.content.Context;
 import android.graphics.Color;
+
+import androidx.annotation.NonNull;
 
 import com.urbanairship.AirshipConfigOptions;
 import com.urbanairship.Autopilot;
 import com.urbanairship.UAirship;
-import com.urbanairship.push.notifications.DefaultNotificationFactory;
+import com.urbanairship.channel.AirshipChannelListener;
+import com.urbanairship.push.NotificationActionButtonInfo;
+import com.urbanairship.push.NotificationInfo;
+import com.urbanairship.push.NotificationListener;
 import com.urbanairship.util.UAStringUtil;
-import com.urbanairship.actions.DeepLinkAction;
-import com.urbanairship.actions.ActionResult;
-import com.urbanairship.actions.ActionArguments;
+
+import org.appcelerator.kroll.common.Log;
+import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.TiProperties;
 
 public class TiAutopilot extends Autopilot {
 
@@ -34,14 +36,63 @@ public class TiAutopilot extends Autopilot {
     @Override
     public void onAirshipReady(UAirship airship) {
         Log.i(TAG, "Airship ready");
-        airship.getActionRegistry().getEntry(DeepLinkAction.DEFAULT_REGISTRY_NAME).setDefaultAction(new DeepLinkAction() {
+
+        airship.setDeepLinkListener(deepLink -> {
+            UrbanAirshipModule.deepLinkReceived(deepLink);
+            return true;
+        });
+
+        airship.getPushManager().addPushListener((message, notificationPosted) -> {
+            Log.i(TAG, "Received push. Alert: " + message.getAlert());
+            if (!notificationPosted) {
+                UrbanAirshipModule.onPushReceived(message, null);
+            }
+        });
+
+        airship.getPushManager().setNotificationListener(new NotificationListener() {
             @Override
-            public ActionResult perform(ActionArguments arguments) {
-                String deepLink = arguments.getValue().getString();
-                if (deepLink != null) {
-                	UrbanAirshipModule.deepLinkReceived(deepLink);
-                }
-                return ActionResult.newResult(arguments.getValue());
+            public void onNotificationPosted(@NonNull NotificationInfo notificationInfo) {
+                Log.i(TAG, "Notification posted. Alert: " + notificationInfo.getMessage().getAlert());
+                UrbanAirshipModule.onPushReceived(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+            }
+
+            @Override
+            public boolean onNotificationOpened(@NonNull NotificationInfo notificationInfo) {
+                Log.i(TAG, "Notification Opened. Alert: " + notificationInfo.getMessage().getAlert());
+                UrbanAirshipModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+                return false;
+            }
+
+            @Override
+            public boolean onNotificationForegroundAction(@NonNull NotificationInfo notificationInfo, @NonNull NotificationActionButtonInfo actionButtonInfo) {
+                Log.i(TAG, "User clicked notification button. Button ID: " + actionButtonInfo.getButtonId() + " Alert: " + notificationInfo.getMessage().getAlert());
+                UrbanAirshipModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+                return false;
+            }
+
+            @Override
+            public void onNotificationBackgroundAction(@NonNull NotificationInfo notificationInfo, @NonNull NotificationActionButtonInfo actionButtonInfo) {
+                Log.i(TAG, "User clicked notification button. Button ID: " + actionButtonInfo.getButtonId() + " Alert: " + notificationInfo.getMessage().getAlert());
+                UrbanAirshipModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+            }
+
+            @Override
+            public void onNotificationDismissed(@NonNull NotificationInfo notificationInfo) {
+                Log.i(TAG, "Notification dismissed. Alert: " + notificationInfo.getMessage().getAlert());
+            }
+        });
+
+        airship.getChannel().addChannelListener(new AirshipChannelListener() {
+            @Override
+            public void onChannelCreated(@NonNull String channelId) {
+                Log.i(TAG, "Channel created. Channel ID:" + channelId + ".");
+                UrbanAirshipModule.onChannelUpdated(channelId);
+            }
+
+            @Override
+            public void onChannelUpdated(@NonNull String channelId) {
+                Log.i(TAG, "Channel updated. Channel ID:" + channelId + ".");
+                UrbanAirshipModule.onChannelUpdated(channelId);
             }
         });
 
@@ -62,8 +113,7 @@ public class TiAutopilot extends Autopilot {
                 .setProductionAppKey(properties.getString(PRODUCTION_KEY, ""))
                 .setProductionAppSecret(properties.getString(PRODUCTION_SECRET, ""))
                 .setInProduction(properties.getBool(IN_PRODUCTION, false))
-                .setGcmSender(properties.getString(GCM_SENDER, ""));
-
+                .setFcmSenderId(properties.getString(GCM_SENDER, null));
 
         // Accent color
         String accentColor = properties.getString(NOTIFICATION_ACCENT_COLOR, null);

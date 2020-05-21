@@ -5,14 +5,14 @@
 version: 5.0.2
 apiversion: 2
 architectures: armv7 arm64 i386 x86_64
-description: Urban Airship Titanium module
-author: Urban Airship
+description: Airship Titanium module
+author: Airship
 license: Apache License, Version 2.0
-copyright: Copyright (c) 2017 by Urban Airship
+copyright: Copyright (c) 2020 by Airship
 
 # these should not be edited
-name: UrbanAirship
-moduleid: com.urbanairship
+name: Airship
+moduleid: ti.airship
 guid: 240dc468-ccad-479d-9510-14e9a7cae5c9
 platform: iphone
 minsdk: 7.0.1.GA
