@@ -4,10 +4,10 @@
 ## Contributing Code
 
 We accept pull requests! If you would like to submit a pull request, please fill out and submit a
-[Code Contribution Agreement](http://docs.urbanairship.com/contribution-agreement.html).
+[Contributor License Agreement](https://docs.google.com/forms/d/e/1FAIpQLScErfiz-fXSPpVZ9r8Di2Tr2xDFxt5MgzUel0__9vqUgvko7Q/viewform).
 
 ## Requirements:
- - Android [GCM Setup](http://docs.urbanairship.com/reference/push-providers/gcm.html#android-gcm-setup)
+ - Android [FCM Setup](https://docs.airship.com/platform/android/getting-started/#fcm-configure-airship-dashboard)
  - iOS [APNS Setup](http://docs.urbanairship.com/reference/push-providers/apns.html)
 
 ## Setup
@@ -27,7 +27,6 @@ Modify the `tiapp.xml` file to include the Urban Airship Config:
   <property name="com.urbanairship.in_production" type="bool">false</property>
 
   <!-- Android -->
-  <property name="com.urbanairship.gcm_sender" type="String">GCM Sender ID or Project Number</property>
   <property name="com.urbanairship.notification_icon" type="string">Name of an icon in /project_name/platform/android/res/drawable folders, e.g. ic_notification.png</property>
   <property name="com.urbanairship.notification_accent_color" type="string">Notification accent color, e.g. #ff0000</property>
 
@@ -45,7 +44,7 @@ For iOS, enable background remote notifications in the `tiapp.xml` file:
   ...
   <ios>
   <plist>
-  <dict>    
+  <dict>
       ...
        <key>UIBackgroundModes</key>
        <array>
@@ -57,12 +56,14 @@ For iOS, enable background remote notifications in the `tiapp.xml` file:
   ...
 ```
 
-## Accessing the urbanairship Module
+For Android, add the `google-services.json` to `platform/android/google-services.json`.
+
+## Accessing the Airship Module
 
 To access this module from JavaScript, you would do the following:
 
 ```
-    var UrbanAirship = require("com.urbanairship");
+    var Airship = require("ti.airship");
 ```
 
 ## Events
@@ -74,8 +75,8 @@ Listens for any channel updates. Event contains the following:
  - deviceToken: (iOS only) The device token.
 
 ```
-    UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
-        Ti.API.info('Channel Updated: ' + UrbanAirship.channelId)
+    Airship.addEventListener(Airship.EVENT_CHANNEL_UPDATED, function(e) {
+        Ti.API.info('Channel Updated: ' + Airship.channelId)
     });
 ```
 
@@ -87,7 +88,7 @@ Listens for any push received events. Event contains the following:
  - notificationId: (Android only) The ID of the posted notification.
 
 ```
-    UrbanAirship.addEventListener(UrbanAirship.EVENT_PUSH_RECEIVED, function(e) {
+    Airship.addEventListener(Airship.EVENT_PUSH_RECEIVED, function(e) {
         Ti.API.info('Push received: ' + e.message);
     });
 ```
@@ -98,7 +99,7 @@ Listens for any deep link events. Event contains the following:
  - deepLink: The deep link.
 
 ```
-    UrbanAirship.addEventListener(UrbanAirship.EVENT_DEEP_LINK_RECEIVED, function(e) {
+    Airship.addEventListener(Airship.EVENT_DEEP_LINK_RECEIVED, function(e) {
         Ti.API.info('DeepLink: ' + e.deepLink);
     });
 ```
@@ -111,7 +112,7 @@ Returns the app's channel ID. The channel ID might not be immediately available 
 the EVENT_CHANNEL_UPDATED event to be notified when it becomes available.
 
 ```
-    Ti.API.info('Channel ID: ' + UrbanAirship.channelId);
+    Ti.API.info('Channel ID: ' + Airship.channelId);
 ```
 
 #### userNotificationsEnabled
@@ -120,7 +121,7 @@ Enables or disables user notifications. On iOS, user notifications can only be e
 notifications the first time will prompt the user to enable notifications.
 
 ```
-    UrbanAirship.userNotificationsEnabled = true;
+    Airship.userNotificationsEnabled = true;
 ```
 
 
@@ -129,9 +130,9 @@ notifications the first time will prompt the user to enable notifications.
 Sets or gets the channel tags. Tags can be used to segment the audience.
 
 ```
-    UrbanAirship.tags = ["test", "titanium"];
+    Airship.tags = ["test", "titanium"];
 
-    UrbanAirship.tags.forEach(function(tag) {
+    Airship.tags.forEach(function(tag) {
         Ti.API.info("Tag: " + tag);
     });
 ```
@@ -141,7 +142,7 @@ Sets or gets the channel tags. Tags can be used to segment the audience.
 Sets the namedUser for the device.
 
 ```
-    UrbanAirship.namedUser = "totes mcgoats";
+    Airship.namedUser = "totes mcgoats";
 ```
 
 ## Methods
@@ -157,7 +158,7 @@ Gets the notification that launched the app. The notification will have the foll
 
 
 ```
-    Ti.API.info("Launch notification: " + UrbanAirship.getLaunchNotification(false).message);
+    Ti.API.info("Launch notification: " + Airship.getLaunchNotification(false).message);
 ```
 
 ### getDeepLink([clear])
@@ -167,7 +168,7 @@ Gets the deep link that launched the app.
 `clear` is used to prevent getDeepLink from returning the deepLink again.
 
 ```
-    Ti.API.info("Deep link: " + UrbanAirship.getDeepLink(false));
+    Ti.API.info("Deep link: " + Airship.getDeepLink(false));
 ```
 
 ### displayMessageCenter()
@@ -175,7 +176,7 @@ Gets the deep link that launched the app.
 Displays the message center.
 
 ```
-    UrbanAirship.displayMessageCenter();
+    Airship.displayMessageCenter();
 ```
 
 ### associateIdentifier(key, identifier)
@@ -187,7 +188,7 @@ It is a set operation.
  - identifier: The value of the identifier as a string, or `null` to remove the identifier.
 
 ```
-    UrbanAirship.associateIdentifier("customKey", "customIdentifier");
+    Airship.associateIdentifier("customKey", "customIdentifier");
 ```
 
 ### addCustomEvent(eventPayload)
@@ -213,5 +214,5 @@ Adds a custom event.
     };
 
     var customEventPayload = JSON.stringify(customEvent);
-    UrbanAirship.addCustomEvent(customEventPayload);
+    Airship.addCustomEvent(customEventPayload);
 ```

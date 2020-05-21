@@ -1,6 +1,6 @@
 // Sample code
 
-var UrbanAirship = require('com.urbanairship');
+var Airship = require('ti.airship');
 
 var window = Ti.UI.createWindow({backgroundColor:'white', layout:'vertical'});
 
@@ -9,7 +9,7 @@ var isAndroid = (osname=='android') ? true : false;
 
 // Title
 window.add(Ti.UI.createLabel({
-    text:'Urban Airship Titanium Sample',
+    text:'Airship Titanium Sample',
     top:20,
     left:10,
     right:10,
@@ -166,20 +166,20 @@ window.add(view);
 
 // Listen for click events.
 mesgCtrButton.addEventListener('click', function() {
-    UrbanAirship.displayMessageCenter();
+    Airship.displayMessageCenter();
 });
 
 window.open();
 
-channelIdLabel.text = UrbanAirship.channelId;
+channelIdLabel.text = Airship.channelId;
 
 // Associate channel to a Named User
-UrbanAirship.namedUser = "namedUser";
-Ti.API.info("namedUser: " + UrbanAirship.namedUser);
-namedUserLabel.text = UrbanAirship.namedUser;
+Airship.namedUser = "namedUser";
+Ti.API.info("namedUser: " + Airship.namedUser);
+namedUserLabel.text = Airship.namedUser;
 
 // Add a custom identifier
-UrbanAirship.associateIdentifier("customKey", "customIdentifier");
+Airship.associateIdentifier("customKey", "customIdentifier");
 
 // Add a custom event
 var customEvent = {
@@ -199,11 +199,11 @@ var customEvent = {
 };
 
 var customEventPayload = JSON.stringify(customEvent);
-UrbanAirship.addCustomEvent(customEventPayload);
+Airship.addCustomEvent(customEventPayload);
 
 // Set Tags
-UrbanAirship.tags = [ osname, 'titanium-test' ];
-var data = UrbanAirship.tags;
+Airship.tags = [ osname, 'titanium-test' ];
+var data = Airship.tags;
 var tags = '';
 data.forEach( function ( val, i ) {
     Ti.API.info("Tag: " + val);
@@ -217,15 +217,15 @@ data.forEach( function ( val, i ) {
 tagsLabel.text = tags;
 
 // Set switch to current state of push
-notificationsEnabledSwitch.value = UrbanAirship.userNotificationsEnabled;
+notificationsEnabledSwitch.value = Airship.userNotificationsEnabled;
 
 // Toggle push state on switch change
 notificationsEnabledSwitch.addEventListener('change', function (e) {
-    UrbanAirship.userNotificationsEnabled = e.value;
+    Airship.userNotificationsEnabled = e.value;
 });
 
-Ti.API.info("Launch: " + UrbanAirship.getLaunchNotification(true).message);
-Ti.API.info("Launch Deep Link: " + UrbanAirship.getDeepLink(true));
+Ti.API.info("Launch: " + Airship.getLaunchNotification(true).message);
+Ti.API.info("Launch Deep Link: " + Airship.getDeepLink(true));
 
 if(isAndroid) {
     window.addEventListener("open", function(e) {
@@ -239,24 +239,24 @@ if(isAndroid) {
     });
 
     Ti.App.addEventListener('resume', function() {
-        Ti.API.info("Launch: " + UrbanAirship.getLaunchNotification(true).message);
+        Ti.API.info("Launch: " + Airship.getLaunchNotification(true).message);
     });
 } else {
     Ti.App.addEventListener('resumed', function() {
-        Ti.API.info("Launch iOS resumed: " + UrbanAirship.getLaunchNotification(true).message);
+        Ti.API.info("Launch iOS resumed: " + Airship.getLaunchNotification(true).message);
     });
 }
 
-UrbanAirship.addEventListener(UrbanAirship.EVENT_DEEP_LINK_RECEIVED, function (e) {
+Airship.addEventListener(Airship.EVENT_DEEP_LINK_RECEIVED, function (e) {
     alert("Received deepLink: " + e.deepLink);
 });
 
-UrbanAirship.addEventListener(UrbanAirship.EVENT_CHANNEL_UPDATED, function(e) {
-        Ti.API.info('Channel Updated: ' + UrbanAirship.channelId);
-        channelIdLabel.text = UrbanAirship.channelId;
+Airship.addEventListener(Airship.EVENT_CHANNEL_UPDATED, function(e) {
+        Ti.API.info('Channel Updated: ' + Airship.channelId);
+        channelIdLabel.text = Airship.channelId;
 });
 
-UrbanAirship.addEventListener(UrbanAirship.EVENT_PUSH_RECEIVED, function(e) {
+Airship.addEventListener(Airship.EVENT_PUSH_RECEIVED, function(e) {
         Ti.API.info('Push received: ' + e.message);
         Ti.API.info('Extras: ' + JSON.stringify(e.extras));
         labelMessage.text = e.message;
