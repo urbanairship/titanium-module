@@ -25,10 +25,6 @@ static NSString *const NotificationPresentationSoundKey = @"com.urbanairship.ios
 
 #pragma mark - Method Swizzling
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
-    // Fixes crash in Titanium
-}
-
 + (void)didFinishLaunching {
     static dispatch_once_t takeoOffOnceToken_;
 
@@ -38,20 +34,6 @@ static NSString *const NotificationPresentationSoundKey = @"com.urbanairship.ios
 }
 
 + (void)performTakeOff {
-    // Titanium forwards application:didReceiveRemoteNotification:fetchCompletionHandler: to
-    // application:didReceiveRemoteNotification:, however that method is not defined. We will
-    // add the method if missing.
-    id delegate = [UIApplication sharedApplication].delegate;
-    if (delegate && ![delegate respondsToSelector:@selector(application:didReceiveRemoteNotification:)]) {
-
-        Method delegateMethod = class_getInstanceMethod([self class], @selector(application:didReceiveRemoteNotification:));
-
-        BOOL swizzled = class_addMethod([delegate class],
-                        @selector(application:didReceiveRemoteNotification:),
-                        method_getImplementation(delegateMethod),
-                        method_getTypeEncoding(delegateMethod));
-    }
-
     NSDictionary *appProperties = [TiApp tiAppProperties];
     UAConfig *config = [UAConfig defaultConfig];
 
