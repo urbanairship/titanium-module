@@ -59,13 +59,13 @@ public class UrbanAirshipModule extends KrollModule {
     }
 
     @Kroll.getProperty
-    public HashMap getLaunchNotification() {
+    public HashMap<String, Object> getLaunchNotification() {
         return getLaunchNotification(false);
     }
 
     @Kroll.method
-    public HashMap getLaunchNotification(@Kroll.argument(optional=true) boolean clear) {
-        HashMap pushMap = createPushEvent(launchPushMessage, launchNotificationId);
+    public HashMap<String, Object> getLaunchNotification(@Kroll.argument(optional=true) boolean clear) {
+        HashMap<String, Object> pushMap = createPushEvent(launchPushMessage, launchNotificationId);
 
         if (clear) {
             launchNotificationId = null;
@@ -192,7 +192,7 @@ public class UrbanAirshipModule extends KrollModule {
     public static void onChannelUpdated(String channelId) {
         UrbanAirshipModule module = getModule();
         if (module != null) {
-            HashMap<String, String> event = new HashMap<String, String>();
+            HashMap<String, String> event = new HashMap<>();
             event.put("channelId", channelId);
             module.fireEvent(EVENT_CHANNEL_UPDATED, event);
         }
@@ -212,13 +212,13 @@ public class UrbanAirshipModule extends KrollModule {
         return (UrbanAirshipModule)TiApplication.getInstance().getModuleByName(MODULE_NAME);
     }
 
-    private static HashMap createPushEvent(PushMessage message, Integer notificationId) {
-        HashMap<String, Object> pushMap = new HashMap<String, Object>();
+    private static HashMap<String, Object> createPushEvent(PushMessage message, Integer notificationId) {
+        HashMap<String, Object> pushMap = new HashMap<>();
         if (message == null) {
             return pushMap;
         }
 
-        Map<String, String> extras = new HashMap<String, String>();
+        Map<String, String> extras = new HashMap<>();
         for (String key : message.getPushBundle().keySet()) {
             if ("android.support.content.wakelockid".equals(key)) {
                 continue;
