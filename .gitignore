@@ -30,3 +30,7 @@ ios/example
 ios/*.zip
 ios/Airship
 ios/assets/AirshipResources.bundle
+ios/Carthage
+ios/Cartfile.resolved
+ios/platform/*.framework
+
