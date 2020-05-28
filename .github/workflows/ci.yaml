@@ -25,3 +25,15 @@ jobs:
 
       - name: Build
         run: make build
+
+      - name: Upload iOS
+        uses: actions/upload-artifact@v1
+        with:
+          name: ios
+          path: ios/dist
+
+     - name: Upload Android
+        uses: actions/upload-artifact@v1
+        with:
+          name: android
+          path: android/dist
