@@ -30,6 +30,5 @@ ios/example
 ios/*.zip
 ios/Airship
 ios/Carthage
-ios/Cartfile.resolved
 ios/platform/*.framework
 

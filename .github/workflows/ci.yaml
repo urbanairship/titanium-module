@@ -3,8 +3,8 @@ name: CI
 on: [pull_request]
 
 jobs:
-  android:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
 
@@ -12,28 +12,30 @@ jobs:
         with:
           java-version: "12.x"
 
-      - name: Install NDK
-        run: echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.1.5948944" --sdk_root=${ANDROID_SDK_ROOT}
+      - uses: actions/cache@v1
+        with:
+          path: ios/Carthage
+          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
 
       - name: Setup Appcelerator
-        run: |
-          npm install appcelerator
-          echo "y" | npx appc setup --no-prompt --username ${{ secrets.APPC_USER_NAME }} --password ${{ secrets.APPC_PASSWORD }}
-          npx appc ti sdk install latest --no-prompt
+        run: ./scripts/setup_appc.sh ${{ secrets.APPC_USER_NAME }} ${{ secrets.APPC_PASSWORD }}
 
-      - name: Build Android
-        run: cd android && npx appc run -p android --build-only
+      - name: Check plugin version
+        run: ./scripts/check_version.sh
 
-  ios:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
+      - name: Build
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.PAT }}
+        run: make build
 
-      - name: Setup Appcelerator
-        run: |
-          npm install appcelerator
-          echo "y" | npx appc setup --no-prompt --username ${{ secrets.APPC_USER_NAME }} --password ${{ secrets.APPC_PASSWORD }}
-          npx appc ti sdk install latest --no-prompt
+      - name: Upload iOS
+        uses: actions/upload-artifact@v1
+        with:
+          name: ios
+          path: ios/dist
 
-      - name: Build iOS
-        run: cd ios && ./update_ios_frameworks.sh && npx appc run -p ios --build-only
+      - name: Upload Android
+        uses: actions/upload-artifact@v1
+        with:
+          name: android
+          path: android/dist
