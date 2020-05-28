@@ -1,17 +1,68 @@
-# Urban Airship Titanium Module
+# Airship Titanium Module
 
-Titanium module for Urban Airship services.
+Titanium module for Airship services. [Download the latest release here.](https://github.com/urbanairship/titanium-module/releases/latest)
 
- [ ![Download](https://api.bintray.com/packages/urbanairship/titanium/titanium-module/images/download.svg) ](https://bintray.com/urbanairship/titanium/titanium-module/_latestVersion)
+## Resources
+ - [API docs](documentation/index.md)
+ - [Getting Started Guide](https://docs.airship.com/platform/titanium/getting-started/)
+
+## Requirements
+ - Android [FCM Setup](https://docs.airship.com/platform/android/getting-started/#fcm-configure-airship-dashboard)
+ - iOS [APNS Setup](https://docs.airship.com/platform/ios/getting-started/#apple-setup)
 
 
-## Docs
- - [Plugin](documentation/index.md)
- - [Changelog](documentation/CHANGELOG.md)
+## Quickstart
 
-## Contributing Code
+Modify the `tiapp.xml` file to include the Urban Airship Config:
 
-We accept pull requests! If you would like to submit a pull request, please fill out and submit our
-[Contributor License Agreement](https://docs.google.com/forms/d/e/1FAIpQLScErfiz-fXSPpVZ9r8Di2Tr2xDFxt5MgzUel0__9vqUgvko7Q/viewform).
+```
+  <!-- Production credentials -->
+  <property name="com.urbanairship.production_app_key" type="string">Your Production App Key</property>
+  <property name="com.urbanairship.production_app_secret" type="string">Your Production App Secret</property>
 
-One of our engineers will verify receipt of the agreement before approving your pull request.
+  <!-- Development credentials -->
+  <property name="com.urbanairship.development_app_key" type="string">Your Development App Key</property>
+  <property name="com.urbanairship.development_app_secret" type="string">Your Development App Secret</property>
+
+  <!-- Selects between production vs development credentials -->
+  <property name="com.urbanairship.in_production" type="bool">false</property>
+
+  <!-- Android -->
+  <property name="com.urbanairship.notification_icon" type="string">Name of an icon in /project_name/platform/android/res/drawable folders, e.g. ic_notification.png</property>
+  <property name="com.urbanairship.notification_accent_color" type="string">Notification accent color, e.g. #ff0000</property>
+
+  <!-- iOS 10 alert foreground notification presentation option -->
+  <property name="com.urbanairship.ios_foreground_notification_presentation_alert" type="bool">true</property>
+  <!-- iOS 10 badge foreground notification presentation option -->
+  <property name="com.urbanairship.ios_foreground_notification_presentation_badge" type="bool">true</property>
+  <!-- iOS 10 sound foreground notification presentation option -->
+  <property name="com.urbanairship.ios_foreground_notification_presentation_sound" type="bool">true</property>
+```
+
+For iOS, enable background remote notifications in the `tiapp.xml` file:
+
+```
+  ...
+  <ios>
+  <plist>
+  <dict>
+      ...
+       <key>UIBackgroundModes</key>
+       <array>
+           <string>remote-notification</string>
+       </array>
+  </dict>
+  </plist>
+  </ios>
+  ...
+```
+
+For Android, add the `google-services.json` to `platform/android/google-services.json`.
+
+### Accessing the Airship Module
+
+To access this module from JavaScript, you would do the following:
+
+```
+    var Airship = require("ti.airship");
+```
