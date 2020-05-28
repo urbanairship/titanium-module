@@ -32,7 +32,7 @@ jobs:
           name: ios
           path: ios/dist
 
-     - name: Upload Android
+      - name: Upload Android
         uses: actions/upload-artifact@v1
         with:
           name: android
