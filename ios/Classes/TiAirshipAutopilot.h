@@ -1,9 +1,13 @@
-/* Copyright Urban Airship and Contributors */
+/* Copyright Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 
-@interface ComUrbanairshipAutopilot : NSObject
+NS_ASSUME_NONNULL_BEGIN
+
+@interface TiAirshipAutopilot : NSObject
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END

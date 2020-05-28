@@ -1,0 +1,39 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+
+      - name: Install NDK
+        run: echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.1.5948944" --sdk_root=${ANDROID_SDK_ROOT}
+
+      - name: Setup Appcelerator
+        run: |
+          npm install appcelerator
+          echo "y" | npx appc setup --no-prompt --username ${{ secrets.APPC_USER_NAME }} --password ${{ secrets.APPC_PASSWORD }}
+          npx appc ti sdk install latest --no-prompt
+
+      - name: Build Android
+        run: cd android && npx appc run -p android --build-only
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Appcelerator
+        run: |
+          npm install appcelerator
+          echo "y" | npx appc setup --no-prompt --username ${{ secrets.APPC_USER_NAME }} --password ${{ secrets.APPC_PASSWORD }}
+          npx appc ti sdk install latest --no-prompt
+
+      - name: Build iOS
+        run: cd ios && ./update_ios_frameworks.sh && npx appc run -p ios --build-only

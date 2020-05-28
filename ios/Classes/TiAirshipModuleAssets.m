@@ -1,11 +1,11 @@
 /**
  * This is a generated file. Do not edit or your changes will be lost
  */
-#import "ComUrbanairshipModuleAssets.h"
+#import "TiAirshipModuleAssets.h"
 
 extern NSData* filterDataInRange(NSData* thedata, NSRange range);
 
-@implementation ComUrbanairshipModuleAssets
+@implementation TiAirshipModuleAssets
 
 - (NSData *)moduleAsset
 {

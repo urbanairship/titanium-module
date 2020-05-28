@@ -1,15 +1,15 @@
 /* Copyright Urban Airship and Contributors */
 
-#import "AirshipLib.h"
-#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
 
-@class ComUrbanAirshipDeepLinkAction;
+@import AirshipCore;
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Deep link delegate method.
  */
-@protocol UADeepLinkDelegate <NSObject>
+@protocol TiAirshipDeepLinkDelegate <NSObject>
 
 /**
  * Called when a new deep link is received.
@@ -23,18 +23,20 @@
 /**
  * Custom deep link action that forwards incoming deep links to a delegate.
  */
-@interface ComUrbanAirshipDeepLinkAction : UADeepLinkAction
+@interface TiAirshipDeepLinkAction : UADeepLinkAction
 
-+ (nonnull ComUrbanAirshipDeepLinkAction *)shared;
++ (TiAirshipDeepLinkAction *)shared;
 
 /**
  * Deep link string.
  */
-@property (nonatomic, copy, nonnull) NSString *deepLink;
+@property (nonatomic, copy) NSString *deepLink;
 
 /**
   * Deep link delegate.
  */
-@property (nonatomic, strong, nullable) id<UADeepLinkDelegate> deepLinkDelegate;
+@property (nonatomic, strong, nullable) id<TiAirshipDeepLinkDelegate> deepLinkDelegate;
 
 @end
+
+NS_ASSUME_NONNULL_END

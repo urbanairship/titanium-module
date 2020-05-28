@@ -1,56 +1,58 @@
-/* Copyright Urban Airship and Contributors */
+/* Copyright Airship and Contributors */
 
-#import "ComUrbanairshipModule.h"
+#import "TiAirshipModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
-#import "AirshipLib.h"
-#import "UAAssociatedIdentifiers.h"
-#import "ComUrbanairshipDeeplink.h"
 
-@interface ComUrbanairshipModule()
-@property (nonatomic, copy) NSDictionary *launchPush;
-@property (nonatomic,copy) NSString *deepLink;
+NS_ASSUME_NONNULL_BEGIN
+
+@interface TiAirshipModule()
+@property (nonatomic, copy, nullable) NSDictionary *launchPush;
+@property (nonatomic, copy, nullable) NSString *deepLink;
 @end
 
-@implementation ComUrbanairshipModule
+@implementation TiAirshipModule
 
 #pragma mark Internal
 
-// this is generated for your module, please do not change it
--(id)moduleGUID {
-	return @"fbe797b5-475d-456a-bbb4-9bb9919fd63f";
+// This is generated for your module, please do not change it
+- (id)moduleGUID {
+    return @"240dc468-ccad-479d-9510-14e9a7cae5c9";
 }
 
-// this is generated for your module, please do not change it
--(NSString*)moduleId {
-	return @"com.urbanairship";
+// This is generated for your module, please do not change it
+- (NSString *)moduleId {
+    return @"ti.airship";
 }
 
 #pragma mark UAPushNotificationDelegate
 
-- (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)())completionHandler {
+- (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)(void))completionHandler {
     UA_LDEBUG(@"The application was launched or resumed from a notification %@", notificationResponse);
     self.launchPush = notificationResponse.notificationContent.notificationInfo;
     completionHandler();
 }
 
-- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void(^)())completionHandler {
+- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void(^)(void))completionHandler {
     UA_LDEBUG(@"Received a notification while the app was already in the foreground %@", notificationContent);
 
     [[UAirship push] setBadgeNumber:0]; // zero badge after push received
 
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
-    [data setValue:[ComUrbanairshipModule alertForUserInfo:notificationContent.notificationInfo] forKey:@"message"];
-    [data setValue:[ComUrbanairshipModule extrasForUserInfo:notificationContent.notificationInfo] forKey:@"extras"];
+    [data setValue:[self alertForUserInfo:notificationContent.notificationInfo] forKey:@"message"];
+    [data setValue:[self extrasForUserInfo:notificationContent.notificationInfo] forKey:@"extras"];
 
     [self fireEvent:self.EVENT_PUSH_RECEIVED withObject:data];
     completionHandler();
 }
 
-#pragma mark UARegistrationDelegate
+#pragma mark Channel Registration
 
-- (void)registrationSucceededForChannelID:(NSString *)channelID deviceToken:(NSString *)deviceToken {
+- (void)channelRegistrationSucceeded:(NSNotification *)notification {
+    NSString *channelID = notification.userInfo[UAChannelUpdatedEventChannelKey];
+    NSString *deviceToken = [UAirship push].deviceToken;
+
     UA_LINFO(@"Channel registration successful %@.", channelID);
 
     NSDictionary *data;
@@ -63,7 +65,7 @@
     [self fireEvent:self.EVENT_CHANNEL_UPDATED withObject:data];
 }
 
-#pragma mark UADeepLinkDelegate
+#pragma mark TiAirshipDeepLinkDelegate
 
 -(void)deepLinkReceived:(NSString *)deepLink {
     self.deepLink = deepLink;
@@ -76,9 +78,14 @@
 -(void)startup {
     [super startup];
     [UAirship push].pushNotificationDelegate = self;
-    [UAirship push].registrationDelegate = self;
-    [ComUrbanAirshipDeepLinkAction shared].deepLinkDelegate = self;
-    self.deepLink = [ComUrbanAirshipDeepLinkAction shared].deepLink;
+    [TiAirshipDeepLinkAction shared].deepLinkDelegate = self;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(channelRegistrationSucceeded:)
+                                                 name:UAChannelUpdatedEvent
+                                               object:nil];
+
+    self.deepLink = [TiAirshipDeepLinkAction shared].deepLink;
     self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
 }
 
@@ -98,7 +105,7 @@
 
 - (void)displayMessageCenter:(id)args {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[UAirship messageCenter] display];
+        [[UAMessageCenter shared] display];
     });
 }
 
@@ -112,18 +119,18 @@
 }
 
 - (NSArray *)tags {
-    return [UAirship push].tags;
+    return [UAirship channel].tags;
 }
 
 - (void)setTags:(id)args {
     ENSURE_ARRAY(args);
 
-    [UAirship push].tags = args;
+    [UAirship channel].tags = args;
     [[UAirship push] updateRegistration];
 }
 
 -(NSString *)channelId {
-    return [UAirship push].channelID;
+    return [UAirship channel].identifier;
 }
 
 - (NSString *)namedUser {
@@ -178,8 +185,8 @@
     NSMutableDictionary *incomingExtras = [NSMutableDictionary dictionary];
 
     if (self.launchPush) {
-        incomingAlert = [ComUrbanairshipModule alertForUserInfo:self.launchPush];
-        [incomingExtras setDictionary:[ComUrbanairshipModule extrasForUserInfo:self.launchPush]];
+        incomingAlert = [self alertForUserInfo:self.launchPush];
+        [incomingExtras setDictionary:[self extrasForUserInfo:self.launchPush]];
     }
 
     NSMutableDictionary *push = [NSMutableDictionary dictionary];
@@ -208,6 +215,7 @@
     return deepLink;
 }
 
+
 #pragma mark Helpers
 
 /**
@@ -216,7 +224,7 @@
  * @param userInfo The notification.
  * @return The notification's alert.
  */
-+ (NSString *)alertForUserInfo:(NSDictionary *)userInfo {
+- (NSString *)alertForUserInfo:(NSDictionary *)userInfo {
     NSString *alert = @"";
 
     if ([[userInfo allKeys] containsObject:@"aps"]) {
@@ -236,7 +244,7 @@
  * @param userInfo The notification.
  * @return The notification's extras.
  */
-+ (NSMutableDictionary *)extrasForUserInfo:(NSDictionary *)userInfo {
+- (NSMutableDictionary *)extrasForUserInfo:(NSDictionary *)userInfo {
 
     // remove extraneous key/value pairs
     NSMutableDictionary *extras = [NSMutableDictionary dictionaryWithDictionary:userInfo];
@@ -252,3 +260,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

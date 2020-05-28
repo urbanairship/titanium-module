@@ -1,14 +1,14 @@
 /* Copyright Urban Airship and Contributors */
 
-#import "ComUrbanairshipDeeplink.h"
+#import "TiAirshipDeeplink.h"
 
-@implementation ComUrbanAirshipDeepLinkAction
+@implementation TiAirshipDeepLinkAction
 
-+ (ComUrbanAirshipDeepLinkAction *)shared {
++ (TiAirshipDeepLinkAction *)shared {
   static dispatch_once_t pred_;
-  static ComUrbanAirshipDeepLinkAction *sharedInstance_;
+  static TiAirshipDeepLinkAction *sharedInstance_;
   dispatch_once(&pred_, ^{
-      sharedInstance_ = [[ComUrbanAirshipDeepLinkAction alloc] init];
+      sharedInstance_ = [[TiAirshipDeepLinkAction alloc] init];
   });
 
   return sharedInstance_;
