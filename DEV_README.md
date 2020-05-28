@@ -2,8 +2,8 @@
 
 Module uses a makefile for build and install commands:
 - `build`: Builds both Android and iOS modules
-- `build-android`: Only builds the Android module
-- `build-ios`: Only builds the iOS module
+- `build-android`: Builds the Android module
+- `build-ios`: Builds the iOS module
 - `install`: Builds both modules and unpacks the zips into the titanium module directory
 - `clean`: Cleans any build folders
 
