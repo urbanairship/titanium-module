@@ -12,6 +12,11 @@ jobs:
         with:
           java-version: "12.x"
 
+      - uses: actions/cache@v1
+        with:
+          path: ios/Carthage
+          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+
       - name: Setup Appcelerator
         run: ./scripts/setup_appc.sh ${{ secrets.APPC_USER_NAME }} ${{ secrets.APPC_PASSWORD }}
 
