@@ -6,9 +6,9 @@ Major update to support Titanium 9.0.0+ and Android and iOS SDKs.
 ### Changes
 - Updated Airship Android SDK to 13.1.2
 - Updated Airship iOS SDK to 13.3.2
-- Updated Titanium to 9.0.0.
-- Changed module name from `UrbanAirship` to `AirshipTitanium`.
-- Changed module id from `com.urbanairship` to `ti.airship`.
+- Updated Titanium to 9.0.0
+- Changed module name from `UrbanAirship` to `AirshipTitanium`
+- Changed module id from `com.urbanairship` to `ti.airship`
 
 ## Version 5.0.2 - March 14, 2018
 Fixed a security issue within Android Urban Airship SDK, that could allow
