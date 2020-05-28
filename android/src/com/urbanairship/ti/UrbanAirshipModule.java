@@ -59,12 +59,12 @@ public class UrbanAirshipModule extends KrollModule {
     }
 
     @Kroll.getProperty
-    public HashMap<String, Object> getLaunchNotification() {
+    public HashMap getLaunchNotification() {
         return getLaunchNotification(false);
     }
 
     @Kroll.method
-    public HashMap<String, Object> getLaunchNotification(@Kroll.argument(optional=true) boolean clear) {
+    public HashMap getLaunchNotification(@Kroll.argument(optional=true) boolean clear) {
         HashMap<String, Object> pushMap = createPushEvent(launchPushMessage, launchNotificationId);
 
         if (clear) {

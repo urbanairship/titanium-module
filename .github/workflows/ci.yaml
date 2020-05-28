@@ -24,6 +24,8 @@ jobs:
         run: ./scripts/check_version.sh
 
       - name: Build
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_PAT }}
         run: make build
 
       - name: Upload iOS
