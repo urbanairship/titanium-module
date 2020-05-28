@@ -1,4 +1,3 @@
-# Airship Titanium Module
 # Airship Titanium Module API
 
 ## Events
