@@ -12,7 +12,6 @@
 
 @implementation TiAirshipChannelTagsEditorProxy
 
-
 - (instancetype)init
 {
     self = [super init];
@@ -54,6 +53,5 @@
     [channel removeTags:[self.tagsToRemove allObjects]];
     [channel updateRegistration];
 }
-
 
 @end

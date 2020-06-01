@@ -1,9 +1,4 @@
-//
-//  TiProxy+UAAdditions.m
-//  AirshipTitanium
-//
-//  Created by Ryan Lepinski on 6/1/20.
-//
+/* Copyright Airship and Contributors */
 
 #import "TiProxy+TiAirshipTagGroupOperationAddition.h"
 #import "TiBase.h"
@@ -26,6 +21,5 @@
 
     return [TiAirshipTagGroupOperation operationForType:type tags:tags group:group];
 }
-
 
 @end

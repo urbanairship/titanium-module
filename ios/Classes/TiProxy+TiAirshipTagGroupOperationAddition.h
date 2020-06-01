@@ -1,9 +1,4 @@
-//
-//  TiProxy+UAAdditions.h
-//  AirshipTitanium
-//
-//  Created by Ryan Lepinski on 6/1/20.
-//
+/* Copyright Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 #import "TiProxy.h"
