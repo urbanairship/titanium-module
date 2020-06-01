@@ -28,13 +28,13 @@
 - (void)addTags:(id)args {
     ENSURE_ARRAY(args);
     [self.tagsToAdd addObjectsFromArray:args];
-    [self.tagsToRemove removeObjectsInArray:args];
+    [self.tagsToRemove minusSet:[NSSet setWithArray:args]];
 }
 
 - (void)removeTags:(id)args {
     ENSURE_ARRAY(args);
     [self.tagsToRemove addObjectsFromArray:args];
-    [self.tagsToAdd removeObjectsInArray:args];
+    [self.tagsToAdd minusSet:[NSSet setWithArray:args]];
 }
 
 - (void)applyTags:(id)args {
