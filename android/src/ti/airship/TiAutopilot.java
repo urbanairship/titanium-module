@@ -114,8 +114,7 @@ public class TiAutopilot extends Autopilot {
                 .setProductionAppKey(properties.getString(PRODUCTION_KEY, ""))
                 .setProductionAppSecret(properties.getString(PRODUCTION_SECRET, ""))
                 .setInProduction(properties.getBool(IN_PRODUCTION, false))
-                .setFcmSenderId(properties.getString(GCM_SENDER, null))
-                .setLogLevel(android.util.Log.VERBOSE);
+                .setFcmSenderId(properties.getString(GCM_SENDER, null));
 
         // Accent color
         String accentColor = properties.getString(NOTIFICATION_ACCENT_COLOR, null);
