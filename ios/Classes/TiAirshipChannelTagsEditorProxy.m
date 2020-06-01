@@ -7,7 +7,7 @@
 @interface TiAirshipChannelTagsEditorProxy ()
 @property (nonatomic, strong) NSMutableSet<NSString *> *tagsToAdd;
 @property (nonatomic, strong) NSMutableSet<NSString *> *tagsToRemove;
-@property (nonatomic) bool clear;
+@property (nonatomic) BOOL clear;
 @end
 
 @implementation TiAirshipChannelTagsEditorProxy

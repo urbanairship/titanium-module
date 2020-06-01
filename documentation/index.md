@@ -83,7 +83,7 @@ Sets the namedUser for the device.
 
 ## Methods
 
-#### channelTagEditor
+#### createChannelTagsEditor
 
 The tag editor allows adding and removing tags on the channel.
 
@@ -91,7 +91,7 @@ The tag editor allows adding and removing tags on the channel.
     var editor = Airship.createChannelTagsEditor()
     editor.clearTags()
     editor.addTags("neat", "rad")
-    editor.removeTag("cool")
+    editor.removeTags("cool")
     editor.applyTags()
 ```
 
@@ -102,7 +102,7 @@ The tag editor allows editing channel tag groups.
 ```
     var editor = Airship.createChannelTagGroupsEditor()
     editor.addTags("group", "neat", "rad")
-    editor.removeTag("group", "cool")
+    editor.removeTags("group", "cool")
     editor.setTags("another group", "awesome")
     editor.applyTags()
 ```
