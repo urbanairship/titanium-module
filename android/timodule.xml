@@ -9,7 +9,7 @@
             <application>
  	            <!-- TiAutopilot -->
  	            <meta-data android:name="com.urbanairship.autopilot"
- 	            	android:value="com.urbanairship.ti.TiAutopilot" />
+ 	            	android:value="ti.airship.TiAutopilot" />
             </application>
         </manifest>
     </android>

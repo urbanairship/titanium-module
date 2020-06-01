@@ -1,6 +1,6 @@
 /* Copyright Airship and Contributors */
 
-package com.urbanairship.ti;
+package ti.airship;
 
 import com.urbanairship.Autopilot;
 import com.urbanairship.UAirship;
@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 @Kroll.module(name = "AirshipTitanium", id = "ti.airship")
-public class UrbanAirshipModule extends KrollModule {
+public class AirshipTitaniumModule extends KrollModule {
 
     @Kroll.constant
     public static final String EVENT_CHANNEL_UPDATED = "EVENT_CHANNEL_UPDATED";
@@ -34,7 +34,7 @@ public class UrbanAirshipModule extends KrollModule {
     @Kroll.constant
     public static final String EVENT_PUSH_RECEIVED = "PUSH_RECEIVED";
 
-    private static final String TAG = "UrbanAirshipModule";
+    public static final String TAG = "AirshipTitaniumModule";
 
     private static final String MODULE_NAME = "AirshipTitanium";
 
@@ -43,7 +43,7 @@ public class UrbanAirshipModule extends KrollModule {
     private static Integer launchNotificationId = null;
     private static String deepLink = null;
 
-    public UrbanAirshipModule() {
+    public AirshipTitaniumModule() {
         super(MODULE_NAME);
     }
 
@@ -178,7 +178,7 @@ public class UrbanAirshipModule extends KrollModule {
     }
 
     public static void onPushReceived(PushMessage message, Integer notificationId) {
-        UrbanAirshipModule module = getModule();
+        AirshipTitaniumModule module = getModule();
         if (module != null) {
             module.fireEvent(EVENT_PUSH_RECEIVED, createPushEvent(message, notificationId));
         }
@@ -190,7 +190,7 @@ public class UrbanAirshipModule extends KrollModule {
     }
 
     public static void onChannelUpdated(String channelId) {
-        UrbanAirshipModule module = getModule();
+        AirshipTitaniumModule module = getModule();
         if (module != null) {
             HashMap<String, String> event = new HashMap<>();
             event.put("channelId", channelId);
@@ -200,7 +200,7 @@ public class UrbanAirshipModule extends KrollModule {
 
     public static void deepLinkReceived(String dl) {
       deepLink = dl;
-    	UrbanAirshipModule module = getModule();
+    	AirshipTitaniumModule module = getModule();
         if (module != null) {
             HashMap<String, String> event = new HashMap<String, String>();
             event.put("deepLink", dl);
@@ -208,8 +208,8 @@ public class UrbanAirshipModule extends KrollModule {
         }
     }
 
-    private static UrbanAirshipModule getModule() {
-        return (UrbanAirshipModule)TiApplication.getInstance().getModuleByName(MODULE_NAME);
+    private static AirshipTitaniumModule getModule() {
+        return (AirshipTitaniumModule)TiApplication.getInstance().getModuleByName(MODULE_NAME);
     }
 
     private static HashMap<String, Object> createPushEvent(PushMessage message, Integer notificationId) {
