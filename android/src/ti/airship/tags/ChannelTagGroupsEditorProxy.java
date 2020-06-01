@@ -16,8 +16,8 @@ public class ChannelTagGroupsEditorProxy extends KrollProxy {
     private final TagGroupsEditor editor = UAirship.shared().getChannel().editTagGroups();
 
     @Kroll.method
-    public void removeTags(String group, Object[] args) {
-        editor.removeTags(group, Utils.convertToStringSet(args));
+    public void removeTags(String group, Object[] tags) {
+        editor.removeTags(group, Utils.convertToStringSet(tags));
     }
 
     @Kroll.method

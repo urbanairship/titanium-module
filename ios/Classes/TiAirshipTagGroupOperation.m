@@ -12,8 +12,7 @@
 
 - (instancetype)initWithType:(TiAirshipTagGroupOperationType)type
                         tags:(NSArray *)tags
-                       group:(NSString *)group
-{
+                       group:(NSString *)group {
     self = [super init];
     if (self) {
         self.type = type;

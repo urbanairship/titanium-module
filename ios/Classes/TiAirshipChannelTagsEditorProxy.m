@@ -12,8 +12,7 @@
 
 @implementation TiAirshipChannelTagsEditorProxy
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.tagsToAdd = [NSMutableSet set];
@@ -29,17 +28,13 @@
 - (void)addTags:(id)args {
     ENSURE_ARRAY(args);
     [self.tagsToAdd addObjectsFromArray:args];
-    for (id tag in args) {
-        [self.tagsToRemove removeObject:tag];
-    }
+    [self.tagsToRemove removeObjectsInArray:args];
 }
 
 - (void)removeTags:(id)args {
     ENSURE_ARRAY(args);
     [self.tagsToRemove addObjectsFromArray:args];
-    for (id tag in args) {
-        [self.tagsToAdd removeObject:tag];
-    }
+    [self.tagsToAdd removeObjectsInArray:args];
 }
 
 - (void)applyTags:(id)args {
@@ -47,7 +42,6 @@
     if (self.clear) {
         channel.tags = @[];
     }
-
 
     [channel addTags:[self.tagsToAdd allObjects]];
     [channel removeTags:[self.tagsToRemove allObjects]];

@@ -7,7 +7,9 @@ public abstract class Utils {
     public static Set<String> convertToStringSet(Object[] values) {
         HashSet<String> set = new HashSet<String>();
         for (Object value : values) {
-            set.add(String.valueOf(value));
+            if (value instanceof String) {
+                set.add((String) value);
+            }
         }
         return set;
     }
