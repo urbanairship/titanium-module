@@ -83,7 +83,7 @@ Sets the namedUser for the device.
 
 Enables or disables data collection. To require data be opted in before collected, set
 `com.urbanairship.data_collection_opt_in_enabled` to true in the app's config. Disabling
-data collection disables tags, attributes, analytics, named user, and push. To allow the user to still receive broadcast push, set `isPushTokenRegistrationEnabled` to true.
+data collection disables tags, attributes, analytics, named user, and push. To allow the user to still receive broadcast pushes, set `isPushTokenRegistrationEnabled` to true.
 
 ```
     Airship.isDataCollectionEnabled = true;
@@ -91,7 +91,7 @@ data collection disables tags, attributes, analytics, named user, and push. To a
 
 ### isPushTokenRegistrationEnabled
 
-Enables or disables push token registration. This value defaults to the current value of `isDataCollectionEnabled`. Can be used to enable push and still have data collection disabled.
+Enables or disables push token registration. This value defaults to the current value of `isDataCollectionEnabled`. Can be used to enable broadcast push and still have data collection disabled.
 
 ```
     Airship.isPushTokenRegistrationEnabled = true;
@@ -112,7 +112,6 @@ The badge number on iOS.
 ```
     Airship.badgeNumber = 3
 ```
-
 
 ## Methods
 
@@ -256,7 +255,6 @@ Screen tracking event.
 ```
     Airship.trackScreen("home")
 ```
-
 
 ### resetBadge (iOS only)
 
