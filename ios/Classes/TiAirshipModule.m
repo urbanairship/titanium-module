@@ -123,7 +123,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)setIsAutoBadgeEnabled:(id)args {
-    [UAirship push].autobadgeEnabled = [TiUtils boolValue:args def:YES];
+    [UAirship push].autobadgeEnabled = [TiUtils boolValue:args
+                                                      def:[UAirship push].autobadgeEnabled];
 }
 
 - (id)badgeNumber {
@@ -131,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)setBadgeNumber:(id)args {
-    [UAirship push].badgeNumber = [TiUtils boolValue:args def:YES];
+    [UAirship push].badgeNumber = [TiUtils numberFromObject:args].integerValue;
 }
 
 - (void)resetBadge:(id)args {
