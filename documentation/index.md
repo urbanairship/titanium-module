@@ -40,7 +40,7 @@ Listens for any deep link events. Event contains the following:
 
 ## Properties
 
-#### channelId
+### channelId
 
 Returns the app's channel ID. The channel ID might not be immediately available on a new install. Use
 the EVENT_CHANNEL_UPDATED event to be notified when it becomes available.
@@ -49,7 +49,7 @@ the EVENT_CHANNEL_UPDATED event to be notified when it becomes available.
     Ti.API.info('Channel ID: ' + Airship.channelId);
 ```
 
-#### userNotificationsEnabled
+### userNotificationsEnabled
 
 Enables or disables user notifications. On iOS, user notifications can only be enabled and enabling
 notifications the first time will prompt the user to enable notifications.
@@ -59,9 +59,10 @@ notifications the first time will prompt the user to enable notifications.
 ```
 
 
-#### tags
+### tags
 
-Sets or gets the channel tags. Tags can be used to segment the audience.
+Sets or gets the channel tags. Tags can be used to segment the audience. Applications
+should use createChannelTagEditor() to add or remove tags.
 
 ```
     Airship.tags = ["test", "titanium"]
@@ -71,14 +72,28 @@ Sets or gets the channel tags. Tags can be used to segment the audience.
     });
 ```
 
-
-
-#### namedUser
+### namedUser
 
 Sets the namedUser for the device.
 
 ```
     Airship.namedUser = "totes mcgoats"
+```
+
+### isAutoBadgeEnabled (iOS only)
+
+Property to enable auto badge on iOS.
+
+```
+    Airship.isAutoBadgeEnabled = true
+```
+
+### badgeNumber (iOS only)
+
+The badge number on iOS.
+
+```
+    Airship.badgeNumber = 3
 ```
 
 ## Methods
@@ -215,4 +230,12 @@ Adds a custom event.
 
     var customEventPayload = JSON.stringify(customEvent)
     Airship.addCustomEvent(customEventPayload)
+```
+
+### resetBadge (iOS only)
+
+Resets the badge on iOS.
+
+```
+    Airship.resetBadge()
 ```

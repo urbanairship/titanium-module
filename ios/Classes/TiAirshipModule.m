@@ -118,6 +118,26 @@ NS_ASSUME_NONNULL_BEGIN
     [[UAirship push] updateRegistration];
 }
 
+- (id)isAutoBadgeEnabled {
+    return NUMBOOL([UAirship push].autobadgeEnabled);
+}
+
+- (void)setIsAutoBadgeEnabled:(id)args {
+    [UAirship push].autobadgeEnabled = [TiUtils boolValue:args def:YES];
+}
+
+- (id)badgeNumber {
+    return NUMINTEGER([UAirship push].badgeNumber);
+}
+
+- (void)setBadgeNumber:(id)args {
+    [UAirship push].badgeNumber = [TiUtils boolValue:args def:YES];
+}
+
+- (void)resetBadge:(id)args {
+    [[UAirship push] resetBadge];
+}
+
 - (NSArray *)tags {
     return [UAirship channel].tags;
 }
