@@ -125,6 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setIsAutoBadgeEnabled:(id)args {
     [UAirship push].autobadgeEnabled = [TiUtils boolValue:args
                                                       def:[UAirship push].autobadgeEnabled];
+    [[UAirship push] updateRegistration];
 }
 
 - (id)badgeNumber {
