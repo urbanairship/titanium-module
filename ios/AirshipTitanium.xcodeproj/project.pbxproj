@@ -40,6 +40,12 @@
 		6E2FA9CB24859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9C924859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m */; };
 		6E2FA9CE2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9CC2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h */; };
 		6E2FA9CF2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9CD2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m */; };
+		6E2FA9D32485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9D12485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.h */; };
+		6E2FA9D42485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9D22485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.m */; };
+		6E2FA9D72485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9D52485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.h */; };
+		6E2FA9D82485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9D62485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.m */; };
+		6E2FA9DB2485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9D92485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.h */; };
+		6E2FA9DC2485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9DA2485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.m */; };
 		AA747D9F0F9514B9006C5449 /* TiAirship_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiAirship_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +80,12 @@
 		6E2FA9C924859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiAirshipNamedUserTagGroupsEditorProxy.m; path = Classes/TiAirshipNamedUserTagGroupsEditorProxy.m; sourceTree = "<group>"; };
 		6E2FA9CC2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TiProxy+TiAirshipTagGroupOperationAddition.h"; path = "Classes/TiProxy+TiAirshipTagGroupOperationAddition.h"; sourceTree = "<group>"; };
 		6E2FA9CD2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "TiProxy+TiAirshipTagGroupOperationAddition.m"; path = "Classes/TiProxy+TiAirshipTagGroupOperationAddition.m"; sourceTree = "<group>"; };
+		6E2FA9D12485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TiAirshipChannelAttributesEditorProxy.h; path = Classes/TiAirshipChannelAttributesEditorProxy.h; sourceTree = "<group>"; };
+		6E2FA9D22485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiAirshipChannelAttributesEditorProxy.m; path = Classes/TiAirshipChannelAttributesEditorProxy.m; sourceTree = "<group>"; };
+		6E2FA9D52485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TiAirshipNamedUserAttributesEditorProxy.h; path = Classes/TiAirshipNamedUserAttributesEditorProxy.h; sourceTree = "<group>"; };
+		6E2FA9D62485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiAirshipNamedUserAttributesEditorProxy.m; path = Classes/TiAirshipNamedUserAttributesEditorProxy.m; sourceTree = "<group>"; };
+		6E2FA9D92485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TiProxy+TiAirshipAttributeAddtions.h"; path = "Classes/TiProxy+TiAirshipAttributeAddtions.h"; sourceTree = "<group>"; };
+		6E2FA9DA2485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "TiProxy+TiAirshipAttributeAddtions.m"; path = "Classes/TiProxy+TiAirshipAttributeAddtions.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiAirship_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiAirship_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libti.airship.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libti.airship.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +133,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6E2FA9D02485C179000B35E1 /* Attributes */,
 				6E2FA9B7248590CD000B35E1 /* Tags */,
 				24DE9E0F11C5FE74003F90F6 /* TiAirshipModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* TiAirshipModuleAssets.m */,
@@ -160,6 +173,19 @@
 			name = Tags;
 			sourceTree = "<group>";
 		};
+		6E2FA9D02485C179000B35E1 /* Attributes */ = {
+			isa = PBXGroup;
+			children = (
+				6E2FA9D12485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.h */,
+				6E2FA9D22485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.m */,
+				6E2FA9D52485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.h */,
+				6E2FA9D62485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.m */,
+				6E2FA9D92485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.h */,
+				6E2FA9DA2485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.m */,
+			);
+			name = Attributes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -171,10 +197,13 @@
 				3CD5DEC4247DF23F0010AD85 /* TiAirshipAutopilot.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* TiAirship_Prefix.pch in Headers */,
 				24DD6CF91134B3F500162E58 /* TiAirshipModule.h in Headers */,
+				6E2FA9D72485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.h in Headers */,
+				6E2FA9DB2485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.h in Headers */,
 				3CD5DEC0247DEE0F0010AD85 /* TiAirshipDeeplink.h in Headers */,
 				6E2FA9CA24859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.h in Headers */,
 				6E2FA9C624859981000B35E1 /* TiAirshipTagGroupOperation.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiAirshipModuleAssets.h in Headers */,
+				6E2FA9D32485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.h in Headers */,
 				6E2FA9C524859981000B35E1 /* TiAirshipChannelTagsEditorProxy.h in Headers */,
 				6E2FA9BE24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.h in Headers */,
 			);
@@ -252,11 +281,14 @@
 			files = (
 				24DD6CFA1134B3F500162E58 /* TiAirshipModule.m in Sources */,
 				6E2FA9CB24859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m in Sources */,
+				6E2FA9D82485C42B000B35E1 /* TiAirshipNamedUserAttributesEditorProxy.m in Sources */,
 				6E2FA9C424859981000B35E1 /* TiAirshipTagGroupOperation.m in Sources */,
 				6E2FA9BF24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.m in Sources */,
 				6E2FA9CF2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m in Sources */,
 				3CD5DEC5247DF23F0010AD85 /* TiAirshipAutopilot.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiAirshipModuleAssets.m in Sources */,
+				6E2FA9DC2485C4B9000B35E1 /* TiProxy+TiAirshipAttributeAddtions.m in Sources */,
+				6E2FA9D42485C199000B35E1 /* TiAirshipChannelAttributesEditorProxy.m in Sources */,
 				3CD5DEC1247DEE0F0010AD85 /* TiAirshipDeeplink.m in Sources */,
 				6E2FA9C724859981000B35E1 /* TiAirshipChannelTagsEditorProxy.m in Sources */,
 			);
