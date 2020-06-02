@@ -27,6 +27,9 @@ Modify the `tiapp.xml` file to include the Urban Airship Config:
   <!-- Selects between production vs development credentials -->
   <property name="com.urbanairship.in_production" type="bool">false</property>
 
+  <!-- Enable data collection opt-in. Defaults to false. -->
+  <property name="com.urbanairship.data_collection_opt_in_enabled" type="bool">false</property>
+
   <!-- Android -->
   <property name="com.urbanairship.notification_icon" type="string">Name of an icon in /project_name/platform/android/res/drawable folders, e.g. ic_notification.png</property>
   <property name="com.urbanairship.notification_accent_color" type="string">Notification accent color, e.g. #ff0000</property>

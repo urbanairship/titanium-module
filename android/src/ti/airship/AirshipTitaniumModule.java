@@ -17,7 +17,6 @@ import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
-import org.appcelerator.titanium.util.TiConvert;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,6 +97,35 @@ public class AirshipTitaniumModule extends KrollModule {
     @Kroll.setProperty
     public void setNamedUser(String namedUser) {
         UAirship.shared().getNamedUser().setId(namedUser);
+    }
+
+    @Kroll.method
+    public void trackScreen(String screen) {
+        UAirship.shared().getAnalytics().trackScreen(screen);
+    }
+
+    @Kroll.method
+    @Kroll.setProperty
+    public void setIsDataCollectionEnabled(boolean enabled) {
+        UAirship.shared().setDataCollectionEnabled(enabled);
+    }
+
+    @Kroll.getProperty
+    @Kroll.method
+    public boolean getIsDataCollectionEnabled() {
+        return UAirship.shared().isDataCollectionEnabled();
+    }
+
+    @Kroll.method
+    @Kroll.setProperty
+    public void setIsPushTokenRegistrationEnabled(boolean enabled) {
+        UAirship.shared().getPushManager().setPushTokenRegistrationEnabled(enabled);
+    }
+
+    @Kroll.getProperty
+    @Kroll.method
+    public boolean getIsPushTokenRegistrationEnabled() {
+        return UAirship.shared().getPushManager().isPushTokenRegistrationEnabled();
     }
 
     @Kroll.method

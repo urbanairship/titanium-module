@@ -58,7 +58,6 @@ notifications the first time will prompt the user to enable notifications.
     Airship.userNotificationsEnabled = true;
 ```
 
-
 ### tags
 
 Sets or gets the channel tags. Tags can be used to segment the audience. Applications
@@ -80,6 +79,24 @@ Sets the namedUser for the device.
     Airship.namedUser = "totes mcgoats"
 ```
 
+### isDataCollectionEnabled
+
+Enables or disables data collection. To require data be opted in before collected, set
+`com.urbanairship.data_collection_opt_in_enabled` to true in the app's config. Disabling
+data collection disables tags, attributes, analytics, named user, and push. To allow the user to still receive broadcast push, set `isPushTokenRegistrationEnabled` to true.
+
+```
+    Airship.isDataCollectionEnabled = true;
+```
+
+### isPushTokenRegistrationEnabled
+
+Enables or disables push token registration. This value defaults to the current value of `isDataCollectionEnabled`. Can be used to enable push and still have data collection disabled.
+
+```
+    Airship.isPushTokenRegistrationEnabled = true;
+```
+
 ### isAutoBadgeEnabled (iOS only)
 
 Property to enable auto badge on iOS.
@@ -95,6 +112,7 @@ The badge number on iOS.
 ```
     Airship.badgeNumber = 3
 ```
+
 
 ## Methods
 
@@ -230,6 +248,15 @@ Adds a custom event.
 
     Airship.addCustomEvent(customEventPayload)
 ```
+
+### trackScreen(screenName)
+
+Screen tracking event.
+
+```
+    Airship.trackScreen("home")
+```
+
 
 ### resetBadge (iOS only)
 
