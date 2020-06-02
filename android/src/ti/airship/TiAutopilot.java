@@ -31,6 +31,7 @@ public class TiAutopilot extends Autopilot {
     static final String GCM_SENDER = "com.urbanairship.gcm_sender";
     static final String NOTIFICATION_ICON = "com.urbanairship.notification_icon";
     static final String NOTIFICATION_ACCENT_COLOR = "com.urbanairship.notification_accent_color";
+    static final String DATA_COLLECTION_OPT_IN = "com.urbanairship.data_collection_opt_in_enabled";
 
     private static final String TAG = "UrbanAirshipModule";
 
@@ -114,7 +115,9 @@ public class TiAutopilot extends Autopilot {
                 .setProductionAppKey(properties.getString(PRODUCTION_KEY, ""))
                 .setProductionAppSecret(properties.getString(PRODUCTION_SECRET, ""))
                 .setInProduction(properties.getBool(IN_PRODUCTION, false))
-                .setFcmSenderId(properties.getString(GCM_SENDER, null));
+                .setFcmSenderId(properties.getString(GCM_SENDER, null))
+                .setDataCollectionOptInEnabled(properties.getBool(DATA_COLLECTION_OPT_IN, false));
+
 
         // Accent color
         String accentColor = properties.getString(NOTIFICATION_ACCENT_COLOR, null);

@@ -23,6 +23,8 @@ static NSString *const NotificationPresentationAlertKey = @"com.urbanairship.ios
 static NSString *const NotificationPresentationBadgeKey = @"com.urbanairship.ios_foreground_notification_presentation_badge";
 static NSString *const NotificationPresentationSoundKey = @"com.urbanairship.ios_foreground_notification_presentation_sound";
 
+static NSString *const DataCollectionOptInKey = @"com.urbanairship.data_collection_opt_in_enabled";
+
 #pragma mark - Method Swizzling
 
 + (void)didFinishLaunching {
@@ -42,6 +44,7 @@ static NSString *const NotificationPresentationSoundKey = @"com.urbanairship.ios
     config.developmentAppKey = appProperties[DevelopmentAppKeyConfigKey];
     config.developmentAppSecret = appProperties[DevelopmentAppSecretConfigKey];
     config.inProduction = [appProperties[ProductionConfigKey] boolValue];
+    config.dataCollectionOptInEnabled = [appProperties[DataCollectionOptInKey] boolValue];
     [UAirship takeOff:config];
 
     // Set the iOS default foreground presentation options if specified in the tiapp.xml else default to None
