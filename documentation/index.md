@@ -64,22 +64,60 @@ notifications the first time will prompt the user to enable notifications.
 Sets or gets the channel tags. Tags can be used to segment the audience.
 
 ```
-    Airship.tags = ["test", "titanium"];
+    Airship.tags = ["test", "titanium"]
 
     Airship.tags.forEach(function(tag) {
-        Ti.API.info("Tag: " + tag);
+        Ti.API.info("Tag: " + tag)
     });
 ```
+
+
 
 #### namedUser
 
 Sets the namedUser for the device.
 
 ```
-    Airship.namedUser = "totes mcgoats";
+    Airship.namedUser = "totes mcgoats"
 ```
 
 ## Methods
+
+#### createChannelTagsEditor
+
+The tag editor allows adding and removing tags on the channel.
+
+```
+    var editor = Airship.createChannelTagsEditor()
+    editor.clearTags()
+    editor.addTags("neat", "rad")
+    editor.removeTags("cool")
+    editor.applyTags()
+```
+
+#### createChannelTagGroupEditor
+
+The tag editor allows editing channel tag groups.
+
+```
+    var editor = Airship.createChannelTagGroupsEditor()
+    editor.addTags("group", "neat", "rad")
+    editor.removeTags("group", "cool")
+    editor.setTags("another group", "awesome")
+    editor.applyTags()
+```
+
+#### createNamedUserTagGroupEditor
+
+The tag editor allows editing named user tag groups.
+
+```
+    var editor = Airship.createNamedUserTagGroupsEditor()
+    editor.addTags("group", "neat", "rad")
+    editor.removeTag("group", "cool")
+    editor.setTags("another group", "awesome")
+    editor.applyTags()
+```
 
 ### getLaunchNotification([clear])
 
@@ -102,7 +140,7 @@ Gets the deep link that launched the app.
 `clear` is used to prevent getDeepLink from returning the deepLink again.
 
 ```
-    Ti.API.info("Deep link: " + Airship.getDeepLink(false));
+    Ti.API.info("Deep link: " + Airship.getDeepLink(false))
 ```
 
 ### displayMessageCenter()
@@ -110,7 +148,7 @@ Gets the deep link that launched the app.
 Displays the message center.
 
 ```
-    Airship.displayMessageCenter();
+    Airship.displayMessageCenter()
 ```
 
 ### associateIdentifier(key, identifier)
@@ -122,7 +160,7 @@ It is a set operation.
  - identifier: The value of the identifier as a string, or `null` to remove the identifier.
 
 ```
-    Airship.associateIdentifier("customKey", "customIdentifier");
+    Airship.associateIdentifier("customKey", "customIdentifier")
 ```
 
 ### addCustomEvent(eventPayload)
@@ -145,8 +183,8 @@ Adds a custom event.
         someLong: 1234567890,
         someArray: ["tangerine", "pineapple", "kiwi"]
       }
-    };
+    }
 
-    var customEventPayload = JSON.stringify(customEvent);
-    Airship.addCustomEvent(customEventPayload);
+    var customEventPayload = JSON.stringify(customEvent)
+    Airship.addCustomEvent(customEventPayload)
 ```

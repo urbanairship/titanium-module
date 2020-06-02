@@ -1,6 +1,6 @@
 /* Copyright Airship and Contributors */
 
-package com.urbanairship.ti;
+package ti.airship;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -16,6 +16,7 @@ import com.urbanairship.push.NotificationInfo;
 import com.urbanairship.push.NotificationListener;
 import com.urbanairship.util.UAStringUtil;
 
+import org.apache.log4j.lf5.LogLevel;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.TiProperties;
@@ -38,14 +39,14 @@ public class TiAutopilot extends Autopilot {
         Log.i(TAG, "Airship ready");
 
         airship.setDeepLinkListener(deepLink -> {
-            UrbanAirshipModule.deepLinkReceived(deepLink);
+            AirshipTitaniumModule.deepLinkReceived(deepLink);
             return true;
         });
 
         airship.getPushManager().addPushListener((message, notificationPosted) -> {
             Log.i(TAG, "Received push. Alert: " + message.getAlert());
             if (!notificationPosted) {
-                UrbanAirshipModule.onPushReceived(message, null);
+                AirshipTitaniumModule.onPushReceived(message, null);
             }
         });
 
@@ -53,27 +54,27 @@ public class TiAutopilot extends Autopilot {
             @Override
             public void onNotificationPosted(@NonNull NotificationInfo notificationInfo) {
                 Log.i(TAG, "Notification posted. Alert: " + notificationInfo.getMessage().getAlert());
-                UrbanAirshipModule.onPushReceived(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+                AirshipTitaniumModule.onPushReceived(notificationInfo.getMessage(), notificationInfo.getNotificationId());
             }
 
             @Override
             public boolean onNotificationOpened(@NonNull NotificationInfo notificationInfo) {
                 Log.i(TAG, "Notification Opened. Alert: " + notificationInfo.getMessage().getAlert());
-                UrbanAirshipModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+                AirshipTitaniumModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
                 return false;
             }
 
             @Override
             public boolean onNotificationForegroundAction(@NonNull NotificationInfo notificationInfo, @NonNull NotificationActionButtonInfo actionButtonInfo) {
                 Log.i(TAG, "User clicked notification button. Button ID: " + actionButtonInfo.getButtonId() + " Alert: " + notificationInfo.getMessage().getAlert());
-                UrbanAirshipModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+                AirshipTitaniumModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
                 return false;
             }
 
             @Override
             public void onNotificationBackgroundAction(@NonNull NotificationInfo notificationInfo, @NonNull NotificationActionButtonInfo actionButtonInfo) {
                 Log.i(TAG, "User clicked notification button. Button ID: " + actionButtonInfo.getButtonId() + " Alert: " + notificationInfo.getMessage().getAlert());
-                UrbanAirshipModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+                AirshipTitaniumModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
             }
 
             @Override
@@ -86,13 +87,13 @@ public class TiAutopilot extends Autopilot {
             @Override
             public void onChannelCreated(@NonNull String channelId) {
                 Log.i(TAG, "Channel created. Channel ID:" + channelId + ".");
-                UrbanAirshipModule.onChannelUpdated(channelId);
+                AirshipTitaniumModule.onChannelUpdated(channelId);
             }
 
             @Override
             public void onChannelUpdated(@NonNull String channelId) {
                 Log.i(TAG, "Channel updated. Channel ID:" + channelId + ".");
-                UrbanAirshipModule.onChannelUpdated(channelId);
+                AirshipTitaniumModule.onChannelUpdated(channelId);
             }
         });
 

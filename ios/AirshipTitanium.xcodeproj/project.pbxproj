@@ -30,6 +30,16 @@
 		3CD5DEC1247DEE0F0010AD85 /* TiAirshipDeeplink.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5DEBF247DEE0F0010AD85 /* TiAirshipDeeplink.m */; };
 		3CD5DEC4247DF23F0010AD85 /* TiAirshipAutopilot.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD5DEC2247DF23F0010AD85 /* TiAirshipAutopilot.h */; };
 		3CD5DEC5247DF23F0010AD85 /* TiAirshipAutopilot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD5DEC3247DF23F0010AD85 /* TiAirshipAutopilot.m */; };
+		6E2FA9BE24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9BC24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.h */; };
+		6E2FA9BF24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9BD24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.m */; };
+		6E2FA9C424859981000B35E1 /* TiAirshipTagGroupOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9C024859981000B35E1 /* TiAirshipTagGroupOperation.m */; };
+		6E2FA9C524859981000B35E1 /* TiAirshipChannelTagsEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9C124859981000B35E1 /* TiAirshipChannelTagsEditorProxy.h */; };
+		6E2FA9C624859981000B35E1 /* TiAirshipTagGroupOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9C224859981000B35E1 /* TiAirshipTagGroupOperation.h */; };
+		6E2FA9C724859981000B35E1 /* TiAirshipChannelTagsEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9C324859981000B35E1 /* TiAirshipChannelTagsEditorProxy.m */; };
+		6E2FA9CA24859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9C824859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.h */; };
+		6E2FA9CB24859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9C924859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m */; };
+		6E2FA9CE2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E2FA9CC2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h */; };
+		6E2FA9CF2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2FA9CD2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m */; };
 		AA747D9F0F9514B9006C5449 /* TiAirship_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiAirship_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -54,6 +64,16 @@
 		3CD5DEBF247DEE0F0010AD85 /* TiAirshipDeeplink.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiAirshipDeeplink.m; path = Classes/TiAirshipDeeplink.m; sourceTree = "<group>"; };
 		3CD5DEC2247DF23F0010AD85 /* TiAirshipAutopilot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TiAirshipAutopilot.h; path = Classes/TiAirshipAutopilot.h; sourceTree = "<group>"; };
 		3CD5DEC3247DF23F0010AD85 /* TiAirshipAutopilot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiAirshipAutopilot.m; path = Classes/TiAirshipAutopilot.m; sourceTree = "<group>"; };
+		6E2FA9BC24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TiAirshipChannelTagGroupsEditorProxy.h; path = Classes/TiAirshipChannelTagGroupsEditorProxy.h; sourceTree = "<group>"; };
+		6E2FA9BD24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiAirshipChannelTagGroupsEditorProxy.m; path = Classes/TiAirshipChannelTagGroupsEditorProxy.m; sourceTree = "<group>"; };
+		6E2FA9C024859981000B35E1 /* TiAirshipTagGroupOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipTagGroupOperation.m; path = Classes/TiAirshipTagGroupOperation.m; sourceTree = "<group>"; };
+		6E2FA9C124859981000B35E1 /* TiAirshipChannelTagsEditorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipChannelTagsEditorProxy.h; path = Classes/TiAirshipChannelTagsEditorProxy.h; sourceTree = "<group>"; };
+		6E2FA9C224859981000B35E1 /* TiAirshipTagGroupOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipTagGroupOperation.h; path = Classes/TiAirshipTagGroupOperation.h; sourceTree = "<group>"; };
+		6E2FA9C324859981000B35E1 /* TiAirshipChannelTagsEditorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipChannelTagsEditorProxy.m; path = Classes/TiAirshipChannelTagsEditorProxy.m; sourceTree = "<group>"; };
+		6E2FA9C824859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TiAirshipNamedUserTagGroupsEditorProxy.h; path = Classes/TiAirshipNamedUserTagGroupsEditorProxy.h; sourceTree = "<group>"; };
+		6E2FA9C924859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TiAirshipNamedUserTagGroupsEditorProxy.m; path = Classes/TiAirshipNamedUserTagGroupsEditorProxy.m; sourceTree = "<group>"; };
+		6E2FA9CC2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TiProxy+TiAirshipTagGroupOperationAddition.h"; path = "Classes/TiProxy+TiAirshipTagGroupOperationAddition.h"; sourceTree = "<group>"; };
+		6E2FA9CD2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "TiProxy+TiAirshipTagGroupOperationAddition.m"; path = "Classes/TiProxy+TiAirshipTagGroupOperationAddition.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiAirship_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiAirship_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libti.airship.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libti.airship.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +121,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6E2FA9B7248590CD000B35E1 /* Tags */,
 				24DE9E0F11C5FE74003F90F6 /* TiAirshipModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* TiAirshipModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* TiAirshipModule.h */,
@@ -122,6 +143,23 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		6E2FA9B7248590CD000B35E1 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				6E2FA9CC2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h */,
+				6E2FA9CD2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m */,
+				6E2FA9C224859981000B35E1 /* TiAirshipTagGroupOperation.h */,
+				6E2FA9C024859981000B35E1 /* TiAirshipTagGroupOperation.m */,
+				6E2FA9C124859981000B35E1 /* TiAirshipChannelTagsEditorProxy.h */,
+				6E2FA9C324859981000B35E1 /* TiAirshipChannelTagsEditorProxy.m */,
+				6E2FA9BC24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.h */,
+				6E2FA9BD24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.m */,
+				6E2FA9C824859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.h */,
+				6E2FA9C924859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m */,
+			);
+			name = Tags;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -129,11 +167,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E2FA9CE2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.h in Headers */,
 				3CD5DEC4247DF23F0010AD85 /* TiAirshipAutopilot.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* TiAirship_Prefix.pch in Headers */,
 				24DD6CF91134B3F500162E58 /* TiAirshipModule.h in Headers */,
 				3CD5DEC0247DEE0F0010AD85 /* TiAirshipDeeplink.h in Headers */,
+				6E2FA9CA24859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.h in Headers */,
+				6E2FA9C624859981000B35E1 /* TiAirshipTagGroupOperation.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiAirshipModuleAssets.h in Headers */,
+				6E2FA9C524859981000B35E1 /* TiAirshipChannelTagsEditorProxy.h in Headers */,
+				6E2FA9BE24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,9 +251,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				24DD6CFA1134B3F500162E58 /* TiAirshipModule.m in Sources */,
+				6E2FA9CB24859AE8000B35E1 /* TiAirshipNamedUserTagGroupsEditorProxy.m in Sources */,
+				6E2FA9C424859981000B35E1 /* TiAirshipTagGroupOperation.m in Sources */,
+				6E2FA9BF24859963000B35E1 /* TiAirshipChannelTagGroupsEditorProxy.m in Sources */,
+				6E2FA9CF2485B44E000B35E1 /* TiProxy+TiAirshipTagGroupOperationAddition.m in Sources */,
 				3CD5DEC5247DF23F0010AD85 /* TiAirshipAutopilot.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiAirshipModuleAssets.m in Sources */,
 				3CD5DEC1247DEE0F0010AD85 /* TiAirshipDeeplink.m in Sources */,
+				6E2FA9C724859981000B35E1 /* TiAirshipChannelTagsEditorProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

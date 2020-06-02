@@ -6,9 +6,13 @@ build-android:
 build-ios:
 	bash ./scripts/build_ios.sh
 
-install: build
-	unzip -o ios/dist/ti.airship-iphone-*.zip -d ~/Library/Application\ Support/Titanium/
+install: install-ios install-android
+
+install-android: build-android
 	unzip -o android/dist/ti.airship-android-*.zip -d ~/Library/Application\ Support/Titanium/
+
+install-ios: build-ios
+	unzip -o ios/dist/ti.airship-iphone-*.zip -d ~/Library/Application\ Support/Titanium/
 
 clean:
 	rm -rf android/build
