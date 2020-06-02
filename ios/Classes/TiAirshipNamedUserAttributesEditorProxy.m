@@ -1,7 +1,7 @@
 /* Copyright Airship and Contributors */
 
 #import "TiAirshipNamedUserAttributesEditorProxy.h"
-#import "TiProxy+TiAirshipAttributeAddtions.h"
+#import "TiProxy+TiAirshipAttributeAdditions.h"
 #import "TiBase.h"
 
 @import AirshipCore;
@@ -29,7 +29,7 @@
 }
 
 -(void)applyAttributes:(id)args {
-    [[UAirship channel] applyAttributeMutations:self.mutations];
+    [[UAirship namedUser] applyAttributeMutations:self.mutations];
 }
 
 @end

@@ -1,9 +1,9 @@
 /* Copyright Airship and Contributors */
 
-#import "TiProxy+TiAirshipAttributeAddtions.h"
+#import "TiProxy+TiAirshipAttributeAdditions.h"
 #import "TiBase.h"
 
-@implementation TiProxy(TiAirshipAttributeAddtions)
+@implementation TiProxy(TiAirshipAttributeAdditions)
 
 
 -(void)setAttributeFromArgs:(id)args onMutations:(UAAttributeMutations *)mutations {

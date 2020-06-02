@@ -1,7 +1,7 @@
 /* Copyright Airship and Contributors */
 
 #import "TiAirshipChannelAttributesEditorProxy.h"
-#import "TiProxy+TiAirshipAttributeAddtions.h"
+#import "TiProxy+TiAirshipAttributeAdditions.h"
 #import "TiBase.h"
 
 @import AirshipCore;

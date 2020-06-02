@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TiProxy(TiAirshipAttributeAddtions)
+@interface TiProxy(TiAirshipAttributeAdditions)
 -(void)setAttributeFromArgs:(id)args
                 onMutations:(UAAttributeMutations *)mutations;
 
