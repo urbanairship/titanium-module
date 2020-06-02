@@ -209,7 +209,7 @@ It is a set operation.
 ### addCustomEvent(eventPayload)
 
 Adds a custom event.
- - eventPayload: The custom event payload as a string.
+ - eventPayload: The custom event object.
 
 ```
     var customEvent = {
@@ -228,7 +228,6 @@ Adds a custom event.
       }
     }
 
-    var customEventPayload = JSON.stringify(customEvent)
     Airship.addCustomEvent(customEventPayload)
 ```
 

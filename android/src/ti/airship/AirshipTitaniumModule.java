@@ -17,6 +17,7 @@ import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.util.TiConvert;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -116,31 +117,35 @@ public class AirshipTitaniumModule extends KrollModule {
     }
 
     @Kroll.method
-    public void addCustomEvent(final String eventPayload) {
-        Log.d(TAG, "Add custom event: " + eventPayload);
-
-        if (UAStringUtil.isEmpty(eventPayload)) {
-            Log.e(TAG, "Missing event payload.");
-            return;
-        }
-
+    public void addCustomEvent(final Object arg) {
+        Log.d(TAG, "Add custom event: " + arg);
         JsonMap eventArgs = null;
-        try {
-            eventArgs = JsonValue.parseString(eventPayload).getMap();
-        } catch (JsonException e) {
-            Log.e(TAG, "Failed to parse event payload", e);
-        }
 
-        if (eventArgs == null) {
-            Log.e(TAG, "Event payload must define a JSON object.");
-            return;
+        if (arg instanceof String) {
+            String eventPayload = (String)arg;
+            if (UAStringUtil.isEmpty(eventPayload)) {
+                Log.e(TAG, "Missing event payload.");
+                return;
+            }
+            try {
+                eventArgs = JsonValue.parseString(eventPayload).getMap();
+            } catch (JsonException e) {
+                Log.e(TAG, "Failed to parse event payload", e);
+            }
+
+            if (eventArgs == null) {
+                Log.e(TAG, "Event payload must define a JSON object.");
+                return;
+            }
+        } else {
+            eventArgs = JsonValue.wrapOpt(arg).optMap();
         }
 
         ActionRunRequest.createRequest(AddCustomEventAction.DEFAULT_REGISTRY_NAME)
                         .setValue(eventArgs)
                         .run((arguments, result) -> {
                             if (result.getException() != null) {
-                                Log.e(TAG, "Failed to add custom event: " + eventPayload, result.getException());
+                                Log.e(TAG, "Failed to add custom event: " + arg, result.getException());
                             }
                         });
     }
