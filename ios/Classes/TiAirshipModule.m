@@ -113,9 +113,33 @@ NS_ASSUME_NONNULL_BEGIN
     return NUMBOOL([UAirship push].userPushNotificationsEnabled);
 }
 
-- (void)setUserNotificationsEnabled:(id)value {
-    [UAirship push].userPushNotificationsEnabled = [TiUtils boolValue:value def:YES];
+- (void)setUserNotificationsEnabled:(id)args {
+    ENSURE_SINGLE_ARG(args, NSNumber);
+    [UAirship push].userPushNotificationsEnabled = [args boolValue];
     [[UAirship push] updateRegistration];
+}
+
+- (id)isAutoBadgeEnabled {
+    return NUMBOOL([UAirship push].autobadgeEnabled);
+}
+
+- (void)setIsAutoBadgeEnabled:(id)args {
+    ENSURE_SINGLE_ARG(args, NSNumber);
+    [UAirship push].autobadgeEnabled = [args boolValue];
+    [[UAirship push] updateRegistration];
+}
+
+- (id)badgeNumber {
+    return NUMINTEGER([UAirship push].badgeNumber);
+}
+
+- (void)setBadgeNumber:(id)args {
+    ENSURE_SINGLE_ARG(args, NSNumber);
+    [UAirship push].badgeNumber = [args integerValue];
+}
+
+- (void)resetBadge:(id)args {
+    [[UAirship push] resetBadge];
 }
 
 - (NSArray *)tags {
@@ -124,27 +148,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setTags:(id)args {
     ENSURE_ARRAY(args);
-
     [UAirship channel].tags = args;
     [[UAirship push] updateRegistration];
 }
 
--(NSString *)channelId {
+-(id)channelId {
     return [UAirship channel].identifier;
 }
 
-- (NSString *)namedUser {
+- (id)namedUser {
     return [UAirship namedUser].identifier;
 }
 
-- (void)setNamedUser:(id)value {
-    ENSURE_STRING(value);
-    [UAirship namedUser].identifier = [value length] ? value : nil;
+- (void)setNamedUser:(id)args {
+    ENSURE_SINGLE_ARG_OR_NIL(args, NSString);
+    [UAirship namedUser].identifier = args;
 }
 
 - (void)associateIdentifier:(id)args {
-    ENSURE_ARRAY(args);
-
+    ENSURE_ARG_COUNT(args, 2);
     NSString *keyString = [TiUtils stringValue:[args objectAtIndex:0]];
 
     if (keyString.length == 0) {
@@ -165,19 +187,33 @@ NS_ASSUME_NONNULL_BEGIN
     [[UAirship shared].analytics associateDeviceIdentifiers:identifiers];
 }
 
-- (void)addCustomEvent:(id)eventPayload {
-    NSString *customEventString = [TiUtils stringValue:[eventPayload objectAtIndex:0]];
-    UA_LDEBUG(@"Add custom event: %@", customEventString);
+- (void)addCustomEvent:(id)args {
+    ENSURE_ARG_COUNT(args, 1);
+    NSDictionary *payload;
 
-    if (customEventString.length == 0) {
-        UA_LERR(@"Missing event payload.");
-        return;
+    if ([args[0] isKindOfClass:[NSString class]]) {
+        NSString *customEventString = [TiUtils stringValue:[args objectAtIndex:0]];
+        if (customEventString.length == 0) {
+            UA_LERR(@"Missing event payload.");
+            return;
+        }
+        NSError *jsonError;
+        NSData *data = [customEventString dataUsingEncoding:NSUTF8StringEncoding];
+        payload = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+        if (jsonError) {
+            UA_LERR(@"Invalid custom event payload %@", customEventString);
+            return;
+        }
+    } else {
+        ENSURE_SINGLE_ARG(args, NSDictionary);
+        payload = args;
     }
 
-    NSError *jsonError;
-    NSData *data = [customEventString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *eventArgs = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-    [UAActionRunner runActionWithName:@"add_custom_event_action" value:eventArgs situation:UASituationManualInvocation];
+    UA_LDEBUG(@"Add custom event: %@", payload);
+    [UAActionRunner runActionWithName:@"add_custom_event_action"
+                                value:payload
+                            situation:UASituationManualInvocation];
+
 }
 
 - (NSDictionary *)getLaunchNotification:(id)args {
