@@ -24,6 +24,8 @@ static NSString *const NotificationPresentationBadgeKey = @"com.urbanairship.ios
 static NSString *const NotificationPresentationSoundKey = @"com.urbanairship.ios_foreground_notification_presentation_sound";
 
 static NSString *const DataCollectionOptInKey = @"com.urbanairship.data_collection_opt_in_enabled";
+static NSString *const CloudSiteConfigKey = @"com.urbanairship.site";
+static NSString *const CloudSiteEUString = @"EU";
 
 #pragma mark - Method Swizzling
 
@@ -45,6 +47,7 @@ static NSString *const DataCollectionOptInKey = @"com.urbanairship.data_collecti
     config.developmentAppSecret = appProperties[DevelopmentAppSecretConfigKey];
     config.inProduction = [appProperties[ProductionConfigKey] boolValue];
     config.dataCollectionOptInEnabled = [appProperties[DataCollectionOptInKey] boolValue];
+    config.site = [TiAirshipAutopilot parseCloudSiteString:appProperties[CloudSiteConfigKey]];
     [UAirship takeOff:config];
 
     // Set the iOS default foreground presentation options if specified in the tiapp.xml else default to None
@@ -72,6 +75,14 @@ static NSString *const DataCollectionOptInKey = @"com.urbanairship.data_collecti
 
     [UAirship push].defaultPresentationOptions = options;
     [[UAirship shared].actionRegistry updateAction:[TiAirshipDeepLinkAction shared] forEntryWithName:kUADeepLinkActionDefaultRegistryName];
+}
+
++ (UACloudSite)parseCloudSiteString:(NSString *)site {
+    if ([CloudSiteEUString caseInsensitiveCompare:site] == NSOrderedSame) {
+        return UACloudSiteEU;
+    } else {
+        return UACloudSiteUS;
+    }
 }
 
 @end

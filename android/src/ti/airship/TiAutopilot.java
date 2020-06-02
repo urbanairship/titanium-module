@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.urbanairship.AirshipConfigOptions;
 import com.urbanairship.Autopilot;
@@ -32,6 +33,7 @@ public class TiAutopilot extends Autopilot {
     static final String NOTIFICATION_ICON = "com.urbanairship.notification_icon";
     static final String NOTIFICATION_ACCENT_COLOR = "com.urbanairship.notification_accent_color";
     static final String DATA_COLLECTION_OPT_IN = "com.urbanairship.data_collection_opt_in_enabled";
+    static final String CLOUD_SITE = "com.urbanairship.site";
 
     private static final String TAG = "UrbanAirshipModule";
 
@@ -116,7 +118,8 @@ public class TiAutopilot extends Autopilot {
                 .setProductionAppSecret(properties.getString(PRODUCTION_SECRET, ""))
                 .setInProduction(properties.getBool(IN_PRODUCTION, false))
                 .setFcmSenderId(properties.getString(GCM_SENDER, null))
-                .setDataCollectionOptInEnabled(properties.getBool(DATA_COLLECTION_OPT_IN, false));
+                .setDataCollectionOptInEnabled(properties.getBool(DATA_COLLECTION_OPT_IN, false))
+                .setSite(parseCloudSite(properties.getString(CLOUD_SITE, null)));
 
 
         // Accent color
@@ -141,5 +144,14 @@ public class TiAutopilot extends Autopilot {
         }
 
         return options.build();
+    }
+
+    @NonNull
+    @AirshipConfigOptions.Site
+    private static String parseCloudSite(@Nullable String value) {
+        if (AirshipConfigOptions.SITE_EU.equalsIgnoreCase(value)) {
+            return AirshipConfigOptions.SITE_EU;
+        }
+        return AirshipConfigOptions.SITE_US;
     }
 }

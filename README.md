@@ -24,6 +24,9 @@ Modify the `tiapp.xml` file to include the Urban Airship Config:
   <property name="com.urbanairship.development_app_key" type="string">Your Development App Key</property>
   <property name="com.urbanairship.development_app_secret" type="string">Your Development App Secret</property>
 
+   <!-- Airship SDK Site (US or EU) defaults to US) -->
+  <property name="com.urbanairship.site" type="string">US</property>
+
   <!-- Selects between production vs development credentials -->
   <property name="com.urbanairship.in_production" type="bool">false</property>
 
