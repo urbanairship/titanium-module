@@ -83,7 +83,7 @@ Sets the namedUser for the device.
 
 ## Methods
 
-#### createChannelTagsEditor
+### createChannelTagsEditor
 
 The tag editor allows adding and removing tags on the channel.
 
@@ -95,7 +95,7 @@ The tag editor allows adding and removing tags on the channel.
     editor.applyTags()
 ```
 
-#### createChannelTagGroupEditor
+### createChannelTagGroupEditor
 
 The tag editor allows editing channel tag groups.
 
@@ -107,7 +107,7 @@ The tag editor allows editing channel tag groups.
     editor.applyTags()
 ```
 
-#### createNamedUserTagGroupEditor
+### createNamedUserTagGroupEditor
 
 The tag editor allows editing named user tag groups.
 
@@ -117,6 +117,34 @@ The tag editor allows editing named user tag groups.
     editor.removeTag("group", "cool")
     editor.setTags("another group", "awesome")
     editor.applyTags()
+```
+
+### createNamedUserAttributesEditor
+
+The attributes editor allows editing named user attributes. The supported attribute types are
+String, Number, and Date.
+
+```
+    var editor = Airship.createNamedUserAttributesEditor()
+    editor.setAttribute("name", "gary")
+    editor.setAttribute("current date", new Date())
+    editor.setAttribute("level", 3)
+    editor.removeAttribute("legacy_name")
+    editor.applyAttributes()
+```
+
+### createChannelAttributesEditor
+
+The attributes editor allows editing channel attributes. The supported attribute types are
+String, Number, and Date.
+
+```
+    var editor = Airship.createChannelAttributesEditor()
+    editor.setAttribute("name", "gary")
+    editor.setAttribute("current date", new Date())
+    editor.setAttribute("level", 3)
+    editor.removeAttribute("legacy_name")
+    editor.applyAttributes()
 ```
 
 ### getLaunchNotification([clear])
