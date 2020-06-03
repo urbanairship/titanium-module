@@ -4,13 +4,12 @@
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
+#import "TiAirship.h"
+#import "TiAirshipPushReceivedEvent.h"
+#import "TiAirshipDeepLinkEvent.h"
+#import "TiAirshipChannelRegistrationEvent.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface TiAirshipModule()
-@property (nonatomic, copy, nullable) NSDictionary *launchPush;
-@property (nonatomic, copy, nullable) NSString *deepLink;
-@end
 
 @implementation TiAirshipModule
 
@@ -26,81 +25,26 @@ NS_ASSUME_NONNULL_BEGIN
     return @"ti.airship";
 }
 
-#pragma mark UAPushNotificationDelegate
-
-- (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)(void))completionHandler {
-    UA_LDEBUG(@"The application was launched or resumed from a notification %@", notificationResponse);
-    self.launchPush = notificationResponse.notificationContent.notificationInfo;
-    completionHandler();
+- (void)_listenerAdded:(NSString *)type count:(int)count {
+    [[TiAirship shared].eventEmitter addListenerForEvent:type count:count proxy:self];
 }
 
-- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void(^)(void))completionHandler {
-    UA_LDEBUG(@"Received a notification while the app was already in the foreground %@", notificationContent);
-
-    [[UAirship push] setBadgeNumber:0]; // zero badge after push received
-
-    NSMutableDictionary *data = [NSMutableDictionary dictionary];
-    [data setValue:[self alertForUserInfo:notificationContent.notificationInfo] forKey:@"message"];
-    [data setValue:[self extrasForUserInfo:notificationContent.notificationInfo] forKey:@"extras"];
-
-    [self fireEvent:self.EVENT_PUSH_RECEIVED withObject:data];
-    completionHandler();
-}
-
-#pragma mark Channel Registration
-
-- (void)channelRegistrationSucceeded:(NSNotification *)notification {
-    NSString *channelID = notification.userInfo[UAChannelUpdatedEventChannelKey];
-    NSString *deviceToken = [UAirship push].deviceToken;
-
-    UA_LINFO(@"Channel registration successful %@.", channelID);
-
-    NSDictionary *data;
-    if (deviceToken) {
-        data = @{ @"channelId":channelID, @"deviceToken":deviceToken };
-    } else {
-        data = @{ @"channelId":channelID };
-    }
-
-    [self fireEvent:self.EVENT_CHANNEL_UPDATED withObject:data];
-}
-
-#pragma mark TiAirshipDeepLinkDelegate
-
--(void)deepLinkReceived:(NSString *)deepLink {
-    self.deepLink = deepLink;
-    id body = @{ @"deepLink" : deepLink };
-    [self fireEvent:self.EVENT_DEEP_LINK_RECEIVED withObject:body];
-}
-
-#pragma mark Lifecycle
-
--(void)startup {
-    [super startup];
-    [UAirship push].pushNotificationDelegate = self;
-    [TiAirshipDeepLinkAction shared].deepLinkDelegate = self;
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(channelRegistrationSucceeded:)
-                                                 name:UAChannelUpdatedEvent
-                                               object:nil];
-
-    self.deepLink = [TiAirshipDeepLinkAction shared].deepLink;
-    self.launchPush = [UAirship push].launchNotificationResponse.notificationContent.notificationInfo;
+- (void)_listenerRemoved:(NSString *)type count:(int)count {
+    [[TiAirship shared].eventEmitter removeListenerForEvent:type count:count proxy:self];
 }
 
 #pragma Public APIs
 
 -(NSString *)EVENT_PUSH_RECEIVED {
-    return @"EVENT_PUSH_RECEIVED";
+    return TiAirshipPushReceivedEventName;
 }
 
 -(NSString *)EVENT_CHANNEL_UPDATED {
-    return @"EVENT_CHANNEL_UPDATED";
+    return TiAirshipChannelRegistrationEventName;
 }
 
 -(NSString *)EVENT_DEEP_LINK_RECEIVED {
-    return @"EVENT_DEEP_LINK_RECEIVED";
+    return TiAirshipDeepLinkEventName;
 }
 
 - (void)displayMessageCenter:(id)args {
@@ -216,36 +160,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 }
 
-- (NSDictionary *)getLaunchNotification:(id)args {
-    NSString *incomingAlert = @"";
-    NSMutableDictionary *incomingExtras = [NSMutableDictionary dictionary];
-
-    if (self.launchPush) {
-        incomingAlert = [self alertForUserInfo:self.launchPush];
-        [incomingExtras setDictionary:[self extrasForUserInfo:self.launchPush]];
-    }
-
-    NSMutableDictionary *push = [NSMutableDictionary dictionary];
-
-    [push setObject:incomingAlert forKey:@"message"];
-    [push setObject:incomingExtras forKey:@"extras"];
+- (id)getLaunchNotification:(id)args {
+    TiAirshipPush *push = [TiAirship shared].launchPush;
 
     if ([TiUtils boolValue:[args firstObject] def:NO]) {
-        self.launchPush = nil;
+        [TiAirship shared].launchPush = nil;
     }
 
-    return push;
+    return push.payload ?: @{};
 }
 
-- (NSDictionary *)launchNotification {
+- (id)launchNotification {
     [self getLaunchNotification:@[NUMBOOL(NO)]];
 }
 
-- (NSString *)getDeepLink:(id)args {
-    NSString *deepLink = self.deepLink;
+- (id)getDeepLink:(id)args {
+    NSString *deepLink = [TiAirship shared].deepLink;
 
     if ([TiUtils boolValue:[args firstObject] def:NO]) {
-        self.deepLink = nil;
+        [TiAirship shared].deepLink = nil;
     }
 
     return deepLink;
@@ -272,49 +205,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)isPushTokenRegistrationEnabled {
     return NUMBOOL([UAirship push].pushTokenRegistrationEnabled);
-}
-
-#pragma mark Helpers
-
-/**
- * Helper method to parse the alert from a notification.
- *
- * @param userInfo The notification.
- * @return The notification's alert.
- */
-- (NSString *)alertForUserInfo:(NSDictionary *)userInfo {
-    NSString *alert = @"";
-
-    if ([[userInfo allKeys] containsObject:@"aps"]) {
-        NSDictionary *apsDict = [userInfo objectForKey:@"aps"];
-        //TODO: what do we want to do in the case of a localized alert dictionary?
-        if ([[apsDict valueForKey:@"alert"] isKindOfClass:[NSString class]]) {
-            alert = [apsDict valueForKey:@"alert"];
-        }
-    }
-
-    return alert;
-}
-
-/**
- * Helper method to parse the extras from a notification.
- *
- * @param userInfo The notification.
- * @return The notification's extras.
- */
-- (NSMutableDictionary *)extrasForUserInfo:(NSDictionary *)userInfo {
-
-    // remove extraneous key/value pairs
-    NSMutableDictionary *extras = [NSMutableDictionary dictionaryWithDictionary:userInfo];
-
-    if([[extras allKeys] containsObject:@"aps"]) {
-        [extras removeObjectForKey:@"aps"];
-    }
-    if([[extras allKeys] containsObject:@"_"]) {
-        [extras removeObjectForKey:@"_"];
-    }
-
-    return extras;
 }
 
 @end

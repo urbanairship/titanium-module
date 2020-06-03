@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 @import AirshipCore;
 @import AirshipMessageCenter;
 
-@interface TiAirshipModule : TiModule <UAPushNotificationDelegate, TiAirshipDeepLinkDelegate>;
+@interface TiAirshipModule : TiModule
 
 NS_ASSUME_NONNULL_END
 

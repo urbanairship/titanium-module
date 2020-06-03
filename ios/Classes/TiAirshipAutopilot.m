@@ -2,9 +2,9 @@
 
 #import "TiAirshipAutopilot.h"
 #import "TiApp.h"
-#import "TiAirshipDeeplink.h"
+#import "TiAirship.h"
 
-#import <objc/runtime.h>
+@import AirshipCore;
 
 @implementation TiAirshipAutopilot
 
@@ -27,11 +27,8 @@ static NSString *const DataCollectionOptInKey = @"com.urbanairship.data_collecti
 static NSString *const CloudSiteConfigKey = @"com.urbanairship.site";
 static NSString *const CloudSiteEUString = @"EU";
 
-#pragma mark - Method Swizzling
-
 + (void)didFinishLaunching {
     static dispatch_once_t takeoOffOnceToken_;
-
     dispatch_once(&takeoOffOnceToken_, ^{
         [self performTakeOff];
     });
@@ -74,7 +71,8 @@ static NSString *const CloudSiteEUString = @"EU";
     UA_LDEBUG(@"Foreground presentation options: %lu", (unsigned long)options);
 
     [UAirship push].defaultPresentationOptions = options;
-    [[UAirship shared].actionRegistry updateAction:[TiAirshipDeepLinkAction shared] forEntryWithName:kUADeepLinkActionDefaultRegistryName];
+
+    [[TiAirship shared] takeOff];
 }
 
 + (UACloudSite)parseCloudSiteString:(NSString *)site {
@@ -84,5 +82,8 @@ static NSString *const CloudSiteEUString = @"EU";
         return UACloudSiteUS;
     }
 }
+
+
+
 
 @end

@@ -10,17 +10,18 @@ import com.urbanairship.json.JsonException;
 import com.urbanairship.json.JsonMap;
 import com.urbanairship.json.JsonValue;
 import com.urbanairship.messagecenter.MessageCenter;
-import com.urbanairship.push.PushMessage;
 import com.urbanairship.util.UAStringUtil;
 
 import org.appcelerator.kroll.KrollModule;
+import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+
+import ti.airship.events.EventEmitter;
 
 @Kroll.module(name = "AirshipTitanium", id = "ti.airship")
 public class AirshipTitaniumModule extends KrollModule {
@@ -38,11 +39,6 @@ public class AirshipTitaniumModule extends KrollModule {
 
     private static final String MODULE_NAME = "AirshipTitanium";
 
-    // Store state
-    private static PushMessage launchPushMessage = null;
-    private static Integer launchNotificationId = null;
-    private static String deepLink = null;
-
     public AirshipTitaniumModule() {
         super(MODULE_NAME);
     }
@@ -52,6 +48,18 @@ public class AirshipTitaniumModule extends KrollModule {
         Autopilot.automaticTakeOff(app);
     }
 
+    @Override
+    public void listenerAdded(String type, int count, KrollProxy proxy) {
+        super.listenerAdded(type, count, proxy);
+        EventEmitter.shared().addListeners(type, count, this);
+    }
+
+    @Override
+    public void listenerRemoved(String type, int count, KrollProxy proxy) {
+        super.listenerRemoved(type, count, proxy);
+        EventEmitter.shared().removeListeners(type, count, this);
+    }
+
     @Kroll.method
     @Kroll.getProperty
     public String getChannelId() {
@@ -59,20 +67,18 @@ public class AirshipTitaniumModule extends KrollModule {
     }
 
     @Kroll.getProperty
-    public HashMap getLaunchNotification() {
+    public Object getLaunchNotification() {
         return getLaunchNotification(false);
     }
 
     @Kroll.method
-    public HashMap getLaunchNotification(@Kroll.argument(optional=true) boolean clear) {
-        HashMap<String, Object> pushMap = createPushEvent(launchPushMessage, launchNotificationId);
-
-        if (clear) {
-            launchNotificationId = null;
-            launchPushMessage = null;
+    public Object getLaunchNotification(@Kroll.argument(optional = true) boolean clear) {
+        TiPush push = TiAirship.shared().getLaunchPush(clear);
+        if (push == null) {
+            return new HashMap<String, Object>();
+        } else {
+            return push.toMap();
         }
-
-        return pushMap;
     }
 
     @Kroll.method
@@ -150,7 +156,7 @@ public class AirshipTitaniumModule extends KrollModule {
         JsonMap eventArgs = null;
 
         if (arg instanceof String) {
-            String eventPayload = (String)arg;
+            String eventPayload = (String) arg;
             if (UAStringUtil.isEmpty(eventPayload)) {
                 Log.e(TAG, "Missing event payload.");
                 return;
@@ -170,12 +176,12 @@ public class AirshipTitaniumModule extends KrollModule {
         }
 
         ActionRunRequest.createRequest(AddCustomEventAction.DEFAULT_REGISTRY_NAME)
-                        .setValue(eventArgs)
-                        .run((arguments, result) -> {
-                            if (result.getException() != null) {
-                                Log.e(TAG, "Failed to add custom event: " + arg, result.getException());
-                            }
-                        });
+                .setValue(eventArgs)
+                .run((arguments, result) -> {
+                    if (result.getException() != null) {
+                        Log.e(TAG, "Failed to add custom event: " + arg, result.getException());
+                    }
+                });
     }
 
     @Kroll.method
@@ -195,90 +201,12 @@ public class AirshipTitaniumModule extends KrollModule {
     }
 
     @Kroll.method
-    public String getDeepLink(@Kroll.argument(optional=true) boolean clear) {
-        String dl = deepLink;
-
-        if (clear) {
-          deepLink = null;
-        }
-
-        return dl;
+    public String getDeepLink(@Kroll.argument(optional = true) boolean clear) {
+        return TiAirship.shared().getDeepLink(clear);
     }
 
     @Kroll.method
     public void displayMessageCenter() {
         MessageCenter.shared().showMessageCenter();
-    }
-
-    public static void onPushReceived(PushMessage message, Integer notificationId) {
-        AirshipTitaniumModule module = getModule();
-        if (module != null) {
-            module.fireEvent(EVENT_PUSH_RECEIVED, createPushEvent(message, notificationId));
-        }
-    }
-
-    public static void onNotificationOpened(PushMessage message, int notificationId) {
-        launchNotificationId = notificationId;
-        launchPushMessage = message;
-    }
-
-    public static void onChannelUpdated(String channelId) {
-        AirshipTitaniumModule module = getModule();
-        if (module != null) {
-            HashMap<String, String> event = new HashMap<>();
-            event.put("channelId", channelId);
-            module.fireEvent(EVENT_CHANNEL_UPDATED, event);
-        }
-    }
-
-    public static void deepLinkReceived(String dl) {
-      deepLink = dl;
-    	AirshipTitaniumModule module = getModule();
-        if (module != null) {
-            HashMap<String, String> event = new HashMap<String, String>();
-            event.put("deepLink", dl);
-            module.fireEvent(EVENT_DEEP_LINK_RECEIVED, event);
-        }
-    }
-
-    private static AirshipTitaniumModule getModule() {
-        return (AirshipTitaniumModule)TiApplication.getInstance().getModuleByName(MODULE_NAME);
-    }
-
-    private static HashMap<String, Object> createPushEvent(PushMessage message, Integer notificationId) {
-        HashMap<String, Object> pushMap = new HashMap<>();
-        if (message == null) {
-            return pushMap;
-        }
-
-        Map<String, String> extras = new HashMap<>();
-        for (String key : message.getPushBundle().keySet()) {
-            if ("android.support.content.wakelockid".equals(key)) {
-                continue;
-            }
-
-            if ("google.sent_time".equals(key)) {
-                extras.put(key, Long.toString(message.getPushBundle().getLong(key)));
-                continue;
-            }
-
-            if ("google.ttl".equals(key)) {
-                extras.put(key, Integer.toString(message.getPushBundle().getInt(key)));
-                continue;
-            }
-
-            extras.put(key, message.getPushBundle().getString(key));
-        }
-        pushMap.put("extras", extras);
-
-        if (message.getAlert() != null) {
-            pushMap.put("message", message.getAlert());
-        }
-
-        if (notificationId != null) {
-            pushMap.put("notificationId", notificationId);
-        }
-
-        return pushMap;
     }
 }

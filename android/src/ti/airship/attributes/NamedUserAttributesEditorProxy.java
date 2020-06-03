@@ -1,3 +1,5 @@
+/* Copyright Airship and Contributors */
+
 package ti.airship.attributes;
 
 import com.urbanairship.UAirship;
