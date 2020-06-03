@@ -15,6 +15,7 @@ echo "Copying frameworks"
 rm -rf "platform/Airship*.framework"
 cp -R "Carthage/Build/iOS/AirshipCore.framework" "platform/"
 cp -R "Carthage/Build/iOS/AirshipMessageCenter.framework" "platform/"
+cp -R "Carthage/Build/iOS/AirshipAutomation.framework" "platform/"
 
 echo "Building iOS"
 npx appc run -p ios --build-only

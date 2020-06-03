@@ -9,10 +9,10 @@
 @property (nonatomic, weak) TiProxy *proxy;
 @property (nonatomic, strong) NSMutableDictionary *listeners;
 
-- (void)addListenersrForEvent:(NSString *)event
+- (void)addListenersForEvent:(NSString *)event
                         count:(NSUInteger)count;
 
-- (void)removeListenersrForEvent:(NSString *)event
+- (void)removeListenersForEvent:(NSString *)event
                            count:(NSUInteger)count;
 
 - (BOOL)fireEvent:(id<TiAirshipEvent>)event;
