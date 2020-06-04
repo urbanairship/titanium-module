@@ -3,12 +3,12 @@
 package ti.airship;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.urbanairship.push.NotificationInfo;
 import com.urbanairship.push.PushMessage;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Wraps Airship push messages.
@@ -16,9 +16,9 @@ import java.util.Map;
 public class TiPush {
 
     private final PushMessage message;
-    private final Integer notificationId;
+    private final String notificationId;
 
-    private TiPush(PushMessage message, Integer notificationId) {
+    protected TiPush(@NonNull PushMessage message, @Nullable String notificationId) {
         this.message = message;
         this.notificationId = notificationId;
     }
@@ -28,40 +28,35 @@ public class TiPush {
     }
 
     public static TiPush wrap(@NonNull NotificationInfo notificationInfo) {
-        return new TiPush(notificationInfo.getMessage(), notificationInfo.getNotificationId());
+        return new TiPush(notificationInfo.getMessage(), getNotificationId(notificationInfo));
     }
 
     @NonNull
     public HashMap<String, Object> toMap() {
-        HashMap<String, Object> pushMap = new HashMap<>();
-        Map<String, String> extras = new HashMap<>();
-        for (String key : message.getPushBundle().keySet()) {
-            if ("android.support.content.wakelockid".equals(key)) {
-                continue;
-            }
-
-            if ("google.sent_time".equals(key)) {
-                extras.put(key, Long.toString(message.getPushBundle().getLong(key)));
-                continue;
-            }
-
-            if ("google.ttl".equals(key)) {
-                extras.put(key, Integer.toString(message.getPushBundle().getInt(key)));
-                continue;
-            }
-
-            extras.put(key, message.getPushBundle().getString(key));
-        }
-        pushMap.put("extras", extras);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("extras", Utils.convertToMap(message));
 
         if (message.getAlert() != null) {
-            pushMap.put("message", message.getAlert());
+            map.put("message", message.getAlert());
+        }
+
+        if (message.getTitle() != null) {
+            map.put("title", message.getTitle());
         }
 
         if (notificationId != null) {
-            pushMap.put("notificationId", notificationId);
+            map.put("notificationId", notificationId);
         }
 
-        return pushMap;
+        return map;
+    }
+
+    @NonNull
+    private static String getNotificationId(@NonNull NotificationInfo notificationInfo) {
+        if (notificationInfo.getNotificationTag() != null) {
+            return notificationInfo.getNotificationTag() + ":" + notificationInfo.getNotificationId();
+        } else {
+            return String.valueOf(notificationInfo.getNotificationId());
+        }
     }
 }

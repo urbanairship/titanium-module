@@ -13,6 +13,7 @@ import com.urbanairship.json.JsonValue;
 import com.urbanairship.messagecenter.MessageCenter;
 import com.urbanairship.util.UAStringUtil;
 
+import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
@@ -34,7 +35,13 @@ public class AirshipTitaniumModule extends KrollModule {
     public static final String EVENT_DEEP_LINK_RECEIVED = "EVENT_DEEP_LINK_RECEIVED";
 
     @Kroll.constant
-    public static final String EVENT_PUSH_RECEIVED = "PUSH_RECEIVED";
+    public static final String EVENT_PUSH_RECEIVED = "EVENT_PUSH_RECEIVED";
+
+    @Kroll.constant
+    public static final String EVENT_NOTIFICATION_RESPONSE = "EVENT_NOTIFICATION_RESPONSE";
+
+    @Kroll.constant
+    public static final String EVENT_NOTIFICATION_OPT_IN_CHANGED = "EVENT_NOTIFICATION_OPT_IN_CHANGED";
 
     public static final String TAG = "AirshipTitaniumModule";
 
@@ -67,6 +74,12 @@ public class AirshipTitaniumModule extends KrollModule {
         return UAirship.shared().getChannel().getId();
     }
 
+    @Kroll.method
+    @Kroll.getProperty
+    public String getPushToken() {
+        return UAirship.shared().getPushManager().getPushToken();
+    }
+
     @Kroll.getProperty
     public Object getLaunchNotification() {
         return getLaunchNotification(false);
@@ -74,11 +87,11 @@ public class AirshipTitaniumModule extends KrollModule {
 
     @Kroll.method
     public Object getLaunchNotification(@Kroll.argument(optional = true) boolean clear) {
-        TiPush push = TiAirship.shared().getLaunchPush(clear);
-        if (push == null) {
+        TiNotificationResponse response = TiAirship.shared().getLaunchNotificationResponse(clear);
+        if (response == null) {
             return new HashMap<String, Object>();
         } else {
-            return push.toMap();
+            return response.toMap();
         }
     }
 
@@ -92,6 +105,12 @@ public class AirshipTitaniumModule extends KrollModule {
     @Kroll.setProperty
     public void setUserNotificationsEnabled(boolean enabled) {
         UAirship.shared().getPushManager().setUserNotificationsEnabled(enabled);
+    }
+
+    @Kroll.method
+    @Kroll.getProperty
+    public boolean getIsUserNotificationsOptedIn() {
+        return UAirship.shared().getPushManager().isOptIn();
     }
 
     @Kroll.method
@@ -221,5 +240,15 @@ public class AirshipTitaniumModule extends KrollModule {
     @Kroll.method
     public void displayMessageCenter() {
         MessageCenter.shared().showMessageCenter();
+    }
+
+    @Kroll.method
+    public void enableUserNotifications(KrollFunction function) {
+        setUserNotificationsEnabled(true);
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("success", UAirship.shared().getPushManager().isOptIn());
+        if (function != null) {
+            function.call(getKrollObject(), result);
+        }
     }
 }

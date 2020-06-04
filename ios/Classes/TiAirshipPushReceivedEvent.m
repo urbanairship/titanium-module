@@ -18,8 +18,10 @@ NSString *const TiAirshipPushReceivedEventName = @"EVENT_PUSH_RECEIVED";
     return self;
 }
 
-+ (instancetype)eventWithPush:(TiAirshipPush *)push {
-    return [[self alloc] initWithData:push.payload];
++ (instancetype)eventWithPush:(TiAirshipPush *)push foreground:(BOOL)foreground {
+    NSMutableDictionary *data = [push.payload mutableCopy];
+    data[@"receivedInForeground"] = @(foreground);
+    return [[self alloc] initWithData:data];
 }
 
 - (nonnull id)eventData {

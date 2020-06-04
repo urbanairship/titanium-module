@@ -10,7 +10,7 @@ extern NSString *const TiAirshipPushReceivedEventName;
 
 @interface TiAirshipPushReceivedEvent : NSObject <TiAirshipEvent>
 
-+ (instancetype)eventWithPush:(TiAirshipPush *)push;
++ (instancetype)eventWithPush:(TiAirshipPush *)push foreground:(BOOL)foreground;
 
 @end
 
