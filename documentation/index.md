@@ -6,7 +6,8 @@
 
 Listens for any channel updates. Event contains the following:
  - channelId: The channel ID of the app instance.
- - deviceToken: (iOS only) The device token.
+ - deviceToken: (deprecated, iOS only) The device token.
+ - pushToken: The push token.
 
 ```
     Airship.addEventListener(Airship.EVENT_CHANNEL_UPDATED, function(e) {
@@ -86,7 +87,7 @@ Enables or disables data collection. To require data be opted in before collecte
 data collection disables tags, attributes, analytics, named user, and push. To allow the user to still receive broadcast pushes, set `isPushTokenRegistrationEnabled` to true.
 
 ```
-    Airship.isDataCollectionEnabled = true;
+    Airship.isDataCollectionEnabled = true
 ```
 
 ### isPushTokenRegistrationEnabled
@@ -94,8 +95,17 @@ data collection disables tags, attributes, analytics, named user, and push. To a
 Enables or disables push token registration. This value defaults to the current value of `isDataCollectionEnabled`. Can be used to enable broadcast push and still have data collection disabled.
 
 ```
-    Airship.isPushTokenRegistrationEnabled = true;
+    Airship.isPushTokenRegistrationEnabled = true
 ```
+
+### isInAppAutomationPaused
+
+Pauses or resumes In-App messaging.
+
+```
+    Airship.isInAppAutomationPaused = true
+```
+
 
 ### isAutoBadgeEnabled (iOS only)
 

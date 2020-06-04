@@ -7,6 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @import AirshipCore;
 @import AirshipMessageCenter;
+@import AirshipAutomation;
 
 @interface TiAirshipModule : TiModule
 

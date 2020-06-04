@@ -109,6 +109,15 @@ NS_ASSUME_NONNULL_BEGIN
     [UAirship namedUser].identifier = args;
 }
 
+- (id)isInAppAutomationPaused {
+    return NUMBOOL([UAInAppMessageManager shared].isPaused);
+}
+
+- (void)setIsInAppAutomationPaused:(id)args {
+    ENSURE_SINGLE_ARG(args, NSNumber);
+    [UAInAppMessageManager shared].paused = [args boolValue];
+}
+
 - (void)associateIdentifier:(id)args {
     ENSURE_ARG_COUNT(args, 2);
     NSString *keyString = [TiUtils stringValue:[args objectAtIndex:0]];
