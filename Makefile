@@ -20,6 +20,6 @@ clean:
 	rm -rf android/libs
 	rm -rf ios/build
 	rm -rf ios/dist
-	rm -rf ~/Library/Application Support/Titanium/modules/iphone/ti.airship/
+	rm -rf "${HOME}/Library/Application Support/Titanium/modules/iphone/ti.airship/"
 
 
