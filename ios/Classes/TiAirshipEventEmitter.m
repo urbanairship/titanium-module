@@ -39,7 +39,11 @@
 - (void)removeListenersForEvent:(NSString *)event
                           count:(NSUInteger)count {
     NSUInteger current = [self.listeners[event] unsignedIntegerValue];
-    current -= count;
+    if (current >= count) {
+        current -= count;
+    } else {
+        current = 0;
+    }
     self.listeners[event] = @(current);
 }
 
