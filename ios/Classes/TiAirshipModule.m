@@ -8,6 +8,9 @@
 #import "TiAirshipPushReceivedEvent.h"
 #import "TiAirshipDeepLinkEvent.h"
 #import "TiAirshipChannelRegistrationEvent.h"
+#import "TiAirshipNotificationResponseEvent.h"
+#import "TiAirshipNotificationOptInChangedEvent.h"
+#import "TiAirshipUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,6 +48,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(NSString *)EVENT_DEEP_LINK_RECEIVED {
     return TiAirshipDeepLinkEventName;
+}
+
+-(NSString *)EVENT_NOTIFICATION_RESPONSE {
+    return TiAirshipNotificationResponseEventName;
+}
+
+-(NSString *)EVENT_NOTIFICATION_OPT_IN_CHANGED {
+    return TiAirshipNotificationOptInChangedEventName;
 }
 
 - (void)displayMessageCenter:(id)args {
@@ -98,6 +109,46 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(id)channelId {
     return [UAirship channel].identifier;
+}
+
+-(id)pushToken {
+    return [UAirship push].deviceToken;
+}
+
+-(id)isUserNotificationsOptedIn {
+    BOOL optedIn = [UAirship push].authorizedNotificationSettings != 0;
+    return NUMBOOL(optedIn);
+}
+
+-(id)authorizedNotificationSettings {
+    return [TiAirshipUtils authorizedNotificationsDictionary:[UAirship push].authorizedNotificationSettings];
+}
+
+-(id)authorizedNotificationStatus {
+    switch ([UAirship push].authorizationStatus) {
+        case UAAuthorizationStatusDenied:
+            return @"denied";
+        case UAAuthorizationStatusAuthorized:
+            return @"authorized";
+        case UAAuthorizationStatusProvisional:
+            return @"provisional";
+        case UAAuthorizationStatusNotDetermined:
+        default:
+            return @"not_determined";
+    }
+}
+
+-(void)enableUserNotifications:(id)args {
+    ENSURE_SINGLE_ARG_OR_NIL(args, KrollCallback)
+    KrollCallback *callback = args;
+
+    UA_WEAKIFY(self)
+    [[UAirship push] enableUserPushNotifications:^(BOOL success) {
+        UA_STRONGIFY(self)
+        if (self && callback) {
+            [callback call:@[@{@"success": @(success)}] thisObject:self];
+        }
+    }];
 }
 
 - (id)namedUser {
@@ -170,13 +221,13 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (id)getLaunchNotification:(id)args {
-    TiAirshipPush *push = [TiAirship shared].launchPush;
+    TiAirshipNotificationResponse *response = [TiAirship shared].launchNotificationResponse;
 
     if ([TiUtils boolValue:[args firstObject] def:NO]) {
-        [TiAirship shared].launchPush = nil;
+        [TiAirship shared].launchNotificationResponse = nil;
     }
 
-    return push.payload ?: @{};
+    return response.payload ?: @{};
 }
 
 - (id)launchNotification {

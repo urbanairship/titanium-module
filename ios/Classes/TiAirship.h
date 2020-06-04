@@ -2,7 +2,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TiAirshipEventEmitter.h"
-#import "TiAirshipPush.h"
+#import "TiAirshipNotificationResponse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TiAirship : NSObject
 
 @property (nonatomic, copy, nullable) NSString *deepLink;
-@property (nonatomic, strong, nullable) TiAirshipPush *launchPush;
+@property (nonatomic, strong, nullable) TiAirshipNotificationResponse *launchNotificationResponse;
 @property (nonatomic, readonly) TiAirshipEventEmitter *eventEmitter;
 
 + (TiAirship *)shared;

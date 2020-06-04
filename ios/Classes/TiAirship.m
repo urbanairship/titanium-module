@@ -5,13 +5,15 @@
 #import "TiAirshipPushReceivedEvent.h"
 #import "TiAirshipDeepLinkEvent.h"
 #import "TiAirshipChannelRegistrationEvent.h"
+#import "TiAirshipNotificationResponseEvent.h"
+#import "TiAirshipNotificationOptInChangedEvent.h"
 
 @import AirshipCore;
 
 static TiAirship *shared_;
 static dispatch_once_t onceToken;
 
-@interface TiAirship() <UAPushNotificationDelegate, UADeepLinkDelegate>
+@interface TiAirship() <UAPushNotificationDelegate, UADeepLinkDelegate, UARegistrationDelegate>
 @property (nonatomic, strong) TiAirshipEventEmitter *eventEmitter;
 @end
 
@@ -34,6 +36,7 @@ static dispatch_once_t onceToken;
 
 - (void)takeOff {
     [UAirship push].pushNotificationDelegate = self;
+    [UAirship push].registrationDelegate = self;
     [UAirship shared].deepLinkDelegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -41,26 +44,44 @@ static dispatch_once_t onceToken;
                                                  name:UAChannelUpdatedEvent
                                                object:nil];
 
-    self.launchPush = [TiAirshipPush pushFromNotificationResponse:[UAirship push].launchNotificationResponse];
+    self.launchNotificationResponse = [TiAirshipNotificationResponse tiResponseFromNotificationResponse:[UAirship push].launchNotificationResponse];
 }
 
 #pragma mark UAPushNotificationDelegate
 
 - (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)(void))completionHandler {
     UA_LDEBUG(@"The application was launched or resumed from a notification %@", notificationResponse);
-    self.launchPush = [TiAirshipPush pushFromNotificationResponse:notificationResponse];
+
+    id tiResponse =  [TiAirshipNotificationResponse tiResponseFromNotificationResponse:notificationResponse];
+    self.launchNotificationResponse = tiResponse;
+
+    id event = [TiAirshipNotificationResponseEvent eventWithResponse:tiResponse];
+    [self.eventEmitter fireEvent:event];
     completionHandler();
 }
 
-- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void(^)(void))completionHandler {
-    UA_LDEBUG(@"Received a notification while the app was already in the foreground %@", notificationContent);
+- (void)receivedBackgroundNotification:(UANotificationContent *)notificationContent
+                     completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    UA_LDEBUG(@"Received a background notification %@", notificationContent);
+    id tiPush = [TiAirshipPush tiPushFromNotificationContent:notificationContent];
+    id event = [TiAirshipPushReceivedEvent eventWithPush:tiPush foreground:NO];
+    [self.eventEmitter fireEvent:event];
+}
 
-    [[UAirship push] setBadgeNumber:0]; // zero badge after push received
-
-    id tiPush = [TiAirshipPush pushFromNotificationContent:notificationContent];
-    id event = [TiAirshipPushReceivedEvent eventWithPush:tiPush];
+- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent
+                     completionHandler:(void(^)(void))completionHandler {
+    UA_LDEBUG(@"Received a foreground notification %@", notificationContent);
+    id tiPush = [TiAirshipPush tiPushFromNotificationContent:notificationContent];
+    id event = [TiAirshipPushReceivedEvent eventWithPush:tiPush foreground:YES];
     [self.eventEmitter fireEvent:event];
     completionHandler();
+}
+
+#pragma mark UARegistrationDelegate
+
+- (void)notificationAuthorizedSettingsDidChange:(UAAuthorizedNotificationSettings)authorizedSettings {
+    id event = [TiAirshipNotificationOptInChangedEvent eventWithAuthroizedSettings:authorizedSettings];
+    [self.eventEmitter fireEvent:event];
 }
 
 #pragma mark Channel Registration

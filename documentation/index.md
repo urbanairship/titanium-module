@@ -2,41 +2,79 @@
 
 ## Events
 
-#### EVENT_CHANNEL_UPDATED
+### EVENT_CHANNEL_UPDATED
 
-Listens for any channel updates. Event contains the following:
- - channelId: The channel ID of the app instance.
- - deviceToken: (deprecated, iOS only) The device token.
- - pushToken: The push token.
+Event sent when the channel is updated or created.
+ - channelId: String. The channel ID of the app instance.
+ - deviceToken: (deprecated, iOS only) String. The device token.
+ - pushToken: String. The push token.
 
 ```
     Airship.addEventListener(Airship.EVENT_CHANNEL_UPDATED, function(e) {
-        Ti.API.info('Channel Updated: ' + Airship.channelId)
-    });
+        Ti.API.info('Channel Updated: ' + e.channelId)
+    })
 ```
 
-#### EVENT_PUSH_RECEIVED
+### EVENT_NOTIFICATION_OPT_IN_CHANGED
 
-Listens for any push received events. Event contains the following:
- - message: The push alert message.
- - extras: Map of all the push extras.
- - notificationId: (Android only) The ID of the posted notification.
+Event sent when the notification opt-in status changes.
+- optIn: Boolean. True if the notifications are opted-in, otherwise false.
+- authorizedSettings: Object. iOS Only.
+    - alert: Boolean. True if alert is allowed, otherwise false.
+    - badge: Boolean. True if badge is allowed, otherwise false.
+    - sound: Boolean. True if sound is allowed, otherwise false.
+    - criticalAlert: Boolean. True if critical alerts are allowed, otherwise false.
+    - announcement: Boolean. True if announcements is allowed, otherwise false.
+    - lockScreen: Boolean. True if lock screen notifications are allowed, otherwise false.
+    - notificationCenter: Boolean. True if notification center notifications are allowed, otherwise false.
+    - carPlay: Boolean. True if car play notifications are allowed, otherwise false.
+
+```
+    Airship.addEventListener(Airship.EVENT_NOTIFICATION_OPT_IN_CHANGED, function(e) {
+        Ti.API.info('OptIn: ' + e.optIn)
+    })
+```
+
+### EVENT_PUSH_RECEIVED
+
+Event sent when a push is received.
+ - message: String. The message's alert.
+ - title: String. The message's title.
+ - extras: Object. The message's extras.
+ - notificationId: String. The notification ID.
+ - receivedInForeground: Boolean. True if received in foreground, otherwise false.
 
 ```
     Airship.addEventListener(Airship.EVENT_PUSH_RECEIVED, function(e) {
-        Ti.API.info('Push received: ' + e.message);
-    });
+        Ti.API.info('Push received: ' + e.message)
+    })
 ```
 
-#### EVENT_DEEP_LINK_RECEIVED
+### EVENT_NOTIFICATION_RESPONSE
 
-Listens for any deep link events. Event contains the following:
+Event sent when a notification response is received.
+ - message: String. The message's alert.
+ - title: String. The message's title.
+ - extras: Object. The message's extras.
+ - notificationId: String. The notification ID. On Android, this will either be "<TAG>:<ID>" or just "<ID>".
+ - actionId: String. The button action Id if a button was tapped.
+ - isForeground: Boolean. True if the response will foreground app, otherwise false.
+
+```
+    Airship.addEventListener(Airship.EVENT_NOTIFICATION_RESPONSE, function(e) {
+        Ti.API.info('Notification response: ' + e.message)
+    })
+```
+
+### EVENT_DEEP_LINK_RECEIVED
+
+Event when a deep link is received.
  - deepLink: The deep link.
 
 ```
     Airship.addEventListener(Airship.EVENT_DEEP_LINK_RECEIVED, function(e) {
-        Ti.API.info('DeepLink: ' + e.deepLink);
-    });
+        Ti.API.info('DeepLink: ' + e.deepLink)
+    })
 ```
 
 ## Properties
@@ -50,6 +88,13 @@ the EVENT_CHANNEL_UPDATED event to be notified when it becomes available.
     Ti.API.info('Channel ID: ' + Airship.channelId);
 ```
 
+### pushToken
+
+Returns the app's push token
+```
+    Ti.API.info('Push token: ' + Airship.pushToken);
+```
+
 ### userNotificationsEnabled
 
 Enables or disables user notifications. On iOS, user notifications can only be enabled and enabling
@@ -57,6 +102,14 @@ notifications the first time will prompt the user to enable notifications.
 
 ```
     Airship.userNotificationsEnabled = true;
+```
+
+### isUserNotificationsOptedIn
+
+Checks if notifications are currently opted-in.
+
+```
+    Ti.API.info('Notifications opted-in:' + Airship.isUserNotificationsOptedIn);
 ```
 
 ### tags
@@ -106,6 +159,30 @@ Pauses or resumes In-App messaging.
     Airship.isInAppAutomationPaused = true
 ```
 
+### authorizedNotificationSettings (iOS only)
+
+Returns the authorized notification settings object:
+
+- alert: Boolean. True if alert is allowed, otherwise false.
+- badge: Boolean. True if badge is allowed, otherwise false.
+- sound: Boolean. True if sound is allowed, otherwise false.
+- criticalAlert: Boolean. True if critical alerts are allowed, otherwise false.
+- announcement: Boolean. True if announcements is allowed, otherwise false.
+- lockScreen: Boolean. True if lock screen notifications are allowed, otherwise false.
+- notificationCenter: Boolean. True if notification center notifications are allowed, otherwise false.
+- carPlay: Boolean. True if car play notifications are allowed, otherwise false.
+
+```
+    Ti.API.info("Authorized settings: " + JSON.stringify(Airship.authorizedNotificationSettings)
+```
+
+### authorizedNotificationStatus (iOS only)
+
+Returns the authorized notification status. One of: "denied", "provisional", "authorized", or "not_determined".
+
+```
+    Ti.API.info("Authorized status: " + Airship.authorizedNotificationStatus)
+```
 
 ### isAutoBadgeEnabled (iOS only)
 
@@ -125,7 +202,18 @@ The badge number on iOS.
 
 ## Methods
 
-### createChannelTagsEditor
+### enableUserNotifications(callback)
+
+Enables user notifications with a callback with the result.
+
+
+```
+    Airship.enableUserNotifications((function(result) {
+        Ti.API.info("Notifications Enabled: " + result.success)
+    })
+```
+
+### createChannelTagsEditor()
 
 The tag editor allows adding and removing tags on the channel.
 
@@ -137,7 +225,7 @@ The tag editor allows adding and removing tags on the channel.
     editor.applyTags()
 ```
 
-### createChannelTagGroupEditor
+### createChannelTagGroupEditor()
 
 The tag editor allows editing channel tag groups.
 
@@ -149,7 +237,7 @@ The tag editor allows editing channel tag groups.
     editor.applyTags()
 ```
 
-### createNamedUserTagGroupEditor
+### createNamedUserTagGroupEditor()
 
 The tag editor allows editing named user tag groups.
 
@@ -161,7 +249,7 @@ The tag editor allows editing named user tag groups.
     editor.applyTags()
 ```
 
-### createNamedUserAttributesEditor
+### createNamedUserAttributesEditor()
 
 The attributes editor allows editing named user attributes. The supported attribute types are
 String, Number, and Date.
@@ -175,7 +263,7 @@ String, Number, and Date.
     editor.applyAttributes()
 ```
 
-### createChannelAttributesEditor
+### createChannelAttributesEditor()
 
 The attributes editor allows editing channel attributes. The supported attribute types are
 String, Number, and Date.
@@ -266,7 +354,7 @@ Screen tracking event.
     Airship.trackScreen("home")
 ```
 
-### resetBadge (iOS only)
+### resetBadge() (iOS only)
 
 Resets the badge on iOS.
 
