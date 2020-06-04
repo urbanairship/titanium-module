@@ -41,14 +41,14 @@ static dispatch_once_t onceToken;
                                                  name:UAChannelUpdatedEvent
                                                object:nil];
 
-    self.launchPush = [TiAirshipPush pushFromNotificaationResponse:[UAirship push].launchNotificationResponse];
+    self.launchPush = [TiAirshipPush pushFromNotificationResponse:[UAirship push].launchNotificationResponse];
 }
 
 #pragma mark UAPushNotificationDelegate
 
 - (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)(void))completionHandler {
     UA_LDEBUG(@"The application was launched or resumed from a notification %@", notificationResponse);
-    self.launchPush = [TiAirshipPush pushFromNotificaationResponse:notificationResponse];
+    self.launchPush = [TiAirshipPush pushFromNotificationResponse:notificationResponse];
     completionHandler();
 }
 
@@ -57,7 +57,7 @@ static dispatch_once_t onceToken;
 
     [[UAirship push] setBadgeNumber:0]; // zero badge after push received
 
-    id tiPush = [TiAirshipPush pushFromNotificaationContent:notificationContent];
+    id tiPush = [TiAirshipPush pushFromNotificationContent:notificationContent];
     id event = [TiAirshipPushReceivedEvent eventWithPush:tiPush];
     [self.eventEmitter fireEvent:event];
     completionHandler();
@@ -87,6 +87,5 @@ static dispatch_once_t onceToken;
 
     completionHandler();
 }
-
 
 @end

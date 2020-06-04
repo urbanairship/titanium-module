@@ -29,15 +29,15 @@
     }
     return self;
 }
-- (void)addListenersrForEvent:(NSString *)event
-                        count:(NSUInteger)count {
+- (void)addListenersForEvent:(NSString *)event
+                       count:(NSUInteger)count {
     NSUInteger current = [self.listeners[event] unsignedIntegerValue];
     current += count;
     self.listeners[event] = @(current);
 }
 
-- (void)removeListenersrForEvent:(NSString *)event
-                        count:(NSUInteger)count {
+- (void)removeListenersForEvent:(NSString *)event
+                          count:(NSUInteger)count {
     NSUInteger current = [self.listeners[event] unsignedIntegerValue];
     current -= count;
     self.listeners[event] = @(current);
@@ -53,9 +53,6 @@
 }
 
 @end
-
-static TiAirshipEventEmitter *sharedEventEmitter_;
-static dispatch_once_t onceToken;
 
 @interface TiAirshipEventEmitter()
 @property (nonatomic, strong) NSMapTable *listenerMap;
@@ -85,7 +82,7 @@ static dispatch_once_t onceToken;
             [self.listenerMap setObject:listeners forKey:proxy];
         }
 
-        [listeners addListenersrForEvent:event count:count];
+        [listeners addListenersForEvent:event count:count];
 
         id pendingEvents = self.pendingEvents[event];
         [self.pendingEvents removeObjectForKey:event];
@@ -101,7 +98,7 @@ static dispatch_once_t onceToken;
                         proxy:(TiProxy *)proxy {
     @synchronized (self) {
         TiAirshipEventListeners *listeners  = [self.listenerMap objectForKey:proxy];
-        [listeners removeListenersrForEvent:event count:count];
+        [listeners removeListenersForEvent:event count:count];
     }
 }
 

@@ -11,9 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface TiAirshipPush : NSObject
 
-+ (instancetype)pushFromNotificaationResponse:(nullable UANotificationResponse *)response;
++ (instancetype)pushFromNotificationResponse:(nullable UANotificationResponse *)notificationResponse;
 
-+ (instancetype)pushFromNotificaationContent:(nullable UANotificationContent *)notificationContent;
++ (instancetype)pushFromNotificationContent:(nullable UANotificationContent *)notificationContent;
 
 @property (readonly, copy) NSDictionary *payload;
 @end

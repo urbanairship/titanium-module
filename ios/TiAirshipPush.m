@@ -16,12 +16,12 @@
     return self;
 }
 
-+ (instancetype)pushFromNotificaationResponse:(nullable UANotificationResponse *)response {
++ (instancetype)pushFromNotificationResponse:(nullable UANotificationResponse *)response {
     id payload = [self parsePayload:response.notificationContent.notificationInfo];
     return [[self alloc] initWithPayload:payload];
 }
 
-+ (instancetype)pushFromNotificaationContent:(nullable UANotificationContent *)notificationContent {
++ (instancetype)pushFromNotificationContent:(nullable UANotificationContent *)notificationContent {
     id payload = [self parsePayload:notificationContent.notificationInfo];
     return [[self alloc] initWithPayload:payload];
 }
