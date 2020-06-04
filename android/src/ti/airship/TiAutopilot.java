@@ -17,10 +17,14 @@ import com.urbanairship.push.NotificationInfo;
 import com.urbanairship.push.NotificationListener;
 import com.urbanairship.util.UAStringUtil;
 
-import org.apache.log4j.lf5.LogLevel;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.TiProperties;
+
+import ti.airship.events.ChannelRegistrationEvent;
+import ti.airship.events.DeepLinkEvent;
+import ti.airship.events.EventEmitter;
+import ti.airship.events.PushReceivedEvent;
 
 public class TiAutopilot extends Autopilot {
 
@@ -40,66 +44,7 @@ public class TiAutopilot extends Autopilot {
     @Override
     public void onAirshipReady(UAirship airship) {
         Log.i(TAG, "Airship ready");
-
-        airship.setDeepLinkListener(deepLink -> {
-            AirshipTitaniumModule.deepLinkReceived(deepLink);
-            return true;
-        });
-
-        airship.getPushManager().addPushListener((message, notificationPosted) -> {
-            Log.i(TAG, "Received push. Alert: " + message.getAlert());
-            if (!notificationPosted) {
-                AirshipTitaniumModule.onPushReceived(message, null);
-            }
-        });
-
-        airship.getPushManager().setNotificationListener(new NotificationListener() {
-            @Override
-            public void onNotificationPosted(@NonNull NotificationInfo notificationInfo) {
-                Log.i(TAG, "Notification posted. Alert: " + notificationInfo.getMessage().getAlert());
-                AirshipTitaniumModule.onPushReceived(notificationInfo.getMessage(), notificationInfo.getNotificationId());
-            }
-
-            @Override
-            public boolean onNotificationOpened(@NonNull NotificationInfo notificationInfo) {
-                Log.i(TAG, "Notification Opened. Alert: " + notificationInfo.getMessage().getAlert());
-                AirshipTitaniumModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
-                return false;
-            }
-
-            @Override
-            public boolean onNotificationForegroundAction(@NonNull NotificationInfo notificationInfo, @NonNull NotificationActionButtonInfo actionButtonInfo) {
-                Log.i(TAG, "User clicked notification button. Button ID: " + actionButtonInfo.getButtonId() + " Alert: " + notificationInfo.getMessage().getAlert());
-                AirshipTitaniumModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
-                return false;
-            }
-
-            @Override
-            public void onNotificationBackgroundAction(@NonNull NotificationInfo notificationInfo, @NonNull NotificationActionButtonInfo actionButtonInfo) {
-                Log.i(TAG, "User clicked notification button. Button ID: " + actionButtonInfo.getButtonId() + " Alert: " + notificationInfo.getMessage().getAlert());
-                AirshipTitaniumModule.onNotificationOpened(notificationInfo.getMessage(), notificationInfo.getNotificationId());
-            }
-
-            @Override
-            public void onNotificationDismissed(@NonNull NotificationInfo notificationInfo) {
-                Log.i(TAG, "Notification dismissed. Alert: " + notificationInfo.getMessage().getAlert());
-            }
-        });
-
-        airship.getChannel().addChannelListener(new AirshipChannelListener() {
-            @Override
-            public void onChannelCreated(@NonNull String channelId) {
-                Log.i(TAG, "Channel created. Channel ID:" + channelId + ".");
-                AirshipTitaniumModule.onChannelUpdated(channelId);
-            }
-
-            @Override
-            public void onChannelUpdated(@NonNull String channelId) {
-                Log.i(TAG, "Channel updated. Channel ID:" + channelId + ".");
-                AirshipTitaniumModule.onChannelUpdated(channelId);
-            }
-        });
-
+        TiAirship.shared().onAirshipReady(airship);
     }
 
     @Override
@@ -135,7 +80,7 @@ public class TiAutopilot extends Autopilot {
         // Notification icon
         String notificationIconName = properties.getString(NOTIFICATION_ICON, null);
         if (!UAStringUtil.isEmpty(notificationIconName)) {
-            int id  = context.getResources().getIdentifier(notificationIconName, "drawable", context.getPackageName());
+            int id = context.getResources().getIdentifier(notificationIconName, "drawable", context.getPackageName());
             if (id > 0) {
                 options.setNotificationIcon(id);
             } else {
