@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.urbanairship.UAirship;
+import com.urbanairship.analytics.Analytics;
 import com.urbanairship.app.GlobalActivityMonitor;
 import com.urbanairship.app.SimpleApplicationListener;
 import com.urbanairship.channel.AirshipChannelListener;
 import com.urbanairship.push.NotificationActionButtonInfo;
 import com.urbanairship.push.NotificationInfo;
 import com.urbanairship.push.NotificationListener;
+
 
 import ti.airship.events.ChannelRegistrationEvent;
 import ti.airship.events.DeepLinkEvent;
@@ -124,6 +126,8 @@ class TiAirship {
                         checkNotificationOptInStatus();
                     }
                 });
+
+        airship.getAnalytics().registerSDKExtension(Analytics.EXTENSION_TITANIUM, TiAirshipModuleVersion.tiAirshipModuleVersion);
     }
 
     @Nullable

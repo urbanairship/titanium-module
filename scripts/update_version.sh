@@ -12,8 +12,8 @@ fi
 sed -i '' "s/\(^version:\).*/\1 $VERSION/g" $ROOT_PATH/ios/manifest
 sed -i '' "s/\(^version:\).*/\1 $VERSION/g" $ROOT_PATH/android/manifest
 
-# Android - build.gradle
-sed -i '' "s/\(airshipTiModuleVersion *= *\)\".*\"/\1\"$VERSION\"/g" $ROOT_PATH/android/build.gradle
+# Android - TiAirshipModuleVersion.java
+sed -i '' "s/\(tiAirshipModuleVersion *= *\)\".*\"/\1\"$VERSION\"/g" $ROOT_PATH/android/src/ti/airship/TiAirshipModuleVersion.java
 
 # iOS - TiAirshipModuleVersion.m
 sed -i '' "s/\(tiAirshipModuleVersionString *= *@\)\".*\"/\1\"$VERSION\"/g" $ROOT_PATH/ios/Classes/TiAirshipModuleVersion.m
