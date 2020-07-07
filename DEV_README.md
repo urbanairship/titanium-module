@@ -9,6 +9,9 @@ Module uses a makefile for build and install commands:
 - `install-ios`:  Builds and unpacks the iOS zip into the titanium module directory
 - `clean`: Cleans any build folders
 
+## Updating Module Version
+Run "./scripts/update_version <VERISON>" from root directory
+
 ## Updating SDKs
 Android: Update android/build.gradle with latest airship version
 iOS: Update ios/Cartfile with latest airship version
