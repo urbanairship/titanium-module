@@ -1,5 +1,13 @@
 # Airship Titanium Module
 
+## Version 6.0.1 - July 8, 2020
+Patch update to add module verison tracking and update to latest iOS and Android SDKs.
+
+### Changes
+- Updated Airship Android SDK to 13.2.1
+- Updated Airship iOS SDK to 13.4.0
+- Added module version tracking
+
 ## Version 6.0.0 - May 28, 2020
 Major update to support Titanium 9.0.0+ and Android and iOS SDKs.
 
