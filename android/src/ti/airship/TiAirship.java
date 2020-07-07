@@ -127,7 +127,7 @@ class TiAirship {
                     }
                 });
 
-        airship.getAnalytics().registerSDKExtension(Analytics.EXTENSION_TITANIUM, TiAirshipModuleVersion.tiAirshipModuleVersion);
+        airship.getAnalytics().registerSDKExtension(Analytics.EXTENSION_TITANIUM, TiAirshipModuleVersion.TI_AIRSHIP_MODULE_VERSION);
     }
 
     @Nullable
