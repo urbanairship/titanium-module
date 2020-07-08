@@ -10,7 +10,7 @@ Module uses a makefile for build and install commands:
 - `clean`: Cleans any build folders
 
 ## Updating Module Version
-Run "./scripts/update_version <VERISON>" from root directory
+Run "./scripts/update_version <VERSION>" from root directory
 
 ## Updating SDKs
 Android: Update android/build.gradle with latest airship version
