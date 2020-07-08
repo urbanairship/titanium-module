@@ -1,5 +1,24 @@
 # Airship Titanium Module
 
+## Version 7.0.0 - July 8, 2020
+Major update to add significant functionality to the Titanium module. These updates take advantage of the latest iOS and Android SDKs APIs.
+
+### Changes
+- Updated Airship Android SDK to 13.2.1
+- Updated Airship iOS SDK to 13.4.0
+- Added channel tag editor.
+- Added named user and channel attribute editor.
+- Added named user and channel tag group editor.
+- Added iOS badge support.
+- Added screen tracking support.
+- Added flag to pause or resume the display of In-App Automation.
+- Added opt-in status flag.
+- Added enableUserNotifications method with a result status callback.
+- Added EUCS cloud site support.
+- Added more robust event handlers.
+- Added notifications for opt-in status changed and notification reponse events.
+- Added custom events support.
+
 ## Version 6.0.0 - May 28, 2020
 Major update to support Titanium 9.0.0+ and Android and iOS SDKs.
 
