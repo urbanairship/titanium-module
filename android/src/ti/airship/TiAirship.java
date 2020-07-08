@@ -17,7 +17,6 @@ import com.urbanairship.push.NotificationActionButtonInfo;
 import com.urbanairship.push.NotificationInfo;
 import com.urbanairship.push.NotificationListener;
 
-
 import ti.airship.events.ChannelRegistrationEvent;
 import ti.airship.events.DeepLinkEvent;
 import ti.airship.events.EventEmitter;
