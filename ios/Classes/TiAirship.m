@@ -7,6 +7,8 @@
 #import "TiAirshipChannelRegistrationEvent.h"
 #import "TiAirshipNotificationResponseEvent.h"
 #import "TiAirshipNotificationOptInChangedEvent.h"
+#import "TiAirshipModuleVersion.h"
+
 
 @import AirshipCore;
 
@@ -43,6 +45,10 @@ static dispatch_once_t onceToken;
                                              selector:@selector(channelRegistrationSucceeded:)
                                                  name:UAChannelUpdatedEvent
                                                object:nil];
+
+
+    // Register the plugin with analytics
+    [[UAirship shared].analytics registerSDKExtension:UASDKExtensionTitanium version:[TiAirshipModuleVersion get]];
 
     self.launchNotificationResponse = [TiAirshipNotificationResponse tiResponseFromNotificationResponse:[UAirship push].launchNotificationResponse];
 }
