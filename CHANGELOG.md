@@ -18,7 +18,7 @@ For more details, see the [iOS CHANGELOG](https://github.com/urbanairship/ios-li
 - Allows overriding the locale used by Airship. (13.3.0)
 - Fixes In-App automation display intervals being ignored if the app is killed and HMS token registration on older Huawei devices. (13.2.2)
 
-For more details, see the [Android CHANGELOG](https://github.com/urbanairship/android-library/blob/13.3.2/CHANGELOG.md.
+For more details, see the [Android CHANGELOG](https://github.com/urbanairship/android-library/blob/13.3.2/CHANGELOG.md).
 
 ## Version 7.0.0 - July 8, 2020
 Major update to add significant functionality to the Titanium module. These updates take advantage of the latest iOS and Android SDKs APIs.
