@@ -1,5 +1,25 @@
 # Airship Titanium Module
 
+## Version 7.1.0 - August 20, 2020
+Minor release bundling the following SDK updates:
+
+### iOS (Updated iOS SDK from 13.4.0 to 13.5.4)
+- Addresses [Dynamic Type](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) build warnings and Message Center Inbox UI issues. (13.5.4)
+- Fixes a crash with Accengage data migration. (13.5.3)
+- Improves iOS 14 support and fixes In-App Automation issues. (13.5.2)
+- Improves compatibility with Xcode 12, adding new messageCenterStyle properties to the default message center UI classes to avoid conflicting with UIKit changes in iOS 14 (13.5.1)
+- Adds support for application-defined locale overrides, and fixes issues in In-App Automation and the Actions Framework. (13.5.0)
+
+For more details, see the [iOS CHANGELOG](https://github.com/urbanairship/ios-library/blob/13.5.4/CHANGELOG.md).
+
+### Android (Updated Android SDK from 13.2.1 to 13.3.2)
+- Fixes In-App Automation version triggers to only fire on app updates instead of new installs. (13.3.2)
+- Fixes ADM registration exceptions that occur on first run and text alignment issues with In-App Automation. (13.3.1)
+- Allows overriding the locale used by Airship. (13.3.0)
+- Fixes In-App automation display intervals being ignored if the app is killed and HMS token registration on older Huawei devices. (13.2.2)
+
+For more details, see the [Android CHANGELOG](https://github.com/urbanairship/android-library/blob/13.3.2/CHANGELOG.md.
+
 ## Version 7.0.0 - July 8, 2020
 Major update to add significant functionality to the Titanium module. These updates take advantage of the latest iOS and Android SDKs APIs.
 
