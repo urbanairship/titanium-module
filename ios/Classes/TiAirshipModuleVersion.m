@@ -2,7 +2,7 @@
 
 #import "TiAirshipModuleVersion.h"
 
-static NSString *const tiAirshipModuleVersionString = @"7.0.0";
+static NSString *const tiAirshipModuleVersionString = @"7.1.0";
 
 @implementation TiAirshipModuleVersion
 
