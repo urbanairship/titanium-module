@@ -1,5 +1,8 @@
 # Airship Titanium Module
 
+## Version 8.0.0 - September 29, 2020
+Major release for iOS Airship SDK 14.1.2 and Android SDK 14.0.1. The major changes include iOS 14 support and bug fixes for In-App Automation.
+
 ## Version 7.1.0 - August 20, 2020
 Minor release bundling the following SDK updates:
 
