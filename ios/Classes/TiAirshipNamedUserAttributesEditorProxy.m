@@ -2,8 +2,7 @@
 
 #import "TiAirshipNamedUserAttributesEditorProxy.h"
 #import "TiProxy+TiAirshipAttributeAdditions.h"
-#import "TiBase.h"
-
+@import TitaniumKit;
 @import AirshipCore;
 
 @interface TiAirshipNamedUserAttributesEditorProxy()

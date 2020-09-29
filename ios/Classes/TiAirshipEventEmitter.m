@@ -1,9 +1,6 @@
 /* Copyright Airship and Contributors */
 
 #import "TiAirshipEventEmitter.h"
-#import "TiProxy.h"
-#import "TiAirshipEvent.h"
-#import "TiApp.h"
 
 @interface TiAirshipEventListeners : NSObject
 @property (nonatomic, weak) TiProxy *proxy;

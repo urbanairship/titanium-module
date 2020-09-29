@@ -5,6 +5,7 @@
 version: 7.1.0
 apiversion: 2
 architectures: arm64 x86_64
+mac: true
 description: AirshipTitanium
 author: Airship
 license: Apache License, Version 2.0
@@ -15,4 +16,4 @@ name: AirshipTitanium
 moduleid: ti.airship
 guid: 240dc468-ccad-479d-9510-14e9a7cae5c9
 platform: iphone
-minsdk: 9.0.0.GA
+minsdk: 9.2.0.GA

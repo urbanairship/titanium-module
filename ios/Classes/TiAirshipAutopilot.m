@@ -1,9 +1,9 @@
 /* Copyright Airship and Contributors */
 
 #import "TiAirshipAutopilot.h"
-#import "TiApp.h"
 #import "TiAirship.h"
 
+@import TitaniumKit;
 @import AirshipCore;
 
 @implementation TiAirshipAutopilot
@@ -45,6 +45,8 @@ static NSString *const CloudSiteEUString = @"EU";
     config.inProduction = [appProperties[ProductionConfigKey] boolValue];
     config.dataCollectionOptInEnabled = [appProperties[DataCollectionOptInKey] boolValue];
     config.site = [TiAirshipAutopilot parseCloudSiteString:appProperties[CloudSiteConfigKey]];
+    config.URLAllowListScopeOpenURL = @[@"*"];
+
     [UAirship takeOff:config];
 
     // Set the iOS default foreground presentation options if specified in the tiapp.xml else default to None

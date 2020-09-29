@@ -15,4 +15,4 @@ name: AirshipTitanium
 moduleid: ti.airship
 guid: 240dc468-ccad-479d-9510-14e9a7cae5c9
 platform: android
-minsdk: 9.0.0.GA
+minsdk: 9.2.0.GA

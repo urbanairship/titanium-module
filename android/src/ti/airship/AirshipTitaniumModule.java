@@ -6,7 +6,7 @@ import com.urbanairship.Autopilot;
 import com.urbanairship.UAirship;
 import com.urbanairship.actions.ActionRunRequest;
 import com.urbanairship.actions.AddCustomEventAction;
-import com.urbanairship.iam.InAppMessageManager;
+import com.urbanairship.automation.InAppAutomation;
 import com.urbanairship.json.JsonException;
 import com.urbanairship.json.JsonMap;
 import com.urbanairship.json.JsonValue;
@@ -116,13 +116,13 @@ public class AirshipTitaniumModule extends KrollModule {
     @Kroll.method
     @Kroll.getProperty
     public boolean getIsInAppAutomationPaused() {
-        return InAppMessageManager.shared().isPaused();
+        return InAppAutomation.shared().isPaused();
     }
 
     @Kroll.method
     @Kroll.setProperty
     public void setIsInAppAutomationPaused(boolean paused) {
-        InAppMessageManager.shared().setPaused(paused);
+        InAppAutomation.shared().setPaused(paused);
     }
 
     @Kroll.method

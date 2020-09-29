@@ -2,7 +2,7 @@
 
 #import "TiAirshipChannelAttributesEditorProxy.h"
 #import "TiProxy+TiAirshipAttributeAdditions.h"
-#import "TiBase.h"
+@import TitaniumKit;
 
 @import AirshipCore;
 
