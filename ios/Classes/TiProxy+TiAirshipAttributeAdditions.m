@@ -1,10 +1,9 @@
 /* Copyright Airship and Contributors */
 
 #import "TiProxy+TiAirshipAttributeAdditions.h"
-#import "TiBase.h"
+@import TitaniumKit;
 
 @implementation TiProxy(TiAirshipAttributeAdditions)
-
 
 -(void)setAttributeFromArgs:(id)args onMutations:(UAAttributeMutations *)mutations {
     ENSURE_ARG_COUNT(args, 2);

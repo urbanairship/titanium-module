@@ -1,7 +1,7 @@
 /* Copyright Airship and Contributors */
 
 #import "TiAirshipChannelTagsEditorProxy.h"
-#import "TiUtils.h"
+@import TitaniumKit;
 @import AirshipCore;
 
 @interface TiAirshipChannelTagsEditorProxy ()

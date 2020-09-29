@@ -1,8 +1,8 @@
 /* Copyright Airship and Contributors */
 
 #import <Foundation/Foundation.h>
-#import "TiProxy.h"
 #import "TiAirshipEvent.h"
+@import TitaniumKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

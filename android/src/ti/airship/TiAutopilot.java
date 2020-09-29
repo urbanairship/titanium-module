@@ -64,7 +64,8 @@ public class TiAutopilot extends Autopilot {
                 .setInProduction(properties.getBool(IN_PRODUCTION, false))
                 .setFcmSenderId(properties.getString(GCM_SENDER, null))
                 .setDataCollectionOptInEnabled(properties.getBool(DATA_COLLECTION_OPT_IN, false))
-                .setSite(parseCloudSite(properties.getString(CLOUD_SITE, null)));
+                .setSite(parseCloudSite(properties.getString(CLOUD_SITE, null)))
+                .setUrlAllowListScopeOpenUrl(new String[]{"*"});
 
 
         // Accent color

@@ -16,6 +16,7 @@ xcuserdata
 
 .idea/
 libs/
+build/
 
 android/documentation
 android/example
@@ -31,4 +32,5 @@ ios/*.zip
 ios/Airship
 ios/Carthage
 ios/platform/*.framework
+ios/platform/*.xcframework/*
 

@@ -1,9 +1,7 @@
 /* Copyright Airship and Contributors */
 
+@import TitaniumKit;
 #import "TiAirshipModule.h"
-#import "TiBase.h"
-#import "TiHost.h"
-#import "TiUtils.h"
 #import "TiAirship.h"
 #import "TiAirshipPushReceivedEvent.h"
 #import "TiAirshipDeepLinkEvent.h"
@@ -161,12 +159,12 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (id)isInAppAutomationPaused {
-    return NUMBOOL([UAInAppMessageManager shared].isPaused);
+    return NUMBOOL([UAInAppAutomation shared].isPaused);
 }
 
 - (void)setIsInAppAutomationPaused:(id)args {
     ENSURE_SINGLE_ARG(args, NSNumber);
-    [UAInAppMessageManager shared].paused = [args boolValue];
+    [UAInAppAutomation shared].paused = [args boolValue];
 }
 
 - (void)associateIdentifier:(id)args {

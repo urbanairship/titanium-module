@@ -1,21 +1,26 @@
 #!/bin/bash -e
-
+IOS_VERSION='14.1.2'
 ROOT_PATH=`dirname "${0}"`/..
+DOWNLOAD_DIRECTORY="$ROOT_PATH/build/download/iOS/$IOS_VERSION"
 
-# iOS
-echo "Building iOS"
-
-cd $ROOT_PATH/ios
-
-
-echo "Updating carthage"
-carthage update
+if [ ! -f "$DOWNLOAD_DIRECTORY/Airship.zip" ]; then
+  echo "Downloading frameworks"
+  rm -rf $DOWNLOAD_DIRECTORY
+  mkdir -p $DOWNLOAD_DIRECTORY
+  cd $DOWNLOAD_DIRECTORY
+  curl -OL https://github.com/urbanairship/ios-library/releases/download/$IOS_VERSION/Airship.zip
+  tar xvzf Airship.zip
+  cd -
+fi
 
 echo "Copying frameworks"
-rm -rf "platform/Airship*.framework"
-cp -R "Carthage/Build/iOS/AirshipCore.framework" "platform/"
-cp -R "Carthage/Build/iOS/AirshipMessageCenter.framework" "platform/"
-cp -R "Carthage/Build/iOS/AirshipAutomation.framework" "platform/"
+rm -rf "$ROOT_PATH/ios/platform/Airship*.xcframework"
+rm -rf "$ROOT_PATH/ios/platform/Airship*.framework"
+cp -R "$DOWNLOAD_DIRECTORY/AirshipCore.xcframework" "$ROOT_PATH/ios/platform/"
+cp -R "$DOWNLOAD_DIRECTORY/AirshipMessageCenter.xcframework" "$ROOT_PATH/ios/platform/"
+cp -R "$DOWNLOAD_DIRECTORY/AirshipAutomation.xcframework" "$ROOT_PATH/ios/platform/"
+
+cd $ROOT_PATH/ios
 
 echo "Building iOS"
 npx appc run -p ios --build-only

@@ -8,6 +8,8 @@ on:
 jobs:
   release:
     runs-on: macos-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.app/Contents/Developer
     steps:
       - uses: actions/checkout@v2
 
@@ -31,11 +33,6 @@ jobs:
           NOTES="${NOTES//$'\n'/'%0A'}"
           NOTES="${NOTES//$'\r'/'%0D'}"
           echo ::set-output name=NOTES::"$NOTES"
-
-      - uses: actions/cache@v1
-        with:
-          path: ios/Carthage
-          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
 
       - name: Setup Appcelerator
         run: ./scripts/setup_appc.sh ${{ secrets.APPC_USER_NAME }} ${{ secrets.APPC_PASSWORD }}

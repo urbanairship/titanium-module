@@ -1,7 +1,8 @@
 /* Copyright Airship and Contributors */
 
 #import "TiProxy+TiAirshipTagGroupOperationAddition.h"
-#import "TiBase.h"
+
+@import TitaniumKit;
 
 @implementation TiProxy(TiAirshipTagGroupOperationAddition)
 
