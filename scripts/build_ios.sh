@@ -1,5 +1,5 @@
 #!/bin/bash -e
-IOS_VERSION='14.1.2'
+IOS_VERSION='14.2.1'
 ROOT_PATH=`dirname "${0}"`/..
 DOWNLOAD_DIRECTORY="$ROOT_PATH/build/download/iOS/$IOS_VERSION"
 
