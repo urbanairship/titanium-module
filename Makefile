@@ -4,6 +4,7 @@ build-android:
 	bash ./scripts/build_android.sh
 
 build-ios:
+	bash ./scripts/check_titanium_version.sh
 	bash ./scripts/build_ios.sh
 
 install: install-ios install-android
