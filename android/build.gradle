@@ -1,5 +1,5 @@
 dependencies {
-  def airshipVersion = "14.1.1"
+  def airshipVersion = "16.1.1"
 
   // ADM & FCM push providers
   implementation "com.urbanairship.android:urbanairship-fcm:$airshipVersion"
