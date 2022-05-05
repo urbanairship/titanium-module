@@ -22,7 +22,7 @@ NSString *const TiAirshipNotificationOptInChangedEventName = @"EVENT_NOTIFICATIO
 +(instancetype)eventWithAuthroizedSettings:(UAAuthorizedNotificationSettings)authorizedSettings {
     id data = @{
         @"optIn": @(authorizedSettings != UAAuthorizedNotificationSettingsNone),
-        @"authorizedSettings": [TiAirshipUtils authorizedNotificationsDictionary:authorizedSettings]
+        @"authorizedSettings": [TiAirshipUtils authorizedSettingsArray:authorizedSettings]
     };
     return [[self alloc] initWithData:data];
 }

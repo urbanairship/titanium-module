@@ -63,36 +63,36 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (id)userNotificationsEnabled {
-    return NUMBOOL([UAirship push].userPushNotificationsEnabled);
+    return NUMBOOL(UAirship.push.userPushNotificationsEnabled);
 }
 
 - (void)setUserNotificationsEnabled:(id)args {
     ENSURE_SINGLE_ARG(args, NSNumber);
-    [UAirship push].userPushNotificationsEnabled = [args boolValue];
-    [[UAirship push] updateRegistration];
+    UAirship.push.userPushNotificationsEnabled = [args boolValue];
+    [UAirship.push updateRegistration];
 }
 
 - (id)isAutoBadgeEnabled {
-    return NUMBOOL([UAirship push].autobadgeEnabled);
+    return NUMBOOL(UAirship.push.autobadgeEnabled);
 }
 
 - (void)setIsAutoBadgeEnabled:(id)args {
     ENSURE_SINGLE_ARG(args, NSNumber);
-    [UAirship push].autobadgeEnabled = [args boolValue];
-    [[UAirship push] updateRegistration];
+    UAirship.push.autobadgeEnabled = [args boolValue];
+    [UAirship.push updateRegistration];
 }
 
 - (id)badgeNumber {
-    return NUMINTEGER([UAirship push].badgeNumber);
+    return NUMINTEGER(UAirship.push.badgeNumber);
 }
 
 - (void)setBadgeNumber:(id)args {
     ENSURE_SINGLE_ARG(args, NSNumber);
-    [UAirship push].badgeNumber = [args integerValue];
+    UAirship.push.badgeNumber = [args integerValue];
 }
 
 - (void)resetBadge:(id)args {
-    [[UAirship push] resetBadge];
+    [UAirship.push resetBadge];
 }
 
 - (NSArray *)tags {
@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setTags:(id)args {
     ENSURE_ARRAY(args);
     [UAirship channel].tags = args;
-    [[UAirship push] updateRegistration];
+    [UAirship.push updateRegistration];
 }
 
 -(id)channelId {
@@ -110,20 +110,20 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 -(id)pushToken {
-    return [UAirship push].deviceToken;
+    return UAirship.push.deviceToken;
 }
 
 -(id)isUserNotificationsOptedIn {
-    BOOL optedIn = [UAirship push].authorizedNotificationSettings != 0;
+    BOOL optedIn = UAirship.push.authorizedNotificationSettings != 0;
     return NUMBOOL(optedIn);
 }
 
 -(id)authorizedNotificationSettings {
-    return [TiAirshipUtils authorizedNotificationsDictionary:[UAirship push].authorizedNotificationSettings];
+    return [TiAirshipUtils authorizedSettingsArray:UAirship.push.authorizedNotificationSettings];
 }
 
 -(id)authorizedNotificationStatus {
-    switch ([UAirship push].authorizationStatus) {
+    switch (UAirship.push.authorizationStatus) {
         case UAAuthorizationStatusDenied:
             return @"denied";
         case UAAuthorizationStatusAuthorized:
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
     KrollCallback *callback = args;
 
     UA_WEAKIFY(self)
-    [[UAirship push] enableUserPushNotifications:^(BOOL success) {
+    [UAirship.push enableUserPushNotifications:^(BOOL success) {
         UA_STRONGIFY(self)
         if (self && callback) {
             [callback call:@[@{@"success": @(success)}] thisObject:self];
@@ -267,7 +267,7 @@ NS_ASSUME_NONNULL_BEGIN
 //}
 //
 //- (id)isPushTokenRegistrationEnabled {
-//    return NUMBOOL([UAirship push].pushTokenRegistrationEnabled);
+//    return NUMBOOL(UAirship.push.pushTokenRegistrationEnabled);
 //}
 
 @end
