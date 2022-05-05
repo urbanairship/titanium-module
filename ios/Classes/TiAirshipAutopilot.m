@@ -43,11 +43,12 @@ static NSString *const CloudSiteEUString = @"EU";
     config.developmentAppKey = appProperties[DevelopmentAppKeyConfigKey];
     config.developmentAppSecret = appProperties[DevelopmentAppSecretConfigKey];
     config.inProduction = [appProperties[ProductionConfigKey] boolValue];
-    config.dataCollectionOptInEnabled = [appProperties[DataCollectionOptInKey] boolValue];
+    //TODO: config.dataCollectionOptInEnabled = [appProperties[DataCollectionOptInKey] boolValue];
     config.site = [TiAirshipAutopilot parseCloudSiteString:appProperties[CloudSiteConfigKey]];
     config.URLAllowListScopeOpenURL = @[@"*"];
 
-    [UAirship takeOff:config];
+    // TODO:
+    [UAirship takeOff:config launchOptions:nil];
 
     // Set the iOS default foreground presentation options if specified in the tiapp.xml else default to None
     UNNotificationPresentationOptions options = UNNotificationPresentationOptionNone;

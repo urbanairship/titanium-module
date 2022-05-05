@@ -42,43 +42,45 @@ static dispatch_once_t onceToken;
     [UAirship shared].deepLinkDelegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(channelRegistrationSucceeded:)
-                                                 name:UAChannelUpdatedEvent
+                                             selector:@selector(channelRegistrationSucceeded)
+                                                 name:UAChannel.channelCreatedEvent
                                                object:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(channelRegistrationSucceeded)
+                                                 name:UAChannel.channelUpdatedEvent
+                                               object:nil];
 
     // Register the plugin with analytics
-    [[UAirship shared].analytics registerSDKExtension:UASDKExtensionTitanium version:[TiAirshipModuleVersion get]];
+    [UAirship.analytics registerSDKExtension:UASDKExtensionTitanium
+                                     version:[TiAirshipModuleVersion get]];
 
     self.launchNotificationResponse = [TiAirshipNotificationResponse tiResponseFromNotificationResponse:[UAirship push].launchNotificationResponse];
 }
 
 #pragma mark UAPushNotificationDelegate
 
-- (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void(^)(void))completionHandler {
-    UA_LDEBUG(@"The application was launched or resumed from a notification %@", notificationResponse);
-
-    id tiResponse =  [TiAirshipNotificationResponse tiResponseFromNotificationResponse:notificationResponse];
-    self.launchNotificationResponse = tiResponse;
-
-    id event = [TiAirshipNotificationResponseEvent eventWithResponse:tiResponse];
+- (void)receivedForegroundNotification:(NSDictionary * _Nonnull)userInfo
+                     completionHandler:(void (^ _Nonnull)(void))completionHandler {
+    id tiPush = [TiAirshipPush tiPushFromNotificationContent:userInfo];
+    id event = [TiAirshipPushReceivedEvent eventWithPush:tiPush foreground:YES];
     [self.eventEmitter fireEvent:event];
     completionHandler();
 }
 
-- (void)receivedBackgroundNotification:(UANotificationContent *)notificationContent
-                     completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    UA_LDEBUG(@"Received a background notification %@", notificationContent);
-    id tiPush = [TiAirshipPush tiPushFromNotificationContent:notificationContent];
+- (void)receivedBackgroundNotification:(NSDictionary * _Nonnull)userInfo
+                     completionHandler:(void (^ _Nonnull)(UIBackgroundFetchResult))completionHandler {
+    id tiPush = [TiAirshipPush tiPushFromNotificationContent:userInfo];
     id event = [TiAirshipPushReceivedEvent eventWithPush:tiPush foreground:NO];
     [self.eventEmitter fireEvent:event];
 }
 
-- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent
-                     completionHandler:(void(^)(void))completionHandler {
-    UA_LDEBUG(@"Received a foreground notification %@", notificationContent);
-    id tiPush = [TiAirshipPush tiPushFromNotificationContent:notificationContent];
-    id event = [TiAirshipPushReceivedEvent eventWithPush:tiPush foreground:YES];
+- (void)receivedNotificationResponse:(UNNotificationResponse * _Nonnull)notificationResponse
+                   completionHandler:(void (^ _Nonnull)(void))completionHandler {
+    id tiResponse =  [TiAirshipNotificationResponse tiResponseFromNotificationResponse:notificationResponse];
+    self.launchNotificationResponse = tiResponse;
+
+    id event = [TiAirshipNotificationResponseEvent eventWithResponse:tiResponse];
     [self.eventEmitter fireEvent:event];
     completionHandler();
 }
@@ -92,8 +94,8 @@ static dispatch_once_t onceToken;
 
 #pragma mark Channel Registration
 
-- (void)channelRegistrationSucceeded:(NSNotification *)notification {
-    NSString *channelID = notification.userInfo[UAChannelUpdatedEventChannelKey];
+- (void)channelRegistrationSucceeded {
+    NSString *channelID = UAirship.channel.identifier;
     NSString *deviceToken = [UAirship push].deviceToken;
 
     UA_LINFO(@"Channel registration successful %@.", channelID);

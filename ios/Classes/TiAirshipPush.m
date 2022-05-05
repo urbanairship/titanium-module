@@ -16,37 +16,39 @@
     return self;
 }
 
-+ (instancetype)tiPushFromNotificationContent:(UANotificationContent *)notificationContent {
-    id payload = [self parsePayload:notificationContent];
++ (instancetype)tiPushFromNotificationContent:(NSDictionary *)userInfo {
+    id payload = [self parsePayload:userInfo];
     return [[self alloc] initWithPayload:payload];
 }
 
-+ (nonnull NSDictionary *)parsePayload:(nullable UANotificationContent *)notificationContent {
-    if (!notificationContent) {
++ (nonnull NSDictionary *)parsePayload:(nullable NSDictionary *)userInfo {
+    if (!userInfo) {
         return @{};
     }
+//
+//    // remove extraneous key/value pairs
+//    NSMutableDictionary *extras = [NSMutableDictionary dictionaryWithDictionary:notificationContent.userInfo];
+//
+//    if([[extras allKeys] containsObject:@"aps"]) {
+//        [extras removeObjectForKey:@"aps"];
+//    }
+//
+//    if([[extras allKeys] containsObject:@"_"]) {
+//        [extras removeObjectForKey:@"_"];
+//    }
+//
+////TODO:    [payload setValue:identifier forKey:@"notificationId"];
+//
+//
+//    NSMutableDictionary *payload = [NSMutableDictionary dictionary];
+//    [payload setValue:notificationContent.body forKey:@"message"];
+//    [payload setValue:notificationContent.title forKey:@"title"];
+//    if (extras.count) {
+//        [payload setValue:extras forKey:@"extras"];
+//    }
+//    return payload;
 
-    // remove extraneous key/value pairs
-    NSMutableDictionary *extras = [NSMutableDictionary dictionaryWithDictionary:notificationContent.notificationInfo];
-
-    if([[extras allKeys] containsObject:@"aps"]) {
-        [extras removeObjectForKey:@"aps"];
-    }
-
-    if([[extras allKeys] containsObject:@"_"]) {
-        [extras removeObjectForKey:@"_"];
-    }
-
-    NSString *identifier = notificationContent.notification.request.identifier;
-
-    NSMutableDictionary *payload = [NSMutableDictionary dictionary];
-    [payload setValue:notificationContent.alertBody forKey:@"message"];
-    [payload setValue:notificationContent.alertTitle forKey:@"title"];
-    [payload setValue:identifier forKey:@"notificationId"];
-    if (extras.count) {
-        [payload setValue:extras forKey:@"extras"];
-    }
-    return payload;
+    return @{};
 }
 
 @end

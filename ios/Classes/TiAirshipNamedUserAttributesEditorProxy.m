@@ -6,29 +6,29 @@
 @import AirshipCore;
 
 @interface TiAirshipNamedUserAttributesEditorProxy()
-@property (nonatomic, strong) UAAttributeMutations *mutations;
-
+@property (nonatomic, strong) UAAttributesEditor *editor;
 @end
+
 @implementation TiAirshipNamedUserAttributesEditorProxy
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.mutations = [UAAttributeMutations mutations];
+        self.editor = [UAirship.contact editAttributes];
     }
     return self;
 }
 
 -(void)setAttribute:(id)args {
-    [self setAttributeFromArgs:args onMutations:self.mutations];
+    [self setAttributeFromArgs:args editor:self.editor];
 }
 
 -(void)removeAttribute:(id)args {
-    [self removeAttributeFromArgs:args onMutations:self.mutations];
+    [self removeAttributeFromArgs:args editor:self.editor];
 }
 
 -(void)applyAttributes:(id)args {
-    [[UAirship namedUser] applyAttributeMutations:self.mutations];
+    [self.editor apply];
 }
 
 @end

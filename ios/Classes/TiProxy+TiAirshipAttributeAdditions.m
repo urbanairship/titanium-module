@@ -5,23 +5,24 @@
 
 @implementation TiProxy(TiAirshipAttributeAdditions)
 
--(void)setAttributeFromArgs:(id)args onMutations:(UAAttributeMutations *)mutations {
+-(void)setAttributeFromArgs:(id)args editor:(UAAttributesEditor *)editor {
     ENSURE_ARG_COUNT(args, 2);
     ENSURE_STRING(args[0]);
 
     id attribute = args[0];
     id value = args[1];
     if ([value isKindOfClass:[NSDate class]]) {
-        [mutations setDate:value forAttribute:attribute];
+        [editor setDate:value attribute:attribute];
     } else if ([value isKindOfClass:[NSNumber class]]) {
-        [mutations setNumber:value forAttribute:attribute];
+        [editor setNumber:value attribute:attribute];
     } else if ([value isKindOfClass:[NSString class]]) {
-        [mutations setString:value forAttribute:attribute];
+        [editor setString:value attribute:attribute];
     }
 }
 
--(void)removeAttributeFromArgs:(id)args onMutations:(UAAttributeMutations *)mutations {
+-(void)removeAttributeFromArgs:(id)args editor:(UAAttributesEditor *)editor {
     ENSURE_SINGLE_ARG(args, NSString);
-    [mutations removeAttribute:args];
+    [editor removeAttribute:args];
 }
+
 @end

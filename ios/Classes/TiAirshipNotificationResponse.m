@@ -17,29 +17,29 @@
     return self;
 }
 
-+ (instancetype)tiResponseFromNotificationResponse:(nullable UANotificationResponse *)response {
++ (instancetype)tiResponseFromNotificationResponse:(nullable UNNotificationResponse *)response {
     id payload = [self parseResponse:response];
     return [[self alloc] initWithPayload:payload];
 }
 
-+ (nonnull NSDictionary *)parseResponse:(nullable UANotificationResponse *)response {
++ (nonnull NSDictionary *)parseResponse:(nullable UNNotificationResponse *)response {
     if (!response) {
         return @{};
     }
 
     NSMutableDictionary *payload = [NSMutableDictionary dictionary];
 
-    TiAirshipPush *push = [TiAirshipPush tiPushFromNotificationContent:response.notificationContent];
+    TiAirshipPush *push = [TiAirshipPush tiPushFromNotificationContent:response.notification.request.content];
     [payload addEntriesFromDictionary:push.payload];
 
 
-    if ([response.actionIdentifier isEqualToString:UANotificationDefaultActionIdentifier]) {
+    if ([response.actionIdentifier isEqualToString:UNNotificationDefaultActionIdentifier]) {
         [payload setValue:@(YES) forKey:@"isForeground"];
     } else {
-        NSString *categoryID = response.notificationContent.categoryIdentifier;
+        NSString *categoryID = response.notification.request.content.categoryIdentifier;
         NSString *actionID = response.actionIdentifier;
 
-        UANotificationAction *notificationAction = [TiAirshipNotificationResponse notificationActionForCategoryID:categoryID
+        UNNotificationAction *notificationAction = [TiAirshipNotificationResponse notificationActionForCategoryID:categoryID
                                                                                                          actionID:actionID];
         BOOL isForeground = notificationAction.options & UNNotificationActionOptionForeground;
 
@@ -51,13 +51,15 @@
 }
 
 
-+ (UANotificationAction *)notificationActionForCategoryID:(NSString *)categoryID actionID:(NSString *)actionID {
++ (UNNotificationAction *)notificationActionForCategoryID:(NSString *)categoryID
+                                                 actionID:(NSString *)actionID {
+
     NSSet *categories = [UAirship push].combinedCategories;
 
-    UANotificationCategory *notificationCategory;
-    UANotificationAction *notificationAction;
+    UNNotificationCategory *notificationCategory;
+    UNNotificationAction *notificationAction;
 
-    for (UANotificationCategory *possibleCategory in categories) {
+    for (UNNotificationCategory *possibleCategory in categories) {
         if ([possibleCategory.identifier isEqualToString:categoryID]) {
             notificationCategory = possibleCategory;
             break;
@@ -71,7 +73,7 @@
 
     NSMutableArray *possibleActions = [NSMutableArray arrayWithArray:notificationCategory.actions];
 
-    for (UANotificationAction *possibleAction in possibleActions) {
+    for (UNNotificationAction *possibleAction in possibleActions) {
         if ([possibleAction.identifier isEqualToString:actionID]) {
             notificationAction = possibleAction;
             break;

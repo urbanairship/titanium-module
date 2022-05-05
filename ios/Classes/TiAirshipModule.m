@@ -150,12 +150,17 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (id)namedUser {
-    return [UAirship namedUser].identifier;
+    return UAirship.contact.namedUserID;
 }
 
 - (void)setNamedUser:(id)args {
     ENSURE_SINGLE_ARG_OR_NIL(args, NSString);
-    [UAirship namedUser].identifier = args;
+    NSString *identifier = args;
+    if (identifier.length) {
+        [UAirship.contact identify:identifier];
+    } else {
+        [UAirship.contact reset];
+    }
 }
 
 - (id)isInAppAutomationPaused {
@@ -184,9 +189,9 @@ NS_ASSUME_NONNULL_BEGIN
         UA_LDEBUG(@"AssociateIdentifier with identifier: %@ for key: %@", identifierString, keyString);
     }
 
-    UAAssociatedIdentifiers *identifiers = [[UAirship shared].analytics currentAssociatedDeviceIdentifiers];
+    UAAssociatedIdentifiers *identifiers = [UAirship.analytics currentAssociatedDeviceIdentifiers];
     [identifiers setIdentifier:identifierString forKey:keyString];
-    [[UAirship shared].analytics associateDeviceIdentifiers:identifiers];
+    [UAirship.analytics associateDeviceIdentifiers:identifiers];
 }
 
 - (void)addCustomEvent:(id)args {
@@ -246,24 +251,24 @@ NS_ASSUME_NONNULL_BEGIN
     ENSURE_SINGLE_ARG(args, NSString)
     [[UAirship analytics] trackScreen:args];
 }
-
-- (void)setIsDataCollectionEnabled:(id)args {
-    ENSURE_SINGLE_ARG(args, NSNumber)
-    [UAirship shared].dataCollectionEnabled = [args boolValue];
-}
-
-- (id)isDataCollectionEnabled {
-    return NUMBOOL([UAirship shared].isDataCollectionEnabled);
-}
-
-- (void)setIsPushTokenRegistrationEnabled:(id)args {
-    ENSURE_SINGLE_ARG(args, NSNumber)
-    [UAirship push].pushTokenRegistrationEnabled = [args boolValue];
-}
-
-- (id)isPushTokenRegistrationEnabled {
-    return NUMBOOL([UAirship push].pushTokenRegistrationEnabled);
-}
+// TODO
+//- (void)setIsDataCollectionEnabled:(id)args {
+//    ENSURE_SINGLE_ARG(args, NSNumber)
+//    [UAirship shared].dataCollectionEnabled = [args boolValue];
+//}
+//
+//- (id)isDataCollectionEnabled {
+//    return NUMBOOL([UAirship shared].isDataCollectionEnabled);
+//}
+//
+//- (void)setIsPushTokenRegistrationEnabled:(id)args {
+//    ENSURE_SINGLE_ARG(args, NSNumber)
+//    UAirship.push.pushTokenRegistrationEnabled = [args boolValue];
+//}
+//
+//- (id)isPushTokenRegistrationEnabled {
+//    return NUMBOOL([UAirship push].pushTokenRegistrationEnabled);
+//}
 
 @end
 

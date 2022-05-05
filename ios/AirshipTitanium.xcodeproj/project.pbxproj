@@ -41,24 +41,20 @@
 		6E7547322523B96E00675F90 /* TiAirshipNamedUserAttributesEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547072523B96D00675F90 /* TiAirshipNamedUserAttributesEditorProxy.h */; };
 		6E7547332523B96E00675F90 /* TiProxy+TiAirshipTagGroupOperationAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547082523B96D00675F90 /* TiProxy+TiAirshipTagGroupOperationAddition.h */; };
 		6E7547342523B96E00675F90 /* TiAirshipChannelAttributesEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547092523B96D00675F90 /* TiAirshipChannelAttributesEditorProxy.h */; };
-		6E7547352523B96E00675F90 /* TiAirshipDeeplink.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E75470A2523B96D00675F90 /* TiAirshipDeeplink.h */; };
 		6E7547362523B96E00675F90 /* TiAirshipNamedUserTagGroupsEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E75470B2523B96D00675F90 /* TiAirshipNamedUserTagGroupsEditorProxy.m */; };
 		6E7547372523B96E00675F90 /* TiAirshipChannelTagGroupsEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E75470C2523B96D00675F90 /* TiAirshipChannelTagGroupsEditorProxy.m */; };
 		6E7547382523B96E00675F90 /* TiAirship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E75470D2523B96D00675F90 /* TiAirship.m */; };
-		6E7547392523B96E00675F90 /* TiAirshipDeeplink.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E75470E2523B96D00675F90 /* TiAirshipDeeplink.m */; };
 		6E75473A2523B96E00675F90 /* TiAirshipChannelTagGroupsEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E75470F2523B96D00675F90 /* TiAirshipChannelTagGroupsEditorProxy.h */; };
 		6E75473B2523B96E00675F90 /* TiAirshipChannelRegistrationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547102523B96D00675F90 /* TiAirshipChannelRegistrationEvent.h */; };
 		6E75473C2523B96E00675F90 /* TiAirshipChannelTagsEditorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547112523B96D00675F90 /* TiAirshipChannelTagsEditorProxy.h */; };
 		6E75473D2523B96E00675F90 /* TiAirship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547122523B96D00675F90 /* TiAirship.h */; };
 		6E75473E2523B96E00675F90 /* TiAirshipPushReceivedEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547132523B96D00675F90 /* TiAirshipPushReceivedEvent.h */; };
 		6E75473F2523B96E00675F90 /* TiAirshipModuleVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547142523B96D00675F90 /* TiAirshipModuleVersion.h */; };
-		6E7547402523B96E00675F90 /* TiAirshipTagGroupOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7547152523B96D00675F90 /* TiAirshipTagGroupOperation.m */; };
 		6E7547412523B96E00675F90 /* TiProxy+TiAirshipAttributeAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547162523B96D00675F90 /* TiProxy+TiAirshipAttributeAdditions.h */; };
 		6E7547422523B96E00675F90 /* TiAirshipNamedUserAttributesEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7547172523B96D00675F90 /* TiAirshipNamedUserAttributesEditorProxy.m */; };
 		6E7547432523B96E00675F90 /* TiAirshipChannelAttributesEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7547182523B96D00675F90 /* TiAirshipChannelAttributesEditorProxy.m */; };
 		6E7547442523B96E00675F90 /* TiAirshipUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7547192523B96D00675F90 /* TiAirshipUtils.h */; };
 		6E7547452523B96E00675F90 /* TiAirshipDeepLinkEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E75471A2523B96D00675F90 /* TiAirshipDeepLinkEvent.m */; };
-		6E7547462523B96E00675F90 /* TiAirshipTagGroupOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E75471B2523B96D00675F90 /* TiAirshipTagGroupOperation.h */; };
 		6E7547472523B96E00675F90 /* TiAirshipAutopilot.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E75471C2523B96E00675F90 /* TiAirshipAutopilot.h */; };
 		6E7547482523B96E00675F90 /* TiAirshipPush.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E75471D2523B96E00675F90 /* TiAirshipPush.h */; };
 		6E7547492523B96E00675F90 /* TiAirshipChannelTagsEditorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E75471E2523B96E00675F90 /* TiAirshipChannelTagsEditorProxy.m */; };
@@ -72,6 +68,7 @@
 		6E75476B2523BA3600675F90 /* AirshipAutomation.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7547682523BA3600675F90 /* AirshipAutomation.xcframework */; };
 		6E75476C2523BA3600675F90 /* AirshipCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7547692523BA3600675F90 /* AirshipCore.xcframework */; };
 		6E75476D2523BA3600675F90 /* AirshipMessageCenter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E75476A2523BA3600675F90 /* AirshipMessageCenter.xcframework */; };
+		6ED3543228247C46006AA48F /* AirshipBasement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3543128247C46006AA48F /* AirshipBasement.xcframework */; };
 		AA747D9F0F9514B9006C5449 /* TiAirship_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiAirship_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		B11E042C241AC5C100EFA7DC /* TitaniumKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B11E042B241AC5C100EFA7DC /* TitaniumKit.xcframework */; };
@@ -108,24 +105,20 @@
 		6E7547072523B96D00675F90 /* TiAirshipNamedUserAttributesEditorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipNamedUserAttributesEditorProxy.h; path = Classes/TiAirshipNamedUserAttributesEditorProxy.h; sourceTree = "<group>"; };
 		6E7547082523B96D00675F90 /* TiProxy+TiAirshipTagGroupOperationAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TiProxy+TiAirshipTagGroupOperationAddition.h"; path = "Classes/TiProxy+TiAirshipTagGroupOperationAddition.h"; sourceTree = "<group>"; };
 		6E7547092523B96D00675F90 /* TiAirshipChannelAttributesEditorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipChannelAttributesEditorProxy.h; path = Classes/TiAirshipChannelAttributesEditorProxy.h; sourceTree = "<group>"; };
-		6E75470A2523B96D00675F90 /* TiAirshipDeeplink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipDeeplink.h; path = Classes/TiAirshipDeeplink.h; sourceTree = "<group>"; };
 		6E75470B2523B96D00675F90 /* TiAirshipNamedUserTagGroupsEditorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipNamedUserTagGroupsEditorProxy.m; path = Classes/TiAirshipNamedUserTagGroupsEditorProxy.m; sourceTree = "<group>"; };
 		6E75470C2523B96D00675F90 /* TiAirshipChannelTagGroupsEditorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipChannelTagGroupsEditorProxy.m; path = Classes/TiAirshipChannelTagGroupsEditorProxy.m; sourceTree = "<group>"; };
 		6E75470D2523B96D00675F90 /* TiAirship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirship.m; path = Classes/TiAirship.m; sourceTree = "<group>"; };
-		6E75470E2523B96D00675F90 /* TiAirshipDeeplink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipDeeplink.m; path = Classes/TiAirshipDeeplink.m; sourceTree = "<group>"; };
 		6E75470F2523B96D00675F90 /* TiAirshipChannelTagGroupsEditorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipChannelTagGroupsEditorProxy.h; path = Classes/TiAirshipChannelTagGroupsEditorProxy.h; sourceTree = "<group>"; };
 		6E7547102523B96D00675F90 /* TiAirshipChannelRegistrationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipChannelRegistrationEvent.h; path = Classes/TiAirshipChannelRegistrationEvent.h; sourceTree = "<group>"; };
 		6E7547112523B96D00675F90 /* TiAirshipChannelTagsEditorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipChannelTagsEditorProxy.h; path = Classes/TiAirshipChannelTagsEditorProxy.h; sourceTree = "<group>"; };
 		6E7547122523B96D00675F90 /* TiAirship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirship.h; path = Classes/TiAirship.h; sourceTree = "<group>"; };
 		6E7547132523B96D00675F90 /* TiAirshipPushReceivedEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipPushReceivedEvent.h; path = Classes/TiAirshipPushReceivedEvent.h; sourceTree = "<group>"; };
 		6E7547142523B96D00675F90 /* TiAirshipModuleVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipModuleVersion.h; path = Classes/TiAirshipModuleVersion.h; sourceTree = "<group>"; };
-		6E7547152523B96D00675F90 /* TiAirshipTagGroupOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipTagGroupOperation.m; path = Classes/TiAirshipTagGroupOperation.m; sourceTree = "<group>"; };
 		6E7547162523B96D00675F90 /* TiProxy+TiAirshipAttributeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TiProxy+TiAirshipAttributeAdditions.h"; path = "Classes/TiProxy+TiAirshipAttributeAdditions.h"; sourceTree = "<group>"; };
 		6E7547172523B96D00675F90 /* TiAirshipNamedUserAttributesEditorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipNamedUserAttributesEditorProxy.m; path = Classes/TiAirshipNamedUserAttributesEditorProxy.m; sourceTree = "<group>"; };
 		6E7547182523B96D00675F90 /* TiAirshipChannelAttributesEditorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipChannelAttributesEditorProxy.m; path = Classes/TiAirshipChannelAttributesEditorProxy.m; sourceTree = "<group>"; };
 		6E7547192523B96D00675F90 /* TiAirshipUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipUtils.h; path = Classes/TiAirshipUtils.h; sourceTree = "<group>"; };
 		6E75471A2523B96D00675F90 /* TiAirshipDeepLinkEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipDeepLinkEvent.m; path = Classes/TiAirshipDeepLinkEvent.m; sourceTree = "<group>"; };
-		6E75471B2523B96D00675F90 /* TiAirshipTagGroupOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipTagGroupOperation.h; path = Classes/TiAirshipTagGroupOperation.h; sourceTree = "<group>"; };
 		6E75471C2523B96E00675F90 /* TiAirshipAutopilot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipAutopilot.h; path = Classes/TiAirshipAutopilot.h; sourceTree = "<group>"; };
 		6E75471D2523B96E00675F90 /* TiAirshipPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipPush.h; path = Classes/TiAirshipPush.h; sourceTree = "<group>"; };
 		6E75471E2523B96E00675F90 /* TiAirshipChannelTagsEditorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipChannelTagsEditorProxy.m; path = Classes/TiAirshipChannelTagsEditorProxy.m; sourceTree = "<group>"; };
@@ -139,6 +132,7 @@
 		6E7547682523BA3600675F90 /* AirshipAutomation.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipAutomation.xcframework; path = platform/AirshipAutomation.xcframework; sourceTree = "<group>"; };
 		6E7547692523BA3600675F90 /* AirshipCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipCore.xcframework; path = platform/AirshipCore.xcframework; sourceTree = "<group>"; };
 		6E75476A2523BA3600675F90 /* AirshipMessageCenter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipMessageCenter.xcframework; path = platform/AirshipMessageCenter.xcframework; sourceTree = "<group>"; };
+		6ED3543128247C46006AA48F /* AirshipBasement.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipBasement.xcframework; path = platform/AirshipBasement.xcframework; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiAirship_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiAirship_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B11E042B241AC5C100EFA7DC /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "$(TITANIUM_SDK)/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<absolute>"; };
@@ -151,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E75476B2523BA3600675F90 /* AirshipAutomation.xcframework in Frameworks */,
+				6ED3543228247C46006AA48F /* AirshipBasement.xcframework in Frameworks */,
 				6E75476C2523BA3600675F90 /* AirshipCore.xcframework in Frameworks */,
 				6E75476D2523BA3600675F90 /* AirshipMessageCenter.xcframework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
@@ -183,6 +178,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3543128247C46006AA48F /* AirshipBasement.xcframework */,
 				6E7547682523BA3600675F90 /* AirshipAutomation.xcframework */,
 				6E7547692523BA3600675F90 /* AirshipCore.xcframework */,
 				6E75476A2523BA3600675F90 /* AirshipMessageCenter.xcframework */,
@@ -202,8 +198,6 @@
 				6E75470D2523B96D00675F90 /* TiAirship.m */,
 				6E75471C2523B96E00675F90 /* TiAirshipAutopilot.h */,
 				6E7547002523B96D00675F90 /* TiAirshipAutopilot.m */,
-				6E75470A2523B96D00675F90 /* TiAirshipDeeplink.h */,
-				6E75470E2523B96D00675F90 /* TiAirshipDeeplink.m */,
 				24DD6CF71134B3F500162E58 /* TiAirshipModule.h */,
 				24DD6CF81134B3F500162E58 /* TiAirshipModule.m */,
 				24DE9E0F11C5FE74003F90F6 /* TiAirshipModuleAssets.h */,
@@ -247,8 +241,6 @@
 			children = (
 				6E7547082523B96D00675F90 /* TiProxy+TiAirshipTagGroupOperationAddition.h */,
 				6E7546FE2523B96D00675F90 /* TiProxy+TiAirshipTagGroupOperationAddition.m */,
-				6E75471B2523B96D00675F90 /* TiAirshipTagGroupOperation.h */,
-				6E7547152523B96D00675F90 /* TiAirshipTagGroupOperation.m */,
 				6E7546FC2523B96D00675F90 /* TiAirshipNamedUserTagGroupsEditorProxy.h */,
 				6E75470B2523B96D00675F90 /* TiAirshipNamedUserTagGroupsEditorProxy.m */,
 				6E75470F2523B96D00675F90 /* TiAirshipChannelTagGroupsEditorProxy.h */,
@@ -287,9 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E75474D2523B96E00675F90 /* TiAirshipNotificationOptInChangedEvent.h in Headers */,
-				6E7547352523B96E00675F90 /* TiAirshipDeeplink.h in Headers */,
 				6E75474A2523B96E00675F90 /* TiAirshipEvent.h in Headers */,
-				6E7547462523B96E00675F90 /* TiAirshipTagGroupOperation.h in Headers */,
 				6E75473F2523B96E00675F90 /* TiAirshipModuleVersion.h in Headers */,
 				6E7547322523B96E00675F90 /* TiAirshipNamedUserAttributesEditorProxy.h in Headers */,
 				6E75474F2523B96E00675F90 /* TiAirshipNotificationResponseEvent.h in Headers */,
@@ -372,7 +362,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# shell script goes here\n\nappc run --project-dir \"${PROJECT_DIR}\"\nexit $?\n";
+			shellScript = "# shell script goes here\n\nti run --project-dir \"${PROJECT_DIR}\"\nexit $?\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -384,8 +374,6 @@
 				6E7547372523B96E00675F90 /* TiAirshipChannelTagGroupsEditorProxy.m in Sources */,
 				6E75474E2523B96E00675F90 /* TiAirshipUtils.m in Sources */,
 				6E7547502523B96E00675F90 /* TiAirshipNotificationResponseEvent.m in Sources */,
-				6E7547402523B96E00675F90 /* TiAirshipTagGroupOperation.m in Sources */,
-				6E7547392523B96E00675F90 /* TiAirshipDeeplink.m in Sources */,
 				6E75472F2523B96E00675F90 /* TiAirshipModuleVersion.m in Sources */,
 				6E7547312523B96E00675F90 /* TiAirshipChannelRegistrationEvent.m in Sources */,
 				6E7547422523B96E00675F90 /* TiAirshipNamedUserAttributesEditorProxy.m in Sources */,

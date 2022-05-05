@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, copy) NSDictionary *payload;
 
-+ (instancetype)tiResponseFromNotificationResponse:(nullable UANotificationResponse *)notificationResponse;
++ (instancetype)tiResponseFromNotificationResponse:(nullable UNNotificationResponse *)notificationResponse;
 
 @end
 

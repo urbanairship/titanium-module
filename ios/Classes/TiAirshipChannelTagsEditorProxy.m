@@ -5,9 +5,7 @@
 @import AirshipCore;
 
 @interface TiAirshipChannelTagsEditorProxy ()
-@property (nonatomic, strong) NSMutableSet<NSString *> *tagsToAdd;
-@property (nonatomic, strong) NSMutableSet<NSString *> *tagsToRemove;
-@property (nonatomic) BOOL clear;
+@property (nonatomic, strong) UATagEditor *editor;
 @end
 
 @implementation TiAirshipChannelTagsEditorProxy
@@ -15,37 +13,27 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.tagsToAdd = [NSMutableSet set];
-        self.tagsToRemove = [NSMutableSet set];
+        self.editor = [UAirship.channel editTags];
     }
     return self;
 }
 
 - (void)clearTags {
-    self.clear = YES;
+    [self.editor clearTags];
 }
 
 - (void)addTags:(id)args {
     ENSURE_ARRAY(args);
-    [self.tagsToAdd addObjectsFromArray:args];
-    [self.tagsToRemove minusSet:[NSSet setWithArray:args]];
+    [self.editor addTags:args];
 }
 
 - (void)removeTags:(id)args {
     ENSURE_ARRAY(args);
-    [self.tagsToRemove addObjectsFromArray:args];
-    [self.tagsToAdd minusSet:[NSSet setWithArray:args]];
+    [self.editor removeTags:args];
 }
 
 - (void)applyTags:(id)args {
-    UAChannel *channel = [UAirship channel];
-    if (self.clear) {
-        channel.tags = @[];
-    }
-
-    [channel addTags:[self.tagsToAdd allObjects]];
-    [channel removeTags:[self.tagsToRemove allObjects]];
-    [channel updateRegistration];
+    [self.editor apply];
 }
 
 @end

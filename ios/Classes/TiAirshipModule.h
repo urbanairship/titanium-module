@@ -4,8 +4,7 @@
 @import AirshipCore;
 @import AirshipMessageCenter;
 @import AirshipAutomation;
-
-#import "TiAirshipDeeplink.h"
+@import AirshipBasement;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, copy) NSDictionary *payload;
 
-+ (instancetype)tiPushFromNotificationContent:(nullable UANotificationContent *)notificationContent;
++ (instancetype)tiPushFromNotificationContent:(nullable NSDictionary *)notificationContent;
 
 @end
 
