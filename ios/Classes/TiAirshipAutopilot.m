@@ -8,9 +8,13 @@
 
 @implementation TiAirshipAutopilot
 
-+ (void)load {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:[self class] selector:@selector(didFinishLaunching) name:UIApplicationDidFinishLaunchingNotification object:nil];
+- (void)load {
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification
+                                                      object:nil
+                                                       queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+
+        [self attemptTakeOffWithLaunchOptions:note.userInfo];
+    }];
 }
 
 // Config keys
@@ -27,14 +31,7 @@ static NSString *const DataCollectionOptInKey = @"com.urbanairship.data_collecti
 static NSString *const CloudSiteConfigKey = @"com.urbanairship.site";
 static NSString *const CloudSiteEUString = @"EU";
 
-+ (void)didFinishLaunching {
-    static dispatch_once_t takeoOffOnceToken_;
-    dispatch_once(&takeoOffOnceToken_, ^{
-        [self performTakeOff];
-    });
-}
-
-+ (void)performTakeOff {
+- (void)attemptTakeOffWithLaunchOptions:(NSDictionary *)launchOptions {
     NSDictionary *appProperties = [TiApp tiAppProperties];
     UAConfig *config = [UAConfig defaultConfig];
 
@@ -43,12 +40,10 @@ static NSString *const CloudSiteEUString = @"EU";
     config.developmentAppKey = appProperties[DevelopmentAppKeyConfigKey];
     config.developmentAppSecret = appProperties[DevelopmentAppSecretConfigKey];
     config.inProduction = [appProperties[ProductionConfigKey] boolValue];
-    //TODO: config.dataCollectionOptInEnabled = [appProperties[DataCollectionOptInKey] boolValue];
     config.site = [TiAirshipAutopilot parseCloudSiteString:appProperties[CloudSiteConfigKey]];
     config.URLAllowListScopeOpenURL = @[@"*"];
 
-    // TODO:
-    [UAirship takeOff:config launchOptions:nil];
+    [UAirship takeOff:config launchOptions:launchOptions];
 
     // Set the iOS default foreground presentation options if specified in the tiapp.xml else default to None
     UNNotificationPresentationOptions options = UNNotificationPresentationOptionNone;

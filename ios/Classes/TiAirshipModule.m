@@ -251,24 +251,6 @@ NS_ASSUME_NONNULL_BEGIN
     ENSURE_SINGLE_ARG(args, NSString)
     [[UAirship analytics] trackScreen:args];
 }
-// TODO
-//- (void)setIsDataCollectionEnabled:(id)args {
-//    ENSURE_SINGLE_ARG(args, NSNumber)
-//    [UAirship shared].dataCollectionEnabled = [args boolValue];
-//}
-//
-//- (id)isDataCollectionEnabled {
-//    return NUMBOOL([UAirship shared].isDataCollectionEnabled);
-//}
-//
-//- (void)setIsPushTokenRegistrationEnabled:(id)args {
-//    ENSURE_SINGLE_ARG(args, NSNumber)
-//    UAirship.push.pushTokenRegistrationEnabled = [args boolValue];
-//}
-//
-//- (id)isPushTokenRegistrationEnabled {
-//    return NUMBOOL(UAirship.push.pushTokenRegistrationEnabled);
-//}
 
 @end
 
