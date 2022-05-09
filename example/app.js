@@ -166,7 +166,7 @@ window.add(view);
 
 // Listen for click events.
 mesgCtrButton.addEventListener('click', function() {
-    Airship.displayMessageCenter();
+    Airship.messageCenter.open();
 });
 
 window.open();
@@ -174,8 +174,8 @@ window.open();
 channelIdLabel.text = Airship.channelId;
 
 // Associate channel to a Named User
-Airship.namedUser = "namedUser";
-Ti.API.info("namedUser: " + Airship.namedUser);
+Airship.contact.identify("titanium person");
+Ti.API.info("namedUser: " + Airship.contact.namedUser);
 namedUserLabel.text = Airship.namedUser;
 
 // Add a custom identifier

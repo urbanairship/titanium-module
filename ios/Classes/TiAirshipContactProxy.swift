@@ -7,6 +7,11 @@ import Darwin
 @objc(TiAirshipContactProxy)
 public class TiAirshipContactProxy: TiProxy {
 
+    @objc
+    public var namedUserId: String? {
+        Airship.contact.namedUserID
+    }
+
     @objc(identify:)
     public func identify(arguments: [Any]?) {
         logCall(arguments)

@@ -6,11 +6,10 @@ import AirshipCore;
 @objc(TiAirshipAnalyticsProxy)
 public class TiAirshipAnalyticsProxy: TiProxy {
 
-
     @objc(addEvent:)
     public func addEvent(arguments: [Any]?) {
         logCall(arguments)
-        guard let event = arguments?.first as? String else { rejectArguments(arguments) }
+        guard let event = arguments?.first as? [String: AnyHashable] else { rejectArguments(arguments) }
 
         // Using action for now to avoid parsing a custom event
         ActionRunner.run(AddCustomEventAction.name, value: event, situation: .manualInvocation)

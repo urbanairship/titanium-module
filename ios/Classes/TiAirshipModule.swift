@@ -49,6 +49,9 @@ public class TiAirshipModule: TiModule {
     public let preferenceCenter = TiAirshipPreferenceCenterProxy()
 
     @objc
+    public let analytics = TiAirshipAnalyticsProxy()
+
+    @objc
     public var isFlying: Bool {
         return Airship.isFlying
     }
