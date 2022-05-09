@@ -16,26 +16,14 @@ public class TiAirshipTagEditorProxy: TiProxy {
     @objc(add:)
     public func add(arguments: [Any]?) -> TiAirshipTagEditorProxy {
         logCall(arguments)
-        if let tags = arguments?.first as? [String] {
-            self.editor.add(tags)
-        } else if let tag = arguments?.first as? String {
-            self.editor.add(tag)
-        } else {
-            rejectArguments(arguments)
-        }
+        self.editor.add(parseTags(arguments))
         return self
     }
 
     @objc(remove:)
     public func remove(arguments: [Any]?) -> TiAirshipTagEditorProxy {
         logCall(arguments)
-        if let tags = arguments?.first as? [String] {
-            self.editor.remove(tags)
-        } else if let tag = arguments?.first as? String {
-            self.editor.remove(tag)
-        } else {
-            rejectArguments(arguments)
-        }
+        self.editor.remove(parseTags(arguments))
         return self
     }
 
@@ -46,9 +34,27 @@ public class TiAirshipTagEditorProxy: TiProxy {
         return self
     }
 
+    @objc(set:)
+    public func set(arguments: [Any]?) -> TiAirshipTagEditorProxy {
+        logCall(arguments)
+        self.editor.set(parseTags(arguments))
+        return self
+    }
+
+
     @objc(apply:)
     public func apply(arguments: [Any]?) -> Void {
         logCall(arguments)
         self.editor.apply()
+    }
+
+    private func parseTags(_ arguments: [Any]?) -> [String] {
+        if let tags = arguments?.first as? [String] {
+            return tags
+        } else if let tag = arguments?.first as? String {
+            return [tag]
+        } else {
+            rejectArguments(arguments)
+        }
     }
 }

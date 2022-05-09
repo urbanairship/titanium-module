@@ -1,9 +1,4 @@
-//
-//  TiAirshipBootstrap.h
-//  TiAirship
-//
-//  Created by Ryan Lepinski on 5/6/22.
-//
+/* Copyright Airship and Contributors */
 
 #import <Foundation/Foundation.h>
 

@@ -85,13 +85,4 @@ struct Log {
 }
 
 
-extension TiProxy {
-    func logCall(_ arguments: [Any]?){
-        Log.debug("arguments: \(String(describing: arguments))")
-    }
-
-    func rejectArguments(_ arguments: [Any]?) -> Never {
-        fatalError("Invalid arguments: \(String(describing: arguments))")
-    }
-}
 

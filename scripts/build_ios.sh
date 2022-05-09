@@ -20,6 +20,8 @@ cp -R "$DOWNLOAD_DIRECTORY/AirshipCore.xcframework" "$ROOT_PATH/ios/platform/"
 cp -R "$DOWNLOAD_DIRECTORY/AirshipMessageCenter.xcframework" "$ROOT_PATH/ios/platform/"
 cp -R "$DOWNLOAD_DIRECTORY/AirshipAutomation.xcframework" "$ROOT_PATH/ios/platform/"
 cp -R "$DOWNLOAD_DIRECTORY/AirshipBasement.xcframework" "$ROOT_PATH/ios/platform/"
+cp -R "$DOWNLOAD_DIRECTORY/AirshipPreferenceCenter.xcframework" "$ROOT_PATH/ios/platform/"
+cp -R "$DOWNLOAD_DIRECTORY/AirshipExtendedActions.xcframework" "$ROOT_PATH/ios/platform/"
 
 cd $ROOT_PATH/ios
 

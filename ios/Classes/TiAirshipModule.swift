@@ -3,24 +3,32 @@
 import TitaniumKit
 import AirshipCore
 
-/**
-
- Titanium Swift Module Requirements
- ---
-
- 1. Use the @objc annotation to expose your class to Objective-C (used by the Titanium core)
- 2. Use the @objc annotation to expose your method to Objective-C as well.
- 3. Method arguments always have the "[Any]" type, specifying a various number of arguments.
- Unwrap them like you would do in Swift, e.g. "guard let arguments = arguments, let message = arguments.first"
- 4. You can use any public Titanium API like before, e.g. TiUtils. Remember the type safety of Swift, like Int vs Int32
- and NSString vs. String.
-
- */
-
 @objc(TiAirshipModule)
 public class TiAirshipModule: TiModule {
+
     @objc
-    public let push = TIAirshipPushProxy()
+    public let pushReceivedEvent = PushReceivedEvent.eventName
+
+    @objc
+    public let notificationResponseReceivedEvent = NotificationResponseReceivedEvent.eventName
+
+    @objc
+    public let notificationOptInStatusChangedEvent = NotificationOptInStatusChangedEvent.eventName
+
+    @objc
+    public let channelCreatedEvent = ChannelCreatedEvent.eventName
+
+    @objc
+    public let deepLinkReceivedEvent = DeepLinkReceivedEvent.eventName
+
+    @objc
+    public let inboxUpdatedEvent = InboxUpdatedEvent.eventName
+
+    @objc
+    public let openPreferenceCenterEvent = OpenPreferenceCenterEvent.eventName
+    
+    @objc
+    public let push = TiAirshipPushProxy()
 
     @objc
     public let channel = TiAirshipChannelProxy()
@@ -38,6 +46,9 @@ public class TiAirshipModule: TiModule {
     public let inAppAutomation = TiAirshipPrivacyManagerProxy()
 
     @objc
+    public let preferenceCenter = TiAirshipPreferenceCenterProxy()
+
+    @objc
     public var isFlying: Bool {
         return Airship.isFlying
     }
@@ -53,14 +64,37 @@ public class TiAirshipModule: TiModule {
     public override func startup() {
         super.startup()
         Log.debug("ti.airship loaded.")
+
+        EventManager.shared.onDispatch = { [weak self] event in
+            guard let strongSelf = self,
+                  strongSelf._hasListeners(event.name)
+            else {
+                return false
+            }
+
+            strongSelf.fireEvent(event.name, with: event.data)
+            return true
+        }
     }
 
+    public override func addEventListener(_ args: [Any]!) {
+        logCall(args)
+        super.addEventListener(args)
+        EventManager.shared.onListenerAdded()
+    }
+
+
     @objc(takeOff:)
-    public func takeOff(arguments: Array<Any>?) -> Bool {
+    public func takeOff(arguments: [Any]?) -> Bool {
         logCall(arguments)
 
-        let config = arguments?[0] as? [AnyHashable: Any]
-        PluginStore.write(.config, value: config)
+        guard let configDict = arguments?[0] as? [String: Any],
+              let config = try! ConfigUtils.parseConfig(configDict)
+        else {
+            rejectArguments(arguments)
+        }
+
+        PluginStore.config = config
         TiAirshipAutopilot.attemptTakeOff(launchOptions: nil)
         return Airship.isFlying
     }

@@ -8,6 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		000000000000000000000002 /* TitaniumKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000000000000000001 /* TitaniumKit.xcframework */; };
+		6E51E789282978A9000B513E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E788282978A9000B513E /* Extensions.swift */; };
+		6E51E78E28299282000B513E /* TiAirshipPushIOSProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E78D28299282000B513E /* TiAirshipPushIOSProxy.swift */; };
+		6E51E79028299972000B513E /* TiAirshipPreferenceCenterProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E78F28299972000B513E /* TiAirshipPreferenceCenterProxy.swift */; };
+		6E51E79328299989000B513E /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E79228299989000B513E /* EventManager.swift */; };
+		6E51E7962829B68A000B513E /* AirshipExtendedActions.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E51E7942829B689000B513E /* AirshipExtendedActions.xcframework */; };
+		6E51E7972829B68A000B513E /* AirshipPreferenceCenter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E51E7952829B689000B513E /* AirshipPreferenceCenter.xcframework */; };
+		6E51E7992829BBE7000B513E /* TiAirshipAssociatedIdEditorProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7982829BBE7000B513E /* TiAirshipAssociatedIdEditorProxy.swift */; };
+		6E51E7A82829D45F000B513E /* NotificationOptInStatusChangedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A02829D45F000B513E /* NotificationOptInStatusChangedEvent.swift */; };
+		6E51E7A92829D45F000B513E /* TiAirshipDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A12829D45F000B513E /* TiAirshipDelegate.swift */; };
+		6E51E7AA2829D45F000B513E /* TiEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A22829D45F000B513E /* TiEvent.swift */; };
+		6E51E7AB2829D45F000B513E /* PushReceivedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A32829D45F000B513E /* PushReceivedEvent.swift */; };
+		6E51E7AC2829D45F000B513E /* ChannelCreatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A42829D45F000B513E /* ChannelCreatedEvent.swift */; };
+		6E51E7AD2829D45F000B513E /* InboxUpdatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A52829D45F000B513E /* InboxUpdatedEvent.swift */; };
+		6E51E7AE2829D45F000B513E /* NotificationResponseReceivedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A62829D45F000B513E /* NotificationResponseReceivedEvent.swift */; };
+		6E51E7AF2829D45F000B513E /* DeepLinkReceivedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7A72829D45F000B513E /* DeepLinkReceivedEvent.swift */; };
+		6E51E7B12829D63E000B513E /* EventUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7B02829D63E000B513E /* EventUtils.swift */; };
+		6E51E7B32829DAC0000B513E /* OpenPreferenceCenterEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51E7B22829DAC0000B513E /* OpenPreferenceCenterEvent.swift */; };
 		6ED35437282580BA006AA48F /* AirshipMessageCenter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED35433282580BA006AA48F /* AirshipMessageCenter.xcframework */; };
 		6ED35438282580BA006AA48F /* AirshipBasement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED35434282580BA006AA48F /* AirshipBasement.xcframework */; };
 		6ED35439282580BA006AA48F /* AirshipAutomation.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED35435282580BA006AA48F /* AirshipAutomation.xcframework */; };
@@ -18,7 +35,7 @@
 		6ED3545428259230006AA48F /* TiAirshipChannelProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3544E28259230006AA48F /* TiAirshipChannelProxy.swift */; };
 		6ED3545528259230006AA48F /* PluginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3544F28259230006AA48F /* PluginStore.swift */; };
 		6ED3545628259230006AA48F /* TiAirshipAutopilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3545028259230006AA48F /* TiAirshipAutopilot.swift */; };
-		6ED354732825D2D0006AA48F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354722825D2D0006AA48F /* Utils.swift */; };
+		6ED354732825D2D0006AA48F /* ConfigUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354722825D2D0006AA48F /* ConfigUtils.swift */; };
 		6ED354782825D9EF006AA48F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354772825D9EF006AA48F /* Log.swift */; };
 		6ED354892825E645006AA48F /* TiAirshipMessageCenterProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354842825E644006AA48F /* TiAirshipMessageCenterProxy.swift */; };
 		6ED3548A2825E645006AA48F /* TiAirshipContactProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354852825E644006AA48F /* TiAirshipContactProxy.swift */; };
@@ -26,6 +43,10 @@
 		6ED3548C2825E645006AA48F /* TiAirshipPrivacyManagerProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354872825E645006AA48F /* TiAirshipPrivacyManagerProxy.swift */; };
 		6ED3548D2825E645006AA48F /* TiAirshipInAppAutomationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354882825E645006AA48F /* TiAirshipInAppAutomationProxy.swift */; };
 		6ED3548F2825E701006AA48F /* TiAirshipAnalyticsProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3548E2825E701006AA48F /* TiAirshipAnalyticsProxy.swift */; };
+		6ED3549228296BF5006AA48F /* TiAirshipTagGroupsEditorProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3549128296BF5006AA48F /* TiAirshipTagGroupsEditorProxy.swift */; };
+		6ED3549428296C0B006AA48F /* TiAirshipSubscriptionListEditorProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3549328296C0B006AA48F /* TiAirshipSubscriptionListEditorProxy.swift */; };
+		6ED3549628296C27006AA48F /* TiAirshipScopedSubscriptionListEditorProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3549528296C27006AA48F /* TiAirshipScopedSubscriptionListEditorProxy.swift */; };
+		6ED3549A28296C53006AA48F /* TiAirshipAttributesEditorProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3549928296C53006AA48F /* TiAirshipAttributesEditorProxy.swift */; };
 		DB24E03C20766AC90033B2B1 /* TiAirshipPushProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB24E03B20766AC90033B2B1 /* TiAirshipPushProxy.swift */; };
 		DB34CDE0207B998A005F8E8C /* TiAirshipModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = DB34CDDE207B998A005F8E8C /* TiAirshipModuleAssets.m */; };
 		DB34CDE1207B998A005F8E8C /* TiAirshipModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = DB34CDDF207B998A005F8E8C /* TiAirshipModuleAssets.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,6 +58,23 @@
 
 /* Begin PBXFileReference section */
 		000000000000000000000001 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "$(TITANIUM_SDK)/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<absolute>"; };
+		6E51E788282978A9000B513E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Classes/Extensions.swift; sourceTree = "<group>"; };
+		6E51E78D28299282000B513E /* TiAirshipPushIOSProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipPushIOSProxy.swift; path = Classes/TiAirshipPushIOSProxy.swift; sourceTree = "<group>"; };
+		6E51E78F28299972000B513E /* TiAirshipPreferenceCenterProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipPreferenceCenterProxy.swift; path = Classes/TiAirshipPreferenceCenterProxy.swift; sourceTree = "<group>"; };
+		6E51E79228299989000B513E /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventManager.swift; path = Classes/EventManager.swift; sourceTree = "<group>"; };
+		6E51E7942829B689000B513E /* AirshipExtendedActions.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipExtendedActions.xcframework; path = platform/AirshipExtendedActions.xcframework; sourceTree = "<group>"; };
+		6E51E7952829B689000B513E /* AirshipPreferenceCenter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipPreferenceCenter.xcframework; path = platform/AirshipPreferenceCenter.xcframework; sourceTree = "<group>"; };
+		6E51E7982829BBE7000B513E /* TiAirshipAssociatedIdEditorProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipAssociatedIdEditorProxy.swift; path = Classes/TiAirshipAssociatedIdEditorProxy.swift; sourceTree = "<group>"; };
+		6E51E7A02829D45F000B513E /* NotificationOptInStatusChangedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationOptInStatusChangedEvent.swift; path = Classes/NotificationOptInStatusChangedEvent.swift; sourceTree = "<group>"; };
+		6E51E7A12829D45F000B513E /* TiAirshipDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipDelegate.swift; path = Classes/TiAirshipDelegate.swift; sourceTree = "<group>"; };
+		6E51E7A22829D45F000B513E /* TiEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiEvent.swift; path = Classes/TiEvent.swift; sourceTree = "<group>"; };
+		6E51E7A32829D45F000B513E /* PushReceivedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushReceivedEvent.swift; path = Classes/PushReceivedEvent.swift; sourceTree = "<group>"; };
+		6E51E7A42829D45F000B513E /* ChannelCreatedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelCreatedEvent.swift; path = Classes/ChannelCreatedEvent.swift; sourceTree = "<group>"; };
+		6E51E7A52829D45F000B513E /* InboxUpdatedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InboxUpdatedEvent.swift; path = Classes/InboxUpdatedEvent.swift; sourceTree = "<group>"; };
+		6E51E7A62829D45F000B513E /* NotificationResponseReceivedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationResponseReceivedEvent.swift; path = Classes/NotificationResponseReceivedEvent.swift; sourceTree = "<group>"; };
+		6E51E7A72829D45F000B513E /* DeepLinkReceivedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeepLinkReceivedEvent.swift; path = Classes/DeepLinkReceivedEvent.swift; sourceTree = "<group>"; };
+		6E51E7B02829D63E000B513E /* EventUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventUtils.swift; path = Classes/EventUtils.swift; sourceTree = "<group>"; };
+		6E51E7B22829DAC0000B513E /* OpenPreferenceCenterEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OpenPreferenceCenterEvent.swift; path = Classes/OpenPreferenceCenterEvent.swift; sourceTree = "<group>"; };
 		6ED35433282580BA006AA48F /* AirshipMessageCenter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipMessageCenter.xcframework; path = platform/AirshipMessageCenter.xcframework; sourceTree = "<group>"; };
 		6ED35434282580BA006AA48F /* AirshipBasement.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipBasement.xcframework; path = platform/AirshipBasement.xcframework; sourceTree = "<group>"; };
 		6ED35435282580BA006AA48F /* AirshipAutomation.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AirshipAutomation.xcframework; path = platform/AirshipAutomation.xcframework; sourceTree = "<group>"; };
@@ -47,7 +85,7 @@
 		6ED3544E28259230006AA48F /* TiAirshipChannelProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipChannelProxy.swift; path = Classes/TiAirshipChannelProxy.swift; sourceTree = "<group>"; };
 		6ED3544F28259230006AA48F /* PluginStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PluginStore.swift; path = Classes/PluginStore.swift; sourceTree = "<group>"; };
 		6ED3545028259230006AA48F /* TiAirshipAutopilot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipAutopilot.swift; path = Classes/TiAirshipAutopilot.swift; sourceTree = "<group>"; };
-		6ED354722825D2D0006AA48F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Classes/Utils.swift; sourceTree = "<group>"; };
+		6ED354722825D2D0006AA48F /* ConfigUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigUtils.swift; path = Classes/ConfigUtils.swift; sourceTree = "<group>"; };
 		6ED354772825D9EF006AA48F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Classes/Log.swift; sourceTree = "<group>"; };
 		6ED354842825E644006AA48F /* TiAirshipMessageCenterProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipMessageCenterProxy.swift; path = Classes/TiAirshipMessageCenterProxy.swift; sourceTree = "<group>"; };
 		6ED354852825E644006AA48F /* TiAirshipContactProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipContactProxy.swift; path = Classes/TiAirshipContactProxy.swift; sourceTree = "<group>"; };
@@ -55,6 +93,10 @@
 		6ED354872825E645006AA48F /* TiAirshipPrivacyManagerProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipPrivacyManagerProxy.swift; path = Classes/TiAirshipPrivacyManagerProxy.swift; sourceTree = "<group>"; };
 		6ED354882825E645006AA48F /* TiAirshipInAppAutomationProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipInAppAutomationProxy.swift; path = Classes/TiAirshipInAppAutomationProxy.swift; sourceTree = "<group>"; };
 		6ED3548E2825E701006AA48F /* TiAirshipAnalyticsProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipAnalyticsProxy.swift; path = Classes/TiAirshipAnalyticsProxy.swift; sourceTree = "<group>"; };
+		6ED3549128296BF5006AA48F /* TiAirshipTagGroupsEditorProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipTagGroupsEditorProxy.swift; path = Classes/TiAirshipTagGroupsEditorProxy.swift; sourceTree = "<group>"; };
+		6ED3549328296C0B006AA48F /* TiAirshipSubscriptionListEditorProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipSubscriptionListEditorProxy.swift; path = Classes/TiAirshipSubscriptionListEditorProxy.swift; sourceTree = "<group>"; };
+		6ED3549528296C27006AA48F /* TiAirshipScopedSubscriptionListEditorProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipScopedSubscriptionListEditorProxy.swift; path = Classes/TiAirshipScopedSubscriptionListEditorProxy.swift; sourceTree = "<group>"; };
+		6ED3549928296C53006AA48F /* TiAirshipAttributesEditorProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipAttributesEditorProxy.swift; path = Classes/TiAirshipAttributesEditorProxy.swift; sourceTree = "<group>"; };
 		DB24E03B20766AC90033B2B1 /* TiAirshipPushProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TiAirshipPushProxy.swift; path = Classes/TiAirshipPushProxy.swift; sourceTree = "<group>"; };
 		DB34CDDE207B998A005F8E8C /* TiAirshipModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiAirshipModuleAssets.m; path = Classes/TiAirshipModuleAssets.m; sourceTree = SOURCE_ROOT; };
 		DB34CDDF207B998A005F8E8C /* TiAirshipModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiAirshipModuleAssets.h; path = Classes/TiAirshipModuleAssets.h; sourceTree = SOURCE_ROOT; };
@@ -74,9 +116,11 @@
 			files = (
 				DB34CDE6207B9EBD005F8E8C /* Foundation.framework in Frameworks */,
 				6ED35438282580BA006AA48F /* AirshipBasement.xcframework in Frameworks */,
+				6E51E7972829B68A000B513E /* AirshipPreferenceCenter.xcframework in Frameworks */,
 				6ED35437282580BA006AA48F /* AirshipMessageCenter.xcframework in Frameworks */,
 				6ED3543A282580BA006AA48F /* AirshipCore.xcframework in Frameworks */,
 				6ED35439282580BA006AA48F /* AirshipAutomation.xcframework in Frameworks */,
+				6E51E7962829B68A000B513E /* AirshipExtendedActions.xcframework in Frameworks */,
 				000000000000000000000002 /* TitaniumKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +128,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E51E78C282988C6000B513E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6ED3544F28259230006AA48F /* PluginStore.swift */,
+				6ED354722825D2D0006AA48F /* ConfigUtils.swift */,
+				6ED354772825D9EF006AA48F /* Log.swift */,
+				6E51E788282978A9000B513E /* Extensions.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		6E51E7912829997A000B513E /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				6E51E7A22829D45F000B513E /* TiEvent.swift */,
+				6E51E7B22829DAC0000B513E /* OpenPreferenceCenterEvent.swift */,
+				6E51E7A42829D45F000B513E /* ChannelCreatedEvent.swift */,
+				6E51E7A72829D45F000B513E /* DeepLinkReceivedEvent.swift */,
+				6E51E7A52829D45F000B513E /* InboxUpdatedEvent.swift */,
+				6E51E7A02829D45F000B513E /* NotificationOptInStatusChangedEvent.swift */,
+				6E51E7A62829D45F000B513E /* NotificationResponseReceivedEvent.swift */,
+				6E51E7A32829D45F000B513E /* PushReceivedEvent.swift */,
+				6E51E79228299989000B513E /* EventManager.swift */,
+				6E51E7B02829D63E000B513E /* EventUtils.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
 		6ED354792825E5A5006AA48F /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +167,8 @@
 				6ED3544E28259230006AA48F /* TiAirshipChannelProxy.swift */,
 				DB24E03B20766AC90033B2B1 /* TiAirshipPushProxy.swift */,
 				6ED3548E2825E701006AA48F /* TiAirshipAnalyticsProxy.swift */,
+				6E51E78D28299282000B513E /* TiAirshipPushIOSProxy.swift */,
+				6E51E78F28299972000B513E /* TiAirshipPreferenceCenterProxy.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -102,7 +176,12 @@
 		6ED354902825E8FB006AA48F /* Editors */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3549928296C53006AA48F /* TiAirshipAttributesEditorProxy.swift */,
 				6ED3544B28259230006AA48F /* TiAirshipTagEditorProxy.swift */,
+				6ED3549128296BF5006AA48F /* TiAirshipTagGroupsEditorProxy.swift */,
+				6ED3549328296C0B006AA48F /* TiAirshipSubscriptionListEditorProxy.swift */,
+				6ED3549528296C27006AA48F /* TiAirshipScopedSubscriptionListEditorProxy.swift */,
+				6E51E7982829BBE7000B513E /* TiAirshipAssociatedIdEditorProxy.swift */,
 			);
 			name = Editors;
 			sourceTree = "<group>";
@@ -123,15 +202,15 @@
 		DB258CA51F0964F6000D0D8D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6E51E7912829997A000B513E /* Events */,
+				6E51E78C282988C6000B513E /* Utils */,
 				6ED354902825E8FB006AA48F /* Editors */,
 				6ED354792825E5A5006AA48F /* Components */,
-				6ED354722825D2D0006AA48F /* Utils.swift */,
 				6ED3545028259230006AA48F /* TiAirshipAutopilot.swift */,
-				6ED3544F28259230006AA48F /* PluginStore.swift */,
 				6ED3544C28259230006AA48F /* TiAirshipBootstrap.h */,
 				6ED3544D28259230006AA48F /* TiAirshipBootstrap.m */,
 				DB52E2421E9CD0F800AAAEE0 /* TiAirshipModule.swift */,
-				6ED354772825D9EF006AA48F /* Log.swift */,
+				6E51E7A12829D45F000B513E /* TiAirshipDelegate.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -139,6 +218,8 @@
 		DB34CDE2207B9D6A005F8E8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E51E7942829B689000B513E /* AirshipExtendedActions.xcframework */,
+				6E51E7952829B689000B513E /* AirshipPreferenceCenter.xcframework */,
 				6ED35435282580BA006AA48F /* AirshipAutomation.xcframework */,
 				6ED35434282580BA006AA48F /* AirshipBasement.xcframework */,
 				6ED35436282580BA006AA48F /* AirshipCore.xcframework */,
@@ -260,21 +341,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ED3545428259230006AA48F /* TiAirshipChannelProxy.swift in Sources */,
+				6E51E7B32829DAC0000B513E /* OpenPreferenceCenterEvent.swift in Sources */,
+				6ED3549628296C27006AA48F /* TiAirshipScopedSubscriptionListEditorProxy.swift in Sources */,
 				6ED3548A2825E645006AA48F /* TiAirshipContactProxy.swift in Sources */,
+				6E51E7AE2829D45F000B513E /* NotificationResponseReceivedEvent.swift in Sources */,
 				6ED3545528259230006AA48F /* PluginStore.swift in Sources */,
-				6ED354732825D2D0006AA48F /* Utils.swift in Sources */,
+				6ED3549A28296C53006AA48F /* TiAirshipAttributesEditorProxy.swift in Sources */,
+				6ED354732825D2D0006AA48F /* ConfigUtils.swift in Sources */,
+				6E51E7AC2829D45F000B513E /* ChannelCreatedEvent.swift in Sources */,
 				6ED3545328259230006AA48F /* TiAirshipBootstrap.m in Sources */,
 				6ED3548C2825E645006AA48F /* TiAirshipPrivacyManagerProxy.swift in Sources */,
 				6ED3548B2825E645006AA48F /* TiAirshipLocaleProxy.swift in Sources */,
 				6ED3545628259230006AA48F /* TiAirshipAutopilot.swift in Sources */,
+				6E51E79028299972000B513E /* TiAirshipPreferenceCenterProxy.swift in Sources */,
 				6ED354782825D9EF006AA48F /* Log.swift in Sources */,
 				6ED354892825E645006AA48F /* TiAirshipMessageCenterProxy.swift in Sources */,
+				6E51E7B12829D63E000B513E /* EventUtils.swift in Sources */,
+				6E51E7A92829D45F000B513E /* TiAirshipDelegate.swift in Sources */,
+				6E51E7AF2829D45F000B513E /* DeepLinkReceivedEvent.swift in Sources */,
+				6ED3549428296C0B006AA48F /* TiAirshipSubscriptionListEditorProxy.swift in Sources */,
+				6E51E789282978A9000B513E /* Extensions.swift in Sources */,
+				6E51E7A82829D45F000B513E /* NotificationOptInStatusChangedEvent.swift in Sources */,
 				DB24E03C20766AC90033B2B1 /* TiAirshipPushProxy.swift in Sources */,
+				6E51E78E28299282000B513E /* TiAirshipPushIOSProxy.swift in Sources */,
 				6ED3548D2825E645006AA48F /* TiAirshipInAppAutomationProxy.swift in Sources */,
+				6E51E79328299989000B513E /* EventManager.swift in Sources */,
+				6E51E7992829BBE7000B513E /* TiAirshipAssociatedIdEditorProxy.swift in Sources */,
+				6E51E7AB2829D45F000B513E /* PushReceivedEvent.swift in Sources */,
 				DB34CDE0207B998A005F8E8C /* TiAirshipModuleAssets.m in Sources */,
+				6E51E7AD2829D45F000B513E /* InboxUpdatedEvent.swift in Sources */,
 				6ED3545128259230006AA48F /* TiAirshipTagEditorProxy.swift in Sources */,
 				DB52E2431E9CD0F800AAAEE0 /* TiAirshipModule.swift in Sources */,
 				6ED3548F2825E701006AA48F /* TiAirshipAnalyticsProxy.swift in Sources */,
+				6ED3549228296BF5006AA48F /* TiAirshipTagGroupsEditorProxy.swift in Sources */,
+				6E51E7AA2829D45F000B513E /* TiEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
