@@ -14,19 +14,24 @@ public class TiAirshipAutopilot: NSObject {
 
     @objc(attemptTakeOffWithLaunchOptions:)
     public static func attemptTakeOff(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        Log.debug("attemptTakeOff: \(String(describing: launchOptions))")
+        AirshipLogger.debug("attemptTakeOff: \(String(describing: launchOptions))")
 
         guard !Airship.isFlying else {
             return;
         }
 
-        guard let config = PluginStore.config else {
+        guard let configDict = PluginStore.config else {
             return
         }
 
-        Log.debug("Taking off! \(config)")
-        Airship.takeOff(config, launchOptions: launchOptions)
+        do {
+            let config = try ConfigUtils.parseConfig(configDict)
+            AirshipLogger.debug("Taking off! \(config)")
 
+            Airship.takeOff(config, launchOptions: launchOptions)
+        } catch {
+            AirshipLogger.error("Failed to takeOff \(error)")
+        }
         guard Airship.isFlying else {
             return;
         }

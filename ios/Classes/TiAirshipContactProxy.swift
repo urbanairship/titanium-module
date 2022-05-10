@@ -14,7 +14,7 @@ public class TiAirshipContactProxy: TiProxy {
 
     @objc(identify:)
     public func identify(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let identifier = arguments?.first as? String else {
             rejectArguments(arguments)
         }
@@ -23,31 +23,31 @@ public class TiAirshipContactProxy: TiProxy {
 
     @objc(reset:)
     public func reset(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         Airship.contact.reset()
     }
 
     @objc(editAttributes:)
     public func editAttributes(arguments: [Any]?) -> TiAirshipAttributesEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         return TiAirshipAttributesEditorProxy(editor: Airship.contact.editAttributes())
     }
 
     @objc(editSubscriptionLists:)
     public func editSubscriptionLists(arguments: [Any]?) -> TiAirshipScopedSubscriptionListEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         return TiAirshipScopedSubscriptionListEditorProxy(editor: Airship.contact.editSubscriptionLists())
     }
 
     @objc(editTagGroups:)
     public func editTagGroups(arguments: [Any]?) -> TiAirshipTagGroupsEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         return TiAirshipTagGroupsEditorProxy(editor: Airship.contact.editTagGroups())
     }
 
     @objc(fetchSubscriptionLists:)
     public func fetchSubscriptionLists(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let callback = arguments?.first as? KrollCallback else { rejectArguments(arguments) }
 
         Airship.contact.fetchSubscriptionLists { config, error in

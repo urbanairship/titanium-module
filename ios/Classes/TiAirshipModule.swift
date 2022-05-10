@@ -52,6 +52,10 @@ public class TiAirshipModule: TiModule {
     public let analytics = TiAirshipAnalyticsProxy()
 
     @objc
+    public let messageCenter = TiAirshipMessageCenterProxy()
+
+
+    @objc
     public var isFlying: Bool {
         return Airship.isFlying
     }
@@ -66,7 +70,7 @@ public class TiAirshipModule: TiModule {
 
     public override func startup() {
         super.startup()
-        Log.debug("ti.airship loaded.")
+        AirshipLogger.debug("ti.airship loaded.")
 
         EventManager.shared.onDispatch = { [weak self] event in
             guard let strongSelf = self,
@@ -81,7 +85,7 @@ public class TiAirshipModule: TiModule {
     }
 
     public override func addEventListener(_ args: [Any]!) {
-        logCall(args)
+        AirshipLogger.debug(describe(args))
         super.addEventListener(args)
         EventManager.shared.onListenerAdded()
     }
@@ -89,15 +93,14 @@ public class TiAirshipModule: TiModule {
 
     @objc(takeOff:)
     public func takeOff(arguments: [Any]?) -> Bool {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
 
-        guard let configDict = arguments?[0] as? [String: Any],
-              let config = try! ConfigUtils.parseConfig(configDict)
-        else {
+        guard let configDict = arguments?[0] as? [String: Any] else {
             rejectArguments(arguments)
         }
 
-        PluginStore.config = config
+        let _ = try! ConfigUtils.parseConfig(configDict)
+        PluginStore.config = configDict
         TiAirshipAutopilot.attemptTakeOff(launchOptions: nil)
         return Airship.isFlying
     }

@@ -2,13 +2,14 @@
 
 import TitaniumKit
 import AirshipPreferenceCenter
+import AirshipCore
 
 @objc(TiAirshipPreferenceCenterProxy)
 public class TiAirshipPreferenceCenterProxy: TiProxy {
 
     @objc(getConfig:)
     public func getConfig(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let arguments = arguments,
               arguments.count == 2,
               let preferenceCenterID = arguments[0] as? String,
@@ -22,9 +23,9 @@ public class TiAirshipPreferenceCenterProxy: TiProxy {
         }
     }
 
-    @objc(open:)
-    public func open(arguments: [Any]?) {
-        logCall(arguments)
+    @objc(display:)
+    public func display(arguments: [Any]?) {
+        AirshipLogger.debug(describe(arguments))
         guard let preferenceCenterID = arguments?.first as? String else { rejectArguments(arguments) }
         PreferenceCenter.shared.open(preferenceCenterID)
     }
@@ -32,7 +33,7 @@ public class TiAirshipPreferenceCenterProxy: TiProxy {
 
     @objc(setUseCustomPreferenceCenter:)
     public func setUseCustomPreferenceCenter(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let arguments = arguments,
               arguments.count == 2,
               let preferenceCenterID = arguments[0] as? String,

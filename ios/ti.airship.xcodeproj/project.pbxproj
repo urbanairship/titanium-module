@@ -36,7 +36,6 @@
 		6ED3545528259230006AA48F /* PluginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3544F28259230006AA48F /* PluginStore.swift */; };
 		6ED3545628259230006AA48F /* TiAirshipAutopilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3545028259230006AA48F /* TiAirshipAutopilot.swift */; };
 		6ED354732825D2D0006AA48F /* ConfigUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354722825D2D0006AA48F /* ConfigUtils.swift */; };
-		6ED354782825D9EF006AA48F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354772825D9EF006AA48F /* Log.swift */; };
 		6ED354892825E645006AA48F /* TiAirshipMessageCenterProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354842825E644006AA48F /* TiAirshipMessageCenterProxy.swift */; };
 		6ED3548A2825E645006AA48F /* TiAirshipContactProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354852825E644006AA48F /* TiAirshipContactProxy.swift */; };
 		6ED3548B2825E645006AA48F /* TiAirshipLocaleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED354862825E645006AA48F /* TiAirshipLocaleProxy.swift */; };
@@ -86,7 +85,6 @@
 		6ED3544F28259230006AA48F /* PluginStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PluginStore.swift; path = Classes/PluginStore.swift; sourceTree = "<group>"; };
 		6ED3545028259230006AA48F /* TiAirshipAutopilot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipAutopilot.swift; path = Classes/TiAirshipAutopilot.swift; sourceTree = "<group>"; };
 		6ED354722825D2D0006AA48F /* ConfigUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigUtils.swift; path = Classes/ConfigUtils.swift; sourceTree = "<group>"; };
-		6ED354772825D9EF006AA48F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Classes/Log.swift; sourceTree = "<group>"; };
 		6ED354842825E644006AA48F /* TiAirshipMessageCenterProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipMessageCenterProxy.swift; path = Classes/TiAirshipMessageCenterProxy.swift; sourceTree = "<group>"; };
 		6ED354852825E644006AA48F /* TiAirshipContactProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipContactProxy.swift; path = Classes/TiAirshipContactProxy.swift; sourceTree = "<group>"; };
 		6ED354862825E645006AA48F /* TiAirshipLocaleProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiAirshipLocaleProxy.swift; path = Classes/TiAirshipLocaleProxy.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 			children = (
 				6ED3544F28259230006AA48F /* PluginStore.swift */,
 				6ED354722825D2D0006AA48F /* ConfigUtils.swift */,
-				6ED354772825D9EF006AA48F /* Log.swift */,
 				6E51E788282978A9000B513E /* Extensions.swift */,
 			);
 			name = Utils;
@@ -354,7 +351,6 @@
 				6ED3548B2825E645006AA48F /* TiAirshipLocaleProxy.swift in Sources */,
 				6ED3545628259230006AA48F /* TiAirshipAutopilot.swift in Sources */,
 				6E51E79028299972000B513E /* TiAirshipPreferenceCenterProxy.swift in Sources */,
-				6ED354782825D9EF006AA48F /* Log.swift in Sources */,
 				6ED354892825E645006AA48F /* TiAirshipMessageCenterProxy.swift in Sources */,
 				6E51E7B12829D63E000B513E /* EventUtils.swift in Sources */,
 				6E51E7A92829D45F000B513E /* TiAirshipDelegate.swift in Sources */,

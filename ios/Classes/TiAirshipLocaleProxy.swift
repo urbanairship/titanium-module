@@ -8,19 +8,22 @@ public class TiAirshipLocaleProxy: TiProxy {
 
     @objc
     public var currentLocale: String {
-        get {
-            Airship.shared.localeManager.currentLocale.identifier
+        Airship.shared.localeManager.currentLocale.identifier
+    }
+
+    @objc(setCurrentLocale:)
+    public func setCurrentLocale(arg: Any) {
+        AirshipLogger.debug(describe(arg))
+        guard let identifier = arg as? String else {
+            rejectArguments(arg)
         }
-        set {
-            logCall(newValue)
-            let locale = Locale(identifier: newValue)
-            Airship.shared.localeManager.currentLocale = locale
-        }
+        let locale = Locale(identifier: identifier)
+        Airship.shared.localeManager.currentLocale = locale
     }
 
     @objc(clearLocale:)
     public func clearLocale(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         return Airship.shared.localeManager.clearLocale()
     }
 }

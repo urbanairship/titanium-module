@@ -15,7 +15,7 @@ public class TiAirshipSubscriptionListEditorProxy: TiProxy {
 
     @objc(subscribe:)
     public func subscribe(arguments: [Any]?) -> TiAirshipSubscriptionListEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let list = arguments?.first as? String else { rejectArguments(arguments) }
         self.editor.subscribe(list)
         return self
@@ -23,7 +23,7 @@ public class TiAirshipSubscriptionListEditorProxy: TiProxy {
 
     @objc(unsubscribe:)
     public func unsubscribe(arguments: [Any]?) -> TiAirshipSubscriptionListEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let list = arguments?.first as? String else { rejectArguments(arguments) }
         self.editor.unsubscribe(list)
         return self
@@ -31,7 +31,7 @@ public class TiAirshipSubscriptionListEditorProxy: TiProxy {
 
     @objc(apply:)
     public func apply(arguments: [Any]?) -> Void {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.apply()
     }
 }

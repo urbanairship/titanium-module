@@ -7,12 +7,9 @@ class PluginStore {
 
     private static let defaults = UserDefaults(suiteName: "ti.airship")!
 
-    public static var config: Config? {
+    public static var config: [String: Any]? {
         get {
-            if let configDict: [String: Any] = self.read("config") {
-                return try? ConfigUtils.parseConfig(configDict)
-            }
-            return nil
+            return self.read("config")
         }
         set {
             self.write("config", value: newValue)

@@ -8,7 +8,7 @@ public class TiAirshipAnalyticsProxy: TiProxy {
 
     @objc(addEvent:)
     public func addEvent(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let event = arguments?.first as? [String: AnyHashable] else { rejectArguments(arguments) }
 
         // Using action for now to avoid parsing a custom event
@@ -17,14 +17,14 @@ public class TiAirshipAnalyticsProxy: TiProxy {
 
     @objc(trackScreen:)
     public func trackScreen(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let screenName = arguments?.first as? String else { rejectArguments(arguments) }
         Airship.analytics.trackScreen(screenName)
     }
 
     @objc(editAssociatedIdentifiers:)
     public func editAssociatedIdentifiers(arguments: [Any]?) -> TiAirshipAssociatedIdEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         return TiAirshipAssociatedIdEditorProxy { mutations in
             let identifiers = Analytics.shared.currentAssociatedDeviceIdentifiers()
             mutations.forEach { mutation in

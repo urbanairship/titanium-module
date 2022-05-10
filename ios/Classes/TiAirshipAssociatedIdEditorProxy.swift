@@ -16,7 +16,7 @@ public class TiAirshipAssociatedIdEditorProxy: TiProxy {
 
     @objc(set:)
     public func set(arguments: [Any]?) -> TiAirshipAssociatedIdEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let arguments = arguments,
               arguments.count == 2,
               let identifier = arguments[0] as? String,
@@ -31,7 +31,7 @@ public class TiAirshipAssociatedIdEditorProxy: TiProxy {
 
     @objc(unsubscribe:)
     public func remove(arguments: [Any]?) -> TiAirshipAssociatedIdEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let identifier = arguments?.first as? String else { rejectArguments(arguments) }
 
         mutations.append((identifier, nil))
@@ -40,7 +40,7 @@ public class TiAirshipAssociatedIdEditorProxy: TiProxy {
 
     @objc(apply:)
     public func apply(arguments: [Any]?) -> Void {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.onApply(mutations)
     }
 }

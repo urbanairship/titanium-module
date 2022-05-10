@@ -3,7 +3,7 @@
 import Foundation
 
 struct PushReceivedEvent: TiEvent {
-    static let eventName = "pushReceivedEVent"
+    static let eventName = "pushReceivedEvent"
 
     let name: String = eventName
     let data: [String: Any]

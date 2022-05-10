@@ -15,28 +15,28 @@ public class TiAirshipTagEditorProxy: TiProxy {
 
     @objc(add:)
     public func add(arguments: [Any]?) -> TiAirshipTagEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.add(parseTags(arguments))
         return self
     }
 
     @objc(remove:)
     public func remove(arguments: [Any]?) -> TiAirshipTagEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.remove(parseTags(arguments))
         return self
     }
 
     @objc(clear:)
     public func clear(arguments: [Any]?) -> TiAirshipTagEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.clear()
         return self
     }
 
     @objc(set:)
     public func set(arguments: [Any]?) -> TiAirshipTagEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.set(parseTags(arguments))
         return self
     }
@@ -44,7 +44,7 @@ public class TiAirshipTagEditorProxy: TiProxy {
 
     @objc(apply:)
     public func apply(arguments: [Any]?) -> Void {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.apply()
     }
 

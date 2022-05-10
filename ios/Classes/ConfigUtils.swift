@@ -4,11 +4,7 @@ import Foundation
 import AirshipCore
 
 struct ConfigUtils {
-    static func parseConfig(_ configDict: [String : Any]?) throws -> Config? {
-        guard let configDict = configDict else {
-            return nil
-        }
-
+    static func parseConfig(_ configDict: [String : Any]) throws -> Config {
         let airshipConfig = Config.default()
 
         let defaultEnvironment = Environment.fromConfig(configDict["default"])

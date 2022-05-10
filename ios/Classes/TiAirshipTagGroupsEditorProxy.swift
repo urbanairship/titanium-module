@@ -15,7 +15,7 @@ public class TiAirshipTagGroupsEditorProxy: TiProxy {
 
     @objc(add:)
     public func add(arguments: [Any]?) -> TiAirshipTagGroupsEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         parseArgs(arguments) { group, tags in
             self.editor.add(tags, group: group)
         }
@@ -24,7 +24,7 @@ public class TiAirshipTagGroupsEditorProxy: TiProxy {
 
     @objc(remove:)
     public func remove(arguments: [Any]?) -> TiAirshipTagGroupsEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         parseArgs(arguments) { group, tags in
             self.editor.remove(tags, group: group)
         }
@@ -33,7 +33,7 @@ public class TiAirshipTagGroupsEditorProxy: TiProxy {
 
     @objc(set:)
     public func set(arguments: [Any]?) -> TiAirshipTagGroupsEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         parseArgs(arguments) { group, tags in
             self.editor.set(tags, group: group)
         }
@@ -42,7 +42,7 @@ public class TiAirshipTagGroupsEditorProxy: TiProxy {
 
     @objc(apply:)
     public func apply(arguments: [Any]?) -> Void {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.apply()
     }
 

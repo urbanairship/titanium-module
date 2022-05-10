@@ -8,18 +8,21 @@ public class TiAirshipPrivacyManagerProxy: TiProxy {
 
     @objc
     public var enabledFeatures: [String] {
-        get {
-            Airship.shared.privacyManager.enabledFeatures.toStringArray()
-        }
-        set {
-            logCall(newValue)
-            Airship.shared.privacyManager.enabledFeatures = try! Features.parse(newValue)
-        }
+        Airship.shared.privacyManager.enabledFeatures.toStringArray()
     }
 
+    @objc(setEnabledFeatures:)
+    public func setEnabledFeatures(arg: Any) {
+        AirshipLogger.debug(describe(arg))
+        guard let names = arg as? [String] else {
+            rejectArguments(arg)
+        }
+        Airship.shared.privacyManager.enabledFeatures = try! Features.parse(names)
+    }
+    
     @objc(enable:)
     public func enable(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
 
         guard let names = arguments?.first as? [String] else {
             rejectArguments(arguments)
@@ -30,7 +33,7 @@ public class TiAirshipPrivacyManagerProxy: TiProxy {
 
     @objc(disable:)
     public func disable(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
 
         guard let names = arguments?.first as? [String] else {
             rejectArguments(arguments)

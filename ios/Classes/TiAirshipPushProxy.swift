@@ -24,18 +24,22 @@ public class TiAirshipPushProxy: TiProxy {
     }
 
     @objc
-    public var userPushNotificationsEnabled: Bool {
-        get {
-            Airship.push.userPushNotificationsEnabled
+    public var userNotificationsEnabled: Bool {
+        Airship.push.userPushNotificationsEnabled
+    }
+
+    @objc(setUserNotificationsEnabled:)
+    public func setUserNotificationsEnabled(arg: Any) {
+        AirshipLogger.debug(describe(arg))
+        guard let enabled = arg as? Bool else {
+            rejectArguments(arg)
         }
-        set {
-            Airship.push.userPushNotificationsEnabled = newValue
-        }
+        Airship.push.userPushNotificationsEnabled = enabled
     }
 
     @objc(enableUserNotifications:)
     public func enableUserNotifications(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         let callback = arguments?.first as? KrollCallback
 
         Airship.push.enableUserPushNotifications { success in

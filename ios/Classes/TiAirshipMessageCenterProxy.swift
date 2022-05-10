@@ -31,7 +31,7 @@ public class TiAirshipMessageCenterProxy: TiProxy {
     
     @objc(markRead:)
     public func markRead(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let messageID = arguments?.first as? String else { rejectArguments(arguments) }
 
         if let message = MessageCenter.shared.messageList.message(forID: messageID) {
@@ -41,16 +41,16 @@ public class TiAirshipMessageCenterProxy: TiProxy {
 
     @objc(delete:)
     public func delete(arguments: [Any]?) {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let messageID = arguments?.first as? String else { rejectArguments(arguments) }
         if let message = MessageCenter.shared.messageList.message(forID: messageID) {
             MessageCenter.shared.messageList.markMessagesDeleted([message as Any])
         }
     }
 
-    @objc(open:)
-    public func open(arguments: [Any]?) {
-        logCall(arguments)
+    @objc(display:)
+    public func display(arguments: [Any]?) {
+        AirshipLogger.debug(describe(arguments))
         if let messageID = arguments?.first as? String {
             MessageCenter.shared.displayMessage(forID: messageID)
         } else {

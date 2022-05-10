@@ -10,23 +10,30 @@ public class TiAirshipInAppAutomationProxy: TiProxy {
 
     @objc
     public var isPaused: Bool {
-        get {
-            InAppAutomation.shared.isPaused
+        InAppAutomation.shared.isPaused
+    }
+
+    @objc(setIsPaused:)
+    public func setIsPaused(arg: Any) {
+        AirshipLogger.debug(describe(arg))
+        guard let paused = arg as? Bool else {
+            rejectArguments(arg)
         }
-        set {
-            logCall(newValue)
-            InAppAutomation.shared.isPaused = newValue
-        }
+        InAppAutomation.shared.isPaused = paused
     }
 
     @objc
     public var displayIntervalMilliseconds: Double {
-        get {
-            InAppAutomation.shared.inAppMessageManager.displayInterval * 1000.0
+        InAppAutomation.shared.inAppMessageManager.displayInterval * 1000.0
+    }
+
+    @objc(setDisplayIntervalMilliseconds:)
+    public func setDisplayIntervalMilliseconds(arg: Any) {
+        AirshipLogger.debug(describe(arg))
+        guard let value = arg as? Double else {
+            rejectArguments(arg)
         }
-        set {
-            logCall(newValue)
-            InAppAutomation.shared.inAppMessageManager.displayInterval = (newValue / 1000.0)
-        }
+
+        InAppAutomation.shared.inAppMessageManager.displayInterval = (value / 1000.0)
     }
 }

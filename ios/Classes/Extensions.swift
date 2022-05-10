@@ -5,8 +5,12 @@ import TitaniumKit
 import AirshipCore
 
 extension TiProxy {
-    func logCall(_ arguments: Any?){
-        Log.debug("arguments: \(String(describing: arguments))")
+
+    func describe(_ arguments: Any?) -> String {
+        if let arguments = arguments {
+            return "\(String(describing: arguments))"
+        }
+        return "nil"
     }
 
     func rejectArguments(_ arguments: Any?) -> Never {

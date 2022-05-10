@@ -15,7 +15,7 @@ public class TiAirshipAttributesEditorProxy: TiProxy {
 
     @objc(remove:)
     public func remove(arguments: [Any]?) -> TiAirshipAttributesEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let attribute = arguments?.first as? String else { rejectArguments(arguments) }
         self.editor.remove(attribute)
         return self
@@ -23,7 +23,7 @@ public class TiAirshipAttributesEditorProxy: TiProxy {
 
     @objc(set:)
     public func set(arguments: [Any]?) -> TiAirshipAttributesEditorProxy {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         guard let arguments = arguments,
               arguments.count == 2,
               let attribute = arguments[0] as? String
@@ -50,7 +50,7 @@ public class TiAirshipAttributesEditorProxy: TiProxy {
 
     @objc(apply:)
     public func apply(arguments: [Any]?) -> Void {
-        logCall(arguments)
+        AirshipLogger.debug(describe(arguments))
         self.editor.apply()
     }
 }
