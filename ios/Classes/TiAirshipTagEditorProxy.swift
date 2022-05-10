@@ -34,14 +34,6 @@ public class TiAirshipTagEditorProxy: TiProxy {
         return self
     }
 
-    @objc(set:)
-    public func set(arguments: [Any]?) -> TiAirshipTagEditorProxy {
-        AirshipLogger.debug(describe(arguments))
-        self.editor.set(parseTags(arguments))
-        return self
-    }
-
-
     @objc(apply:)
     public func apply(arguments: [Any]?) -> Void {
         AirshipLogger.debug(describe(arguments))

@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 
-import ti.airship.AirshipTitaniumModule;
+import ti.airship.TIAirshipModule;
 
 public class ChannelRegistrationEvent implements Event {
     private final String pushToken;
@@ -32,6 +32,6 @@ public class ChannelRegistrationEvent implements Event {
     @NonNull
     @Override
     public String getName() {
-        return AirshipTitaniumModule.EVENT_CHANNEL_UPDATED;
+        return TIAirshipModule.EVENT_CHANNEL_UPDATED;
     }
 }

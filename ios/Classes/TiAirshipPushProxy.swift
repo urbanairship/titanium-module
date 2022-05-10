@@ -24,6 +24,11 @@ public class TiAirshipPushProxy: TiProxy {
     }
 
     @objc
+    public var pushToken: String? {
+        Airship.push.deviceToken
+    }
+
+    @objc
     public var userNotificationsEnabled: Bool {
         Airship.push.userPushNotificationsEnabled
     }

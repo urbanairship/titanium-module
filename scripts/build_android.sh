@@ -6,7 +6,7 @@ ROOT_PATH=`dirname "${0}"`/..
 echo "Building Android"
 
 cd $ROOT_PATH/android
-npx appc run -p android --build-only
+npx titanium build -p android --build-only
 
 echo "Finished building Android"
 

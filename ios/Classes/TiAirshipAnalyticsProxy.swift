@@ -18,7 +18,7 @@ public class TiAirshipAnalyticsProxy: TiProxy {
     @objc(trackScreen:)
     public func trackScreen(arguments: [Any]?) {
         AirshipLogger.debug(describe(arguments))
-        guard let screenName = arguments?.first as? String else { rejectArguments(arguments) }
+        let screenName = arguments?.first as? String
         Airship.analytics.trackScreen(screenName)
     }
 

@@ -1,6 +1,6 @@
 /* Copyright Airship and Contributors */
 
-package ti.airship;
+package ti.airship.events;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,6 +9,8 @@ import com.urbanairship.push.NotificationInfo;
 import com.urbanairship.push.PushMessage;
 
 import java.util.HashMap;
+
+import ti.airship.utils.Utils;
 
 /**
  * Wraps Airship push messages.

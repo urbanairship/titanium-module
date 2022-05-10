@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import ti.airship.AirshipTitaniumModule;
+import ti.airship.TIAirshipModule;
 
 public class DeepLinkEvent implements Event {
     private final String deepLink;
@@ -19,7 +19,7 @@ public class DeepLinkEvent implements Event {
     @NonNull
     @Override
     public String getName() {
-        return AirshipTitaniumModule.EVENT_DEEP_LINK_RECEIVED;
+        return TIAirshipModule.EVENT_DEEP_LINK_RECEIVED;
     }
 
     @NonNull

@@ -3,16 +3,10 @@
 package ti.airship.events;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.urbanairship.push.NotificationActionButtonInfo;
-
-import java.util.HashMap;
 import java.util.Map;
 
-import ti.airship.AirshipTitaniumModule;
-import ti.airship.TiNotificationResponse;
-import ti.airship.TiPush;
+import ti.airship.TIAirshipModule;
 
 public class NotificationResponseEvent implements Event {
     private final TiNotificationResponse response;
@@ -30,6 +24,6 @@ public class NotificationResponseEvent implements Event {
     @NonNull
     @Override
     public String getName() {
-        return AirshipTitaniumModule.EVENT_NOTIFICATION_RESPONSE;
+        return TIAirshipModule.EVENT_NOTIFICATION_RESPONSE;
     }
 }

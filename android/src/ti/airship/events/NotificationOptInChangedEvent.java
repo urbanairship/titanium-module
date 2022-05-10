@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import ti.airship.AirshipTitaniumModule;
+import ti.airship.TIAirshipModule;
 
 public class NotificationOptInChangedEvent implements Event {
     private final boolean optInStatus;
@@ -17,7 +17,7 @@ public class NotificationOptInChangedEvent implements Event {
     @NonNull
     @Override
     public String getName() {
-        return AirshipTitaniumModule.EVENT_NOTIFICATION_OPT_IN_CHANGED;
+        return TIAirshipModule.EVENT_NOTIFICATION_OPT_IN_CHANGED;
     }
 
     @NonNull

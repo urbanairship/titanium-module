@@ -7,8 +7,7 @@ import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import ti.airship.AirshipTitaniumModule;
-import ti.airship.TiPush;
+import ti.airship.TIAirshipModule;
 
 public class PushReceivedEvent implements Event {
     private final TiPush tiPush;
@@ -30,6 +29,6 @@ public class PushReceivedEvent implements Event {
     @NonNull
     @Override
     public String getName() {
-        return AirshipTitaniumModule.EVENT_PUSH_RECEIVED;
+        return TIAirshipModule.EVENT_PUSH_RECEIVED;
     }
 }

@@ -1,4 +1,4 @@
-package ti.airship;
+package ti.airship.events;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
