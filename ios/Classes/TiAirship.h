@@ -1,10 +1,4 @@
-//
-//  TiAirship.h
-//  AirshipTitanium
-//
-//  Created by Your Name
-//  Copyright (c) 2022 Your Company. All rights reserved.
-//
+/* Copyright Airship and Contributors */
 
 #import <UIKit/UIKit.h>
 

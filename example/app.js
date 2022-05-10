@@ -1,6 +1,14 @@
 // Sample code
 
 var Airship = require('ti.airship');
+Airship.takeOff({
+    "default": {
+        "appKey": "APP KEY HERE",
+        "appSecret": "APP SECRET HERE"
+    },
+    "urlAllowList": ["*"],
+    "site": "us"
+})
 
 var window = Ti.UI.createWindow({backgroundColor:'white', layout:'vertical'});
 
@@ -175,11 +183,8 @@ channelIdLabel.text = Airship.channelId;
 
 // Associate channel to a Named User
 Airship.contact.identify("titanium person");
-Ti.API.info("namedUser: " + Airship.contact.namedUser);
-namedUserLabel.text = Airship.namedUser;
-
-// Add a custom identifier
-Airship.associateIdentifier("customKey", "customIdentifier");
+Ti.API.info("namedUser: " + Airship.contact.namedUserId);
+namedUserLabel.text = Airship.contact.namedUserId;
 
 // Add a custom event
 var customEvent = {
@@ -198,8 +203,8 @@ var customEvent = {
     }
 };
 
-var customEventPayload = JSON.stringify(customEvent);
-Airship.addCustomEvent(customEventPayload);
+Airship.analytics.addEvent(customEvent);
+Airship.analytics.trackScreen("woot");
 
 // Set Tags
 Airship.tags = [ osname, 'titanium-test' ];
@@ -217,47 +222,37 @@ data.forEach( function ( val, i ) {
 tagsLabel.text = tags;
 
 // Set switch to current state of push
-notificationsEnabledSwitch.value = Airship.userNotificationsEnabled;
+notificationsEnabledSwitch.value = Airship.push.userNotificationsEnabled;
 
 // Toggle push state on switch change
 notificationsEnabledSwitch.addEventListener('change', function (e) {
-    Airship.userNotificationsEnabled = e.value;
+    Airship.push.userNotificationsEnabled = e.value;
 });
 
-Ti.API.info("Launch: " + Airship.getLaunchNotification(true).message);
-Ti.API.info("Launch Deep Link: " + Airship.getDeepLink(true));
-
-if(isAndroid) {
-    window.addEventListener("open", function(e) {
-        window.activity.addEventListener("resume", function() {
-            Ti.App.fireEvent('resume');
-        });
-        //Notice the pause event
-        window.activity.addEventListener("pause", function() {
-            Ti.App.fireEvent('paused');
-        });
-    });
-
-    Ti.App.addEventListener('resume', function() {
-        Ti.API.info("Launch: " + Airship.getLaunchNotification(true).message);
-    });
-} else {
-    Ti.App.addEventListener('resumed', function() {
-        Ti.API.info("Launch iOS resumed: " + Airship.getLaunchNotification(true).message);
-    });
-}
-
-Airship.addEventListener(Airship.EVENT_DEEP_LINK_RECEIVED, function (e) {
-    alert("Received deepLink: " + e.deepLink);
+Airship.addEventListener(Airship.pushReceivedEvent, function (e) {
+    alert("pushReceivedEvent: " + JSON.stringify(e));
 });
 
-Airship.addEventListener(Airship.EVENT_CHANNEL_UPDATED, function(e) {
-        Ti.API.info('Channel Updated: ' + Airship.channelId);
-        channelIdLabel.text = Airship.channelId;
+Airship.addEventListener(Airship.notificationResponseReceivedEvent, function (e) {
+    alert("notificationResponseReceivedEvent: " + JSON.stringify(e));
 });
 
-Airship.addEventListener(Airship.EVENT_PUSH_RECEIVED, function(e) {
-        Ti.API.info('Push received: ' + e.message);
-        Ti.API.info('Extras: ' + JSON.stringify(e.extras));
-        labelMessage.text = e.message;
+Airship.addEventListener(Airship.notificationOptInStatusChangedEvent, function (e) {
+    alert("notificationOptInStatusChangedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.channelCreatedEvent, function (e) {
+    alert("channelCreatedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.deepLinkReceivedEvent, function (e) {
+    alert("deepLinkReceivedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.inboxUpdatedEvent, function (e) {
+    alert("inboxUpdatedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.openPreferenceCenterEvent, function (e) {
+    alert("openPreferenceCenterEvent: " + JSON.stringify(e));
 });
