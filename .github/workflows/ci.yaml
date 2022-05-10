@@ -14,9 +14,6 @@ jobs:
         with:
           java-version: "12.x"
 
-      - name: Setup Appcelerator
-        run: ./scripts/setup_appc.sh ${{ secrets.APPC_USER_NAME }} ${{ secrets.APPC_PASSWORD }}
-
       - name: Check plugin version
         run: ./scripts/check_version.sh
 
