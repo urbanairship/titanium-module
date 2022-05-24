@@ -37,9 +37,6 @@ jobs:
           NOTES="${NOTES//$'\r'/'%0D'}"
           echo ::set-output name=NOTES::"$NOTES"
 
-      - name: Setup Appcelerator
-        run: ./scripts/setup_appc.sh ${{ secrets.APPC_USER_NAME }} ${{ secrets.APPC_PASSWORD }}
-
       - name: Build
         run: make build
 
