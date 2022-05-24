@@ -1,28 +1,11 @@
 /* Copyright Airship and Contributors */
 
-#import <Foundation/Foundation.h>
-#import "TiAirshipEventEmitter.h"
-#import "TiAirshipNotificationResponse.h"
+#import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+//! Project version number for TiAirship.
+FOUNDATION_EXPORT double TiAirshipVersionNumber;
 
-/**
- * Handles listeners and plugin state for the module. Needed
- * since the module lifecycle does not match the app lifecycle.
- */
-@interface TiAirship : NSObject
+//! Project version string for TiAirship.
+FOUNDATION_EXPORT const unsigned char TiAirshipVersionString[];
 
-@property (nonatomic, copy, nullable) NSString *deepLink;
-@property (nonatomic, strong, nullable) TiAirshipNotificationResponse *launchNotificationResponse;
-@property (nonatomic, readonly) TiAirshipEventEmitter *eventEmitter;
-
-+ (TiAirship *)shared;
-
-/**
- * Called in autpilot after Airship is ready.
- */
-- (void)takeOff;
-
-@end
-
-NS_ASSUME_NONNULL_END
+#import "TiAirshipModuleAssets.h"
