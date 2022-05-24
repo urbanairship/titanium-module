@@ -13,36 +13,15 @@ Titanium module for Airship services. [Download the latest release here.](https:
 
 ## Quickstart
 
-Modify the `tiapp.xml` file to include the Urban Airship Config:
-
 ```
-  <!-- Production credentials -->
-  <property name="com.urbanairship.production_app_key" type="string">Your Production App Key</property>
-  <property name="com.urbanairship.production_app_secret" type="string">Your Production App Secret</property>
+    var Airship = require("ti.airship");
 
-  <!-- Development credentials -->
-  <property name="com.urbanairship.development_app_key" type="string">Your Development App Key</property>
-  <property name="com.urbanairship.development_app_secret" type="string">Your Development App Secret</property>
-
-   <!-- Airship SDK Site (US or EU) defaults to US) -->
-  <property name="com.urbanairship.site" type="string">US</property>
-
-  <!-- Selects between production vs development credentials -->
-  <property name="com.urbanairship.in_production" type="bool">false</property>
-
-  <!-- Enable data collection opt-in. Defaults to false. -->
-  <property name="com.urbanairship.data_collection_opt_in_enabled" type="bool">false</property>
-
-  <!-- Android -->
-  <property name="com.urbanairship.notification_icon" type="string">Name of an icon in /project_name/platform/android/res/drawable folders, e.g. ic_notification.png</property>
-  <property name="com.urbanairship.notification_accent_color" type="string">Notification accent color, e.g. #ff0000</property>
-
-  <!-- iOS alert foreground notification presentation option -->
-  <property name="com.urbanairship.ios_foreground_notification_presentation_alert" type="bool">true</property>
-  <!-- iOS badge foreground notification presentation option -->
-  <property name="com.urbanairship.ios_foreground_notification_presentation_badge" type="bool">true</property>
-  <!-- iOS sound foreground notification presentation option -->
-  <property name="com.urbanairship.ios_foreground_notification_presentation_sound" type="bool">true</property>
+    Airship.takeOff({
+      "default": {
+        "appKey": Your App Key,
+        "appSecret": Your App Secret
+      },
+    });
 ```
 
 For iOS, enable background remote notifications in the `tiapp.xml` file:

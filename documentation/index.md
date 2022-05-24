@@ -1,155 +1,487 @@
 # Airship Titanium Module API
 
-## Events
+## Airship
 
-### EVENT_CHANNEL_UPDATED
+Top level Airship instance.
 
-Event sent when the channel is updated or created.
+### Constants
+
+#### eventChannelCreated
+
+Event sent when the channel created. The event body will include:
  - channelId: String. The channel ID of the app instance.
- - deviceToken: (deprecated, iOS only) String. The device token.
- - pushToken: String. The push token.
 
-```
-    Airship.addEventListener(Airship.EVENT_CHANNEL_UPDATED, function(e) {
-        Ti.API.info('Channel Updated: ' + e.channelId)
-    })
-```
 
-### EVENT_NOTIFICATION_OPT_IN_CHANGED
+#### eventNotificationOptInStatusChanged
 
-Event sent when the notification opt-in status changes.
+Event sent when the notification opt-in status changes. The event body will include:
 - optIn: Boolean. True if the notifications are opted-in, otherwise false.
-- authorizedSettings: Object. iOS Only.
-    - alert: Boolean. True if alert is allowed, otherwise false.
-    - badge: Boolean. True if badge is allowed, otherwise false.
-    - sound: Boolean. True if sound is allowed, otherwise false.
-    - criticalAlert: Boolean. True if critical alerts are allowed, otherwise false.
-    - announcement: Boolean. True if announcements is allowed, otherwise false.
-    - lockScreen: Boolean. True if lock screen notifications are allowed, otherwise false.
-    - notificationCenter: Boolean. True if notification center notifications are allowed, otherwise false.
-    - carPlay: Boolean. True if car play notifications are allowed, otherwise false.
+- authorizedSettings: Array of authorized settings.
 
-```
-    Airship.addEventListener(Airship.EVENT_NOTIFICATION_OPT_IN_CHANGED, function(e) {
-        Ti.API.info('OptIn: ' + e.optIn)
-    })
-```
+#### eventPushReceived
 
-### EVENT_PUSH_RECEIVED
-
-Event sent when a push is received.
- - message: String. The message's alert.
- - title: String. The message's title.
+Event sent when a push is received. The event body will include:
+ - payload: The full message payload. Will be different between iOS and Android.
+ - notification:
+    - title: String. The message's title.
+    - alert: String. The message's alert.
+    - notificationId: (Android only) String. The notification ID
  - extras: Object. The message's extras.
- - notificationId: String. The notification ID.
- - receivedInForeground: Boolean. True if received in foreground, otherwise false.
 
-```
-    Airship.addEventListener(Airship.EVENT_PUSH_RECEIVED, function(e) {
-        Ti.API.info('Push received: ' + e.message)
-    })
-```
 
-### EVENT_NOTIFICATION_RESPONSE
+#### eventNotificationResponseReceived
 
-Event sent when a notification response is received.
- - message: String. The message's alert.
- - title: String. The message's title.
+Event sent when a notification response is received. The event body will include:
+ - payload: The full message payload. Will be different between iOS and Android.
+ - notification:
+    - title: String. The message's title.
+    - alert: String. The message's alert.
+    - notificationId: (Android only) String. The notification ID.
  - extras: Object. The message's extras.
- - notificationId: String. The notification ID. On Android, this will either be "<TAG>:<ID>" or just "<ID>".
  - actionId: String. The button action Id if a button was tapped.
  - isForeground: Boolean. True if the response will foreground app, otherwise false.
 
+### logLevelVerbose
+
+Verbose log level.
+
+### logLevelDebug
+
+Debug log level.
+
+### logLevelInfo
+
+Info log level.
+
+### logLevelWarning
+
+Warning log level.
+
+### logLevelError
+
+Error log level.
+
+### logLevelNone
+
+Used to disable logging.
+
+### cloudSiteEu
+
+EU cloud site.
+
+### cloudSiteUs
+
+US cloud site.
+
+### Methods
+
+#### takeOff(config)
+
+Called to initialize the Airship instance. Airship can only be initialized once per app init. Config will be cached and applied to the following app inits. If takeOff is called after Airship is initialized, the config will be applied to the next app run.
+
+config:
+ - default: Environment.
+ - production: Environment.
+ - development: Environment.
+ - inProduction: Boolean. true if in production, false if development. If not set, the plugin will auto determine the flag.
+ - site: The cloud site. Defaults to US.
+ - enabledFeatures: The list of features to enable by default. Use `["none"]` to disable all features.
+ - urlAllowList: Array of strings. A list of allow list rules. Use `["*"]` to allow all Urls. Applies to both `urlAllowListScopeOpenUrl` and `urlAllowListScopeJavaScriptInterface`
+ - urlAllowListScopeOpenUrl: Array of allow list rules for URLs that the SDK is allowed to open.
+ - urlAllowListScopeJavaScriptInterface: Array of allow list rules for URLs that the SDK is should inject the JS interface when loaded in a web view.
+ - android
+    - appStoreUri: The app store Uri. Used by the rate app action.
+    - fcmFirebaseAppName: The firebase app name if using a FCM project other than default.
+    - notificationConfig:
+        - icon: The notification icon name.
+        - largeIcon: The notification large icon name.
+        - accentColor: The notification accent color a color string #AARRGGBB
+        - defaultChannelId: The default notification channel/category.
+ - iOS
+    - itunesId: The itunes ID. Used by the rate app action.
+
+Environment:
+ - appKey: The app key.
+ - appKey: The app secret.
+ - logLevel: The log level.
+
+A valid environment is required, everything else is optional. Production and development environment will override default depending.
+
+### Properties 
+
+#### isFlying
+
+Boolean property that indicates if Airship is initialized or not.
+
+#### channel
+
+The channel instance.
+
+#### contact
+
+The contact instance. 
+
+#### push
+
+The push instance.
+
+#### analytics
+
+The analytics instance.
+
+#### locale
+
+The locale instance.
+
+#### inAppAutomation
+
+The in-app automation instance.
+
+#### messageCenter
+
+The message center instance.
+
+#### preferenceCenter
+
+The preference center instance.
+
+#### privacyManager
+
+The privacy manager instance.
+
+## Channel
+
+Provides access to channel level segmentation properties.
+
+### Properties
+
+#### identifier
+
+The channel identifier. The identifier will not be available right away on the first run, use `Airship.eventChannelCreated` to listen for when the channel is created.
+
+#### tags
+
+Sets or gets the channel tags. Tags can be used to segment the audience. Applications
+should use Airship.editTags() to add or remove tags.
+
 ```
-    Airship.addEventListener(Airship.EVENT_NOTIFICATION_RESPONSE, function(e) {
-        Ti.API.info('Notification response: ' + e.message)
-    })
+    Airship.channel.tags = ["test", "titanium"]
 ```
 
-### EVENT_DEEP_LINK_RECEIVED
+### Methods
 
-Event when a deep link is received.
- - deepLink: The deep link.
+#### editTags()
 
-```
-    Airship.addEventListener(Airship.EVENT_DEEP_LINK_RECEIVED, function(e) {
-        Ti.API.info('DeepLink: ' + e.deepLink)
-    })
-```
-
-## Properties
-
-### channelId
-
-Returns the app's channel ID. The channel ID might not be immediately available on a new install. Use
-the EVENT_CHANNEL_UPDATED event to be notified when it becomes available.
+Creates a tag editor instance for the channel. Once edits are done, make sure to call apply on the instance to save changes to the channel.
 
 ```
-    Ti.API.info('Channel ID: ' + Airship.channelId);
+Airship.channel.editTags()
+  .addTags(["foo"])
+  .removeTags(["cool", "neat"])
+  .apply()
 ```
 
-### pushToken
+#### editTagGroups()
 
-Returns the app's push token
+Creates a tag group editor instance for the channel. Once edits are done, make sure to call apply on the instance to save changes to the channel.
+
 ```
-    Ti.API.info('Push token: ' + Airship.pushToken);
+Airship.channel.editTagGroups()
+  .addTags("some-group", ["foo"])
+  .removeTags("some-other-group", ["cool", "neat"])
+  .apply()
 ```
+
+#### editSubscriptionLists()
+
+Creates a subscription list editor instance for the channel. Once edits are done, make sure to call apply on the instance to save changes to channel.
+
+```
+Airship.channel.editSubscriptionLists()
+  .subscribe("bears")
+  .unsubscribe("battle-star")
+  .apply()
+```
+
+#### editAttributes()
+
+Creates an attribute editor instance for the channel. Once edits are done, make sure to call apply on the instance to save changes to the channel.
+
+```
+Airship.channel.editAttributes()
+  .setAttribute("favorite_color", "red")
+  .apply()
+```
+
+#### fetchSubscriptionLists(callback)
+
+Fetches the current subscription lists for the channel. The lists are an array of subscription ids that the channel is currently subscribed to. The result body includes:
+- error: An error if it failed ot fetch subscriptions.
+- subscriptions: The list of subscriptions.
+
+```
+Airship.channel.fetchSubscriptionLists(function (result) {
+    Ti.API.info("lists: " + JSON.stringify(result))
+});
+```
+
+## Contact
+
+Provides access to segmentation data at the contact/user level. If a contact is not named you can still apply attributes, tags, and subscription lists as an anonymous contact.
+
+### Constants
+
+#### scopeApp
+
+The app scope when getting/setting subscription lists.
+
+#### scopeWeb
+
+The web scope when getting/setting subscription lists.
+
+#### scopeEmail
+
+The email scope when getting/setting subscription lists.
+
+#### scopeSms
+
+The SMS scope when getting/setting subscription lists.
+
+### Properties
+
+### namedUserId
+
+The current named user Id that was set through the App.
+
+### Methods
+
+#### editTagGroups()
+
+Creates a tag group editor instance for the contact. Once edits are done, make sure to call apply on the instance to save changes to the contact.
+
+```
+Airship.contact.editTagGroups()
+  .addTags("some-group", ["foo"])
+  .removeTags("some-other-group", ["cool", "neat"])
+  .apply()
+```
+
+#### editSubscriptionLists()
+
+Creates a scoped subscription list editor instance for the contact. Once edits are done, make sure to call apply on the instance to save changes to contact.
+
+```
+Airship.contact.editSubscriptionLists()
+  .subscribe("bears", Airship.contact.scopeApp)
+  .unsubscribe("battle-star", Airship.contact.scopeEmail)
+  .apply()
+```
+
+#### editAttributes()
+
+Creates an attribute editor instance for the contact. Once edits are done, make sure to call apply on the instance to save changes to the contact.
+
+```
+Airship.contact.editAttributes()
+  .setAttribute("favorite_color", "red")
+  .apply()
+```
+
+#### fetchSubscriptionLists(callback)
+
+Fetches the current subscription lists for the channel. The result body includes:
+- error: An error if it failed ot fetch subscriptions.
+- subscriptions: A map of subscribed Ids to a list of scopes.
+
+```
+Airship.contact.fetchSubscriptionLists(function (result) {
+    Ti.API.info("lists: " + JSON.stringify(result))
+});
+```
+
+#### identify(namedUserId)
+
+Identifies the contact.
+
+```
+Airship.contact.identify("bart")
+```
+
+#### reset()
+
+Resets the contact.
+
+```
+Airship.contact.reset()
+```
+
+
+## Push
 
 ### userNotificationsEnabled
 
-Enables or disables user notifications. On iOS, user notifications can only be enabled and enabling
-notifications the first time will prompt the user to enable notifications.
+Enables or disables user notifications. On iOS, enabling notifications the first time will
+prompt the user to enable notifications.
 
 ```
-    Airship.userNotificationsEnabled = true;
+    Airship.push.userNotificationsEnabled = true;
 ```
 
-### isUserNotificationsOptedIn
+### enableUserNotifications(callback)
 
-Checks if notifications are currently opted-in.
-
-```
-    Ti.API.info('Notifications opted-in:' + Airship.isUserNotificationsOptedIn);
-```
-
-### tags
-
-Sets or gets the channel tags. Tags can be used to segment the audience. Applications
-should use createChannelTagEditor() to add or remove tags.
+Enables user notifications with a callback with the result.
 
 ```
-    Airship.tags = ["test", "titanium"]
-
-    Airship.tags.forEach(function(tag) {
-        Ti.API.info("Tag: " + tag)
-    });
+    Airship.enableUserNotifications((function(result) {
+        Ti.API.info("Notifications Enabled: " + result.success)
+    })
 ```
 
-### namedUser
 
-Sets the namedUser for the device.
+### notificationStatus
 
-```
-    Airship.namedUser = "totes mcgoats"
-```
+Gets the current notification status:
+ - systemEnabled: Boolean. True if notifications are enabled in the system settings for the app or false.
+ - airshipOptIn: Boolean. True if push notifications are receivable through Airship.
 
-### isDataCollectionEnabled
 
-Enables or disables data collection. To require data be opted in before collected, set
-`com.urbanairship.data_collection_opt_in_enabled` to true in the app's config. Disabling
-data collection disables tags, attributes, analytics, named user, and push. To allow the user to still receive broadcast pushes, set `isPushTokenRegistrationEnabled` to true.
+## Push.iOS
 
-```
-    Airship.isDataCollectionEnabled = true
-```
+Push extensions for iOS.
 
-### isPushTokenRegistrationEnabled
+### Constants
 
-Enables or disables push token registration. This value defaults to the current value of `isDataCollectionEnabled`. Can be used to enable broadcast push and still have data collection disabled.
+#### authorizedSettingAlert
 
-```
-    Airship.isPushTokenRegistrationEnabled = true
-```
+Authorized setting for alert.
+
+#### authorizedSettingBadge
+
+Authorized setting for badge.
+
+#### authorizedSettingSound
+
+Authorized setting for sound.
+
+#### authorizedSettingAnnouncement
+
+Authorized setting for announcement.
+
+#### authorizedSettingCarPlay
+
+Authorized setting for car play.
+
+#### authorizedSettingCriticalAlert
+
+Authorized setting for critical alert.
+
+#### authorizedSettingNotificationCenter 
+
+Authorized setting for notification center.
+
+#### authorizedSettingScheduledDelivery
+
+Authorized setting for scheduled delivery.
+
+#### authorizedSettingTimeSensitive 
+
+Authorized setting for time sensitive notifications.
+
+#### authorizedSettingLockScreen
+
+Authorized setting for lock screen.
+
+#### presentationOptionAlert
+
+Foreground presentation option for alert. Use list or banner for iOS 14.
+
+#### presentationOptionBadge
+
+Foreground presentation option for badge.
+
+#### presentationOptionSound
+
+Foreground presentation option for sound.
+
+#### presentationOptionList
+
+Foreground presentation option for list. iOS 14+ only.
+
+#### presentationOptionBanner
+
+Foreground presentation option for banner. iOS 14+ only.
+
+#### notificationOptionAlert
+
+Notification option for alert.
+
+#### notificationOptionBadge
+
+Notification option for badge.
+
+#### notificationOptionSound
+
+Notification option for sound.
+
+#### notificationOptionCarPlay
+
+Notification option for car play.
+
+#### notificationOptionCriticalAlert
+
+Notification option for critical alert.
+
+#### notificationOptionProvidesAppNotificationSettings
+
+Notification option if your app provides settings for notifications.
+
+#### notificationOptionProvisional
+
+Notification option for provisional notifications.
+
+#### authorizedStatusAuthorized
+
+Authorized notification status.
+
+#### authorizedStatusEphemeral
+
+Ephemeral notification status.
+
+#### authorizedStatusProvisional
+
+Provisional notification status.
+
+#### authorizedStatusNotDetermined
+
+Not determined notification status.
+
+#### authorizedStatusDenied
+
+Denied notification status.
+
+### Properties 
+
+#### foregroundPresentationOptions
+
+Gets or sets the foreground presentation options.
+
+#### notificationOptions
+
+Gets or sets the notification options.
+
+#### isAutoBadgeEnabled
+
+Property to enable or disable auto badge on iOS.
+
+#### badgeNumber
+
+The badge number on iOS.    
+
+### Methods
+
+#### resetBadge()
+
+Resets the badge to zero.
 
 ### isInAppAutomationPaused
 
@@ -159,149 +491,177 @@ Pauses or resumes In-App messaging.
     Airship.isInAppAutomationPaused = true
 ```
 
-### authorizedNotificationSettings (iOS only)
+## Privacy Manager
 
-Returns the authorized notification settings object:
+### Constants
 
-- alert: Boolean. True if alert is allowed, otherwise false.
-- badge: Boolean. True if badge is allowed, otherwise false.
-- sound: Boolean. True if sound is allowed, otherwise false.
-- criticalAlert: Boolean. True if critical alerts are allowed, otherwise false.
-- announcement: Boolean. True if announcements is allowed, otherwise false.
-- lockScreen: Boolean. True if lock screen notifications are allowed, otherwise false.
-- notificationCenter: Boolean. True if notification center notifications are allowed, otherwise false.
-- carPlay: Boolean. True if car play notifications are allowed, otherwise false.
+#### featureAll
 
-```
-    Ti.API.info("Authorized settings: " + JSON.stringify(Airship.authorizedNotificationSettings)
-```
+All features.
 
-### authorizedNotificationStatus (iOS only)
+#### featureNone
 
-Returns the authorized notification status. One of: "denied", "provisional", "authorized", or "not_determined".
+No features.
 
-```
-    Ti.API.info("Authorized status: " + Airship.authorizedNotificationStatus)
-```
+#### featurePush
 
-### isAutoBadgeEnabled (iOS only)
+Push notification feature.
 
-Property to enable auto badge on iOS.
+#### featureMessageCenter
 
-```
-    Airship.isAutoBadgeEnabled = true
-```
+Message Center feature.
 
-### badgeNumber (iOS only)
+#### featureInAppAutomation
 
-The badge number on iOS.
+In-App Automation feature.
 
-```
-    Airship.badgeNumber = 3
-```
+#### featureContacts
 
-## Methods
+Contacts feature.
 
-### enableUserNotifications(callback)
+#### featureTagsAndAttributes
 
-Enables user notifications with a callback with the result.
+Tags, Attributes, and Subscription feature.
 
+#### featureAnalytics
 
-```
-    Airship.enableUserNotifications((function(result) {
-        Ti.API.info("Notifications Enabled: " + result.success)
-    })
-```
+Analytics feature.
 
-### createChannelTagsEditor()
+#### featureChat
 
-The tag editor allows adding and removing tags on the channel.
+Chat feature.
 
-```
-    var editor = Airship.createChannelTagsEditor()
-    editor.clearTags()
-    editor.addTags("neat", "rad")
-    editor.removeTags("cool")
-    editor.applyTags()
-```
+#### featureLocation
 
-### createChannelTagGroupEditor()
+Location feature.
 
-The tag editor allows editing channel tag groups.
+Privacy manager controls what features and data is collected by the Airship SDK.
+
+### Properties
+
+#### privacyManager.enabledFeatures
+
+Gets or sets the list of enabled features.
+
+### privacyManager.enable(features)
+
+Adds features to the enabled set.
+
+### privacyManager.disable(features)
+
+Removes features to the enabled set.
+
+## Analytics
+
+### Methods
+
+#### editAssociatedIdentifiers()
+
+Creates an editor to edit the associated identifiers.
 
 ```
-    var editor = Airship.createChannelTagGroupsEditor()
-    editor.addTags("group", "neat", "rad")
-    editor.removeTags("group", "cool")
-    editor.setTags("another group", "awesome")
-    editor.applyTags()
+    Airship.analytics.editAssociatedIdentifiers()
+        .setIdentifier("foo", "bar")
+        .apply();
 ```
 
-### createNamedUserTagGroupEditor()
+#### newEvent(eventName)
 
-The tag editor allows editing named user tag groups.
-
-```
-    var editor = Airship.createNamedUserTagGroupsEditor()
-    editor.addTags("group", "neat", "rad")
-    editor.removeTag("group", "cool")
-    editor.setTags("another group", "awesome")
-    editor.applyTags()
-```
-
-### createNamedUserAttributesEditor()
-
-The attributes editor allows editing named user attributes. The supported attribute types are
-String, Number, and Date.
+Creates a new event with the given event name.
 
 ```
-    var editor = Airship.createNamedUserAttributesEditor()
-    editor.setAttribute("name", "gary")
-    editor.setAttribute("current date", new Date())
-    editor.setAttribute("level", 3)
-    editor.removeAttribute("legacy_name")
-    editor.applyAttributes()
+    var event = Airship.analytics.newEvent("foo")
+    event.eventValue = 100.0
+    event.eventProperties = {
+        someBoolean: true,
+        someDouble: 124.49,
+        someString: "customString",
+        someInt: 5,
+        someLong: 1234567890,
+        someArray: ["tangerine", "pineapple", "kiwi"]
+    }
+    event.track()
 ```
 
-### createChannelAttributesEditor()
+#### trackScreen(screenName)
 
-The attributes editor allows editing channel attributes. The supported attribute types are
-String, Number, and Date.
-
-```
-    var editor = Airship.createChannelAttributesEditor()
-    editor.setAttribute("name", "gary")
-    editor.setAttribute("current date", new Date())
-    editor.setAttribute("level", 3)
-    editor.removeAttribute("legacy_name")
-    editor.applyAttributes()
-```
-
-### getLaunchNotification([clear])
-
-Gets the notification that launched the app. The notification will have the following:
- - message: The push alert message.
- - extras: Map of all the push extras.
- - notificationId: (Android only) The ID of the posted notification.
-
-`clear` is used to prevent getLaunchNotification from returning the notification again.
-
+Tracks a screen.
 
 ```
-    Ti.API.info("Launch notification: " + Airship.getLaunchNotification(false).message);
+    Airship.trackScreen("home")
 ```
 
-### getDeepLink([clear])
+## Locale
 
-Gets the deep link that launched the app.
+Locale controls which locale is configured for the Channel when using Airship messaging features.
 
-`clear` is used to prevent getDeepLink from returning the deepLink again.
+### Properties
 
-```
-    Ti.API.info("Deep link: " + Airship.getDeepLink(false))
-```
+### currentLocale
+
+Gets or sets the locale for Airship.
+
+### reset()
+
+Reset the locale to the app's locale.
+
+## In App Automation
+
+### Properties
+
+#### inAppAutomation.isPaused
+
+Resumes or pauses in-app automations.
+
+#### inAppAutomation.displayIntervalMilliseconds
+
+Sets the display interval in milliseconds.
+
+## Preference Center
+
+### Methods
+
+#### preferenceCenter.setUseCustomPreferenceCenter(preferenceCenterId, useCustom)
+
+Sets if Airship should automatically display a preference center for the given ID or not.
+
+#### display(preferenceCenterId)
+
+Displays a preference center with the given ID. If `useCustom` is set for the preference center Id, it will
+emit an event instead of displaying the preference center.
+
+#### getConfig(preferenceCenterId)
+
+Gets the config for the preference center.
+
+## Message Center
+
+### Properties
+
+#### messages
+
+The list of messages.
+
+### Methods
+
+#### markMessageRead(messageId)
+
+Marks a message read.
+
+#### deleteMessage(messageId)
+
+Deletes a message.
+
+#### display()
+
+Displays the message center.
+
+#### displayMessage(messageId)
+
+Displays the message.
 
 ### displayMessageCenter()
+
 
 Displays the message center.
 
@@ -309,55 +669,137 @@ Displays the message center.
     Airship.displayMessageCenter()
 ```
 
-### associateIdentifier(key, identifier)
+## ScopedSubscriptionListEditor
 
-Associate a custom identifier.
-Previous identifiers will be replaced by the new identifiers each time associateIdentifier is called.
-It is a set operation.
- - key: The custom key for the identifier as a string.
- - identifier: The value of the identifier as a string, or `null` to remove the identifier.
+Editor for a contact subscription lists.
 
-```
-    Airship.associateIdentifier("customKey", "customIdentifier")
-```
+### Methods
 
-### addCustomEvent(eventPayload)
+#### subscribe(listId, scope)
 
-Adds a custom event.
- - eventPayload: The custom event object.
+Subscribes to a list with the given scope.
 
-```
-    var customEvent = {
-      event_name: 'customEventName',
-      event_value: 2016,
-      transaction_id: 'customTransactionId',
-      interaction_id: 'customInteractionId',
-      interaction_type: 'customInteractionType',
-      properties: {
-        someBoolean: true,
-        someDouble: 124.49,
-        someString: "customString",
-        someInt: 5,
-        someLong: 1234567890,
-        someArray: ["tangerine", "pineapple", "kiwi"]
-      }
-    }
+#### unsubscribe(listId, scope)
 
-    Airship.addCustomEvent(customEventPayload)
-```
+Unsubscribes from a list with the given scope.
 
-### trackScreen(screenName)
+#### apply()
 
-Screen tracking event.
+Applies the changes.
 
-```
-    Airship.trackScreen("home")
-```
 
-### resetBadge() (iOS only)
+## SubscriptionListEditor
 
-Resets the badge on iOS.
+Editor for a channel subscription lists.
 
-```
-    Airship.resetBadge()
-```
+### Methods
+
+#### subscribe(listId)
+
+Subscribes to a list.
+
+#### unsubscribe(listId)
+
+Unsubscribes from a list.
+
+#### apply()
+
+Applies the changes.
+
+## TagEditor
+
+### Methods
+
+#### addTags(tags)
+
+Adds tags.
+
+#### removeTags(tags)
+
+Removes tags.
+
+#### clearTags()
+
+Clears the tags.
+
+#### apply()
+
+Applies the changes.
+
+## TagGroupEditor
+
+### Methods
+
+#### addTags(group, tags)
+
+Adds tags to the group.
+
+#### removeTags(group, tags)
+
+Removes tags from the group.
+
+#### apply()
+
+Applies the changes.
+
+## AttributesEditor
+
+### Methods
+
+#### setAttribute(attributeId, value)
+
+Sets the attribute. The value can be a number, string, or date.
+
+#### removeAttribute(attributeId)
+
+Removes the attribute.
+
+#### apply()
+
+Applies the changes.
+
+## AssociatedIdEditor
+
+### Methods
+
+#### setIdentifier(key, value)
+
+Sets the identifier. Both need to be a string.
+
+#### removeIdentifier(key)
+
+Removes the identifier.
+
+#### apply()
+
+Applies the changes.
+
+## CustomEvent
+
+### Properties
+
+#### eventValue
+
+The event value. Must be a number.
+
+#### transactionId
+
+Sets the transaction ID.
+
+#### interactionId
+
+Sets the interaction ID. Both ID and type must be set if one is set.
+
+#### interactionType
+
+Sets the interaction type. Both ID and type must be set if one is set.
+
+#### eventProperties
+
+Additional event properties. Must be a JSON object.
+
+### Methods
+
+#### track()
+
+Tracks the event.
