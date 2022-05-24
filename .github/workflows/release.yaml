@@ -17,6 +17,9 @@ jobs:
         with:
           java-version: "12.x"
 
+      - name: Setup Ti
+        run: ./scripts/setup_ti.sh
+
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}

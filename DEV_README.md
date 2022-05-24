@@ -13,5 +13,5 @@ Module uses a makefile for build and install commands:
 Run "./scripts/update_version <VERSION>" from root directory
 
 ## Updating SDKs
-Android: Update android/build.gradle with latest airship version
-iOS: Update ios/Cartfile with latest airship version
+Android: Update the version in android/build.gradle.
+iOS: Update the version in scripts/build_ios.sh.
