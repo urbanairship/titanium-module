@@ -1,6 +1,14 @@
 // Sample code
 
 var Airship = require('ti.airship');
+Airship.takeOff({
+    "default": {
+        "appKey": "APP KEY HERE",
+        "appSecret": "APP SECRET HERE"
+    },
+    "urlAllowList": ["*"],
+    "site": Airship.cloudSiteUs
+})
 
 var window = Ti.UI.createWindow({backgroundColor:'white', layout:'vertical'});
 
@@ -166,7 +174,7 @@ window.add(view);
 
 // Listen for click events.
 mesgCtrButton.addEventListener('click', function() {
-    Airship.displayMessageCenter();
+    Airship.messageCenter.display();
 });
 
 window.open();
@@ -174,32 +182,11 @@ window.open();
 channelIdLabel.text = Airship.channelId;
 
 // Associate channel to a Named User
-Airship.namedUser = "namedUser";
-Ti.API.info("namedUser: " + Airship.namedUser);
-namedUserLabel.text = Airship.namedUser;
+Airship.contact.identify("titanium person");
+Ti.API.info("namedUser: " + Airship.contact.namedUserId);
+namedUserLabel.text = Airship.contact.namedUserId;
 
-// Add a custom identifier
-Airship.associateIdentifier("customKey", "customIdentifier");
-
-// Add a custom event
-var customEvent = {
-    event_name: 'customEventName',
-    event_value: 2016,
-    transaction_id: 'customTransactionId',
-    interaction_id: 'customInteractionId',
-    interaction_type: 'customInteractionType',
-    properties: {
-        someBoolean: true,
-        someDouble: 124.49,
-        someString: "customString",
-        someInt: 5,
-        someLong: 1234567890,
-        someArray: ["tangerine", "pineapple", "kiwi"]
-    }
-};
-
-var customEventPayload = JSON.stringify(customEvent);
-Airship.addCustomEvent(customEventPayload);
+Airship.analytics.trackScreen("woot");
 
 // Set Tags
 Airship.tags = [ osname, 'titanium-test' ];
@@ -217,47 +204,37 @@ data.forEach( function ( val, i ) {
 tagsLabel.text = tags;
 
 // Set switch to current state of push
-notificationsEnabledSwitch.value = Airship.userNotificationsEnabled;
+notificationsEnabledSwitch.value = Airship.push.userNotificationsEnabled;
 
 // Toggle push state on switch change
 notificationsEnabledSwitch.addEventListener('change', function (e) {
-    Airship.userNotificationsEnabled = e.value;
+    Airship.push.userNotificationsEnabled = e.value;
 });
 
-Ti.API.info("Launch: " + Airship.getLaunchNotification(true).message);
-Ti.API.info("Launch Deep Link: " + Airship.getDeepLink(true));
-
-if(isAndroid) {
-    window.addEventListener("open", function(e) {
-        window.activity.addEventListener("resume", function() {
-            Ti.App.fireEvent('resume');
-        });
-        //Notice the pause event
-        window.activity.addEventListener("pause", function() {
-            Ti.App.fireEvent('paused');
-        });
-    });
-
-    Ti.App.addEventListener('resume', function() {
-        Ti.API.info("Launch: " + Airship.getLaunchNotification(true).message);
-    });
-} else {
-    Ti.App.addEventListener('resumed', function() {
-        Ti.API.info("Launch iOS resumed: " + Airship.getLaunchNotification(true).message);
-    });
-}
-
-Airship.addEventListener(Airship.EVENT_DEEP_LINK_RECEIVED, function (e) {
-    alert("Received deepLink: " + e.deepLink);
+Airship.addEventListener(Airship.eventPushReceived, function (e) {
+    alert("pushReceivedEvent: " + JSON.stringify(e));
 });
 
-Airship.addEventListener(Airship.EVENT_CHANNEL_UPDATED, function(e) {
-        Ti.API.info('Channel Updated: ' + Airship.channelId);
-        channelIdLabel.text = Airship.channelId;
+Airship.addEventListener(Airship.eventNotificationResponseReceived, function (e) {
+    alert("notificationResponseReceivedEvent: " + JSON.stringify(e));
 });
 
-Airship.addEventListener(Airship.EVENT_PUSH_RECEIVED, function(e) {
-        Ti.API.info('Push received: ' + e.message);
-        Ti.API.info('Extras: ' + JSON.stringify(e.extras));
-        labelMessage.text = e.message;
+Airship.addEventListener(Airship.eventNotificationOptInStatusChanged, function (e) {
+    alert("notificationOptInStatusChangedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.eventChannelCreated, function (e) {
+    alert("channelCreatedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.eventDeepLinkReceived, function (e) {
+    alert("deepLinkReceivedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.eventInboxUpdated, function (e) {
+    alert("inboxUpdatedEvent: " + JSON.stringify(e));
+});
+
+Airship.addEventListener(Airship.eventOpenPreferenceCenter, function (e) {
+    alert("openPreferenceCenterEvent: " + JSON.stringify(e));
 });
