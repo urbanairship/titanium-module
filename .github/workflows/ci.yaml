@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: macos-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
     steps:
       - uses: actions/checkout@v2
 
@@ -14,8 +14,8 @@ jobs:
         with:
           java-version: "12.x"
 
-      - name: Setup Appcelerator
-        run: ./scripts/setup_appc.sh ${{ secrets.APPC_USER_NAME }} ${{ secrets.APPC_PASSWORD }}
+      - name: Setup Ti
+        run: ./scripts/setup_ti.sh
 
       - name: Check plugin version
         run: ./scripts/check_version.sh
@@ -24,15 +24,3 @@ jobs:
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.PAT }}
         run: make build
-
-      - name: Upload iOS
-        uses: actions/upload-artifact@v1
-        with:
-          name: ios
-          path: ios/dist
-
-      - name: Upload Android
-        uses: actions/upload-artifact@v1
-        with:
-          name: android
-          path: android/dist

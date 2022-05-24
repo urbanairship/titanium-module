@@ -1,5 +1,16 @@
 # Airship Titanium Module
 
+## Version 9.0.0 - May 24, 2022
+
+A complete plugin rewrite. Existing integrations will break without at least changing the way Airship is configured. Please read the [Migration Guide](https://github.com/urbanairship/titanium-module/documentation/migration-guide-8-9.md) if you are upgrading from a previous version.
+
+### Changes
+- Updated iOS SDK to 16.7.0
+- Updated Android SDK to 16.5.0
+- Modularize the plugin interface
+- Added support for new contacts, privacy manager, preference center, subscription lists, and locale overrides
+- takeOff is now required to be called from JS instead of configuring the SDK through an xml file
+
 ## Version 8.1.0 - January 15, 2020
 
 Minor release that adds support for In-App Automation message limits and segments.
