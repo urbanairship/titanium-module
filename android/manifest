@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 8.1.0
+version: 9.0.0
 apiversion: 4
 architectures: arm64-v8a armeabi-v7a x86 x86_64
 description: Airship Titanium module
@@ -11,8 +11,8 @@ license: Apache License, Version 2.0
 copyright: Copyright (c) 2020 by Airship
 
 # these should not be edited
-name: AirshipTitanium
+name: ti.airship
 moduleid: ti.airship
 guid: 240dc468-ccad-479d-9510-14e9a7cae5c9
 platform: android
-minsdk: 9.2.0.GA
+minsdk: 10.1.1.GA
