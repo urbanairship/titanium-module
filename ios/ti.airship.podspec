@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "ti.airship"
-    s.version      = "9.0.0"
+    s.version      = "9.1.0"
     s.summary      = "The Airship Titanium module."
   
     s.description  = <<-DESC

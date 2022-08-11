@@ -1,5 +1,13 @@
 # Airship Titanium Module
 
+## Version 9.1.0 - August 11, 2022
+
+Minor release that updates Airship SDK versions.
+
+### Changes
+- Updated iOS SDK to 16.9.1
+- Updated Android SDK to 16.7.0
+
 ## Version 9.0.0 - May 24, 2022
 
 A complete plugin rewrite. Existing integrations will break without at least changing the way Airship is configured. Please read the [Migration Guide](https://github.com/urbanairship/titanium-module/documentation/migration-guide-8-9.md) if you are upgrading from a previous version.

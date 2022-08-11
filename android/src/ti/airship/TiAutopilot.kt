@@ -17,7 +17,7 @@ import ti.airship.utils.PluginStore
 class TiAutopilot : Autopilot() {
 
     companion object {
-        private const val VERSION = "9.0.0"
+        private const val VERSION = "9.1.0"
     }
 
     private var configOptions: AirshipConfigOptions? = null
