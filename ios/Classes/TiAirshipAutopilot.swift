@@ -8,7 +8,7 @@ import TitaniumKit
 
 @objc(TiAirshipAutopilot)
 public class TiAirshipAutopilot: NSObject {
-    private static let version = "9.1.0"
+    private static let version = "9.2.0"
 
     private static let airshipDelegate = TiAirshipDelegate()
 
