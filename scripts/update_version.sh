@@ -12,9 +12,9 @@ fi
 sed -i '' "s/\(^version:\).*/\1 $VERSION/g" $ROOT_PATH/ios/manifest
 sed -i '' "s/\(^version:\).*/\1 $VERSION/g" $ROOT_PATH/android/manifest
 
-# Android - TiAirshipModuleVersion.java
-sed -i '' "s/\(TI_AIRSHIP_MODULE_VERSION *= *\)\".*\"/\1\"$VERSION\"/g" $ROOT_PATH/android/src/ti/airship/TiAirshipModuleVersion.java
+# Android - TiAutopilot.kt
+sed -i '' "s/\(VERSION *= *\)\".*\"/\1\"$VERSION\"/g" $ROOT_PATH/android/src/ti/airship/TiAutopilot.kt
 
-# iOS - TiAirshipModuleVersion.m
-sed -i '' "s/\(tiAirshipModuleVersionString *= *@\)\".*\"/\1\"$VERSION\"/g" $ROOT_PATH/ios/Classes/TiAirshipModuleVersion.m
+# iOS - TiAirshipAutopilot.kt
+sed -i '' "s/\(version *= *\)\".*\"/\1\"$VERSION\"/g" $ROOT_PATH/ios/Classes/TiAirshipAutopilot.swift
 

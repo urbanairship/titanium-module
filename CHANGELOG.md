@@ -1,5 +1,16 @@
 # Airship Titanium Module
 
+## Version 10.0.0 - April 6, 2023
+
+Major release that updates to support Titanium 12.0.0.GA and latest Airship SDK versions.
+
+### Changes
+- Updated iOS SDK to 16.11.3
+- Updated Android SDK to 16.9.1
+- Updated Titanium to 12.0.0.GA
+- Fixed Contact update merge order, resolving a Preference Center bug that could lead to unexpected subscription states in some circumstances
+- Improved Scene/Survey accessibility and fixed a reporting bug related to form display events 
+
 ## Version 9.1.0 - August 11, 2022
 
 Minor release that updates Airship SDK versions.

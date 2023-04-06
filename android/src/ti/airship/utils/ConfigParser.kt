@@ -11,7 +11,6 @@ import com.urbanairship.json.JsonList
 import com.urbanairship.json.JsonMap
 import com.urbanairship.json.JsonValue
 import com.urbanairship.util.UAStringUtil
-import org.apache.log4j.lf5.LogLevel
 import ti.airship.TiAirshipModule
 
 object ConfigParser {
