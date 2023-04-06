@@ -1,8 +1,8 @@
 # Airship Titanium Module
 
-## Version 9.2.0 - April 3, 2023
+## Version 10.0.0 - April 6, 2023
 
-Minor release that updates to support Titanium 12.0.0.GA and latest Airship SDK versions.
+Major release that updates to support Titanium 12.0.0.GA and latest Airship SDK versions.
 
 ### Changes
 - Updated iOS SDK to 16.11.3
